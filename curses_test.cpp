@@ -4,17 +4,17 @@
 
 int main()
 {
-  char str[10];
-
   initscr();
   keypad(stdscr, TRUE);
 
-  mvprintw(20, 15, "Hello, ncurses.\n");
-  printw(" > ");
-  while(getstr(str));
-  mvprintw(22, 3, str);
-  refresh();
-  sleep(3);
+  int count{0};
+  while (true) {
+    if (getch()) {
+      ++count;
+    }
+    mvprintw(20, 15, "Hello, ncurses. [%d]\n", count);
+    refresh();
+  }
   endwin();
   return 0;
 }

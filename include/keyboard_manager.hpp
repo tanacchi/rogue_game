@@ -9,10 +9,10 @@ public:
   enum KeyState
   {
     Space   = 32,
-    Up      = 3,
-    Down    = 2,
-    Right   = 5,
-    Left    = 4,
+    Up      = KEY_UP,
+    Down    = KEY_DOWN,
+    Right   = KEY_RIGHT,
+    Left    = KEY_LEFT,
     Unknown =-1
   };
 

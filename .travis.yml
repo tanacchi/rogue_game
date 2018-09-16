@@ -1,4 +1,10 @@
+dist: trusty
+
 language: cpp
+
+before_install: sudo apt-get update -qq
+
+install: export CXX="g++-5"
 
 script:
   - cmake .

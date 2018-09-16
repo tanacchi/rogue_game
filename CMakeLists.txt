@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.5.1)
 
+set(CMAKE_CXX_COMPILER g++)
 add_definitions("-Wall -std=c++14")
 
 add_executable(rogue_game.out curses_test.cpp)

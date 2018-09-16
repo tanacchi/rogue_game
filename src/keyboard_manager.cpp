@@ -17,7 +17,7 @@ KeyboardManager::KeyState KeyboardManager::get_key()
 {
   int input{getch()};
   mvprintw(21, 15, "Input char: [%c]\n", (char)input);
-  return static_cast<KeyState>(input);
+  return static_cast<KeyState>(input);  // FIX: Unkown のフィルターが機能していない
 }
 
 std::string key_to_str(KeyboardManager::KeyState key)

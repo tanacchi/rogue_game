@@ -5,7 +5,7 @@
 int main()
 {
   initscr();
-  printw("Hello, ncurses.");
+  mvprintw(20, 15, "Hello, ncurses.");
   refresh();
   sleep(3);
   endwin();

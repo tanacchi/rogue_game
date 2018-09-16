@@ -1,0 +1,8 @@
+*.out
+*.o
+
+*CMake*
+*cmake*
+Makefile*
+
+!CMakeList*s*.txt

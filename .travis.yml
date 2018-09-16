@@ -4,8 +4,13 @@ language: cpp
 compiler: g++
 
 before_install: sudo apt-get update -qq
-
 install: export CXX="g++-5"
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-5
 
 script:
   - cmake .

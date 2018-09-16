@@ -25,6 +25,8 @@ std::string key_to_str(KeyboardManager::KeyState key)
   switch (key) {
   case KeyboardManager::KeyState::Space:
     return "Space";
+  case KeyboardManager::KeyState::Enter:
+    return "Enter";
   case KeyboardManager::KeyState::Up:
     return "Up";
   case KeyboardManager::KeyState::Down:

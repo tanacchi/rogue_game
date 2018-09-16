@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../include/keyboard_manager.hpp"
+#include <keyboard_manager.hpp>
 
 int main()
 {

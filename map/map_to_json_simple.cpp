@@ -9,14 +9,26 @@
 #include <vector>
 #include <fstream>
 
+std::string get_type(char elem_char)
+{
+  switch (elem_char) {
+  case ' ': return "none";
+  case '-': return "horizontal_wall";
+  case '|': return "vertical_wall";
+  case '.': return "floor";
+  case '#': return "path";
+  }
+}
+
 int main(int argc, char** argv)
 {
   std::stringstream ss{};
+  int map_width{}, map_height{};
   try {
     std::vector<std::string> arg_list{argv, argv + argc};
     std::string text_map_filname{arg_list[1]};
-    int map_width{std::stoi(arg_list[2])};
-    int map_height{std::stoi(arg_list[3])};
+    map_width = std::stoi(arg_list[2]);
+    map_height = std::stoi(arg_list[3]);
     std::cout << text_map_filname << std::endl;
     std::ifstream read_file{};
     read_file.open(text_map_filname, std::ios::in);
@@ -24,22 +36,21 @@ int main(int argc, char** argv)
     for (int row{0}; row < map_height && !read_file.eof(); ++row) {
       std::getline(read_file, input_buff);
       input_buff = (input_buff.length() > map_width) ? input_buff.substr(0, map_width) : input_buff;
-      ss << '$' << std::setw(map_width) << std::setfill(' ') << std::left << input_buff << '$' << '\n';
+      ss << std::setw(map_width) << std::setfill(' ') << std::left << input_buff;
     }
   }
   catch (const std::logic_error& e) {
     std::cout << "[Usage]: argv[1]: text_map_file, argv[2]: width, argv[3]: height" << std::endl;
-    return 1;
   }
-  std::cout << "Map data:" << '\n' << ss.str() << std::endl;
-  return 0;
+  std::string map_string{ss.str()};
+  std::cout << "Map data:" << '\n' << map_string << std::endl;
   boost::property_tree::ptree map_data;
-  map_data.put("Map.width", 30);
-  map_data.put("Map.height", 10);
+  map_data.put("Map.width", map_width);
+  map_data.put("Map.height", map_height);
   boost::property_tree::ptree elem_list;
-  for (int i{0}; i < 3; ++i) {
+  for (int i{0}; i < map_string.length(); ++i) {
     boost::property_tree::ptree elem;
-    elem.put("type", "horizontal_wall");
+    elem.put("type", get_type(map_string[i]));
     elem_list.push_back(std::make_pair("", elem));
   }
   map_data.add_child("Map.elems", elem_list);

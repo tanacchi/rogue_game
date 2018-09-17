@@ -13,3 +13,4 @@ Character | Description | type
 \* | 金塊 | gold
 : | 食料 | food
 ? | 巻物 | scroll
+(Space) | 無効 | none

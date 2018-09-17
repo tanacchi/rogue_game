@@ -16,11 +16,12 @@ int main(int argc, char** argv)
     std::vector<std::string> arg_list{argv, argv + argc};
     std::string text_map_filname{arg_list[1]};
     int map_width{std::stoi(arg_list[2])};
+    int map_height{std::stoi(arg_list[3])};
     std::cout << text_map_filname << std::endl;
     std::ifstream read_file{};
     read_file.open(text_map_filname, std::ios::in);
     std::string input_buff{};
-    while (!read_file.eof()) {
+    for (int row{0}; row < map_height && !read_file.eof(); ++row) {
       std::getline(read_file, input_buff);
       input_buff = (input_buff.length() > map_width) ? input_buff.substr(0, map_width) : input_buff;
       ss << '$' << std::setw(map_width) << std::setfill(' ') << std::left << input_buff << '$' << '\n';

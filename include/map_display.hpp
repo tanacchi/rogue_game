@@ -1,9 +1,10 @@
 #ifndef INCLUDED_MAP_DISPLAY_HPP
 #define INCLUDED_MAP_DISPLAY_HPP
 
-class MapDisplay
+#include <display_panel.hpp>
+
+class MapDisplay : public DisplayPanel
 {
-  MapDisplay();
 };
 
 #endif  // INCLUDED_MAP_DISPLAY_HPP

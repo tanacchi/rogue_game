@@ -18,9 +18,7 @@ public:
     Unknown = -1
   };
 
-  KeyboardManager();
-  ~KeyboardManager();
-  KeyState get_key();
+  KeyState get_key() const noexcept;
 };
 
 #endif  // INCLUDED_KEYBOARD_MANAGER_HPP

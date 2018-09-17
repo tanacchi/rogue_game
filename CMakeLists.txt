@@ -7,5 +7,9 @@ include_directories(
   include
 )
 
-add_executable(rogue_game.out src/keyboard_manager.cpp)
+add_executable(rogue_game.out
+  src/main.cpp
+  src/keyboard_manager.cpp
+  src/display_panel.cpp
+)
 target_link_libraries(rogue_game.out ncurses)

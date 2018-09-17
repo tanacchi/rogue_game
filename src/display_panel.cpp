@@ -3,7 +3,13 @@
 
 #include <display_panel.hpp>
 
-DisplayPanel::DisplayPanel()
+DisplayPanel::DisplayPanel(std::size_t x, std::size_t y,
+                           std::size_t width, std::size_t height)
+  :x_{x},
+   y_{y},
+   height_{height},
+   row_boarder_(width, '-'),
+   col_boarder_{std::string("|") + std::string(width-2, ' ') + std::string("|")}    
 {
   initscr();
   keypad(stdscr, TRUE);
@@ -14,14 +20,11 @@ DisplayPanel::~DisplayPanel()
   endwin();
 }
 
-void DisplayPanel::draw_outline(std::size_t x, std::size_t y,
-                                std::size_t width, std::size_t height)
+void DisplayPanel::draw_outline()
 {
-  std::string row_boarder(width, '-');
-  std::string col_boarder {std::string("|") + std::string(width-2, ' ') + std::string("|")};
-  mvprintw(y, x, row_boarder.data());
-  for (std::size_t i{1}; i < height-1; ++i) {
-      mvprintw(y+i, x, col_boarder.data());
+  mvprintw(y_, x_, row_boarder_.data());
+  for (std::size_t i{1}; i < height_-1; ++i) {
+      mvprintw(y_+i, x_, col_boarder_.data());
   }
-  mvprintw(y+height-1, x, row_boarder.data());
+  mvprintw(y_+height_-1, x_, row_boarder_.data());
 }

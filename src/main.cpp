@@ -29,11 +29,11 @@ std::string key_to_str(KeyboardManager::KeyState key)
 
 int main()
 {
-  DisplayPanel    dp{};
+  DisplayPanel    dp{10, 10, 10, 5};
   KeyboardManager km{};
   std::cout << "Hello, rouge_game." << std::endl;
   while (true) {
-    dp.draw_outline(10, 10, 10, 5);
+    dp.draw_outline();
     KeyboardManager::KeyState key{km.get_key()};
     mvprintw(22, 15, "Input KeyState: [%s]\n", key_to_str(key).data());
   }

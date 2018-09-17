@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 
 #include <keyboard_manager.hpp>
 #include <display_panel.hpp>
@@ -34,6 +33,7 @@ int main()
   KeyboardManager km{};
   std::cout << "Hello, rouge_game." << std::endl;
   while (true) {
+    dp.draw_outline(10, 10, 10, 5);
     KeyboardManager::KeyState key{km.get_key()};
     mvprintw(22, 15, "Input KeyState: [%s]\n", key_to_str(key).data());
   }

@@ -18,8 +18,6 @@ public:
     Unknown = -1
   };
 
-  KeyboardManager();
-  ~KeyboardManager();
   KeyState get_key() const noexcept;
 };
 

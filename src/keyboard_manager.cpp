@@ -1,13 +1,5 @@
 #include <keyboard_manager.hpp>
 
-KeyboardManager::KeyboardManager()
-{
-}
-
-KeyboardManager::~KeyboardManager()
-{
-}
-
 KeyboardManager::KeyState KeyboardManager::get_key() const noexcept
 {
   static int count{0};

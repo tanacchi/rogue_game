@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include <keyboard_manager.hpp>
 #include <display_panel.hpp>
 #include <map_display.hpp>

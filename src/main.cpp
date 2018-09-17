@@ -2,6 +2,7 @@
 
 #include <keyboard_manager.hpp>
 #include <display_panel.hpp>
+#include <map_display.hpp>
 
 std::string key_to_str(KeyboardManager::KeyState key)
 {

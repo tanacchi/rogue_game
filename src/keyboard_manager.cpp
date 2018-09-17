@@ -1,6 +1,4 @@
-#include <iostream>
 #include <keyboard_manager.hpp>
-#include <string>
 
 KeyboardManager::KeyboardManager()
 {

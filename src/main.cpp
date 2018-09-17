@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+
 #include <keyboard_manager.hpp>
 #include <display_panel.hpp>
 

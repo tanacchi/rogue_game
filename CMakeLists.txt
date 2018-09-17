@@ -8,6 +8,7 @@ include_directories(
 )
 
 add_executable(rogue_game.out
+  src/main.cpp
   src/keyboard_manager.cpp
   src/display_panel.cpp
 )

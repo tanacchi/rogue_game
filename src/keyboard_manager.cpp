@@ -15,9 +15,12 @@ KeyboardManager::~KeyboardManager()
 
 KeyboardManager::KeyState KeyboardManager::get_key()
 {
+  static int count{0};
   int input{getch()};
+  if (input != static_cast<int>(KeyboardManager::KeyState::Unknown)) count++;
+  mvprintw(20, 15, "Count: [%d]\n", count);
   mvprintw(21, 15, "Input char: [%c]\n", (char)input);
-  return static_cast<KeyState>(input);  // FIX: Unkown のフィルターが機能していない
+  return static_cast<KeyState>(input);  // FIX: Unknown のフィルターが機能していない
 }
 
 std::string key_to_str(KeyboardManager::KeyState key)
@@ -50,7 +53,7 @@ int main()
   std::cout << "Hello, rouge_game." << std::endl;
   while (true) {
     KeyboardManager::KeyState key{km.get_key()};
-    mvprintw(21, 15, "Input char: [%s]\n", key_to_str(key).data());
+    mvprintw(22, 15, "Input KeyState: [%s]\n", key_to_str(key).data());
   }
   return 0;
 }

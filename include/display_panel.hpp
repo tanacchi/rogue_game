@@ -5,6 +5,7 @@ class DisplayPanel
 {
 public:
   DisplayPanel();
+  ~DisplayPanel();
 };
 
 #endif  // INCLUDED_DISPLAY_PANEL_HPP

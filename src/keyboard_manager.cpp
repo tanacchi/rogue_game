@@ -2,13 +2,10 @@
 
 KeyboardManager::KeyboardManager()
 {
-  initscr();
-  keypad(stdscr, TRUE);
 }
 
 KeyboardManager::~KeyboardManager()
 {
-  endwin();
 }
 
 KeyboardManager::KeyState KeyboardManager::get_key()

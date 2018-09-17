@@ -4,4 +4,11 @@
 
 DisplayPanel::DisplayPanel()
 {
+  initscr();
+  keypad(stdscr, TRUE);
+}
+
+DisplayPanel::~DisplayPanel()
+{
+  endwin();
 }

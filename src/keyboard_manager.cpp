@@ -8,7 +8,7 @@ KeyboardManager::~KeyboardManager()
 {
 }
 
-KeyboardManager::KeyState KeyboardManager::get_key()
+KeyboardManager::KeyState KeyboardManager::get_key() const noexcept
 {
   static int count{0};
   int input{getch()};

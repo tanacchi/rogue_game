@@ -20,7 +20,7 @@ DisplayPanel::~DisplayPanel()
   endwin();
 }
 
-void DisplayPanel::draw_outline()
+void DisplayPanel::draw_outline() const noexcept
 {
   mvprintw(y_, x_, row_boarder_.data());
   for (std::size_t i{1}; i < height_-1; ++i) {

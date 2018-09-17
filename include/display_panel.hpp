@@ -6,7 +6,7 @@ class DisplayPanel
 public:
   DisplayPanel(std::size_t x, std::size_t y, std::size_t width, std::size_t height);
   ~DisplayPanel();
-  void draw_outline();
+  void draw_outline() const noexcept;
 private:
   const std::size_t x_;
   const std::size_t y_;

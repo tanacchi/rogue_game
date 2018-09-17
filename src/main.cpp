@@ -20,10 +20,8 @@ std::string key_to_str(KeyboardManager::KeyState key)
     return "Right";
   case KeyboardManager::KeyState::Left:
     return "Left";
-  case KeyboardManager::KeyState::Unknown:
-    return "Unknown";
   default:
-    return "???????";
+    return "Unknown";
   }
 }
 

@@ -10,6 +10,7 @@ public:
   {
     Space   = 32,
     Enter   = 10,
+    Back    = KEY_BACKSPACE,
     Up      = KEY_UP,
     Down    = KEY_DOWN,
     Right   = KEY_RIGHT,

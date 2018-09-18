@@ -16,12 +16,10 @@ namespace map {
     boost::property_tree::read_json(mapfile_name, json_map_data);
     {
       int width = json_map_data.get_optional<int>("Map.width").get();
-      mvprintw(0, 0, "width: [%d]", width);;
       map.width = width;
     }
     {
       int height = json_map_data.get_optional<int>("Map.height").get();
-      mvprintw(1, 0, "height: [%d]", height);
       map.height = height;
     }
     {

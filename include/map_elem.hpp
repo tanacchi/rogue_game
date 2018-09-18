@@ -7,11 +7,12 @@ namespace map
 {
   class MapElem {
   public:
+    MapElem(std::string type);
     const std::string type;
     const char symbol;
-    MapElem(std::string type);
-    const char get_symbol();
   };
+  
+  const char get_symbol(const std::string);
 }
 
 #endif  // INCLUDED_MAP_ELEM_HPP

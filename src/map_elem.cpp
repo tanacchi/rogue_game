@@ -2,13 +2,13 @@
 
 namespace map
 {
-  MapElem::MapElem(std::string type)
+  MapElem::MapElem(const std::string type)
     : type{type},
-      symbol{get_symbol()}
+      symbol{get_symbol(type)}
   {
   }
 
-  const char MapElem::get_symbol()
+  const char get_symbol(const std::string type)
   {
     if (type == "horizontal_wall") return '-';
     if (type == "vertical_wall") return '|';

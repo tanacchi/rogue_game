@@ -8,33 +8,29 @@
 
 #include <map.hpp>
 
-char converter(std::string type)
+Map read_map(const std::string mapfile_name)
 {
-  if (type == "horizontal_wall") return '-';
-  if (type == "vertical_wall") return '|';
-  if (type == "floor") return '.';
-  if (type == "path") return '#';
-  if (type == "none") return ' ';
-}
-
-void read_map(const std::string mapfile_name)
-{
+  Map map{};
   boost::property_tree::ptree json_map_data{};
   boost::property_tree::read_json(mapfile_name, json_map_data);
-  int width = json_map_data.get_optional<int>("Map.width").get();
-  std::cout << "width: " << width << "."<< std::endl;
-  int height = json_map_data.get_optional<int>("Map.height").get();
-  std::cout << "height: " << height << "."<< std::endl;
-  std::vector<std::vector<std::string> > elems{height};
-  int count{0};
-  BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.elems") ) {
-    const boost::property_tree::ptree& elem{child.second};
-    std::string type = elem.get_optional<std::string>("type").get();
-    elems[static_cast<int>(count++/width)].push_back(type);
+  {
+    int width = json_map_data.get_optional<int>("Map.width").get();
+    mvprintw(0, 0, "width: [%d]", width);;
+    map.width = width;
   }
-  for (int y = 0; y < elems.size(); y++) {
-    for (int x = 0; x < elems[0].size(); ++x) {
-      mvprintw(y, x, "%c",converter(elems[y][x]));
+  {
+    int height = json_map_data.get_optional<int>("Map.height").get();
+    mvprintw(1, 0, "height: [%d]", height);
+    map.height = height;
+  }
+  {
+    std::vector<MapElem> elems{};
+    BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.elems") ) {
+      const boost::property_tree::ptree& elem{child.second};
+      std::string type = elem.get_optional<std::string>("type").get();
+      elems.push_back(MapElem{type});
     }
+    map.elems = std::valarray<MapElem>{elems.data(), elems.size()};
   }
+  return map;
 }

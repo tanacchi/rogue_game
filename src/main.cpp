@@ -27,13 +27,14 @@ std::string key_to_str(KeyboardManager::KeyState key)
 int main()
 {
   DisplayPanel    dp{10, 10, 10, 5};
+  MapDisplay      md{5, 4, 140, 30};
   KeyboardManager km{};
   border(0, 0, 0, 0, 0, 0, 0, 0);
   noecho();
   curs_set(0);
   std::cout << "Hello, rouge_game." << std::endl;
   while (true) {
-    dp.draw_outline();
+    md.draw_outline();
     KeyboardManager::KeyState key{km.get_key()};
     mvprintw(22, 15, "Input KeyState: [%s]\n", key_to_str(key).data());
   }

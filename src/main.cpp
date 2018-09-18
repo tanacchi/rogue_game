@@ -29,8 +29,9 @@ int main()
 {
   initscr();
   keypad(stdscr, TRUE);
-
-  map::MapDisplay      md{5, 4, 33, 10};
+  curs_set(0);
+  
+  map::MapDisplay md{5, 4, 33, 10};
   map::Map map = map::read_map("../map/tmp_sample_map.json");
   while (true) {
     md.show(map);

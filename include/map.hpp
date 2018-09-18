@@ -12,4 +12,7 @@ struct Map
   std::valarray<MapElem> elems;
 };
 
+char converter(std::string type);
+void read_map(const std::string mapfile_name);
+
 #endif  // INCLUDED_MAP_HPP

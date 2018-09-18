@@ -1,6 +1,7 @@
 #include <keyboard_manager.hpp>
 #include <display_panel.hpp>
 #include <map_display.hpp>
+#include <map.hpp>
 
 std::string key_to_str(KeyboardManager::KeyState key)
 {
@@ -33,7 +34,7 @@ int main()
   // noecho();
   // curs_set(0);
   std::cout << "Hello, rouge_game." << std::endl;
-  md.read_map("../map/tmp_sample_map.json");
+  read_map("../map/tmp_sample_map.json");
   while (true) {
     // md.draw_outline();
     KeyboardManager::KeyState key{km.get_key()};

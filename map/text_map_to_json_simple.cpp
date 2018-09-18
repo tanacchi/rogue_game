@@ -9,14 +9,17 @@
 #include <vector>
 #include <fstream>
 
-std::string get_type(char elem_char)
+namespace map
 {
-  switch (elem_char) {
-  case ' ': return "none";
-  case '-': return "horizontal_wall";
-  case '|': return "vertical_wall";
-  case '.': return "floor";
-  case '#': return "path";
+  std::string get_type(char elem_char)
+  {
+    switch (elem_char) {
+    case ' ': return "none";
+    case '-': return "horizontal_wall";
+    case '|': return "vertical_wall";
+    case '.': return "floor";
+    case '#': return "path";
+    }
   }
 }
 
@@ -50,7 +53,7 @@ int main(int argc, char** argv)
   boost::property_tree::ptree elem_list;
   for (int i{0}; i < map_string.length(); ++i) {
     boost::property_tree::ptree elem;
-    elem.put("type", get_type(map_string[i]));
+    elem.put("type", map::get_type(map_string[i]));
     elem_list.push_back(std::make_pair("", elem));
   }
   map_data.add_child("Map.elems", elem_list);

@@ -5,16 +5,19 @@
 
 #include <map_elem.hpp>
 
-struct Map
+namespace map
 {
-  Map() = default;
-  Map(const Map&) = default;
-  Map(Map&&) = default;
-  int width;
-  int height;
-  std::valarray<MapElem> elems;
-};
+  struct Map
+  {
+    Map() = default;
+    Map(const Map&) = default;
+    Map(Map&&) = default;
+    int width;
+    int height;
+    std::valarray<MapElem> elems;
+  };
 
-Map read_map(const std::string mapfile_name);
+  Map read_map(const std::string mapfile_name);
+}
 
 #endif  // INCLUDED_MAP_HPP

@@ -3,12 +3,15 @@
 
 #include <string>
 
-class MapElem {
-public:
-  const std::string type;
-  const char symbol;
-  MapElem(std::string type);
-  const char get_symbol();
-};
+namespace map
+{
+  class MapElem {
+  public:
+    const std::string type;
+    const char symbol;
+    MapElem(std::string type);
+    const char get_symbol();
+  };
+}
 
 #endif  // INCLUDED_MAP_ELEM_HPP

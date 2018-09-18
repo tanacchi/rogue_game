@@ -27,9 +27,13 @@ std::string key_to_str(KeyboardManager::KeyState key)
 
 int main()
 {
+  initscr();
+  keypad(stdscr, TRUE);
+
   DisplayPanel    dp{10, 10, 10, 5};
   map::MapDisplay      md{5, 4, 140, 30};
   KeyboardManager km{};
+
   // border(0, 0, 0, 0, 0, 0, 0, 0);
   // noecho();
   // curs_set(0);
@@ -41,6 +45,6 @@ int main()
     KeyboardManager::KeyState key{km.get_key()};
     mvprintw(22, 15, "Input KeyState: [%s]\n", key_to_str(key).data());
   }
-
+  endwin();
   return 0;
 }

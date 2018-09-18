@@ -11,13 +11,10 @@ DisplayPanel::DisplayPanel(std::size_t x, std::size_t y,
    row_boarder_(width, '-'),
    col_boarder_{std::string("|") + std::string(width-2, ' ') + std::string("|")}
 {
-  initscr();
-  keypad(stdscr, TRUE);
 }
 
 DisplayPanel::~DisplayPanel()
 {
-  endwin();
 }
 
 void DisplayPanel::draw_outline() const noexcept

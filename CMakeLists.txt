@@ -12,5 +12,6 @@ add_executable(rogue_game.out
   src/keyboard_manager.cpp
   src/display_panel.cpp
   src/map_display.cpp
+  src/map_elem.cpp
 )
 target_link_libraries(rogue_game.out ncurses)

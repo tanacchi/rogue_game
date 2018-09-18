@@ -19,6 +19,6 @@ namespace map
       {"path",            '#'},
       {"none",            ' '}
     };
-    return symbol_hash.at(type);
+    return symbol_hash.find(type) != symbol_hash.end() ? symbol_hash.at(type) : '$';
   }
 }

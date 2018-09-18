@@ -34,9 +34,10 @@ int main()
   // noecho();
   // curs_set(0);
   std::cout << "Hello, rouge_game." << std::endl;
-  read_map("../map/tmp_sample_map.json");
+  Map map{read_map("../map/tmp_sample_map.json")};
   while (true) {
     // md.draw_outline();
+    md.show(map);
     KeyboardManager::KeyState key{km.get_key()};
     mvprintw(22, 15, "Input KeyState: [%s]\n", key_to_str(key).data());
   }

@@ -9,9 +9,6 @@ namespace map
 {
   struct Map
   {
-    Map() = default;
-    Map(const Map&) = default;
-    Map(Map&&) = default;
     int width;
     int height;
     std::valarray<MapElem> elems;

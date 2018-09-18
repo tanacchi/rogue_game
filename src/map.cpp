@@ -4,8 +4,6 @@
 #include <boost/optional.hpp>
 #include <vector>
 
-#include <ncurses.h>
-
 #include <map.hpp>
 
 namespace map {

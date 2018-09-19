@@ -1,5 +1,3 @@
-#include <ncurses.h>
-
 #include <map_display.hpp>
 
 namespace map {

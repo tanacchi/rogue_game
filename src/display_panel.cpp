@@ -1,6 +1,3 @@
-#include <string>
-#include <ncurses.h>
-
 #include <display_panel.hpp>
 
 DisplayPanel::DisplayPanel(std::size_t x, std::size_t y,

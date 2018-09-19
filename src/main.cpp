@@ -1,7 +1,5 @@
 #include <keyboard_manager.hpp>
-#include <display_panel.hpp>
 #include <map_display.hpp>
-#include <map.hpp>
 
 std::string key_to_str(KeyboardManager::KeyState key)
 {
@@ -27,20 +25,16 @@ std::string key_to_str(KeyboardManager::KeyState key)
 
 int main()
 {
-  DisplayPanel    dp{10, 10, 10, 5};
-  map::MapDisplay      md{5, 4, 140, 30};
-  KeyboardManager km{};
-  // border(0, 0, 0, 0, 0, 0, 0, 0);
-  // noecho();
-  // curs_set(0);
-  std::cout << "Hello, rouge_game." << std::endl;
+  initscr();
+  keypad(stdscr, TRUE);
+  curs_set(0);
+  
+  map::MapDisplay md{5, 4, 33, 10};
   map::Map map = map::read_map("../map/tmp_sample_map.json");
   while (true) {
-    // md.draw_outline();
     md.show(map);
-    KeyboardManager::KeyState key{km.get_key()};
-    mvprintw(22, 15, "Input KeyState: [%s]\n", key_to_str(key).data());
+    refresh();
   }
-
+  endwin();
   return 0;
 }

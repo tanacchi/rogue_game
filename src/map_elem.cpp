@@ -1,19 +1,24 @@
+#include <map>
+
 #include <map_elem.hpp>
 
 namespace map
 {
-  MapElem::MapElem(std::string type)
+  MapElem::MapElem(const std::string type)
     : type{type},
-      symbol{get_symbol()}
+      symbol{get_symbol(type)}
   {
   }
 
-  const char MapElem::get_symbol()
+  const char get_symbol(const std::string type)
   {
-    if (type == "horizontal_wall") return '-';
-    if (type == "vertical_wall") return '|';
-    if (type == "floor") return '.';
-    if (type == "path") return '#';
-    if (type == "none") return ' ';
+    static std::map<std::string, char> symbol_hash = {
+      {"horizontal_wall", '-'},
+      {"vertical_wall",   '|'},
+      {"floor",           '.'},
+      {"path",            '#'},
+      {"none",            ' '}
+    };
+    return symbol_hash.find(type) != symbol_hash.end() ? symbol_hash.at(type) : '$';
   }
 }

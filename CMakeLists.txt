@@ -33,6 +33,11 @@ set(CMAKE_CXX_COMPILER g++)
 set(CMAKE_CXX_FLAGS "-Wall -std=c++1y")
 # set(CMAKE_CXX_STANDARD 14)
 
+set(${PROJECT_NAME}_CONFIGURE_DIR ${PROJECT_SOURCE_DIR}/config)
+configure_file(
+  ${${PROJECT_NAME}_CONFIGURE_DIR}/README.md.in
+  ${PROJECT_SOURCE_DIR}/README.md)
+
 include_directories(
   include
 )

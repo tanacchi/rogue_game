@@ -42,13 +42,9 @@ include_directories(
   include
 )
 
+file(GLOB_RECURSE ${PROJECT_NAME}_SOURCE_FILES ${PROJECT_SOURCE_DIR}/src/*)
 add_executable(${PROJECT_NAME}.out
-  src/main.cpp
-  src/keyboard_manager.cpp
-  src/display_panel.cpp
-  src/map_display.cpp
-  src/map_elem.cpp
-  src/map.cpp
+  ${${PROJECT_NAME}_SOURCE_FILES}
 )
 target_link_libraries(${PROJECT_NAME}.out ncurses)
 

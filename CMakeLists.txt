@@ -11,12 +11,15 @@ if (${MAJOR})
     COMMAND git describe --abbrev=0
     OUTPUT_VARIABLE LATEST_RELEASE)  
   execute_process(
-    COMMAND git log ${LATEST_RELEASE}..master --oneline --merges --first-parent master
+    COMMANT git symbolic-ref --short HEAD
+    OUTPUT_VARIABLE CURRENT_BRANCH)
+  execute_process(
+    COMMAND git log ${LATEST_RELEASE}..${CURRENT_BRANCH} --oneline --merges
     COMMAND wc --lines
     OUTPUT_VARIABLE MINOR)
 else()
   execute_process(
-    COMMAND git log --oneline --merges --first-parent master
+    COMMAND git log --oneline --merges
     COMMAND wc --lines
     OUTPUT_VARIABLE MINOR)
 endif()

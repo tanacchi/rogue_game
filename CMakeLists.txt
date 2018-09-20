@@ -57,3 +57,10 @@ add_executable(${PROJECT_NAME}.out
   src/map.cpp
 )
 target_link_libraries(${PROJECT_NAME}.out ncurses)
+
+message(STATUS "============ CMake Variables =============")
+get_cmake_property(_variableNames VARIABLES)
+foreach(_variableName ${_variableNames})
+  message(STATUS "${_variableName}=${${_variableName}}")
+endforeach()
+message(STATUS "==========================================")

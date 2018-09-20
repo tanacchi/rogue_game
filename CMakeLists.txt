@@ -1,5 +1,27 @@
 cmake_minimum_required(VERSION 3.5.1)
 
+execute_process(COMMAND git tag COMMAND wc --lines OUTPUT_VARIABLE MAJOR)
+message(STATUS MAJOR: ${MAJOR})
+
+if (${MAJOR})
+  execute_process(
+    COMMAND git describe --abbrev=0
+    OUTPUT_VARIABLE LATEST_RELEASE)  
+  execute_process(
+    COMMAND git log ${LATEST_RELEASE}..master --oneline --merges --first-parent master
+    COMMAND wc --lines
+    OUTPUT_VARIABLE MINOR)
+else()
+  execute_process(
+    COMMAND git log --oneline --merges --first-parent master
+    COMMAND wc --lines
+    OUTPUT_VARIABLE MINOR)
+endif()
+message(STATUS MINOR: ${MINOR})
+
+set(VERSION "${MAJOR}.${MINOR}")
+message(STATUS VERSION: ${VERSION})
+
 project(rogue_game
   VERSION 0.0.0
   LANGUAGES CXX

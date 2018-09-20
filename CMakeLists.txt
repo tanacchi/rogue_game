@@ -3,35 +3,37 @@ cmake_minimum_required(VERSION 3.5.1)
 execute_process(
   COMMAND git tag
   COMMAND wc --lines
-  OUTPUT_VARIABLE MAJOR)
+  OUTPUT_VARIABLE MAJOR
+  OUTPUT_STRIP_TRAILING_WHITESPACE)
 message(STATUS MAJOR: ${MAJOR})
 
 if (${MAJOR})
   execute_process(
     COMMAND git describe --abbrev=0
-    OUTPUT_VARIABLE LATEST_RELEASE)  
+    OUTPUT_VARIABLE LATEST_RELEASE
+    OUTPUT_STRIP_TRAILING_WHITESPACE)  
   execute_process(
     COMMANT git symbolic-ref --short HEAD
-    OUTPUT_VARIABLE CURRENT_BRANCH)
+    OUTPUT_VARIABLE CURRENT_BRANCH
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
   execute_process(
     COMMAND git log ${LATEST_RELEASE}..${CURRENT_BRANCH} --oneline --merges
     COMMAND wc --lines
-    OUTPUT_VARIABLE MINOR)
+    OUTPUT_VARIABLE MINOR
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
 else()
   execute_process(
     COMMAND git log --oneline --merges
     COMMAND wc --lines
-    OUTPUT_VARIABLE MINOR)
+    OUTPUT_VARIABLE MINOR
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
 endif()
 message(STATUS MINOR: ${MINOR})
 
-set(VERSION "${MAJOR}.${MINOR}")
-message(STATUS VERSION: ${VERSION})
-
-project(rogue_game
-  VERSION 0.0.0
-  LANGUAGES CXX
-)
+project(
+  rogue_game
+  VERSION ${MAJOR}.${MINOR}
+  LANGUAGES CXX)
 message(STATUS PROJECT_NAME: ${PROJECT_NAME})
 message(STATUS ${PROJECT_NAME}_SOURCE_DIR: ${${PROJECT_NAME}_SOURCE_DIR})
 

@@ -13,6 +13,9 @@ addons:
       - g++-5
       - libboost-all-dev
 
+before_script:
+  - git fetch origin master:remotes/origin/master
+        
 script:
   - cmake .
   - make

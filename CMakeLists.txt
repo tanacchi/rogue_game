@@ -19,7 +19,7 @@ if (${MAJOR})
     OUTPUT_STRIP_TRAILING_WHITESPACE)
 else()
   execute_process(
-    COMMAND git log --oneline --merges --first-parent orogin/master
+    COMMAND git log --oneline --merges --first-parent origin/master
     COMMAND wc --lines
     OUTPUT_VARIABLE MINOR
     OUTPUT_STRIP_TRAILING_WHITESPACE)

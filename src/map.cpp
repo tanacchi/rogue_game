@@ -4,7 +4,7 @@
 #include <boost/optional.hpp>
 #include <vector>
 
-#include <map.hpp>
+#include <map/map.hpp>
 
 namespace map {
   Map read_map(const std::string mapfile_name)

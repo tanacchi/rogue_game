@@ -1,8 +1,8 @@
 #ifndef INCLUDED_MAP_DISPLAY_HPP
 #define INCLUDED_MAP_DISPLAY_HPP
 
-#include <display_panel.hpp>
-#include <map.hpp>
+#include <display/display_panel.hpp>
+#include <map/map.hpp>
 
 namespace map
 {

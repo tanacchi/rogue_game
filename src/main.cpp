@@ -1,5 +1,5 @@
-#include <keyboard_manager.hpp>
-#include <map_display.hpp>
+#include <keyboard/keyboard_manager.hpp>
+#include <display/map_display.hpp>
 
 std::string key_to_str(KeyboardManager::KeyState key)
 {

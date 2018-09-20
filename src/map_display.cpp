@@ -1,4 +1,4 @@
-#include <map_display.hpp>
+#include <display/map_display.hpp>
 
 namespace map {
   MapDisplay::MapDisplay(std::size_t x, std::size_t y,

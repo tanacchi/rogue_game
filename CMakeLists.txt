@@ -42,6 +42,7 @@ include_directories(
   include
 )
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
 file(GLOB_RECURSE ${PROJECT_NAME}_SOURCE_FILES ${PROJECT_SOURCE_DIR}/src/*)
 add_executable(${PROJECT_NAME}.out
   ${${PROJECT_NAME}_SOURCE_FILES}

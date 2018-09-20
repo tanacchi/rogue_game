@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.5.1)
 
-execute_process(COMMAND git tag COMMAND wc --lines OUTPUT_VARIABLE MAJOR)
+execute_process(
+  COMMAND git tag
+  COMMAND wc --lines
+  OUTPUT_VARIABLE MAJOR)
 message(STATUS MAJOR: ${MAJOR})
 
 if (${MAJOR})
@@ -42,7 +45,7 @@ include_directories(
   include
 )
 
-add_executable(rogue_game.out
+add_executable(${PROJECT_NAME}.out
   src/main.cpp
   src/keyboard_manager.cpp
   src/display_panel.cpp
@@ -50,4 +53,4 @@ add_executable(rogue_game.out
   src/map_elem.cpp
   src/map.cpp
 )
-target_link_libraries(rogue_game.out ncurses)
+target_link_libraries(${PROJECT_NAME}.out ncurses)

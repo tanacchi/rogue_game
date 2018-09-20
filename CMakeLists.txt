@@ -13,17 +13,13 @@ if (${MAJOR})
     OUTPUT_VARIABLE LATEST_RELEASE
     OUTPUT_STRIP_TRAILING_WHITESPACE)  
   execute_process(
-    COMMANT git symbolic-ref --short HEAD
-    OUTPUT_VARIABLE CURRENT_BRANCH
-    OUTPUT_STRIP_TRAILING_WHITESPACE)
-  execute_process(
-    COMMAND git log ${LATEST_RELEASE}..${CURRENT_BRANCH} --oneline --merges
+    COMMAND git log origin/master..${LATEST_RELEASE} --oneline --merges --first-parent origin/master
     COMMAND wc --lines
     OUTPUT_VARIABLE MINOR
     OUTPUT_STRIP_TRAILING_WHITESPACE)
 else()
   execute_process(
-    COMMAND git log --oneline --merges
+    COMMAND git log --oneline --merges --first-parent orogin/master
     COMMAND wc --lines
     OUTPUT_VARIABLE MINOR
     OUTPUT_STRIP_TRAILING_WHITESPACE)

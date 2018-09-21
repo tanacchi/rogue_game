@@ -1,5 +1,6 @@
 *tmp*
 
 build/
+include/rogue_game.hpp
 
 *.out

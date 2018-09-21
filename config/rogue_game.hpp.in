@@ -4,6 +4,6 @@
 #include <keyboard/keyboard_manager.hpp>
 #include <display/map_display.hpp>
 
-#define MAP_DIR @PROJECT_SOURCE_DIR@/map
+const std::string map_dir{"@PROJECT_SOURCE_DIR@/map/"};
 
 #endif  // INCLUDED_ROGUE_GAME_HPP

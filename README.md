@@ -1,7 +1,7 @@
 # rogue_game
 [![Build Status](https://travis-ci.org/tanacchi/rogue_game.png)](https://travis-ci.org/tanacchi/rogue_game)
 
-version 0.6 in development.
+version 0.7 in development.
 
 つくチャ終わったらやるシリーズ  
 より美しく、よりモダンなローグゲーム  

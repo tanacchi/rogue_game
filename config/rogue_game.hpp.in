@@ -1,0 +1,9 @@
+#ifndef INCLUDED_ROGUE_GAME_HPP
+#define INCLUDED_ROGUE_GAME_HPP
+
+#include <keyboard/keyboard_manager.hpp>
+#include <display/map_display.hpp>
+
+const std::string map_dir{"@PROJECT_SOURCE_DIR@/map/"};
+
+#endif  // INCLUDED_ROGUE_GAME_HPP

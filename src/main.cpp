@@ -1,5 +1,4 @@
-#include <keyboard/keyboard_manager.hpp>
-#include <display/map_display.hpp>
+#include <rogue_game.hpp>
 
 std::string key_to_str(KeyboardManager::KeyState key)
 {
@@ -30,7 +29,7 @@ int main()
   curs_set(0);
   
   map::MapDisplay md{5, 4, 33, 10};
-  map::Map map = map::read_map("../map/tmp_sample_map.json");
+  map::Map map = map::read_map(map_dir + "tmp_sample_map.json");
   while (true) {
     md.show(map);
     refresh();

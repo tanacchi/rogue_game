@@ -1,5 +1,4 @@
-#include <keyboard/keyboard_manager.hpp>
-#include <display/map_display.hpp>
+#include <rogue_game.hpp>
 
 std::string key_to_str(KeyboardManager::KeyState key)
 {

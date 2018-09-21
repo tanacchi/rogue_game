@@ -38,8 +38,9 @@ configure_file(
   ${${PROJECT_NAME}_CONFIGURE_DIR}/README.md.in
   ${PROJECT_SOURCE_DIR}/README.md)
 
+set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 include_directories(
-  include
+  ${PROJECT_INCLUDE_DIR}
 )
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})

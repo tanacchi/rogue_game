@@ -2,6 +2,7 @@
 #define INCLUDED_MAP_HPP
 
 #include <valarray>
+#include <memory>
 
 #include <map/map_elem.hpp>
 
@@ -11,7 +12,7 @@ namespace map
   {
     int width;
     int height;
-    std::valarray<MapElem> elems;
+    std::valarray<std::shared_ptr<MapElem> > elems;
   };
 
   Map read_map(const std::string mapfile_name);

@@ -21,13 +21,13 @@ namespace map {
       map.height = height;
     }
     {
-      std::vector<MapElem> elems{};
+      std::vector<std::shared_ptr<MapElem> > elems{};
       BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.elems") ) {
         const boost::property_tree::ptree& elem{child.second};
         std::string type = elem.get_optional<std::string>("type").get();
-        elems.push_back(MapElem{type});
+        elems.push_back(std::shared_ptr<MapElem>{new MapElem(type)});
       }
-      map.elems = std::valarray<MapElem>{elems.data(), elems.size()};
+      map.elems = std::valarray<std::shared_ptr<MapElem> >{elems.data(), elems.size()};
     }
     return map;
   }

@@ -30,8 +30,9 @@ int main()
   
   map::MapDisplay md{5, 4, 33, 10};
   map::Map map = map::read_map(map_dir + "json/tmp_sample_map.json");
+  Character chara{1, 1};
   while (true) {
-    md.show(map);
+    md.show(map, chara);
     refresh();
   }
   endwin();

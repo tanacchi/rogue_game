@@ -29,7 +29,7 @@ int main()
   curs_set(0);
   
   map::MapDisplay md{5, 4, 33, 10};
-  map::Map map = map::read_map(map_dir + "tmp_sample_map.json");
+  map::Map map = map::read_map(map_dir + "json/tmp_sample_map.json");
   while (true) {
     md.show(map);
     refresh();

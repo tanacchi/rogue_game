@@ -8,10 +8,7 @@ namespace map
   class Floor : public MapElem
   {
   public:
-    Floor(std::string type)
-      : MapElem(type)
-    {
-    }
+    Floor(std::string type);
   };
 }
 

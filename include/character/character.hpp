@@ -12,6 +12,7 @@ public:
   Character(std::size_t x, std::size_t y, std::unique_ptr<KeyboardManager>&& km_ptr=nullptr);
   std::size_t get_x() const;
   std::size_t get_y() const;
+  void update();
 private:
   std::size_t x_;
   std::size_t y_;

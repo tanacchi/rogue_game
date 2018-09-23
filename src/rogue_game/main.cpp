@@ -35,6 +35,7 @@ int main()
   while (true) {
     md.show(map, chara);
     refresh();
+    chara.update();
   }
   endwin();
   return 0;

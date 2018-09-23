@@ -16,3 +16,21 @@ std::size_t Character::get_y() const
   return y_;
 }
 
+void Character::update()
+{
+  KeyboardManager::KeyState keystate{km_ptr_->get_key()};
+  switch (keystate) {
+  case KeyboardManager::KeyState::Up:
+    --y_;
+    return;
+  case KeyboardManager::KeyState::Down:
+    ++y_;
+    return;
+  case KeyboardManager::KeyState::Right:
+    ++x_;
+    return;
+  case KeyboardManager::KeyState::Left:
+    --x_;
+    return;
+  }
+}

@@ -1,44 +1,42 @@
 #include <character/character.hpp>
 
-Character::Character(std::size_t x, std::size_t y, std::unique_ptr<KeyboardManager>&& km_ptr)
-  : x_{x}, y_{y},
+Character::Character(map::Point point, std::unique_ptr<KeyboardManager>&& km_ptr)
+  : point_{point},
     km_ptr_{std::move(km_ptr)}
 {
 }
 
-std::size_t Character::get_x() const
+map::Point Character::get_point() const
 {
-  return x_;
-}
-
-std::size_t Character::get_y() const
-{
-  return y_;
+  return point_;
 }
 
 void Character::update(const map::Map& map)
 {
   KeyboardManager::KeyState keystate{km_ptr_->get_key()};
+  std::size_t x{point_.get_x()};
+  std::size_t y{point_.get_y()};
   switch (keystate) {
   case KeyboardManager::KeyState::Up:
-    if (y_ > 0) {
-      --y_;
+    if (y > 0) {
+      --y;
     }
-    return;
+    break;
   case KeyboardManager::KeyState::Down:
-    if (y_ < map.height - 1) {
-      ++y_;
+    if (y < map.height - 1) {
+      ++y;
     }
-    return;
+    break;
   case KeyboardManager::KeyState::Right:
-    if (x_ < map.width - 1) {
-      ++x_;
+    if (x < map.width - 1) {
+      ++x;
     }
-    return;
+    break;
   case KeyboardManager::KeyState::Left:
-    if (x_ > 0) {
-      --x_;
+    if (x > 0) {
+      --x;
     }
-    return;
+    break;
   }
+  point_ = map::Point{x, y};
 }

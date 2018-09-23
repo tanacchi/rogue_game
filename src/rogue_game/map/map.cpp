@@ -36,6 +36,8 @@ namespace map
       return std::shared_ptr<HorizontalWall>(new HorizontalWall{type});
     } else if (type == "vertical_wall") {
       return std::shared_ptr<VerticalWall>(new VerticalWall{type});
+    } else if (type == "door") {
+      return std::shared_ptr<Door>(new Door{type});
     } else {
       throw std::string{"Invalid map elem type."};
     }

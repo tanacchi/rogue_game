@@ -9,8 +9,8 @@ namespace map
     Point(int x, int y);
     const int get_x() const;
     const int get_y() const;
+    const Point operator+(const Point& rhs) const;
     const Point& operator+=(const Point& rhs);
-    const Point& operator+(const Point& rhs);
   private:
     int x_;
     int y_;

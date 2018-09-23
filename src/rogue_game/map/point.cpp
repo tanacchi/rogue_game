@@ -17,16 +17,14 @@ namespace map
     return y_;
   }
 
-  const Point& Point::operator+=(const Point& rhs)
+  const Point Point::operator+(const Point& rhs) const
   {
-    x_ += rhs.x_;
-    y_ += rhs.y_;
-    return *this;
+    return Point{x_ + rhs.x_, y_ + rhs.y_};
   }
 
-  const Point& Point::operator+(const Point& rhs)
+  const Point& Point::operator+=(const Point& rhs)
   {
-    *this += rhs;
+    *this = *this + rhs;
     return *this;
   }
 

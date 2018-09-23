@@ -7,6 +7,7 @@
 #include <map/map.hpp>
 #include <map/floor.hpp>
 #include <map/path.hpp>
+#include <map/none.hpp>
 
 namespace map
 {
@@ -16,6 +17,8 @@ namespace map
       return std::shared_ptr<Floor>(new Floor{type});
     } else if (type == "path") {
       return std::shared_ptr<Path>(new Path{type});
+    } else if (type == "none") {
+      return std::shared_ptr<None>(new None{type});
     } else {
       return std::shared_ptr<MapElem>(new MapElem{type});
     }

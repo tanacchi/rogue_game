@@ -8,6 +8,8 @@
 #include <map/floor.hpp>
 #include <map/path.hpp>
 #include <map/none.hpp>
+#include <map/horizontal_wall.hpp>
+#include <map/vertical_wall.hpp>
 
 namespace map
 {
@@ -19,6 +21,10 @@ namespace map
       return std::shared_ptr<Path>(new Path{type});
     } else if (type == "none") {
       return std::shared_ptr<None>(new None{type});
+    } else if (type == "horizontal_wall") {
+      return std::shared_ptr<HorizontalWall>(new HorizontalWall{type});
+    } else if (type == "vertical_wall") {
+      return std::shared_ptr<VerticalWall>(new VerticalWall{type});
     } else {
       return std::shared_ptr<MapElem>(new MapElem{type});
     }

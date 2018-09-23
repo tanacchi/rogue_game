@@ -13,6 +13,11 @@
 
 namespace map
 {
+  const std::shared_ptr<MapElem> Map::get_elem(const Point& point) const
+  {
+    return elems[width * point.get_y() + point.get_x()];
+  }
+
   std::shared_ptr<MapElem> gen_map_elem(std::string type)
   {
     if (type == "floor") {

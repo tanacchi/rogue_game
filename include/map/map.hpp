@@ -5,6 +5,7 @@
 #include <memory>
 
 #include <map/map_elem.hpp>
+#include <map/point.hpp>
 
 namespace map
 {
@@ -13,6 +14,7 @@ namespace map
     int width;
     int height;
     std::valarray<std::shared_ptr<MapElem> > elems;
+    const std::shared_ptr<MapElem> get_elem(const Point& point) const;
   };
 
   Map read_map(const std::string mapfile_name);

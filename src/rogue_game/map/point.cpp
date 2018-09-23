@@ -7,12 +7,12 @@ namespace map
   {
   }
 
-  std::size_t Point::get_x()
+  const std::size_t Point::get_x() const
   {
     return x_;
   }
 
-  std::size_t Point::get_y()
+  const std::size_t Point::get_y() const
   {
     return y_;
   }

@@ -38,7 +38,8 @@ void Character::update(const map::Map& map)
     }
     break;
   }
-  if (map.elems[y*map.width + x]->is_valid_point()) {
-     point_ = map::Point{x, y};
+  map::Point next_point{map::Point{x, y}};
+  if (map.get_elem(next_point)->is_valid_point()) {
+     point_ = next_point;
   } 
 }

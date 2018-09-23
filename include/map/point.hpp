@@ -9,8 +9,8 @@ namespace map
   {
   public:
     Point(std::size_t x, std::size_t y);
-    std::size_t get_x();
-    std::size_t get_y();
+    const std::size_t get_x() const;
+    const std::size_t get_y() const;
     const Point& operator+=(const Point& rhs);
     const Point& operator+(const Point& rhs);
   private:

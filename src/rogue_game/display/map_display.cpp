@@ -7,7 +7,7 @@ namespace map {
   {
   }
 
-  void MapDisplay::show(Map map, Character character)
+  void MapDisplay::show(Map map, const Character& character)
   {
     for (int y{0}; y < map.height; ++y) {
       for (int x{0}; x < map.width; ++x) {

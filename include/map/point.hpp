@@ -1,21 +1,19 @@
 #ifndef INCLUDED_POINT_HPP
 #define INCLUDED_POINT_HPP
 
-#include <cstddef>
-
 namespace map
 {
   class Point
   {
   public:
-    Point(std::size_t x, std::size_t y);
-    const std::size_t get_x() const;
-    const std::size_t get_y() const;
+    Point(int x, int y);
+    const int get_x() const;
+    const int get_y() const;
     const Point& operator+=(const Point& rhs);
     const Point& operator+(const Point& rhs);
   private:
-    std::size_t x_;
-    std::size_t y_;
+    int x_;
+    int y_;
   };
 }
 

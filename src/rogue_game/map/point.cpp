@@ -2,17 +2,17 @@
 
 namespace map
 {
-  Point::Point(std::size_t x = 0, std::size_t y = 0)
+  Point::Point(int x = 0, int y = 0)
     : x_{x}, y_{y}
   {
   }
 
-  const std::size_t Point::get_x() const
+  const int Point::get_x() const
   {
     return x_;
   }
 
-  const std::size_t Point::get_y() const
+  const int Point::get_y() const
   {
     return y_;
   }

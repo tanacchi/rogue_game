@@ -9,6 +9,7 @@ namespace map
   {
   public:
     Path(std::string type);
+    bool is_valid_point() const;
   };
 }
 

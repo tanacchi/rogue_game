@@ -6,4 +6,9 @@ namespace map
     : MapElem(type)
   {
   }
+
+  bool None::is_valid_point() const
+  {
+    return false;
+  }
 }

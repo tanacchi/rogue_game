@@ -6,4 +6,9 @@ namespace map
     : MapElem(type)
   {
   }
+
+  bool Floor::is_valid_point() const
+  {
+    return true;
+  }
 }

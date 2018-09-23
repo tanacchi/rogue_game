@@ -26,7 +26,7 @@ namespace map
     } else if (type == "vertical_wall") {
       return std::shared_ptr<VerticalWall>(new VerticalWall{type});
     } else {
-      return std::shared_ptr<MapElem>(new MapElem{type});
+      throw std::string{"Invalid map elem type."};
     }
   }
   

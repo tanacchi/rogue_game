@@ -6,4 +6,8 @@ namespace map
     : MapElem(type)
   {
   }
+  bool VerticalWall::is_valid_point() const
+  {
+    return false;
+  }
 }

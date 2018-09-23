@@ -10,6 +10,7 @@
 #include <map/none.hpp>
 #include <map/horizontal_wall.hpp>
 #include <map/vertical_wall.hpp>
+#include <map/door.hpp>
 
 namespace map
 {

@@ -38,5 +38,7 @@ void Character::update(const map::Map& map)
     }
     break;
   }
-  point_ = map::Point{x, y};
+  if (map.elems[y*map.width + x]->is_valid_point()) {
+     point_ = map::Point{x, y};
+  } 
 }

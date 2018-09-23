@@ -16,21 +16,29 @@ std::size_t Character::get_y() const
   return y_;
 }
 
-void Character::update()
+void Character::update(const map::Map& map)
 {
   KeyboardManager::KeyState keystate{km_ptr_->get_key()};
   switch (keystate) {
   case KeyboardManager::KeyState::Up:
-    --y_;
+    if (y_ > 0) {
+      --y_;
+    }
     return;
   case KeyboardManager::KeyState::Down:
-    ++y_;
+    if (y_ < map.height - 1) {
+      ++y_;
+    }
     return;
   case KeyboardManager::KeyState::Right:
-    ++x_;
+    if (x_ < map.width - 1) {
+      ++x_;
+    }
     return;
   case KeyboardManager::KeyState::Left:
-    --x_;
+    if (x_ > 0) {
+      --x_;
+    }
     return;
   }
 }

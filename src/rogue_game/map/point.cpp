@@ -16,4 +16,18 @@ namespace map
   {
     return y_;
   }
+
+  const Point& Point::operator+=(const Point& rhs)
+  {
+    x_ += rhs.x_;
+    y_ += rhs.y_;
+    return *this;
+  }
+
+  const Point& Point::operator+(const Point& rhs)
+  {
+    *this += rhs;
+    return *this;
+  }
+
 }

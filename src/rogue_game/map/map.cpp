@@ -5,8 +5,19 @@
 #include <vector>
 
 #include <map/map.hpp>
+#include <map/floor.hpp>
 
-namespace map {
+namespace map
+{
+  std::shared_ptr<MapElem> gen_map_elem(std::string type)
+  {
+    if (type == "floor") {
+      return std::shared_ptr<Floor>(new Floor{type});
+    } else {
+      return std::shared_ptr<MapElem>(new MapElem{type});
+    }
+  }
+  
   Map read_map(const std::string mapfile_name)
   {
     Map map{};
@@ -25,7 +36,7 @@ namespace map {
       BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.elems") ) {
         const boost::property_tree::ptree& elem{child.second};
         std::string type = elem.get_optional<std::string>("type").get();
-        elems.push_back(std::shared_ptr<MapElem>{new MapElem(type)});
+        elems.push_back(gen_map_elem(type));
       }
       map.elems = std::valarray<std::shared_ptr<MapElem> >{elems.data(), elems.size()};
     }

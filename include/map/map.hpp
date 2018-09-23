@@ -16,6 +16,7 @@ namespace map
   };
 
   Map read_map(const std::string mapfile_name);
+  std::shared_ptr<MapElem> gen_map_elem(std::string type);
 }
 
 #endif  // INCLUDED_MAP_HPP

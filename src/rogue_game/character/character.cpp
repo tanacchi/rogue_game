@@ -24,7 +24,7 @@ void Character::update(const map::Map& map)
   map::Point motion{motion_table.find(keystate) != motion_table.end() ?
       motion_table.at(keystate) : map::Point{0, 0}};
   map::Point next_point{point_ + motion};
-  if (map.get_elem(next_point)->is_valid_point()) {
+  if (map.in_range(next_point) && map.get_elem(next_point)->is_valid_point()) {
      point_ = next_point;
-  } 
+  }
 }

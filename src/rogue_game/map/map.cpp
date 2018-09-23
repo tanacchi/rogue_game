@@ -18,6 +18,11 @@ namespace map
     return elems[width * point.get_y() + point.get_x()];
   }
 
+  bool Map::in_range(const Point& point) const
+  {
+    return 0 <= point.get_x() < width && 0 <= point.get_y() < height;
+  }
+  
   std::shared_ptr<MapElem> gen_map_elem(std::string type)
   {
     if (type == "floor") {

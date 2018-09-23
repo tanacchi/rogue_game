@@ -15,6 +15,7 @@ namespace map
     int height;
     std::valarray<std::shared_ptr<MapElem> > elems;
     const std::shared_ptr<MapElem> get_elem(const Point& point) const;
+    bool in_range(const Point& point) const;
   };
 
   Map read_map(const std::string mapfile_name);

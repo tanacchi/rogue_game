@@ -8,15 +8,18 @@
 #include <map/map.hpp>
 #include <map/point.hpp>
 
-class Character
+namespace character
 {
-public:
-  Character(map::Point point, std::unique_ptr<KeyboardManager>&& km_ptr=nullptr);
-  map::Point get_point() const;
-  void update(const map::Map& map);
-private:
-  map::Point point_;
-  std::unique_ptr<KeyboardManager> km_ptr_;
-};
+  class Character
+  {
+  public:
+    Character(map::Point point, std::unique_ptr<KeyboardManager>&& km_ptr=nullptr);
+    map::Point get_point() const;
+    void update(const map::Map& map);
+  private:
+    map::Point point_;
+    std::unique_ptr<KeyboardManager> km_ptr_;
+  };
+}
 
 #endif  // INCLUDED_CHARACTER_HPP

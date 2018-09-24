@@ -3,10 +3,13 @@
 
 #include <character/character.hpp>
 
-class Player : public Character
+namespace character
 {
-public:
-  Player(map::Point point);
-};
+  class Player : public Character
+  {
+  public:
+    Player(map::Point point);
+  };
+}
 
 #endif  // INCLUDED_PLAYER_HPP

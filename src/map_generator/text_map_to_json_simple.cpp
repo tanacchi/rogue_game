@@ -22,6 +22,7 @@ namespace map
     case '.': return "floor";
     case '#': return "path";
     case '+': return "door";
+    default:  throw std::string{"Undefined type of map elem."};
     }
   }
 }
@@ -33,7 +34,7 @@ std::string get_map_text(std::string filename, std::size_t map_width, std::size_
 
   std::stringstream ss{};
   std::string input_buff{};
-  for (int row{0}; row < map_height && !read_file.eof(); ++row) {
+  for (std::size_t row{0}; row < map_height && !read_file.eof(); ++row) {
     std::getline(read_file, input_buff);
     input_buff = (input_buff.length() > map_width) ? input_buff.substr(0, map_width) : input_buff;
     ss << std::setw(map_width) << std::setfill(' ') << std::left << input_buff;

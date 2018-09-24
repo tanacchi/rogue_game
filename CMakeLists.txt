@@ -47,12 +47,7 @@ configure_file(
   ${${PROJECT_NAME}_CONFIGURE_DIR}/${PROJECT_NAME}.hpp.in
   ${PROJECT_INCLUDE_DIR}/${PROJECT_NAME}.hpp)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
-file(GLOB_RECURSE ${PROJECT_NAME}_SOURCE_FILES ${PROJECT_SOURCE_DIR}/src/*)
-add_executable(${PROJECT_NAME}.out
-  ${${PROJECT_NAME}_SOURCE_FILES}
-)
-target_link_libraries(${PROJECT_NAME}.out ncurses)
+add_subdirectory(src)
 
 message(STATUS "============ CMake Variables =============")
 get_cmake_property(_variableNames VARIABLES)

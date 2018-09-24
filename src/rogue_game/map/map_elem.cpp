@@ -17,7 +17,8 @@ namespace map
       {"vertical_wall",   '|'},
       {"floor",           '.'},
       {"path",            '#'},
-      {"none",            ' '}
+      {"none",            ' '},
+      {"door",            '+'}
     };
     return symbol_hash.find(type) != symbol_hash.end() ? symbol_hash.at(type) : '$';
   }

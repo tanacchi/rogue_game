@@ -3,7 +3,8 @@
 Character | Description | type
 --- | --- | ---
 \- | 壁① | horizontal_wall
-\| | 壁② | vertical_wall
+\| | 壁② | vertical_wall  
+\+ | 扉   | door
 \# | 通路 | path
 \. | 床   | floor
 \^ | 罠   | trap

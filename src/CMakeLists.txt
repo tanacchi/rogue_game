@@ -1,0 +1,12 @@
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
+
+file(GLOB_RECURSE ROGUE_GAME_SOURCE_FILES ${PROJECT_SOURCE_DIR}/src/rogue_game/*)
+add_executable(${PROJECT_NAME}.out
+  ${ROGUE_GAME_SOURCE_FILES}
+)
+target_link_libraries(${PROJECT_NAME}.out ncurses)
+
+file(GLOB_RECURSE MAP_GENERATOR_SOURCE_FILES ${PROJECT_SOURCE_DIR}/src/map_generator/*)
+add_executable(map_generator.out
+  ${MAP_GENERATOR_SOURCE_FILES}
+)

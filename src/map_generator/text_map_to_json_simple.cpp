@@ -9,6 +9,8 @@
 #include <vector>
 #include <fstream>
 
+#include <rogue_game.hpp>
+
 namespace map
 {
   std::string get_type(char elem_char)
@@ -19,6 +21,7 @@ namespace map
     case '|': return "vertical_wall";
     case '.': return "floor";
     case '#': return "path";
+    case '+': return "door";
     }
   }
 }
@@ -39,7 +42,7 @@ std::string get_map_text(std::string filename, std::size_t map_width, std::size_
 }
 
 void write_map_json(std::size_t map_width, std::size_t map_height,
-                     std::string map_text,  std::string output_name = "tmp_sample_map.json")
+                     std::string map_text,  std::string output_name = "tmp_sample_map")
 {
   boost::property_tree::ptree map_data;
   map_data.put("Map.width", map_width);
@@ -54,7 +57,7 @@ void write_map_json(std::size_t map_width, std::size_t map_height,
   map_data.add_child("Map.elems", elem_list);
   
   boost::property_tree::write_json(std::cout, map_data);
-  boost::property_tree::write_json(output_name, map_data);
+  boost::property_tree::write_json(map_dir+"json/"+output_name+".json", map_data);
 }
 
 int main(int argc, char** argv)

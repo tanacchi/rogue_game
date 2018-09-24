@@ -21,6 +21,7 @@ namespace map
     case '|': return "vertical_wall";
     case '.': return "floor";
     case '#': return "path";
+    case '+': return "door";
     }
   }
 }

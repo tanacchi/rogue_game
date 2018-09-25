@@ -7,7 +7,7 @@ namespace map
   {
   }
 
-  bool None::is_valid_point() const
+  bool None::can_stand() const
   {
     return false;
   }

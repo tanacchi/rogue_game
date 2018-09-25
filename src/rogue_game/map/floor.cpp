@@ -7,7 +7,7 @@ namespace map
   {
   }
 
-  bool Floor::is_valid_point() const
+  bool Floor::can_stand() const
   {
     return true;
   }

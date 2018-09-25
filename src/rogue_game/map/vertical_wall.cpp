@@ -6,7 +6,7 @@ namespace map
     : MapElem(type)
   {
   }
-  bool VerticalWall::is_valid_point() const
+  bool VerticalWall::can_stand() const
   {
     return false;
   }

@@ -11,8 +11,4 @@ namespace character
   {
     return point_;
   }
-
-  void Character::update(const map::Map& map)
-  {
-  }
 }

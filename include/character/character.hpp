@@ -15,7 +15,7 @@ namespace character
   public:
     Character(map::Point point);
     map::Point get_point() const;
-    virtual void update(const map::Map& map);
+    virtual void update(const map::Map& map) = 0;
   protected:
     map::Point point_;
   };

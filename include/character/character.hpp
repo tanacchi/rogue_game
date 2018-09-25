@@ -13,11 +13,11 @@ namespace character
   class Character
   {
   public:
-    Character(map::Point point);
-    map::Point get_point() const;
+    Character(map::Point position);
+    map::Point get_position() const;
     virtual void update(const map::Map& map) = 0;
   protected:
-    map::Point point_;
+    map::Point position_;
   };
 }
 

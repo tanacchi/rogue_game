@@ -4,8 +4,8 @@
 
 namespace character
 {
-  Player::Player(map::Point point, std::unique_ptr<KeyboardManager>&& km_ptr)
-    : Character(point),
+  Player::Player(map::Point position, std::unique_ptr<KeyboardManager>&& km_ptr)
+    : Character(position),
       km_ptr_{std::move(km_ptr)}
   {
   }
@@ -21,9 +21,9 @@ namespace character
     };
     map::Point motion{motion_table.find(keystate) != motion_table.end() ?
         motion_table.at(keystate) : map::Point{0, 0}};
-    map::Point next_point{point_ + motion};
-    if (map.in_range(next_point) && map.get_elem(next_point)->is_valid_point()) {
-      point_ = next_point;
+    map::Point next_position{position_ + motion};
+    if (map.in_range(next_position) && map.get_elem(next_position)->is_valid_point()) {
+      position_ = next_position;
     }
   }
 }

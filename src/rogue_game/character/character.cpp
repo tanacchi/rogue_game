@@ -2,13 +2,13 @@
 
 namespace character
 {
-  Character::Character(map::Point point)
-    : point_{point}
+  Character::Character(map::Point position)
+    : position_{position}
   {
   }
 
-  map::Point Character::get_point() const
+  map::Point Character::get_position() const
   {
-    return point_;
+    return position_;
   }
 }

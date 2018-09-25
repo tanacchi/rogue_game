@@ -15,7 +15,7 @@ namespace map {
       }
       mvwprintw(win_, y, map.width, "\n");
     }
-    mvwprintw(win_, character.get_point().get_y(), character.get_point().get_x(), "@");
+    mvwprintw(win_, character.get_position().get_y(), character.get_position().get_x(), "@");
     wrefresh(win_);
   }
 }

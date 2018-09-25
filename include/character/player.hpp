@@ -9,6 +9,7 @@ namespace character
   {
   public:
     Player(map::Point point);
+    void update(const map::Map& map) override;
   };
 }
 

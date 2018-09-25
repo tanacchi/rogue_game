@@ -15,7 +15,7 @@ namespace character
   public:
     Character(map::Point point, std::unique_ptr<KeyboardManager>&& km_ptr=nullptr);
     map::Point get_point() const;
-    void update(const map::Map& map);
+    virtual void update(const map::Map& map);
   private:
     map::Point point_;
     std::unique_ptr<KeyboardManager> km_ptr_;

@@ -6,4 +6,7 @@ namespace character
     : Character(point)
   {
   }
+  void Player::update(const map::Map& map)
+  {
+  }
 }

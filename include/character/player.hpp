@@ -8,8 +8,10 @@ namespace character
   class Player : public Character
   {
   public:
-    Player(map::Point point);
+    Player(map::Point point, std::unique_ptr<KeyboardManager>&& km_ptr=nullptr);
     void update(const map::Map& map) override;
+  private:
+    std::unique_ptr<KeyboardManager> km_ptr_;
   };
 }
 

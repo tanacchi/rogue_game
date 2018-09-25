@@ -13,13 +13,11 @@ namespace character
   class Character
   {
   public:
-    Character(map::Point point, std::unique_ptr<KeyboardManager>&& km_ptr=nullptr);
+    Character(map::Point point);
     map::Point get_point() const;
     virtual void update(const map::Map& map);
   protected:
     map::Point point_;
-  private:
-    std::unique_ptr<KeyboardManager> km_ptr_;
   };
 }
 

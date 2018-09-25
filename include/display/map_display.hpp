@@ -3,7 +3,7 @@
 
 #include <display/display_panel.hpp>
 #include <map/map.hpp>
-#include <character/character.hpp>
+#include <character/player.hpp>
 
 namespace map
 {

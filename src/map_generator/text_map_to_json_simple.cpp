@@ -58,6 +58,21 @@ namespace map
       return map_strings;
     }
 
+    TextMap get_text_map_obj(std::vector<std::string> map_strings)
+    {
+      TextMap tm;
+      for (auto row : map_strings) {
+        tm.width = std::max(tm.width, row.length());
+      }
+      tm.height = map_strings.size();
+      std::stringstream ss{};
+      for (auto row : map_strings) {
+        ss << std::setw(tm.width) << std::setfill(' ') << std::left << row;
+      }
+      tm.text = ss.str();
+      return tm;
+    }
+    
     void write_map_json(std::size_t map_width, std::size_t map_height,
                         std::string map_text,  std::string output_name = "tmp_sample_map")
     {
@@ -102,9 +117,8 @@ int main(int argc, char** argv)
   //   std::cout << "[Usage]: argv[1]: text_map_file, argv[2]: width, argv[3]: height" << std::endl;
   //   return -1;
   // }
-  std::vector<std::string> map_text{map::generator::read_map_text(text_map_filname)};
-  for (auto row : map_text) {
-    std::cout << row << std::endl;
-  }
+  std::vector<std::string> map_strings{map::generator::read_map_strings(text_map_filname)};
+  map::generator::TextMap text_map{map::generator::get_text_map_obj(map_strings)};
+  text_map.show();
   return 0;
 }

@@ -41,6 +41,7 @@ namespace map
         {'.', "floor"},
         {'#', "path"},
         {'+', "door"},
+        {'*', "gold"}
       };
       return type_table.at(elem_char);
     }

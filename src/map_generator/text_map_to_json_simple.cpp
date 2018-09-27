@@ -73,17 +73,16 @@ namespace map
       return tm;
     }
     
-    void write_map_json(std::size_t map_width, std::size_t map_height,
-                        std::string map_text,  std::string output_name = "tmp_sample_map")
+    void write_map_json(const TextMap& text_map,  std::string output_name = "tmp_sample_map")
     {
       boost::property_tree::ptree map_data;
-      map_data.put("Map.width", map_width);
-      map_data.put("Map.height", map_height);
+      map_data.put("Map.width", text_map.width);
+      map_data.put("Map.height", text_map.height);
   
       boost::property_tree::ptree elem_list;
-      for (std::size_t i{0}, length{map_text.length()}; i < length; ++i) {
+      for (std::size_t i{0}, length{text_map.text.length()}; i < length; ++i) {
         boost::property_tree::ptree elem;
-        elem.put("type", get_type(map_text[i]));
+        elem.put("type", get_type(text_map.text[i]));
         elem_list.push_back(std::make_pair("", elem));
       }
       map_data.add_child("Map.elems", elem_list);
@@ -120,5 +119,6 @@ int main(int argc, char** argv)
   std::vector<std::string> map_strings{map::generator::read_map_strings(text_map_filname)};
   map::generator::TextMap text_map{map::generator::get_text_map_obj(map_strings)};
   text_map.show();
+  map::generator::write_map_json(text_map);
   return 0;
 }

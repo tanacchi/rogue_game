@@ -94,31 +94,18 @@ namespace map
 
 int main(int argc, char** argv)
 {
-  // try {
-  //   if (argc != 4) {
-  //     throw std::logic_error{"Invalid arguments."};
-  //   }
-  std::vector<std::string> arg_list{argv, argv + argc};
-  std::string text_map_filname{arg_list[1]};
-  //   std::size_t map_width{std::stoul(arg_list[2])};
-  //   std::size_t map_height{std::stoul(arg_list[3])};
-  //   std::cout << "File:   [" << text_map_filname << "]" << std::endl;
-  //   std::cout << "Width:  [" << map_width << "]" << std::endl;
-  //   std::cout << "Height: [" << map_height << "]" << std::endl;
-    
-  //   std::string map_text{map::generator::get_map_text(text_map_filname, map_width, map_height)};
-  //   std::cout << "Map text:" << '\n' << map_text << std::endl;
-
-  //   map::generator::write_map_json(map_width, map_height, map_text);
-  // }
-  // catch (const std::logic_error& e) {
-  //   std::cout << e.what() << std::endl;
-  //   std::cout << "[Usage]: argv[1]: text_map_file, argv[2]: width, argv[3]: height" << std::endl;
-  //   return -1;
-  // }
-  std::vector<std::string> map_strings{map::generator::read_map_strings(text_map_filname)};
-  map::generator::TextMap text_map{map::generator::get_text_map_obj(map_strings)};
-  text_map.show();
-  map::generator::write_map_json(text_map);
+  try {
+    std::vector<std::string> arg_list{argv, argv + argc};
+    std::string text_map_filname{arg_list[1]};
+    std::vector<std::string> map_strings{map::generator::read_map_strings(text_map_filname)};
+    map::generator::TextMap text_map{map::generator::get_text_map_obj(map_strings)};
+    text_map.show();
+    map::generator::write_map_json(text_map);
+  }
+  catch (const std::logic_error& e) {
+    std::cout << e.what() << std::endl;
+    std::cout << "[Usage]: argv[1]: text_map_file, argv[2]: width, argv[3]: height" << std::endl;
+    return -1;
+  }
   return 0;
 }

@@ -23,7 +23,8 @@ namespace map
       void show()
       {
         std::cout << "width:  [" << width  << "]\n"
-                  << "height: [" << height << ']' << std::endl;
+                  << "height: [" << height << "]\n"
+                  << "text: " << std::endl;
         for (std::size_t i{0}; i < text.length(); i += width) {
           std::string row{text.substr(i, width)};
           std::cout << row << std::endl;
@@ -104,7 +105,7 @@ int main(int argc, char** argv)
   }
   catch (const std::logic_error& e) {
     std::cout << e.what() << std::endl;
-    std::cout << "[Usage]: argv[1]: text_map_file, argv[2]: width, argv[3]: height" << std::endl;
+    std::cout << "[Usage]: argv[1]: text_map_file" << std::endl;
     return -1;
   }
   return 0;

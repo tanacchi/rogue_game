@@ -13,9 +13,24 @@
 #include <rogue_game.hpp>
 
 namespace map
-{  
+{
   namespace generator
   {
+    struct TextMap {
+      std::size_t width{};
+      std::size_t height{};
+      std::string text{};
+      void show()
+      {
+        std::cout << "width:  [" << width  << "]\n"
+                  << "height: [" << height << ']' << std::endl;
+        for (std::size_t i{0}; i < text.length(); i += width) {
+          std::string row{text.substr(i, width)};
+          std::cout << row << std::endl;
+        }
+      }
+    };
+    
     std::string get_type(char elem_char)
     {
       static std::map<char, std::string> type_table = {
@@ -29,19 +44,18 @@ namespace map
       return type_table.at(elem_char);
     }
   
-    std::string get_map_text(std::string filename, std::size_t map_width, std::size_t map_height)
+    std::vector<std::string> read_map_strings(std::string filename)
     {
       std::ifstream read_file{};
       read_file.open(filename, std::ios::in);
 
-      std::stringstream ss{};
+      std::vector<std::string> map_strings{};
       std::string input_buff{};
-      for (std::size_t row{0}; row < map_height && !read_file.eof(); ++row) {
+      for (std::size_t row{0}; !read_file.eof(); ++row) {
         std::getline(read_file, input_buff);
-        input_buff = (input_buff.length() > map_width) ? input_buff.substr(0, map_width) : input_buff;
-        ss << std::setw(map_width) << std::setfill(' ') << std::left << input_buff;
+        map_strings.emplace_back(input_buff);
       }
-      return ss.str();
+      return map_strings;
     }
 
     void write_map_json(std::size_t map_width, std::size_t map_height,
@@ -66,27 +80,31 @@ namespace map
 
 int main(int argc, char** argv)
 {
-  try {
-    if (argc != 4) {
-      throw std::logic_error{"Invalid arguments."};
-    }
-    std::vector<std::string> arg_list{argv, argv + argc};
-    std::string text_map_filname{arg_list[1]};
-    std::size_t map_width{std::stoul(arg_list[2])};
-    std::size_t map_height{std::stoul(arg_list[3])};
-    std::cout << "File:   [" << text_map_filname << "]" << std::endl;
-    std::cout << "Width:  [" << map_width << "]" << std::endl;
-    std::cout << "Height: [" << map_height << "]" << std::endl;
+  // try {
+  //   if (argc != 4) {
+  //     throw std::logic_error{"Invalid arguments."};
+  //   }
+  std::vector<std::string> arg_list{argv, argv + argc};
+  std::string text_map_filname{arg_list[1]};
+  //   std::size_t map_width{std::stoul(arg_list[2])};
+  //   std::size_t map_height{std::stoul(arg_list[3])};
+  //   std::cout << "File:   [" << text_map_filname << "]" << std::endl;
+  //   std::cout << "Width:  [" << map_width << "]" << std::endl;
+  //   std::cout << "Height: [" << map_height << "]" << std::endl;
     
-    std::string map_text{map::generator::get_map_text(text_map_filname, map_width, map_height)};
-    std::cout << "Map text:" << '\n' << map_text << std::endl;
+  //   std::string map_text{map::generator::get_map_text(text_map_filname, map_width, map_height)};
+  //   std::cout << "Map text:" << '\n' << map_text << std::endl;
 
-    map::generator::write_map_json(map_width, map_height, map_text);
-  }
-  catch (const std::logic_error& e) {
-    std::cout << e.what() << std::endl;
-    std::cout << "[Usage]: argv[1]: text_map_file, argv[2]: width, argv[3]: height" << std::endl;
-    return -1;
+  //   map::generator::write_map_json(map_width, map_height, map_text);
+  // }
+  // catch (const std::logic_error& e) {
+  //   std::cout << e.what() << std::endl;
+  //   std::cout << "[Usage]: argv[1]: text_map_file, argv[2]: width, argv[3]: height" << std::endl;
+  //   return -1;
+  // }
+  std::vector<std::string> map_text{map::generator::read_map_text(text_map_filname)};
+  for (auto row : map_text) {
+    std::cout << row << std::endl;
   }
   return 0;
 }

@@ -7,7 +7,7 @@ namespace map {
   {
   }
 
-  void MapDisplay::show(Map map, const Character& character)
+  void MapDisplay::show(Map map, const character::Character& character)
   {
     for (int y{0}; y < map.height; ++y) {
       for (int x{0}; x < map.width; ++x) {
@@ -15,7 +15,7 @@ namespace map {
       }
       mvwprintw(win_, y, map.width, "\n");
     }
-    mvwprintw(win_, character.get_point().get_y(), character.get_point().get_x(), "@");
+    mvwprintw(win_, character.get_position().get_y(), character.get_position().get_x(), "@");
     wrefresh(win_);
   }
 }

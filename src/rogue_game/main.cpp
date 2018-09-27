@@ -31,11 +31,11 @@ int main()
   map::MapDisplay md{5, 4, 33, 10};
   map::Map map = map::read_map(map_dir + "json/tmp_sample_map.json");
   std::unique_ptr<KeyboardManager> km_ptr{new KeyboardManager};
-  Character chara{map::Point{1, 1}, std::move(km_ptr)};
+  character::Player player{map::Point{1, 1}, std::move(km_ptr)};
   while (true) {
-    md.show(map, chara);
+    md.show(map, player);
     refresh();
-    chara.update(map);
+    player.update(map);
   }
   endwin();
   return 0;

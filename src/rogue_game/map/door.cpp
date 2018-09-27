@@ -7,7 +7,7 @@ namespace map
   {
   }
 
-  bool Door::is_valid_point() const
+  bool Door::can_stand() const
   {
     return true;
   }

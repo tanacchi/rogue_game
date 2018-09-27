@@ -7,7 +7,7 @@ namespace map
   {
   }
 
-  bool HorizontalWall::is_valid_point() const
+  bool HorizontalWall::can_stand() const
   {
     return false;
   }

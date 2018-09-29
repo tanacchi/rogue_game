@@ -1,4 +1,4 @@
-#include <map/door.hpp>
+#include <dungeon/door.hpp>
 
 namespace map
 {

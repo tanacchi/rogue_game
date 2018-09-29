@@ -5,12 +5,12 @@
 #include <vector>
 
 #include <map/map.hpp>
-#include <map/floor.hpp>
-#include <map/path.hpp>
-#include <map/none.hpp>
-#include <map/horizontal_wall.hpp>
-#include <map/vertical_wall.hpp>
-#include <map/door.hpp>
+#include <dungeon/floor.hpp>
+#include <dungeon/path.hpp>
+#include <dungeon/none.hpp>
+#include <dungeon/horizontal_wall.hpp>
+#include <dungeon/vertical_wall.hpp>
+#include <dungeon/door.hpp>
 
 namespace map
 {

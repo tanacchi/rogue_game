@@ -1,4 +1,4 @@
-#include <map/path.hpp>
+#include <dungeon/path.hpp>
 
 namespace map
 {

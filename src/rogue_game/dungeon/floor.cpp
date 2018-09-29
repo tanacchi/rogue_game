@@ -1,4 +1,4 @@
-#include <map/floor.hpp>
+#include <dungeon/floor.hpp>
 
 namespace map
 {

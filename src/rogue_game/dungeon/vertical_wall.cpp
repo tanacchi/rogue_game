@@ -1,4 +1,4 @@
-#include <map/vertical_wall.hpp>
+#include <dungeon/vertical_wall.hpp>
 
 namespace map
 {

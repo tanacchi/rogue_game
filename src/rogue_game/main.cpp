@@ -28,10 +28,10 @@ int main()
   keypad(stdscr, TRUE);
   curs_set(0);
   
-  map::MapDisplay md{5, 4, 33, 10};
   map::Map map = map::read_map(map_dir + "json/tmp_sample_map.json");
+  map::MapDisplay md{5, 4, map.width, map.height};
   std::unique_ptr<KeyboardManager> km_ptr{new KeyboardManager};
-  character::Player player{map::Point{1, 1}, std::move(km_ptr)};
+  character::Player player{map::Point{10, 15}, std::move(km_ptr)};
   while (true) {
     md.show(map, player);
     refresh();

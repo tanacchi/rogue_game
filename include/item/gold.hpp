@@ -7,7 +7,7 @@ namespace item
 {
   class Gold : public Item
   {
-  private:
+  public:
     Gold(std::string type, std::size_t amount = 100);
   private:
     const std::size_t amount_;

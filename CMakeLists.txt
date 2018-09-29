@@ -24,9 +24,15 @@ else()
     OUTPUT_STRIP_TRAILING_WHITESPACE)
 endif()
 
+execute_process(
+  COMMAND git log origin/master..origin/develop --oneline --merges
+  COMMAND wc --lines
+  OUTPUT_VARIABLE PATCH
+  OUTPUT_STRIP_TRAILING_WHITESPACE)
+
 project(
   rogue_game
-  VERSION ${MAJOR}.${MINOR}
+  VERSION ${MAJOR}.${MINOR}.${PATCH}
   LANGUAGES CXX)
 
 set(CMAKE_CXX_COMPILER g++)

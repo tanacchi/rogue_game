@@ -7,4 +7,9 @@ namespace item
       amount_{amount}
   {
   }
+
+  bool Gold::can_stand() const
+  {
+    return false;
+  }
 }

@@ -11,6 +11,7 @@ namespace item
     Gold(std::string type, std::size_t amount = 100);
   private:
     const std::size_t amount_;
+    bool can_stand() const;
   };
 }
 

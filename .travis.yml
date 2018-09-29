@@ -15,6 +15,7 @@ addons:
 
 before_script:
   - git fetch origin master:remotes/origin/master
+  - git fetch origin master:remotes/origin/develop
         
 script:
   - cmake .

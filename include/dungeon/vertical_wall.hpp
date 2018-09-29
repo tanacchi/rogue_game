@@ -1,11 +1,11 @@
 #ifndef INCLUDED_VERTICAL_WALL_HPP
 #define INCLUDED_VERTICAL_WALL_HPP
 
-#include <map/map_elem.hpp>
+#include <dungeon/dungeon_elem.hpp>
 
-namespace map
+namespace dungeon
 {
-  class VerticalWall : public MapElem
+  class VerticalWall : public DungeonElem
   {
   public:
     VerticalWall(std::string type);

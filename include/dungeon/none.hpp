@@ -1,11 +1,11 @@
 #ifndef INCLUDED_NONE_HPP
 #define INCLUDED_NONE_HPP
 
-#include <map/map_elem.hpp>
+#include <dungeon/dungeon_elem.hpp>
 
-namespace map
+namespace dungeon
 {
-  class None : public MapElem
+  class None : public DungeonElem
   {
   public:
     None(std::string type);

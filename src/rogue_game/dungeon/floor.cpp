@@ -1,9 +1,9 @@
-#include <map/floor.hpp>
+#include <dungeon/floor.hpp>
 
-namespace map
+namespace dungeon
 {
   Floor::Floor(std::string type)
-    : MapElem(type)
+    : DungeonElem(type)
   {
   }
 

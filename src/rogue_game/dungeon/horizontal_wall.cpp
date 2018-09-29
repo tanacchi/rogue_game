@@ -1,9 +1,9 @@
-#include <map/horizontal_wall.hpp>
+#include <dungeon/horizontal_wall.hpp>
 
-namespace map
+namespace dungeon
 {
   HorizontalWall::HorizontalWall(std::string type)
-    : MapElem(type)
+    : DungeonElem(type)
   {
   }
 

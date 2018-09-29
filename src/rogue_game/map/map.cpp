@@ -5,12 +5,12 @@
 #include <vector>
 
 #include <map/map.hpp>
-#include <map/floor.hpp>
-#include <map/path.hpp>
-#include <map/none.hpp>
-#include <map/horizontal_wall.hpp>
-#include <map/vertical_wall.hpp>
-#include <map/door.hpp>
+#include <dungeon/floor.hpp>
+#include <dungeon/path.hpp>
+#include <dungeon/none.hpp>
+#include <dungeon/horizontal_wall.hpp>
+#include <dungeon/vertical_wall.hpp>
+#include <dungeon/door.hpp>
 
 namespace map
 {
@@ -27,17 +27,17 @@ namespace map
   std::shared_ptr<MapElem> gen_map_elem(std::string type)
   {
     if (type == "floor") {
-      return std::shared_ptr<Floor>(new Floor{type});
+      return std::shared_ptr<::dungeon::Floor>(new ::dungeon::Floor{type});
     } else if (type == "path") {
-      return std::shared_ptr<Path>(new Path{type});
+      return std::shared_ptr<::dungeon::Path>(new ::dungeon::Path{type});
     } else if (type == "none") {
-      return std::shared_ptr<None>(new None{type});
+      return std::shared_ptr<::dungeon::None>(new ::dungeon::None{type});
     } else if (type == "horizontal_wall") {
-      return std::shared_ptr<HorizontalWall>(new HorizontalWall{type});
+      return std::shared_ptr<::dungeon::HorizontalWall>(new ::dungeon::HorizontalWall{type});
     } else if (type == "vertical_wall") {
-      return std::shared_ptr<VerticalWall>(new VerticalWall{type});
+      return std::shared_ptr<::dungeon::VerticalWall>(new ::dungeon::VerticalWall{type});
     } else if (type == "door") {
-      return std::shared_ptr<Door>(new Door{type});
+      return std::shared_ptr<::dungeon::Door>(new ::dungeon::Door{type});
     } else {
       throw std::string{"Invalid map elem type."};
     }

@@ -1,9 +1,9 @@
-#include <map/door.hpp>
+#include <dungeon/door.hpp>
 
-namespace map
+namespace dungeon
 {
   Door::Door(std::string type)
-    : MapElem(type)
+    : DungeonElem(type)
   {
   }
 

@@ -1,9 +1,9 @@
-#include <map/path.hpp>
+#include <dungeon/path.hpp>
 
-namespace map
+namespace dungeon
 {
   Path::Path(std::string type)
-    : MapElem(type)
+    : DungeonElem(type)
   {
   }
 

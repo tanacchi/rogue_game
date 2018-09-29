@@ -1,11 +1,11 @@
 #ifndef INCLUDED_HORIZONTAL_HPP
 #define INCLUDED_HORIZONTAL_HPP
 
-#include <map/map_elem.hpp>
+#include <dungeon/dungeon_elem.hpp>
 
-namespace map
+namespace dungeon
 {
-  class HorizontalWall : public MapElem
+  class HorizontalWall : public DungeonElem
   {
   public:
     HorizontalWall(std::string type);

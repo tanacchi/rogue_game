@@ -1,11 +1,11 @@
 #ifndef INCLUDED_PATH_HPP
 #define INCLUDED_PATH_HPP
 
-#include <map/map_elem.hpp>
+#include <dungeon/dungeon_elem.hpp>
 
-namespace map
+namespace dungeon
 {
-  class Path : public MapElem
+  class Path : public DungeonElem
   {
   public:
     Path(std::string type);

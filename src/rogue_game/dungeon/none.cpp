@@ -1,9 +1,9 @@
-#include <map/none.hpp>
+#include <dungeon/none.hpp>
 
-namespace map
+namespace dungeon
 {
   None::None(std::string type)
-    : MapElem(type)
+    : DungeonElem(type)
   {
   }
 

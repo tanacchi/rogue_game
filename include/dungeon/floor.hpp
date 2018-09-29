@@ -1,11 +1,11 @@
 #ifndef INCLUDED_FLOOR_HPP
 #define INCLUDED_FLOOR_HPP
 
-#include <map/map_elem.hpp>
+#include <dungeon/dungeon_elem.hpp>
 
-namespace map
+namespace dungeon
 {
-  class Floor : public MapElem
+  class Floor : public DungeonElem
   {
   public:
     Floor(std::string type);

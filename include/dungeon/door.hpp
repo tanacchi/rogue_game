@@ -1,11 +1,11 @@
 #ifndef INCLUDED_DOOR_HPP
 #define INCLUDED_DOOR_HPP
 
-#include <map/map_elem.hpp>
+#include <dungeon/dungeon_elem.hpp>
 
-namespace map
+namespace dungeon
 {
-  class Door : public MapElem
+  class Door : public DungeonElem
   {
   public:
     Door(std::string type);

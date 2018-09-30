@@ -10,6 +10,11 @@ namespace character
       money_{0}
   {
   }
+
+  std::size_t Player::get_money() const
+  {
+    return money_;
+  }
   
   void Player::update(const map::Map& map)
   {

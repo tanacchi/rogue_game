@@ -56,7 +56,7 @@ int main(int argc, char** argv)
     std::vector<std::string> arg_list{argv, argv + argc};
     std::string text_map_filname{arg_list[1]};
     std::vector<std::string> map_strings{map::generator::read_map_strings(text_map_filname)};
-    map::TextMap text_map{map::generator::get_text_map_obj(map_strings)};
+    map::generator::TextMap text_map{map::generator::get_text_map_obj(map_strings)};
     text_map.show();
     map::generator::MapGenerator map_generator{text_map};
     map_generator.set_elem_config_table();

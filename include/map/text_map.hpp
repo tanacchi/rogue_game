@@ -5,13 +5,16 @@
 
 namespace map
 {
-  struct TextMap {
-    std::size_t width{};
-    std::size_t height{};
-    std::string text{};
+  namespace generator
+  {
+    struct TextMap {
+      std::size_t width{};
+      std::size_t height{};
+      std::string text{};
 
-    void show() const;
-  };
+      void show() const;
+    };
+  }
 }
 
 #endif  // INCLUDED_TEXT_MAP_HPP

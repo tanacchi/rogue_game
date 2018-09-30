@@ -53,6 +53,7 @@ namespace map
             ptree item_config;
             item_config.put("index", index);
             item_config.put("type", "gold");
+            item_config.put("amount", 100);
             item_configs_.emplace_back(item_config);
           }}
       };

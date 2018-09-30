@@ -18,8 +18,7 @@ namespace map
       {"floor",           '.'},
       {"path",            '#'},
       {"none",            ' '},
-      {"door",            '+'},
-      {"gold",            '*'}
+      {"door",            '+'}
     };
     return symbol_hash.find(type) != symbol_hash.end() ? symbol_hash.at(type) : '$';
   }

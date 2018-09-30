@@ -5,15 +5,12 @@
 #include <vector>
 
 #include <map/map.hpp>
-
 #include <dungeon/floor.hpp>
 #include <dungeon/path.hpp>
 #include <dungeon/none.hpp>
 #include <dungeon/horizontal_wall.hpp>
 #include <dungeon/vertical_wall.hpp>
 #include <dungeon/door.hpp>
-
-#include <item/gold.hpp>
 
 namespace map
 {
@@ -41,8 +38,6 @@ namespace map
       return std::shared_ptr<::dungeon::VerticalWall>(new ::dungeon::VerticalWall{type});
     } else if (type == "door") {
       return std::shared_ptr<::dungeon::Door>(new ::dungeon::Door{type});
-    } else if (type == "gold") {
-      return std::shared_ptr<::item::Gold>(new ::item::Gold{type});
     } else {
       throw std::string{"Invalid map elem type."};
     }

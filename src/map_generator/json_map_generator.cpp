@@ -33,75 +33,96 @@ namespace map
     
   namespace generator
   {
-    namespace elem_config
+    class MapGenerator
     {
-      using ptree = boost::property_tree::ptree;
+    public:
+      MapGenerator(const TextMap& text_map, std::string output_filename = "tmp_sample_map")
+        : text_map_{text_map},
+          output_filename_{output_filename}
+      {
+      }
+
+      void set_elem_config_table()
+      {
+        using ptree = boost::property_tree::ptree;
+        elem_config_table_ = {
+          {' ', [&](std::size_t index) {
+              ptree dungeon_config;
+              dungeon_config.put("type", "none");
+              dungeon_configs_.emplace_back(dungeon_config);
+            }},
+          {'-', [&](std::size_t index) {
+              ptree dungeon_config;
+              dungeon_config.put("type", "horizontal_wall");
+              dungeon_configs_.emplace_back(dungeon_config);
+            }},
+          {'|', [&](std::size_t index) {
+              ptree dungeon_config;
+              dungeon_config.put("type", "vertical_wall");
+              dungeon_configs_.emplace_back(dungeon_config);
+            }},
+          {'.', [&](std::size_t index) {
+              ptree dungeon_config;
+              dungeon_config.put("type", "floor");
+              dungeon_configs_.emplace_back(dungeon_config);
+            }},
+          {'#', [&](std::size_t index) {
+              ptree dungeon_config;
+              dungeon_config.put("type", "path");
+              dungeon_configs_.emplace_back(dungeon_config);
+            }},
+          {'+', [&](std::size_t index) {
+              ptree dungeon_config;
+              dungeon_config.put("type", "door");
+              dungeon_configs_.emplace_back(dungeon_config);
+            }},
+          {'*', [&](std::size_t index) {
+              ptree dungeon_config;
+              dungeon_config.put("type", "floor");
+              dungeon_configs_.emplace_back(dungeon_config);
+              ptree item_config;
+              item_config.put("index", index);
+              item_config.put("type", "gold");
+              item_configs_.emplace_back(item_config);
+            }}
+        };
+      }
+
+      void set_configs()
+      {
+        for (std::size_t i{0}, end{text_map_.text.length()}; i < end; ++i) {
+          elem_config_table_.at(text_map_.text[i])(i);
+        }
+      }
       
-      ptree none()
+      void write_map_json()
       {
-        ptree config;
-        config.put("type", "none");
-        return config;
-      }
-      
-      ptree horizontal_wall()
-      {
-        ptree config;
-        config.put("type", "horizontal_wall");
-        return config;
-      }
-
-      ptree vertical_wall()
-      {
-        ptree config;
-        config.put("type", "vertical_wall");
-        return config; 
-      }
-
-      ptree floor()
-      {
-        ptree config;
-        config.put("type", "floor");
-        return config; 
-      }
-
-      ptree path()
-      {
-        ptree config;
-        config.put("type", "path");
-        return config; 
-      }
-
-      ptree door()
-      {
-        ptree config;
-        config.put("type", "door");
-        return config;
-      }
-
-      ptree gold()
-      {
-        ptree config;
-        config.put("type", "gold");
-        config.put("amount", 100);
-        return config; 
-      }
-    }
-    
-    std::function<boost::property_tree::ptree(void)> get_elem_config(char elem_char)
-    {
-      static std::map<char, std::function<boost::property_tree::ptree(void)>> config_table = {
-        {' ', elem_config::none},
-        {'-', elem_config::horizontal_wall},
-        {'|', elem_config::vertical_wall},
-        {'.', elem_config::floor},
-        {'#', elem_config::path},
-        {'+', elem_config::door},
-        {'*', elem_config::gold}
-      };
-      return config_table.at(elem_char);
-    }
+        boost::property_tree::ptree map_data;
+        map_data.put("Map.width", text_map_.width);
+        map_data.put("Map.height", text_map_.height);
   
+        boost::property_tree::ptree dungeon_tree;
+        for (auto config : dungeon_configs_) {
+          dungeon_tree.push_back(std::make_pair("", config));
+        }
+        map_data.add_child("Map.elems", dungeon_tree);
+        
+        boost::property_tree::ptree item_tree;
+        for (auto config : item_configs_) {
+          item_tree.push_back(std::make_pair("", config));
+        }
+        map_data.add_child("Map.items", item_tree);
+
+        boost::property_tree::write_json(map_dir+"json/"+output_filename_+".json", map_data);
+      }
+    private:
+      const TextMap text_map_;
+      const std::string output_filename_;
+      std::map<char, std::function<void(std::size_t index)> > elem_config_table_;
+      std::vector<boost::property_tree::ptree> dungeon_configs_;
+      std::vector<boost::property_tree::ptree> item_configs_;
+    };
+     
     std::vector<std::string> read_map_strings(std::string filename)
     {
       std::ifstream read_file{};
@@ -130,22 +151,6 @@ namespace map
       tm.text = ss.str();
       return tm;
     }
-    
-    void write_map_json(const TextMap& text_map,  std::string output_name = "tmp_sample_map")
-    {
-      boost::property_tree::ptree map_data;
-      map_data.put("Map.width", text_map.width);
-      map_data.put("Map.height", text_map.height);
-  
-      boost::property_tree::ptree elem_list;
-      for (std::size_t i{0}, length{text_map.text.length()}; i < length; ++i) {
-        boost::property_tree::ptree elem = get_elem_config(text_map.text[i])();
-        elem_list.push_back(std::make_pair("", elem));
-      }
-      map_data.add_child("Map.elems", elem_list);
-  
-      boost::property_tree::write_json(map_dir+"json/"+output_name+".json", map_data);
-    }
   }
 }
 
@@ -157,7 +162,10 @@ int main(int argc, char** argv)
     std::vector<std::string> map_strings{map::generator::read_map_strings(text_map_filname)};
     map::TextMap text_map{map::generator::get_text_map_obj(map_strings)};
     text_map.show();
-    map::generator::write_map_json(text_map);
+    map::generator::MapGenerator map_generator{text_map};
+    map_generator.set_elem_config_table();
+    map_generator.set_configs();
+    map_generator.write_map_json();
   }
   catch (const std::logic_error& e) {
     std::cout << e.what() << std::endl;

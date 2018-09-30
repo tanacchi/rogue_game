@@ -46,41 +46,42 @@ namespace map
       {
         using ptree = boost::property_tree::ptree;
         elem_config_table_ = {
-          {' ', [&]{
+          {' ', [&](std::size_t index) {
               ptree dungeon_config;
               dungeon_config.put("type", "none");
               dungeon_configs_.emplace_back(dungeon_config);
             }},
-          {'-', [&]{
+          {'-', [&](std::size_t index) {
               ptree dungeon_config;
               dungeon_config.put("type", "horizontal_wall");
               dungeon_configs_.emplace_back(dungeon_config);
             }},
-          {'|', [&]{
+          {'|', [&](std::size_t index) {
               ptree dungeon_config;
               dungeon_config.put("type", "vertical_wall");
               dungeon_configs_.emplace_back(dungeon_config);
             }},
-          {'.', [&]{
+          {'.', [&](std::size_t index) {
               ptree dungeon_config;
               dungeon_config.put("type", "floor");
               dungeon_configs_.emplace_back(dungeon_config);
             }},
-          {'#', [&]{
+          {'#', [&](std::size_t index) {
               ptree dungeon_config;
               dungeon_config.put("type", "path");
               dungeon_configs_.emplace_back(dungeon_config);
             }},
-          {'+', [&]{
+          {'+', [&](std::size_t index) {
               ptree dungeon_config;
               dungeon_config.put("type", "door");
               dungeon_configs_.emplace_back(dungeon_config);
             }},
-          {'*', [&]{
+          {'*', [&](std::size_t index) {
               ptree dungeon_config;
               dungeon_config.put("type", "floor");
               dungeon_configs_.emplace_back(dungeon_config);
               ptree item_config;
+              item_config.put("index", index);
               item_config.put("type", "gold");
               item_configs_.emplace_back(item_config);
             }}
@@ -90,7 +91,7 @@ namespace map
       void set_configs()
       {
         for (std::size_t i{0}, end{text_map_.text.length()}; i < end; ++i) {
-          elem_config_table_.at(text_map_.text[i])();
+          elem_config_table_.at(text_map_.text[i])(i);
         }
       }
       
@@ -106,12 +107,18 @@ namespace map
         }
         map_data.add_child("Map.elems", dungeon_tree);
         
+        boost::property_tree::ptree item_tree;
+        for (auto config : item_configs_) {
+          item_tree.push_back(std::make_pair("", config));
+        }
+        map_data.add_child("Map.items", item_tree);
+
         boost::property_tree::write_json(map_dir+"json/"+output_filename_+".json", map_data);
       }
     private:
       const TextMap text_map_;
       const std::string output_filename_;
-      std::map<char, std::function<void(void)> > elem_config_table_;
+      std::map<char, std::function<void(std::size_t index)> > elem_config_table_;
       std::vector<boost::property_tree::ptree> dungeon_configs_;
       std::vector<boost::property_tree::ptree> item_configs_;
     };

@@ -6,9 +6,6 @@
 #include <boost/foreach.hpp>
 #include <boost/optional.hpp>
 #include <stdexcept>
-#include <sstream>
-#include <vector>
-#include <fstream>
 #include <map>
 #include <functional>
 

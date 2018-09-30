@@ -14,6 +14,9 @@ namespace map
 
       void show() const;
     };
+
+    std::vector<std::string> read_map_strings(std::string filename);
+    TextMap get_text_map_obj(std::vector<std::string> map_strings);
   }
 }
 

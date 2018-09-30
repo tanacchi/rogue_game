@@ -11,6 +11,7 @@ namespace map
     const int get_y() const;
     const Point operator+(const Point& rhs) const;
     const Point& operator+=(const Point& rhs);
+    bool operator==(const Point& rhs) const;
   private:
     int x_;
     int y_;

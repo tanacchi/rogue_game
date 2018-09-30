@@ -9,41 +9,97 @@
 #include <vector>
 #include <fstream>
 #include <map>
+#include <functional>
 
 #include <rogue_game.hpp>
 
 namespace map
 {
+  struct TextMap {
+    std::size_t width{};
+    std::size_t height{};
+    std::string text{};
+    void show()
+    {
+      std::cout << "width:  [" << width  << "]\n"
+                << "height: [" << height << "]\n"
+                << "text: " << std::endl;
+      for (std::size_t i{0}; i < text.length(); i += width) {
+        std::string row{text.substr(i, width)};
+        std::cout << row << std::endl;
+      }
+    }
+  };
+    
   namespace generator
   {
-    struct TextMap {
-      std::size_t width{};
-      std::size_t height{};
-      std::string text{};
-      void show()
-      {
-        std::cout << "width:  [" << width  << "]\n"
-                  << "height: [" << height << "]\n"
-                  << "text: " << std::endl;
-        for (std::size_t i{0}; i < text.length(); i += width) {
-          std::string row{text.substr(i, width)};
-          std::cout << row << std::endl;
-        }
-      }
-    };
-    
-    std::string get_type(char elem_char)
+    namespace elem_config
     {
-      static std::map<char, std::string> type_table = {
-        {' ', "none"},
-        {'-', "horizontal_wall"},
-        {'|', "vertical_wall"},
-        {'.', "floor"},
-        {'#', "path"},
-        {'+', "door"},
-        {'*', "gold"}
+      using ptree = boost::property_tree::ptree;
+      
+      ptree none()
+      {
+        ptree config;
+        config.put("type", "none");
+        return config;
+      }
+      
+      ptree horizontal_wall()
+      {
+        ptree config;
+        config.put("type", "horizontal_wall");
+        return config;
+      }
+
+      ptree vertical_wall()
+      {
+        ptree config;
+        config.put("type", "vertical_wall");
+        return config; 
+      }
+
+      ptree floor()
+      {
+        ptree config;
+        config.put("type", "floor");
+        return config; 
+      }
+
+      ptree path()
+      {
+        ptree config;
+        config.put("type", "path");
+        return config; 
+      }
+
+      ptree door()
+      {
+        ptree config;
+        config.put("type", "door");
+        return config;
+      }
+
+      ptree gold()
+      {
+        ptree config;
+        config.put("type", "gold");
+        config.put("amount", 100);
+        return config; 
+      }
+    }
+    
+    std::function<boost::property_tree::ptree(void)> get_elem_config(char elem_char)
+    {
+      static std::map<char, std::function<boost::property_tree::ptree(void)>> config_table = {
+        {' ', elem_config::none},
+        {'-', elem_config::horizontal_wall},
+        {'|', elem_config::vertical_wall},
+        {'.', elem_config::floor},
+        {'#', elem_config::path},
+        {'+', elem_config::door},
+        {'*', elem_config::gold}
       };
-      return type_table.at(elem_char);
+      return config_table.at(elem_char);
     }
   
     std::vector<std::string> read_map_strings(std::string filename)
@@ -83,8 +139,7 @@ namespace map
   
       boost::property_tree::ptree elem_list;
       for (std::size_t i{0}, length{text_map.text.length()}; i < length; ++i) {
-        boost::property_tree::ptree elem;
-        elem.put("type", get_type(text_map.text[i]));
+        boost::property_tree::ptree elem = get_elem_config(text_map.text[i])();
         elem_list.push_back(std::make_pair("", elem));
       }
       map_data.add_child("Map.elems", elem_list);
@@ -100,7 +155,7 @@ int main(int argc, char** argv)
     std::vector<std::string> arg_list{argv, argv + argc};
     std::string text_map_filname{arg_list[1]};
     std::vector<std::string> map_strings{map::generator::read_map_strings(text_map_filname)};
-    map::generator::TextMap text_map{map::generator::get_text_map_obj(map_strings)};
+    map::TextMap text_map{map::generator::get_text_map_obj(map_strings)};
     text_map.show();
     map::generator::write_map_json(text_map);
   }

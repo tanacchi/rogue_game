@@ -2,8 +2,8 @@
 
 namespace dungeon
 {
-  VerticalWall::VerticalWall(std::string type)
-    : DungeonElem(type)
+  VerticalWall::VerticalWall()
+    : DungeonElem("vertical_wall")
   {
   }
   bool VerticalWall::can_stand() const

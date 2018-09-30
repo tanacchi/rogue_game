@@ -2,8 +2,8 @@
 
 namespace dungeon
 {
-  Path::Path(std::string type)
-    : DungeonElem(type)
+  Path::Path()
+    : DungeonElem("path")
   {
   }
 

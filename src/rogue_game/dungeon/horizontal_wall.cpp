@@ -2,8 +2,8 @@
 
 namespace dungeon
 {
-  HorizontalWall::HorizontalWall(std::string type)
-    : DungeonElem(type)
+  HorizontalWall::HorizontalWall()
+    : DungeonElem("horizontal_wall")
   {
   }
 

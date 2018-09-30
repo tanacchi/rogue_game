@@ -2,8 +2,8 @@
 
 namespace dungeon
 {
-  Floor::Floor(std::string type)
-    : DungeonElem(type)
+  Floor::Floor()
+    : DungeonElem("floor")
   {
   }
 

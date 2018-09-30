@@ -34,17 +34,17 @@ namespace map
   std::shared_ptr<::dungeon::DungeonElem> gen_map_elem(std::string type)
   {
     if (type == "floor") {
-      return std::shared_ptr<::dungeon::Floor>(new ::dungeon::Floor{type});
+      return std::shared_ptr<::dungeon::Floor>(new ::dungeon::Floor{});
     } else if (type == "path") {
-      return std::shared_ptr<::dungeon::Path>(new ::dungeon::Path{type});
+      return std::shared_ptr<::dungeon::Path>(new ::dungeon::Path{});
     } else if (type == "none") {
-      return std::shared_ptr<::dungeon::None>(new ::dungeon::None{type});
+      return std::shared_ptr<::dungeon::None>(new ::dungeon::None{});
     } else if (type == "horizontal_wall") {
-      return std::shared_ptr<::dungeon::HorizontalWall>(new ::dungeon::HorizontalWall{type});
+      return std::shared_ptr<::dungeon::HorizontalWall>(new ::dungeon::HorizontalWall{});
     } else if (type == "vertical_wall") {
-      return std::shared_ptr<::dungeon::VerticalWall>(new ::dungeon::VerticalWall{type});
+      return std::shared_ptr<::dungeon::VerticalWall>(new ::dungeon::VerticalWall{});
     } else if (type == "door") {
-      return std::shared_ptr<::dungeon::Door>(new ::dungeon::Door{type});
+      return std::shared_ptr<::dungeon::Door>(new ::dungeon::Door{});
     } else {
       throw std::string{"Invalid map elem type."};
     }

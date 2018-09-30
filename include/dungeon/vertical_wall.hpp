@@ -8,7 +8,7 @@ namespace dungeon
   class VerticalWall : public DungeonElem
   {
   public:
-    VerticalWall(std::string type);
+    VerticalWall();
     bool can_stand() const;
   };
 }

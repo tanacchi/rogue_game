@@ -8,7 +8,7 @@ namespace dungeon
   class Floor : public DungeonElem
   {
   public:
-    Floor(std::string type);
+    Floor();
     bool can_stand() const;
   };
 }

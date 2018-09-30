@@ -7,6 +7,7 @@
 #include <map/map_elem.hpp>
 #include <map/point.hpp>
 #include <dungeon/dungeon_elem.hpp>
+#include <item/item.hpp>
 
 namespace map
 {

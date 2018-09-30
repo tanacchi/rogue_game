@@ -2,8 +2,8 @@
 
 namespace item
 {
-  Gold::Gold(std::string type, std::size_t amount)
-    : Item(type),
+  Gold::Gold(::map::Point position, std::size_t amount)
+    : Item("gold", position),
       amount_{amount}
   {
   }

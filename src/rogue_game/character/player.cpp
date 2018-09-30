@@ -23,7 +23,7 @@ namespace character
     map::Point motion{motion_table.find(keystate) != motion_table.end() ?
         motion_table.at(keystate) : map::Point{0, 0}};
     map::Point next_position{position_ + motion};
-    if (map.in_range(next_position) && map.get_elem(next_position)->can_stand()) {
+    if (map.in_range(next_position) && map.get_dungeon_elem(next_position)->can_stand()) {
       position_ = next_position;
     }
   }

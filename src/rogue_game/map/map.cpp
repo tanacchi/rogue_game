@@ -14,9 +14,9 @@
 
 namespace map
 {
-  const std::shared_ptr<MapElem> Map::get_elem(const Point& point) const
+  const std::shared_ptr<::dungeon::DungeonElem> Map::get_dungeon_elem(const Point& point) const
   {
-    return elems[width * point.get_y() + point.get_x()];
+    return dungeon_layer[width * point.get_y() + point.get_x()];
   }
 
   bool Map::in_range(const Point& point) const
@@ -24,7 +24,7 @@ namespace map
     return 0 <= point.get_x() && point.get_x() < width && 0 <= point.get_y() && point.get_y() < height;
   }
   
-  std::shared_ptr<MapElem> gen_map_elem(std::string type)
+  std::shared_ptr<::dungeon::DungeonElem> gen_map_elem(std::string type)
   {
     if (type == "floor") {
       return std::shared_ptr<::dungeon::Floor>(new ::dungeon::Floor{type});
@@ -57,13 +57,13 @@ namespace map
       map.height = height;
     }
     {
-      std::vector<std::shared_ptr<MapElem> > elems{};
+      std::vector<std::shared_ptr<::dungeon::DungeonElem> > elems{};
       BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.elems") ) {
         const boost::property_tree::ptree& elem{child.second};
         std::string type = elem.get_optional<std::string>("type").get();
         elems.push_back(gen_map_elem(type));
       }
-      map.elems = std::valarray<std::shared_ptr<MapElem> >{elems.data(), elems.size()};
+      map.dungeon_layer = std::valarray<std::shared_ptr<::dungeon::DungeonElem> >{elems.data(), elems.size()};
     }
     return map;
   }

@@ -15,6 +15,10 @@ namespace map {
       }
       mvwprintw(win_, y, map.width, "\n");
     }
+    for (auto item : map.item_layer) {
+      Point pos{item->get_position()};
+      mvwprintw(win_, pos.get_y(), pos.get_x(), "%c", item->symbol);
+    }
     mvwprintw(win_, character.get_position().get_y(), character.get_position().get_x(), "@");
     wrefresh(win_);
   }

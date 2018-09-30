@@ -28,8 +28,8 @@ namespace map
 
   Point Map::index_to_point(std::size_t index)
   {
-    int x{static_cast<int>(index % height)};
-    int y{static_cast<int>(index / height)};
+    int x{static_cast<int>(index % width)};
+    int y{static_cast<int>(index / width)};
     return Point{x, y};
   }
   

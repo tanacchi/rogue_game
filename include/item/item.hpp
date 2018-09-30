@@ -10,6 +10,7 @@ namespace item
   {
   public:
     Item(std::string type, ::map::Point position);
+    ::map::Point get_position() const;
   private:
     ::map::Point position_;
   };

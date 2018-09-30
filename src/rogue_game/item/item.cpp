@@ -7,4 +7,9 @@ namespace item
       position_{position}
   {
   }
+
+  ::map::Point Item::get_position() const
+  {
+    return position_;
+  }
 }

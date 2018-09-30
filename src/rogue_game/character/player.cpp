@@ -6,7 +6,8 @@ namespace character
 {
   Player::Player(map::Point position, std::unique_ptr<KeyboardManager>&& km_ptr)
     : Character(position),
-      km_ptr_{std::move(km_ptr)}
+      km_ptr_{std::move(km_ptr)},
+      money_{0}
   {
   }
   

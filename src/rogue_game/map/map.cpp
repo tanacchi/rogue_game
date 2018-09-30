@@ -23,6 +23,13 @@ namespace map
   {
     return 0 <= point.get_x() && point.get_x() < width && 0 <= point.get_y() && point.get_y() < height;
   }
+
+  Point Map::index_to_point(std::size_t index)
+  {
+    int x{static_cast<int>(index % height)};
+    int y{static_cast<int>(index / height)};
+    return Point{x, y};
+  }
   
   std::shared_ptr<::dungeon::DungeonElem> gen_map_elem(std::string type)
   {

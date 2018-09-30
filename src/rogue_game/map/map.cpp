@@ -12,6 +12,8 @@
 #include <dungeon/vertical_wall.hpp>
 #include <dungeon/door.hpp>
 
+#include <item/gold.hpp>
+
 namespace map
 {
   const std::shared_ptr<::dungeon::DungeonElem> Map::get_dungeon_elem(const Point& point) const
@@ -71,6 +73,18 @@ namespace map
         elems.push_back(gen_map_elem(type));
       }
       map.dungeon_layer = std::valarray<std::shared_ptr<::dungeon::DungeonElem> >{elems.data(), elems.size()};
+    }
+    {
+      std::vector<std::shared_ptr<::item::Item> > elems{};
+      BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.items") ) {
+        const boost::property_tree::ptree& elem{child.second};
+        std::size_t index = elem.get_optional<std::size_t>("index").get();
+        Point pos{map.index_to_point(index)};
+        std::string type{elem.get_optional<std::string>("type").get()};
+        std::size_t amount{elem.get_optional<std::size_t>("amount").get()};
+        elems.push_back(std::shared_ptr<::item::Gold>{new ::item::Gold{pos, amount}});
+      }
+      map.item_layer = std::valarray<std::shared_ptr<::item::Item> >{elems.data(), elems.size()};
     }
     return map;
   }

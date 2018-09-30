@@ -12,25 +12,10 @@
 #include <functional>
 
 #include <rogue_game.hpp>
+#include <map/text_map.hpp>
 
 namespace map
 {
-  struct TextMap {
-    std::size_t width{};
-    std::size_t height{};
-    std::string text{};
-    void show()
-    {
-      std::cout << "width:  [" << width  << "]\n"
-                << "height: [" << height << "]\n"
-                << "text: " << std::endl;
-      for (std::size_t i{0}; i < text.length(); i += width) {
-        std::string row{text.substr(i, width)};
-        std::cout << row << std::endl;
-      }
-    }
-  };
-    
   namespace generator
   {
     class MapGenerator

@@ -31,5 +31,10 @@ namespace character
     if (map.in_range(next_position) && map.get_dungeon_elem(next_position)->can_stand()) {
       position_ = next_position;
     }
+    for (std::size_t i{0}, end{map.item_layer.size()}; i < end; ++i) {
+      if (map.item_layer[i]->get_position() == next_position) {
+        money_ += 100;
+      }
+    }
   }
 }

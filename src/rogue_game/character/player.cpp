@@ -34,6 +34,8 @@ namespace character
     for (auto it{map.item_layer.begin()}, end{map.item_layer.end()}; it != end; ++it) {
       if ((*it)->get_position() == next_position) {
         money_ += 100;
+        map.item_layer.erase(it);
+        break;
       }
     }
   }

@@ -8,7 +8,7 @@ namespace dungeon
   class Door : public DungeonElem
   {
   public:
-    Door(std::string type);
+    Door();
     bool can_stand() const;
   };
 }

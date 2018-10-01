@@ -8,7 +8,7 @@ namespace dungeon
   class Path : public DungeonElem
   {
   public:
-    Path(std::string type);
+    Path();
     bool can_stand() const;
   };
 }

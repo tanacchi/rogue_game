@@ -3,6 +3,7 @@
 
 #include <keyboard/keyboard_manager.hpp>
 #include <display/map_display.hpp>
+#include <display/player_display.hpp>
 
 const std::string map_dir{"@PROJECT_SOURCE_DIR@/map/"};
 

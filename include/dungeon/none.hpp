@@ -8,7 +8,7 @@ namespace dungeon
   class None : public DungeonElem
   {
   public:
-    None(std::string type);
+    None();
     bool can_stand() const;
   };
 }

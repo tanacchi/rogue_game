@@ -12,32 +12,41 @@
 #include <dungeon/vertical_wall.hpp>
 #include <dungeon/door.hpp>
 
+#include <item/gold.hpp>
+
 namespace map
 {
-  const std::shared_ptr<MapElem> Map::get_elem(const Point& point) const
+  const std::shared_ptr<::dungeon::DungeonElem> Map::get_dungeon_elem(const Point& point) const
   {
-    return elems[width * point.get_y() + point.get_x()];
+    return dungeon_layer[width * point.get_y() + point.get_x()];
   }
 
   bool Map::in_range(const Point& point) const
   {
     return 0 <= point.get_x() && point.get_x() < width && 0 <= point.get_y() && point.get_y() < height;
   }
+
+  Point Map::index_to_point(std::size_t index)
+  {
+    int x{static_cast<int>(index % width)};
+    int y{static_cast<int>(index / width)};
+    return Point{x, y};
+  }
   
-  std::shared_ptr<MapElem> gen_map_elem(std::string type)
+  std::shared_ptr<::dungeon::DungeonElem> gen_map_elem(std::string type)
   {
     if (type == "floor") {
-      return std::shared_ptr<::dungeon::Floor>(new ::dungeon::Floor{type});
+      return std::shared_ptr<::dungeon::Floor>(new ::dungeon::Floor{});
     } else if (type == "path") {
-      return std::shared_ptr<::dungeon::Path>(new ::dungeon::Path{type});
+      return std::shared_ptr<::dungeon::Path>(new ::dungeon::Path{});
     } else if (type == "none") {
-      return std::shared_ptr<::dungeon::None>(new ::dungeon::None{type});
+      return std::shared_ptr<::dungeon::None>(new ::dungeon::None{});
     } else if (type == "horizontal_wall") {
-      return std::shared_ptr<::dungeon::HorizontalWall>(new ::dungeon::HorizontalWall{type});
+      return std::shared_ptr<::dungeon::HorizontalWall>(new ::dungeon::HorizontalWall{});
     } else if (type == "vertical_wall") {
-      return std::shared_ptr<::dungeon::VerticalWall>(new ::dungeon::VerticalWall{type});
+      return std::shared_ptr<::dungeon::VerticalWall>(new ::dungeon::VerticalWall{});
     } else if (type == "door") {
-      return std::shared_ptr<::dungeon::Door>(new ::dungeon::Door{type});
+      return std::shared_ptr<::dungeon::Door>(new ::dungeon::Door{});
     } else {
       throw std::string{"Invalid map elem type."};
     }
@@ -57,13 +66,23 @@ namespace map
       map.height = height;
     }
     {
-      std::vector<std::shared_ptr<MapElem> > elems{};
+      std::vector<std::shared_ptr<::dungeon::DungeonElem> > elems{};
       BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.elems") ) {
         const boost::property_tree::ptree& elem{child.second};
         std::string type = elem.get_optional<std::string>("type").get();
         elems.push_back(gen_map_elem(type));
       }
-      map.elems = std::valarray<std::shared_ptr<MapElem> >{elems.data(), elems.size()};
+      map.dungeon_layer = std::valarray<std::shared_ptr<::dungeon::DungeonElem> >{elems.data(), elems.size()};
+    }
+    {
+      BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.items") ) {
+        const boost::property_tree::ptree& elem{child.second};
+        std::size_t index = elem.get_optional<std::size_t>("index").get();
+        Point pos{map.index_to_point(index)};
+        std::string type{elem.get_optional<std::string>("type").get()};
+        std::size_t amount{elem.get_optional<std::size_t>("amount").get()};
+        map.item_layer.push_back(std::shared_ptr<::item::Gold>{new ::item::Gold{pos, amount}});
+      }
     }
     return map;
   }

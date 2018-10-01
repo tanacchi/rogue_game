@@ -28,4 +28,8 @@ namespace map
     return *this;
   }
 
+  bool Point::operator==(const Point& rhs) const
+  {
+    return x_ == rhs.x_ && y_ == rhs.y_;
+  }
 }

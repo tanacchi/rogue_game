@@ -2,8 +2,8 @@
 
 namespace dungeon
 {
-  None::None(std::string type)
-    : DungeonElem(type)
+  None::None()
+    : DungeonElem("none")
   {
   }
 

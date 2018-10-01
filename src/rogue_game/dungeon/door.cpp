@@ -2,8 +2,8 @@
 
 namespace dungeon
 {
-  Door::Door(std::string type)
-    : DungeonElem(type)
+  Door::Door()
+    : DungeonElem("door")
   {
   }
 

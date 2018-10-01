@@ -10,7 +10,6 @@ namespace map
     MapElem(std::string type);
     const std::string type;
     const char symbol;
-    virtual bool can_stand() const = 0;
   };
   
   const char get_symbol(const std::string);

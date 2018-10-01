@@ -16,7 +16,7 @@ namespace character
     return money_;
   }
   
-  void Player::update(const map::Map& map)
+  void Player::update(map::Map& map)
   {
     KeyboardManager::KeyState keystate{km_ptr_->get_key()};
     static std::map<KeyboardManager::KeyState, map::Point> motion_table = {
@@ -31,8 +31,8 @@ namespace character
     if (map.in_range(next_position) && map.get_dungeon_elem(next_position)->can_stand()) {
       position_ = next_position;
     }
-    for (std::size_t i{0}, end{map.item_layer.size()}; i < end; ++i) {
-      if (map.item_layer[i]->get_position() == next_position) {
+    for (auto it{map.item_layer.begin()}, end{map.item_layer.end()}; it != end; ++it) {
+      if ((*it)->get_position() == next_position) {
         money_ += 100;
       }
     }

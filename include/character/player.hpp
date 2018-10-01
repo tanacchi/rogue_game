@@ -10,7 +10,7 @@ namespace character
   public:
     Player(map::Point point, std::unique_ptr<KeyboardManager>&& km_ptr=nullptr);
     std::size_t get_money() const;
-    void update(const map::Map& map) override;
+    void update(map::Map& map) override;
   private:
     std::unique_ptr<KeyboardManager> km_ptr_;
     std::size_t money_;

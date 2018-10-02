@@ -9,7 +9,6 @@ namespace dungeon
   {
   public:
     Floor();
-    bool can_stand() const;
   };
 }
 

@@ -6,9 +6,4 @@ namespace dungeon
     : DungeonElem("floor", true)
   {
   }
-
-  bool Floor::can_stand() const
-  {
-    return true;
-  }
 }

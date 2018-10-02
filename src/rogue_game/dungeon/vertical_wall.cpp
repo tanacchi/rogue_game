@@ -6,8 +6,4 @@ namespace dungeon
     : DungeonElem("vertical_wall", false)
   {
   }
-  bool VerticalWall::can_stand() const
-  {
-    return false;
-  }
 }

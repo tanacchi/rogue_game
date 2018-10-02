@@ -9,7 +9,6 @@ namespace dungeon
   {
   public:
     Door();
-    bool can_stand() const;
   };
 }
 

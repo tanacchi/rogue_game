@@ -9,7 +9,6 @@ namespace dungeon
   {
   public:
     None();
-    bool can_stand() const;
   };
 }
 

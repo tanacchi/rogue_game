@@ -6,7 +6,7 @@ add_executable(${PROJECT_NAME}.out
 )
 target_link_libraries(${PROJECT_NAME}.out ncurses)
 
-file(GLOB_RECURSE MAP_GENERATOR_SOURCE_FILES ${PROJECT_SOURCE_DIR}/src/map_generator/*)
-add_executable(map_generator.out
+file(GLOB_RECURSE MAP_GENERATOR_SOURCE_FILES ${PROJECT_SOURCE_DIR}/src/map_maker/*)
+add_executable(map_maker.out
   ${MAP_GENERATOR_SOURCE_FILES}
 )

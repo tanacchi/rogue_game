@@ -12,7 +12,7 @@ namespace dungeon
     virtual ~DungeonElem() = default;
     bool can_stand() const;
   public:
-    bool can_stand_;
+    const bool can_stand_;
   };
 }
 

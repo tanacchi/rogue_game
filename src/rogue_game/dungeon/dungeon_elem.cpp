@@ -7,4 +7,9 @@ namespace dungeon
       can_stand_{can_stand}
   {
   }
+
+  bool DungeonElem::can_stand() const
+  {
+    return can_stand_;
+  }
 }

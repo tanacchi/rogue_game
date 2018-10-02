@@ -23,7 +23,8 @@ namespace map
 
   bool Map::in_range(const Point& point) const
   {
-    return 0 <= point.get_x() && point.get_x() < width && 0 <= point.get_y() && point.get_y() < height;
+    int x{point.get_x()}, y{point.get_y()};
+    return (0 <= x && x < static_cast<int>(width)) && (0 <= y && y < static_cast<int>(height));
   }
 
   Point Map::index_to_point(std::size_t index)

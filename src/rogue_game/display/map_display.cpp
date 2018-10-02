@@ -9,8 +9,8 @@ namespace map {
 
   void MapDisplay::show(Map map, const character::Character& character)
   {
-    for (int y{0}; y < map.height; ++y) {
-      for (int x{0}; x < map.width; ++x) {
+    for (std::size_t y{0}; y < map.height; ++y) {
+      for (std::size_t x{0}; x < map.width; ++x) {
         mvwprintw(win_, y, x, "%c", map.dungeon_layer[y*map.width+x]->symbol);
       }
       mvwprintw(win_, y, map.width, "\n");

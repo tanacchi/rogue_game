@@ -13,8 +13,8 @@ namespace map
 {
   struct Map
   {
-    int width;
-    int height;
+    std::size_t width;
+    std::size_t height;
     std::valarray<std::shared_ptr<::dungeon::DungeonElem> > dungeon_layer;
     std::vector<std::shared_ptr<::item::Item> > item_layer;
     const std::shared_ptr<::dungeon::DungeonElem> get_dungeon_elem(const Point& point) const;

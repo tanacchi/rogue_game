@@ -13,7 +13,7 @@ namespace item
     virtual ~Item() = default;
     ::map::Point get_position() const;
   private:
-    ::map::Point position_;
+    const ::map::Point position_;
   };
 }
 

@@ -3,7 +3,7 @@
 namespace dungeon
 {
   Door::Door()
-    : DungeonElem("door")
+    : DungeonElem("door", true)
   {
   }
 

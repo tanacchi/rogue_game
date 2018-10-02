@@ -3,7 +3,7 @@
 namespace dungeon
 {
   VerticalWall::VerticalWall()
-    : DungeonElem("vertical_wall")
+    : DungeonElem("vertical_wall", false)
   {
   }
   bool VerticalWall::can_stand() const

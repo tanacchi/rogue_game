@@ -3,7 +3,7 @@
 namespace dungeon
 {
   Floor::Floor()
-    : DungeonElem("floor")
+    : DungeonElem("floor", true)
   {
   }
 

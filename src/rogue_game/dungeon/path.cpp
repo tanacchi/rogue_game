@@ -3,7 +3,7 @@
 namespace dungeon
 {
   Path::Path()
-    : DungeonElem("path")
+    : DungeonElem("path", true)
   {
   }
 

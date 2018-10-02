@@ -3,7 +3,7 @@
 namespace dungeon
 {
   None::None()
-    : DungeonElem("none")
+    : DungeonElem("none", false)
   {
   }
 

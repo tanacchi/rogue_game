@@ -18,7 +18,7 @@ namespace character
   
   void Player::update(map::Map& map)
   {
-    KeyboardManager::KeyState keystate{km_ptr_->get_key()};
+    const KeyboardManager::KeyState keystate{km_ptr_->get_key()};
     static std::map<KeyboardManager::KeyState, map::Point> motion_table = {
       {KeyboardManager::KeyState::Up,    map::Point{ 0,-1}},
       {KeyboardManager::KeyState::Down,  map::Point{ 0, 1}},

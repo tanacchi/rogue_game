@@ -18,7 +18,7 @@ public:
     Unknown = -1
   };
 
-  KeyState get_key() const noexcept;
+  static const KeyState get_key() noexcept;
 };
 
 #endif  // INCLUDED_KEYBOARD_MANAGER_HPP

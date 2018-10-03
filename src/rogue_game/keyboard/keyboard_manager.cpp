@@ -1,6 +1,6 @@
 #include <keyboard/keyboard_manager.hpp>
 
-KeyboardManager::KeyState KeyboardManager::get_key() const noexcept
+const KeyboardManager::KeyState KeyboardManager::get_key() noexcept
 {
   return static_cast<KeyState>(getch());
 }

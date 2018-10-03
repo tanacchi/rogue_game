@@ -31,7 +31,7 @@ namespace map
   {
     int x{static_cast<int>(index % width)};
     int y{static_cast<int>(index / width)};
-    return Point{x, y};
+    return {x, y};
   }
   
   std::shared_ptr<::dungeon::DungeonElem> gen_map_elem(std::string type)

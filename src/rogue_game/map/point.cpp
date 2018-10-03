@@ -19,7 +19,7 @@ namespace map
 
   const Point Point::operator+(const Point& rhs) const
   {
-    return Point{x_ + rhs.x_, y_ + rhs.y_};
+    return {x_ + rhs.x_, y_ + rhs.y_};
   }
 
   const Point& Point::operator+=(const Point& rhs)

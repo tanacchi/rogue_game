@@ -9,6 +9,7 @@ namespace dungeon
   {
   public:
     DungeonElem(std::string type, bool can_stand);
+    DungeonElem(const DungeonElem& rhs);
     virtual ~DungeonElem() = default;
     bool can_stand() const;
   public:

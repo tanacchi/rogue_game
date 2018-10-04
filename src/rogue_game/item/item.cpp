@@ -8,6 +8,12 @@ namespace item
   {
   }
 
+  Item::Item(Item&& rhs) noexcept
+    : MapElem(type),
+      position_{rhs.position_}
+  {
+  }
+  
   ::map::Point Item::get_position() const
   {
     return position_;

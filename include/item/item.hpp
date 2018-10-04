@@ -10,6 +10,7 @@ namespace item
   {
   public:
     Item(std::string type, ::map::Point position);
+    Item(Item&& rhs) noexcept;
     virtual ~Item() = default;
     ::map::Point get_position() const;
   private:

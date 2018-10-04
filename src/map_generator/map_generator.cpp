@@ -1,5 +1,5 @@
 #include <map/map_generator.hpp>
-#include <rogue_game.hpp>
+#include <rogue_game/rogue_game.hpp>
 
 namespace map
 {

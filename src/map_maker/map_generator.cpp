@@ -18,37 +18,31 @@ namespace map
         switch (text_map_.text[i]) {
         case ' ':
           dungeon_config.put("type", "none");
-          dungeon_configs_.emplace_back(dungeon_config);
           break;
         case '-':
           dungeon_config.put("type", "horizontal_wall");
-          dungeon_configs_.emplace_back(dungeon_config);
           break;
         case '|':
           dungeon_config.put("type", "vertical_wall");
-          dungeon_configs_.emplace_back(dungeon_config);
           break;
         case '.':
           dungeon_config.put("type", "floor");
-          dungeon_configs_.emplace_back(dungeon_config);
           break;
         case '#':
           dungeon_config.put("type", "path");
-          dungeon_configs_.emplace_back(dungeon_config);  
           break;
         case '+':
           dungeon_config.put("type", "door");
-          dungeon_configs_.emplace_back(dungeon_config);
           break;
         case '*':
           dungeon_config.put("type", "floor");
-          dungeon_configs_.emplace_back(dungeon_config);
           item_config.put("index", i);
           item_config.put("type", "gold");
           item_config.put("amount", 100);
-          item_configs_.emplace_back(item_config);
           break;
         }
+        dungeon_configs_.emplace_back(dungeon_config);
+        item_configs_.emplace_back(item_config);
       }
     }
       

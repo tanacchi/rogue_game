@@ -10,6 +10,12 @@ namespace map
   {
   }
 
+  MapElem::MapElem(MapElem&& rhs) noexcept
+    : type{rhs.type},
+      symbol{rhs.symbol}
+  {
+  }
+  
   const char get_symbol(const std::string type)
   {
     static std::map<std::string, char> symbol_hash = {

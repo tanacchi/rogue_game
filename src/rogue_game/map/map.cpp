@@ -16,9 +16,10 @@
 
 namespace map
 {
-  const std::shared_ptr<::dungeon::DungeonElem> Map::get_dungeon_elem(const Point& point) const
+  const ::dungeon::DungeonElem Map::get_dungeon_elem(const Point& point) const
   {
-    return dungeon_layer[width * point.get_y() + point.get_x()];
+    const ::dungeon::DungeonElem* elem{dungeon_layer[width * point.get_y() + point.get_x()].get()};
+    return *elem;
   }
 
   bool Map::in_range(const Point& point) const

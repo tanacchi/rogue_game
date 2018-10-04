@@ -16,7 +16,7 @@ namespace map
     std::size_t width;
     std::size_t height;
     std::vector<std::unique_ptr<::dungeon::DungeonElem> > dungeon_layer;
-    std::vector<std::shared_ptr<::item::Item> > item_layer;
+    std::vector<std::unique_ptr<::item::Item> > item_layer;
     const ::dungeon::DungeonElem get_dungeon_elem(const Point& point) const;
     bool in_range(const Point& point) const;
     Point index_to_point(std::size_t index);

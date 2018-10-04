@@ -15,7 +15,7 @@ namespace map {
       }
       mvwprintw(win_.get(), y, map.width, "\n");
     }
-    for (auto item : map.item_layer) {
+    for (const std::unique_ptr<::item::Item>& item : map.item_layer) {
       Point pos{item->get_position()};
       mvwprintw(win_.get(), pos.get_y(), pos.get_x(), "%c", item->symbol);
     }

@@ -71,6 +71,9 @@ namespace map
       std::vector<std::unique_ptr<::dungeon::DungeonElem> > elems{};
       BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.elems") ) {
         const boost::property_tree::ptree& elem{child.second};
+        if (elem.empty()) {
+          continue;
+        }
         std::string type = elem.get_optional<std::string>("type").get();
         elems.push_back(std::move(gen_dungeon_elem(type)));
       }
@@ -79,6 +82,9 @@ namespace map
     {
       BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.items") ) {
         const boost::property_tree::ptree& elem{child.second};
+        if (elem.empty()) {
+          continue;
+        }
         std::size_t index = elem.get_optional<std::size_t>("index").get();
         Point pos{map.index_to_point(index)};
         std::string type{elem.get_optional<std::string>("type").get()};

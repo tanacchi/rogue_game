@@ -8,61 +8,47 @@ namespace map
     MapGenerator::MapGenerator(const TextMap& text_map, std::string output_filename)
       : text_map_{text_map},
         output_filename_{output_filename}
-      {
-      }
-
-    void MapGenerator::set_elem_config_table()
     {
-      using ptree = boost::property_tree::ptree;
-
-      elem_config_table_ = {
-        {' ', [&](std::size_t index) {
-            ptree dungeon_config;
-            dungeon_config.put("type", "none");
-            dungeon_configs_.emplace_back(dungeon_config);
-          }},
-        {'-', [&](std::size_t index) {
-            ptree dungeon_config;
-            dungeon_config.put("type", "horizontal_wall");
-            dungeon_configs_.emplace_back(dungeon_config);
-          }},
-        {'|', [&](std::size_t index) {
-            ptree dungeon_config;
-            dungeon_config.put("type", "vertical_wall");
-            dungeon_configs_.emplace_back(dungeon_config);
-          }},
-        {'.', [&](std::size_t index) {
-            ptree dungeon_config;
-            dungeon_config.put("type", "floor");
-            dungeon_configs_.emplace_back(dungeon_config);
-          }},
-        {'#', [&](std::size_t index) {
-            ptree dungeon_config;
-            dungeon_config.put("type", "path");
-            dungeon_configs_.emplace_back(dungeon_config);
-          }},
-        {'+', [&](std::size_t index) {
-            ptree dungeon_config;
-            dungeon_config.put("type", "door");
-            dungeon_configs_.emplace_back(dungeon_config);
-          }},
-        {'*', [&](std::size_t index) {
-            ptree dungeon_config;
-            dungeon_config.put("type", "floor");
-            dungeon_configs_.emplace_back(dungeon_config);
-            ptree item_config;
-            item_config.put("index", index);
-            item_config.put("type", "gold");
-            item_config.put("amount", 100);
-            item_configs_.emplace_back(item_config);
-          }}
-      };
     }
 
     void MapGenerator::set_configs()
     {
       for (std::size_t i{0}, end{text_map_.text.length()}; i < end; ++i) {
-        elem_config_table_.at(text_map_.text[i])(i);
+        boost::property_tree::ptree dungeon_config, item_config;
+        switch (text_map_.text[i]) {
+        case ' ':
+          dungeon_config.put("type", "none");
+          dungeon_configs_.emplace_back(dungeon_config);
+          break;
+        case '-':
+          dungeon_config.put("type", "horizontal_wall");
+          dungeon_configs_.emplace_back(dungeon_config);
+          break;
+        case '|':
+          dungeon_config.put("type", "vertical_wall");
+          dungeon_configs_.emplace_back(dungeon_config);
+          break;
+        case '.':
+          dungeon_config.put("type", "floor");
+          dungeon_configs_.emplace_back(dungeon_config);
+          break;
+        case '#':
+          dungeon_config.put("type", "path");
+          dungeon_configs_.emplace_back(dungeon_config);  
+          break;
+        case '+':
+          dungeon_config.put("type", "door");
+          dungeon_configs_.emplace_back(dungeon_config);
+          break;
+        case '*':
+          dungeon_config.put("type", "floor");
+          dungeon_configs_.emplace_back(dungeon_config);
+          item_config.put("index", i);
+          item_config.put("type", "gold");
+          item_config.put("amount", 100);
+          item_configs_.emplace_back(item_config);
+          break;
+        }
       }
     }
       

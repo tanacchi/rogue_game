@@ -19,13 +19,11 @@ namespace map
     {
     public:
       MapGenerator(const TextMap& text_map, std::string output_filename = "tmp_sample_map");
-      void set_elem_config_table();
       void set_configs();
       void write_json_map() const;
     private:
       const TextMap text_map_;
       const std::string output_filename_;
-      std::map<char, std::function<void(std::size_t index)> > elem_config_table_;
       std::vector<boost::property_tree::ptree> dungeon_configs_;
       std::vector<boost::property_tree::ptree> item_configs_;
     };

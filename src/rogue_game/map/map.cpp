@@ -35,7 +35,7 @@ namespace map
     return {x, y};
   }
   
-  std::unique_ptr<::dungeon::DungeonElem> gen_map_elem(std::string type)
+  std::unique_ptr<::dungeon::DungeonElem> gen_dungeon_elem(std::string type)
   {
     if (type == "floor") {
       return std::unique_ptr<::dungeon::Floor>(new ::dungeon::Floor{});
@@ -72,7 +72,7 @@ namespace map
       BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.elems") ) {
         const boost::property_tree::ptree& elem{child.second};
         std::string type = elem.get_optional<std::string>("type").get();
-        elems.push_back(std::move(gen_map_elem(type)));
+        elems.push_back(std::move(gen_dungeon_elem(type)));
       }
       map.dungeon_layer = std::move(elems);
     }

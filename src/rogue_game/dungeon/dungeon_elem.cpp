@@ -8,6 +8,12 @@ namespace dungeon
   {
   }
 
+  DungeonElem::DungeonElem(const DungeonElem& rhs)
+    : MapElem(rhs.type),
+      can_stand_{rhs.can_stand_}
+  {
+  }
+
   bool DungeonElem::can_stand() const
   {
     return can_stand_;

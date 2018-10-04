@@ -35,20 +35,20 @@ namespace map
     return {x, y};
   }
   
-  std::shared_ptr<::dungeon::DungeonElem> gen_map_elem(std::string type)
+  std::unique_ptr<::dungeon::DungeonElem> gen_map_elem(std::string type)
   {
     if (type == "floor") {
-      return std::shared_ptr<::dungeon::Floor>(new ::dungeon::Floor{});
+      return std::unique_ptr<::dungeon::Floor>(new ::dungeon::Floor{});
     } else if (type == "path") {
-      return std::shared_ptr<::dungeon::Path>(new ::dungeon::Path{});
+      return std::unique_ptr<::dungeon::Path>(new ::dungeon::Path{});
     } else if (type == "none") {
-      return std::shared_ptr<::dungeon::None>(new ::dungeon::None{});
+      return std::unique_ptr<::dungeon::None>(new ::dungeon::None{});
     } else if (type == "horizontal_wall") {
-      return std::shared_ptr<::dungeon::HorizontalWall>(new ::dungeon::HorizontalWall{});
+      return std::unique_ptr<::dungeon::HorizontalWall>(new ::dungeon::HorizontalWall{});
     } else if (type == "vertical_wall") {
-      return std::shared_ptr<::dungeon::VerticalWall>(new ::dungeon::VerticalWall{});
+      return std::unique_ptr<::dungeon::VerticalWall>(new ::dungeon::VerticalWall{});
     } else if (type == "door") {
-      return std::shared_ptr<::dungeon::Door>(new ::dungeon::Door{});
+      return std::unique_ptr<::dungeon::Door>(new ::dungeon::Door{});
     } else {
       throw std::string{"Invalid map elem type."};
     }
@@ -68,13 +68,13 @@ namespace map
       map.height = height;
     }
     {
-      std::vector<std::shared_ptr<::dungeon::DungeonElem> > elems{};
+      std::vector<std::unique_ptr<::dungeon::DungeonElem> > elems{};
       BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.elems") ) {
         const boost::property_tree::ptree& elem{child.second};
         std::string type = elem.get_optional<std::string>("type").get();
-        elems.push_back(gen_map_elem(type));
+        elems.push_back(std::move(gen_map_elem(type)));
       }
-      map.dungeon_layer = std::valarray<std::shared_ptr<::dungeon::DungeonElem> >{elems.data(), elems.size()};
+      map.dungeon_layer = std::move(elems);
     }
     {
       BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.items") ) {

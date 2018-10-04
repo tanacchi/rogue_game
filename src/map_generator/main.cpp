@@ -1,4 +1,4 @@
-#include <rogue_game.hpp>
+#include <rogue_game/rogue_game.hpp>
 #include <map/text_map.hpp>
 #include <map/map_generator.hpp>
 

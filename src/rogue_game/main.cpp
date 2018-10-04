@@ -1,10 +1,9 @@
 #include <rogue_game/rogue_game.hpp>
+#include <rogue_game/game_master.hpp>
 
 int main()
 {
-  initscr();
-  keypad(stdscr, TRUE);
-  curs_set(0);
+  GameMaster master{};
   
   map::Map map = map::read_map(map_dir + "json/tmp_sample_map.json");
   map::MapDisplay md{5, 4, map.width, map.height};
@@ -17,6 +16,5 @@ int main()
     refresh();
     player.update(map);
   }
-  endwin();
   return 0;
 }

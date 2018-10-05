@@ -9,6 +9,12 @@ public:
   GameMaster();
   ~GameMaster();
   void update();
+private:
+  map::Map map_;
+  map::MapDisplay map_display_;
+  PlayerDisplay player_display_;
+  KeyboardManager keyboard_;
+  character::Player player_;
 };
 
 #endif  // INCLUDED_ROGUE_GAME_GAME_MASTER_HPP

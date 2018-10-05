@@ -17,6 +17,7 @@ namespace character
 
   void Player::update(map::Map& map)
   {
+    update(map, ::KeyboardManager::KeyState::Unknown);
   }
   
   void Player::update(map::Map& map, const ::KeyboardManager::KeyState keystate)

@@ -15,7 +15,7 @@ namespace character
   public:
     Character(map::Point position);
     map::Point get_position() const;
-    virtual void update(map::Map& map, KeyboardManager::KeyState key_state) = 0;
+    virtual void update(map::Map& map) = 0;
   protected:
     map::Point position_;
   };

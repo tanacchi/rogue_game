@@ -14,6 +14,10 @@ namespace character
   {
     return money_;
   }
+
+  void Player::update(map::Map& map)
+  {
+  }
   
   void Player::update(map::Map& map, const ::KeyboardManager::KeyState keystate)
   {

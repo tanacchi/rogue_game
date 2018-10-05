@@ -17,6 +17,8 @@ public:
     Right   = 0x01 << 5,
     Left    = 0x01 << 6,
     Unknown = 0x01 << 7,
+    Enable  = 0xff >> 1,
+    Arrow   = Up | Down | Right | Left
   };
 
   static const KeyState get_key() noexcept;

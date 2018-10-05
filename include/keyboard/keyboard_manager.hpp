@@ -9,14 +9,14 @@ class KeyboardManager
 public:
   enum class KeyState : std::uint8_t
   {
-    Space   = 0x0001 << 0,
-    Enter   = 0x0001 << 1,
-    Back    = 0x0001 << 2,
-    Up      = 0x0001 << 3,
-    Down    = 0x0001 << 4,
-    Right   = 0x0001 << 5,
-    Left    = 0x0001 << 6,
-    Unknown = 0x0001 << 7,
+    Space   = 0x01 << 0,
+    Enter   = 0x01 << 1,
+    Back    = 0x01 << 2,
+    Up      = 0x01 << 3,
+    Down    = 0x01 << 4,
+    Right   = 0x01 << 5,
+    Left    = 0x01 << 6,
+    Unknown = 0x01 << 7,
   };
 
   static const KeyState get_key() noexcept;

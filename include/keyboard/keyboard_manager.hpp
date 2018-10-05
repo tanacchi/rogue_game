@@ -7,16 +7,16 @@
 class KeyboardManager
 {
 public:
-  enum class KeyState : std::uint16_t
+  enum class KeyState : std::uint8_t
   {
-    Space   = 32,
-    Enter   = 10,
-    Back    = KEY_BACKSPACE,
-    Up      = KEY_UP,
-    Down    = KEY_DOWN,
-    Right   = KEY_RIGHT,
-    Left    = KEY_LEFT,
-    Unknown = 0
+    Space   = 0x0001 << 0,
+    Enter   = 0x0001 << 1,
+    Back    = 0x0001 << 2,
+    Up      = 0x0001 << 3,
+    Down    = 0x0001 << 4,
+    Right   = 0x0001 << 5,
+    Left    = 0x0001 << 6,
+    Unknown = 0x0001 << 7,
   };
 
   static const KeyState get_key() noexcept;

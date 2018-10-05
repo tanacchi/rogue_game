@@ -4,9 +4,8 @@
 
 namespace character
 {
-  Player::Player(map::Point position, std::unique_ptr<KeyboardManager>&& km_ptr)
+  Player::Player(map::Point position)
     : Character(position),
-      km_ptr_{std::move(km_ptr)},
       money_{0}
   {
   }
@@ -16,9 +15,8 @@ namespace character
     return money_;
   }
   
-  void Player::update(map::Map& map)
+  void Player::update(map::Map& map, const ::KeyboardManager::KeyState keystate)
   {
-    const KeyboardManager::KeyState keystate{km_ptr_->get_key()};
     static std::map<KeyboardManager::KeyState, map::Point> motion_table = {
       {KeyboardManager::KeyState::Up,    map::Point{ 0,-1}},
       {KeyboardManager::KeyState::Down,  map::Point{ 0, 1}},

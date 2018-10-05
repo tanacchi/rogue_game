@@ -8,6 +8,7 @@ class GameMaster
 public:
   GameMaster();
   ~GameMaster();
+  void update();
 };
 
 #endif  // INCLUDED_ROGUE_GAME_GAME_MASTER_HPP

@@ -7,9 +7,6 @@ GameMaster::GameMaster()
     keyboard_{},
     player_{map::Point{10, 15}}
 {
-  initscr();
-  keypad(stdscr, TRUE);
-  curs_set(0);
 }
 
 GameMaster::~GameMaster()

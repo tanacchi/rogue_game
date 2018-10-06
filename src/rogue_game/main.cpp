@@ -3,6 +3,10 @@
 
 int main()
 {
+  initscr();
+  keypad(stdscr, TRUE);
+  curs_set(0);
+
   GameMaster master{};
   master.update();
   return 0;

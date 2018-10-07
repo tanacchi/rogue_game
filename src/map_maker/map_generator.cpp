@@ -1,3 +1,5 @@
+#include <string>
+
 #include <map/map_generator.hpp>
 #include <rogue_game/rogue_game.hpp>
 
@@ -51,7 +53,7 @@ namespace map
       boost::property_tree::ptree map_data;
       map_data.put("Map.width", text_map_.width);
       map_data.put("Map.height", text_map_.height);
-  
+      map_data.put("Map.player_pos", text_map_.text.find('@'));
       boost::property_tree::ptree dungeon_tree;
       for (auto config : dungeon_configs_) {
         dungeon_tree.push_back(std::make_pair("", config));

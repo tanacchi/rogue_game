@@ -16,6 +16,14 @@
 
 namespace map
 {
+  Map::Map(Map&& map)
+    : width{map.width},
+      height{map.height},
+      dungeon_layer{std::move(map.dungeon_layer)},
+      item_layer{std::move(map.item_layer)}
+  {
+  }
+  
   const ::dungeon::DungeonElem Map::get_dungeon_elem(const Point& point) const
   {
     const ::dungeon::DungeonElem* elem{dungeon_layer[width * point.get_y() + point.get_x()].get()};

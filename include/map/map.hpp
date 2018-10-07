@@ -13,6 +13,8 @@ namespace map
 {
   struct Map
   {
+    Map() = default;
+    Map(Map&& map);
     std::size_t width;
     std::size_t height;
     std::vector<std::unique_ptr<::dungeon::DungeonElem> > dungeon_layer;

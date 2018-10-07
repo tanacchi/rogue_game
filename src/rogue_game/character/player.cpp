@@ -4,8 +4,8 @@
 
 namespace character
 {
-  Player::Player(map::Point position)
-    : Character(position),
+  Player::Player()
+    : Character(map::Point{0, 0}),
       money_{0}
   {
   }

@@ -1,9 +1,11 @@
 cmake_minimum_required(VERSION 3.5.1)
 
+set(MAJOR 0)
+
 execute_process(
   COMMAND git tag
   COMMAND wc --lines
-  OUTPUT_VARIABLE MAJOR
+  OUTPUT_VARIABLE MINOR
   OUTPUT_STRIP_TRAILING_WHITESPACE)
 
 if (${MAJOR})
@@ -14,25 +16,25 @@ if (${MAJOR})
   execute_process(
     COMMAND git log origin/master..${LATEST_RELEASE} --oneline --merges --first-parent origin/master
     COMMAND wc --lines
-    OUTPUT_VARIABLE MINOR
+    OUTPUT_VARIABLE PATCH
     OUTPUT_STRIP_TRAILING_WHITESPACE)
 else()
   execute_process(
     COMMAND git log --oneline --merges --first-parent origin/master
     COMMAND wc --lines
-    OUTPUT_VARIABLE MINOR
+    OUTPUT_VARIABLE PATCH
     OUTPUT_STRIP_TRAILING_WHITESPACE)
 endif()
 
 execute_process(
   COMMAND git log origin/master..origin/develop --oneline --merges
   COMMAND wc --lines
-  OUTPUT_VARIABLE PATCH
+  OUTPUT_VARIABLE TWEAK
   OUTPUT_STRIP_TRAILING_WHITESPACE)
 
 project(
   rogue_game
-  VERSION ${MAJOR}.${MINOR}.${PATCH}
+  VERSION ${MAJOR}.${MINOR}.${PATCH}.${TWEAK}
   LANGUAGES CXX)
 
 set(CMAKE_CXX_COMPILER g++)

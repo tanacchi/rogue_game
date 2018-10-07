@@ -17,6 +17,7 @@ namespace map
     Map(Map&& map);
     std::size_t width;
     std::size_t height;
+    map::Point initial_position;
     std::vector<std::unique_ptr<::dungeon::DungeonElem> > dungeon_layer;
     std::vector<std::unique_ptr<::item::Item> > item_layer;
     const ::dungeon::DungeonElem get_dungeon_elem(const Point& point) const;

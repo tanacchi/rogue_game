@@ -19,6 +19,7 @@ namespace map
   Map::Map(Map&& map)
     : width{map.width},
       height{map.height},
+      initial_position{std::move(map.initial_position)},
       dungeon_layer{std::move(map.dungeon_layer)},
       item_layer{std::move(map.item_layer)}
   {

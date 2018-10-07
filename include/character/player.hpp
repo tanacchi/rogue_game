@@ -8,7 +8,7 @@ namespace character
   class Player : public Character
   {
   public:
-    Player();
+    Player(map::Point point);
     std::size_t get_money() const;
     void update(map::Map& map) override;
     void update(map::Map& map, const KeyboardManager::KeyState key_state);

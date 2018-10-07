@@ -5,7 +5,7 @@ GameMaster::GameMaster()
     map_display_{5, 4, map_.width, map_.height},
     player_display_{70, 30, 20, 10},
     keyboard_{},
-    player_{map::Point{10, 15}}
+    player_(map::Point(10, 15))
 {
 }
 

@@ -29,5 +29,15 @@ void GameMaster::update()
         player_.set_position(next_position);
       }
     }
+    {
+      map::Point current_position{player_.get_position()};
+      for (std::vector<std::unique_ptr<::item::Item> >::iterator it{map_.item_layer.begin()}, end{map_.item_layer.end()}; it != end; ++it) {
+        if ((*it)->get_position() == current_position) {
+          player_.add_money(100);
+          map_.item_layer.erase(it);
+          break;
+        }
+      }
+    }
   }
 }

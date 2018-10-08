@@ -1,5 +1,3 @@
-#include <map>
-
 #include <character/player.hpp>
 
 namespace character
@@ -9,6 +7,13 @@ namespace character
       money_{0}
   {
   }
+
+  const std::map<KeyboardManager::KeyState, map::Point> Player::motion_table = {
+    {KeyboardManager::KeyState::Up,    map::Point{ 0,-1}},
+    {KeyboardManager::KeyState::Down,  map::Point{ 0, 1}},
+    {KeyboardManager::KeyState::Right, map::Point{ 1, 0}},
+    {KeyboardManager::KeyState::Left,  map::Point{-1, 0}},
+  };
 
   std::size_t Player::get_money() const
   {
@@ -22,12 +27,6 @@ namespace character
   
   void Player::update(map::Map& map, const ::KeyboardManager::KeyState keystate)
   {
-    static std::map<KeyboardManager::KeyState, map::Point> motion_table = {
-      {KeyboardManager::KeyState::Up,    map::Point{ 0,-1}},
-      {KeyboardManager::KeyState::Down,  map::Point{ 0, 1}},
-      {KeyboardManager::KeyState::Right, map::Point{ 1, 0}},
-      {KeyboardManager::KeyState::Left,  map::Point{-1, 0}},
-    };
     map::Point motion{motion_table.find(keystate) != motion_table.end() ?
         motion_table.at(keystate) : map::Point{0, 0}};
     map::Point next_position{position_ + motion};

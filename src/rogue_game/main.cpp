@@ -8,6 +8,8 @@ int main()
   curs_set(0);
 
   GameMaster master{};
-  master.update();
+  while (true) {
+    master.update();
+  }
   return 0;
 }

@@ -15,9 +15,9 @@ namespace map {
       }
       mvwprintw(win_.get(), y, map.width, "\n");
     }
-    for (const std::unique_ptr<::item::Item>& item : map.item_layer) {
-      Point pos{item->get_position()};
-      mvwprintw(win_.get(), pos.get_y(), pos.get_x(), "%c", item->symbol);
+    
+    for (const std::pair<const Point, std::unique_ptr<::item::Item> >& item : map.item_layer) {
+      mvwprintw(win_.get(), item.first.get_y(), item.first.get_x(), "%c", item.second->symbol);
     }
     mvwprintw(win_.get(), character.get_position().get_y(), character.get_position().get_x(), "@");
     wrefresh(win_.get());

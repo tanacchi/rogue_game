@@ -9,12 +9,10 @@ namespace item
   class Item : public ::map::MapElem
   {
   public:
-    Item(std::string type, ::map::Point position);
+    Item(std::string type);
     Item(Item&& rhs) noexcept;
     virtual ~Item() = default;
     ::map::Point get_position() const;
-  private:
-    const ::map::Point position_;
   };
 }
 

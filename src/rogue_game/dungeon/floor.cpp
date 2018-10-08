@@ -3,12 +3,7 @@
 namespace dungeon
 {
   Floor::Floor()
-    : DungeonElem("floor")
+    : DungeonElem("floor", true)
   {
-  }
-
-  bool Floor::can_stand() const
-  {
-    return true;
   }
 }

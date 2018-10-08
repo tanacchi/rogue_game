@@ -1,6 +1,8 @@
 #ifndef INCLUDED_PLAYER_HPP
 #define INCLUDED_PLAYER_HPP
 
+#include <map>
+
 #include <character/character.hpp>
 
 namespace character
@@ -8,11 +10,13 @@ namespace character
   class Player : public Character
   {
   public:
-    Player(map::Point point, std::unique_ptr<KeyboardManager>&& km_ptr=nullptr);
+    Player(map::Point point);
+    static const std::map<KeyboardManager::KeyState, map::Point> motion_table;
     std::size_t get_money() const;
+    void add_money(std::size_t addition);
     void update(map::Map& map) override;
+    void update(map::Map& map, const KeyboardManager::KeyState key_state);
   private:
-    std::unique_ptr<KeyboardManager> km_ptr_;
     std::size_t money_;
   };
 }

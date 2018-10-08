@@ -3,12 +3,7 @@
 namespace dungeon
 {
   HorizontalWall::HorizontalWall()
-    : DungeonElem("horizontal_wall")
+    : DungeonElem("horizontal_wall", false)
   {
-  }
-
-  bool HorizontalWall::can_stand() const
-  {
-    return false;
   }
 }

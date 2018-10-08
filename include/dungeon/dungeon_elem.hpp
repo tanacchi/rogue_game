@@ -8,7 +8,12 @@ namespace dungeon
   class DungeonElem : public ::map::MapElem
   {
   public:
-    DungeonElem(std::string type);
+    DungeonElem(std::string type, bool can_stand);
+    DungeonElem(const DungeonElem& rhs);
+    virtual ~DungeonElem() = default;
+    bool can_stand() const;
+  public:
+    const bool can_stand_;
   };
 }
 

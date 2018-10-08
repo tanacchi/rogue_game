@@ -2,23 +2,26 @@
 #define INCLUDED_KEYBOARD_MANAGER_HPP
 
 #include <ncurses.h>
+#include <cstdint>
 
 class KeyboardManager
 {
 public:
-  enum class KeyState
+  enum class KeyState : std::uint8_t
   {
-    Space   = 32,
-    Enter   = 10,
-    Back    = KEY_BACKSPACE,
-    Up      = KEY_UP,
-    Down    = KEY_DOWN,
-    Right   = KEY_RIGHT,
-    Left    = KEY_LEFT,
-    Unknown = -1
+    Space   = 0x01 << 0,
+    Enter   = 0x01 << 1,
+    Back    = 0x01 << 2,
+    Up      = 0x01 << 3,
+    Down    = 0x01 << 4,
+    Right   = 0x01 << 5,
+    Left    = 0x01 << 6,
+    Unknown = 0x01 << 7,
+    Enable  = 0xff >> 1,
+    Arrow   = Up | Down | Right | Left
   };
 
-  KeyState get_key() const noexcept;
+  static const KeyState get_key() noexcept;
 };
 
 #endif  // INCLUDED_KEYBOARD_MANAGER_HPP

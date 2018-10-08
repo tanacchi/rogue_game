@@ -7,19 +7,19 @@ namespace map {
   {
   }
 
-  void MapDisplay::show(Map map, const character::Character& character)
+  void MapDisplay::show(Map& map, const character::Character& character)
   {
-    for (int y{0}; y < map.height; ++y) {
-      for (int x{0}; x < map.width; ++x) {
-        mvwprintw(win_, y, x, "%c", map.dungeon_layer[y*map.width+x]->symbol);
+    for (std::size_t y{0}; y < map.height; ++y) {
+      for (std::size_t x{0}; x < map.width; ++x) {
+        mvwprintw(win_.get(), y, x, "%c", map.dungeon_layer[y*map.width+x]->symbol);
       }
-      mvwprintw(win_, y, map.width, "\n");
+      mvwprintw(win_.get(), y, map.width, "\n");
     }
-    for (auto item : map.item_layer) {
-      Point pos{item->get_position()};
-      mvwprintw(win_, pos.get_y(), pos.get_x(), "%c", item->symbol);
+    
+    for (const std::pair<const Point, std::unique_ptr<::item::Item> >& item : map.item_layer) {
+      mvwprintw(win_.get(), item.first.get_y(), item.first.get_x(), "%c", item.second->symbol);
     }
-    mvwprintw(win_, character.get_position().get_y(), character.get_position().get_x(), "@");
-    wrefresh(win_);
+    mvwprintw(win_.get(), character.get_position().get_y(), character.get_position().get_x(), "@");
+    wrefresh(win_.get());
   }
 }

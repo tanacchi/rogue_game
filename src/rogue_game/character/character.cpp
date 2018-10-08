@@ -11,4 +11,9 @@ namespace character
   {
     return position_;
   }
+
+  void Character::set_position(const map::Point& point)
+  {
+    position_ = point;
+  }
 }

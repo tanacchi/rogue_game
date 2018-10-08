@@ -11,7 +11,6 @@ int main(int argc, char** argv)
     map::generator::TextMap text_map{map::generator::get_text_map_obj(map_strings)};
     text_map.show();
     map::generator::MapGenerator map_generator{text_map};
-    map_generator.set_elem_config_table();
     map_generator.set_configs();
     map_generator.write_json_map();
   }

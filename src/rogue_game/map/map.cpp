@@ -16,37 +16,48 @@
 
 namespace map
 {
-  const std::shared_ptr<::dungeon::DungeonElem> Map::get_dungeon_elem(const Point& point) const
+  Map::Map(Map&& map)
+    : width{map.width},
+      height{map.height},
+      initial_position{std::move(map.initial_position)},
+      dungeon_layer{std::move(map.dungeon_layer)},
+      item_layer{std::move(map.item_layer)}
   {
-    return dungeon_layer[width * point.get_y() + point.get_x()];
+  }
+  
+  const ::dungeon::DungeonElem Map::get_dungeon_elem(const Point& point) const
+  {
+    const ::dungeon::DungeonElem* elem{dungeon_layer[width * point.get_y() + point.get_x()].get()};
+    return *elem;
   }
 
   bool Map::in_range(const Point& point) const
   {
-    return 0 <= point.get_x() && point.get_x() < width && 0 <= point.get_y() && point.get_y() < height;
+    int x{point.get_x()}, y{point.get_y()};
+    return (0 <= x && x < static_cast<int>(width)) && (0 <= y && y < static_cast<int>(height));
   }
 
   Point Map::index_to_point(std::size_t index)
   {
     int x{static_cast<int>(index % width)};
     int y{static_cast<int>(index / width)};
-    return Point{x, y};
+    return {x, y};
   }
   
-  std::shared_ptr<::dungeon::DungeonElem> gen_map_elem(std::string type)
+  std::unique_ptr<::dungeon::DungeonElem> gen_dungeon_elem(std::string type)
   {
     if (type == "floor") {
-      return std::shared_ptr<::dungeon::Floor>(new ::dungeon::Floor{});
+      return std::unique_ptr<::dungeon::Floor>(new ::dungeon::Floor{});
     } else if (type == "path") {
-      return std::shared_ptr<::dungeon::Path>(new ::dungeon::Path{});
+      return std::unique_ptr<::dungeon::Path>(new ::dungeon::Path{});
     } else if (type == "none") {
-      return std::shared_ptr<::dungeon::None>(new ::dungeon::None{});
+      return std::unique_ptr<::dungeon::None>(new ::dungeon::None{});
     } else if (type == "horizontal_wall") {
-      return std::shared_ptr<::dungeon::HorizontalWall>(new ::dungeon::HorizontalWall{});
+      return std::unique_ptr<::dungeon::HorizontalWall>(new ::dungeon::HorizontalWall{});
     } else if (type == "vertical_wall") {
-      return std::shared_ptr<::dungeon::VerticalWall>(new ::dungeon::VerticalWall{});
+      return std::unique_ptr<::dungeon::VerticalWall>(new ::dungeon::VerticalWall{});
     } else if (type == "door") {
-      return std::shared_ptr<::dungeon::Door>(new ::dungeon::Door{});
+      return std::unique_ptr<::dungeon::Door>(new ::dungeon::Door{});
     } else {
       throw std::string{"Invalid map elem type."};
     }
@@ -66,22 +77,32 @@ namespace map
       map.height = height;
     }
     {
-      std::vector<std::shared_ptr<::dungeon::DungeonElem> > elems{};
+      std::size_t player_index = json_map_data.get_optional<std::size_t>("Map.player_pos").get();
+      map.initial_position = map.index_to_point(player_index);
+    }
+    {
+      std::vector<std::unique_ptr<::dungeon::DungeonElem> > elems{};
       BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.elems") ) {
         const boost::property_tree::ptree& elem{child.second};
+        if (elem.empty()) {
+          continue;
+        }
         std::string type = elem.get_optional<std::string>("type").get();
-        elems.push_back(gen_map_elem(type));
+        elems.push_back(std::move(gen_dungeon_elem(type)));
       }
-      map.dungeon_layer = std::valarray<std::shared_ptr<::dungeon::DungeonElem> >{elems.data(), elems.size()};
+      map.dungeon_layer = std::move(elems);
     }
     {
       BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.items") ) {
         const boost::property_tree::ptree& elem{child.second};
+        if (elem.empty()) {
+          continue;
+        }
         std::size_t index = elem.get_optional<std::size_t>("index").get();
         Point pos{map.index_to_point(index)};
         std::string type{elem.get_optional<std::string>("type").get()};
         std::size_t amount{elem.get_optional<std::size_t>("amount").get()};
-        map.item_layer.push_back(std::shared_ptr<::item::Gold>{new ::item::Gold{pos, amount}});
+        map.item_layer.emplace(pos, std::unique_ptr<::item::Gold>{new ::item::Gold{amount}});
       }
     }
     return map;

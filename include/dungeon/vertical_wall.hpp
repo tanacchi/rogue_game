@@ -9,7 +9,6 @@ namespace dungeon
   {
   public:
     VerticalWall();
-    bool can_stand() const;
   };
 }
 

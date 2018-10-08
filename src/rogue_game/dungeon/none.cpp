@@ -3,12 +3,7 @@
 namespace dungeon
 {
   None::None()
-    : DungeonElem("none")
+    : DungeonElem("none", false)
   {
-  }
-
-  bool None::can_stand() const
-  {
-    return false;
   }
 }

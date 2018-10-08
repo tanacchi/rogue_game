@@ -3,12 +3,7 @@
 namespace dungeon
 {
   Path::Path()
-    : DungeonElem("path")
+    : DungeonElem("path", true)
   {
-  }
-
-  bool Path::can_stand() const
-  {
-    return true;
   }
 }

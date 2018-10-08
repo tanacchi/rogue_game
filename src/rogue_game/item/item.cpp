@@ -2,14 +2,13 @@
 
 namespace item
 {
-  Item::Item(std::string type, ::map::Point position)
-    : MapElem(type),
-      position_{position}
+  Item::Item(std::string type)
+    : MapElem(type)
   {
   }
 
-  ::map::Point Item::get_position() const
+  Item::Item(Item&& rhs) noexcept
+    : MapElem(type)
   {
-    return position_;
   }
 }

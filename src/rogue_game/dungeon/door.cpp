@@ -3,12 +3,7 @@
 namespace dungeon
 {
   Door::Door()
-    : DungeonElem("door")
+    : DungeonElem("door", true)
   {
-  }
-
-  bool Door::can_stand() const
-  {
-    return true;
   }
 }

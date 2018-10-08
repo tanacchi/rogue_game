@@ -18,6 +18,7 @@ namespace map
     const Point operator+(const Point& rhs) const;
     const Point& operator+=(const Point& rhs);
     bool operator==(const Point& rhs) const;
+    bool operator<(const Point& rls) const;
   private:
     int x_;
     int y_;

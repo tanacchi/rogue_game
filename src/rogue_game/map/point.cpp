@@ -58,4 +58,9 @@ namespace map
   {
     return x_ == rhs.x_ && y_ == rhs.y_;
   }
+
+  bool Point::operator<(const Point& rls) const
+  {
+    return (x_*x_ + y_*y_) < (rls.x_*rls.x_ + rls.y_*rls.y_);
+  }
 }

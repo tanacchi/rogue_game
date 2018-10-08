@@ -102,7 +102,7 @@ namespace map
         Point pos{map.index_to_point(index)};
         std::string type{elem.get_optional<std::string>("type").get()};
         std::size_t amount{elem.get_optional<std::size_t>("amount").get()};
-        map.item_layer.push_back(std::unique_ptr<::item::Gold>{new ::item::Gold{pos, amount}});
+        map.item_layer.emplace(pos, std::unique_ptr<::item::Gold>{new ::item::Gold{amount}});
       }
     }
     return map;

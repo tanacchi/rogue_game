@@ -19,6 +19,7 @@ namespace map
   Map::Map(Map&& map)
     : width{map.width},
       height{map.height},
+      initial_position{std::move(map.initial_position)},
       dungeon_layer{std::move(map.dungeon_layer)},
       item_layer{std::move(map.item_layer)}
   {
@@ -74,6 +75,10 @@ namespace map
     {
       int height = json_map_data.get_optional<int>("Map.height").get();
       map.height = height;
+    }
+    {
+      std::size_t player_index = json_map_data.get_optional<std::size_t>("Map.player_pos").get();
+      map.initial_position = map.index_to_point(player_index);
     }
     {
       std::vector<std::unique_ptr<::dungeon::DungeonElem> > elems{};

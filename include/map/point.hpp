@@ -1,14 +1,20 @@
 #ifndef INCLUDED_POINT_HPP
 #define INCLUDED_POINT_HPP
 
+#include <utility>
+
 namespace map
 {
   class Point
   {
   public:
-    Point(int x, int y);
+    Point(int x = 0, int y = 0);
+    Point(const Point& point);
+    Point(Point&& point);
     const int get_x() const;
     const int get_y() const;
+    Point& operator=(const Point& rls);
+    Point& operator=(Point&& rls);
     const Point operator+(const Point& rhs) const;
     const Point& operator+=(const Point& rhs);
     bool operator==(const Point& rhs) const;

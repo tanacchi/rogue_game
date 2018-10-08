@@ -77,6 +77,10 @@ namespace map
       map.height = height;
     }
     {
+      std::size_t player_index = json_map_data.get_optional<std::size_t>("Map.player_pos").get();
+      map.initial_position = map.index_to_point(player_index);
+    }
+    {
       std::vector<std::unique_ptr<::dungeon::DungeonElem> > elems{};
       BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.elems") ) {
         const boost::property_tree::ptree& elem{child.second};

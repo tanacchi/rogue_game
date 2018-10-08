@@ -27,7 +27,7 @@ namespace map
         case '|':
           dungeon_config.put("type", "vertical_wall");
           break;
-        case '.':
+        case '.': case '@':
           dungeon_config.put("type", "floor");
           break;
         case '#':

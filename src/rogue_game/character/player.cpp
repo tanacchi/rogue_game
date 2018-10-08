@@ -20,6 +20,11 @@ namespace character
     return money_;
   }
 
+  void Player::add_money(std::size_t addition)
+  {
+    money_ += addition;
+  }
+  
   void Player::update(map::Map& map)
   {
     update(map, ::KeyboardManager::KeyState::Unknown);
@@ -27,12 +32,5 @@ namespace character
   
   void Player::update(map::Map& map, const ::KeyboardManager::KeyState keystate)
   {
-    // for (std::vector<std::unique_ptr<::item::Item> >::iterator it{map.item_layer.begin()}, end{map.item_layer.end()}; it != end; ++it) {
-    //   if ((*it)->get_position() == next_position) {
-    //     money_ += 100;
-    //     map.item_layer.erase(it);
-    //     break;
-    //   }
-    // }
   }
 }

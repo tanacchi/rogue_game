@@ -21,6 +21,13 @@ void GameMaster::update()
     player_display_.show(player_);
     refresh();
     const KeyboardManager::KeyState key_state{keyboard_.get_key()};
-    player_.update(map_, key_state);
+    {
+      map::Point motion{character::Player::motion_table.find(key_state) != character::Player::motion_table.end() ?
+          character::Player::motion_table.at(key_state) : map::Point{0, 0}};
+      map::Point next_position{player_.get_position() + motion};
+      if (map_.in_range(next_position) && map_.get_dungeon_elem(next_position).can_stand()) {
+        player_.set_position(next_position);
+      }
+    }
   }
 }

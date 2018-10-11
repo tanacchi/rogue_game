@@ -10,7 +10,7 @@ int main(int argc, char** argv)
     std::vector<std::string> map_strings{map::generator::read_map_strings(text_map_filname)};
     map::generator::TextMap text_map{map::generator::get_text_map_obj(map_strings)};
     text_map.show();
-    map::generator::MapGenerator map_generator{text_map};
+    map::generator::MapGenerator map_generator{text_map, "ver_0.1.0.0_map"};
     map_generator.set_configs();
     map_generator.write_json_map();
   }

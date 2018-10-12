@@ -12,7 +12,6 @@ namespace item
     Item(std::string type);
     Item(Item&& rhs) noexcept;
     virtual ~Item() = default;
-    ::map::Point get_position() const;
   };
 }
 

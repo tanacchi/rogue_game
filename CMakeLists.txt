@@ -56,10 +56,3 @@ configure_file(
   ${PROJECT_INCLUDE_DIR}/${PROJECT_NAME}/${PROJECT_NAME}.hpp)
 
 add_subdirectory(src)
-
-message(STATUS "============ CMake Variables =============")
-get_cmake_property(_variableNames VARIABLES)
-foreach(_variableName ${_variableNames})
-  message(STATUS "${_variableName}=${${_variableName}}")
-endforeach()
-message(STATUS "==========================================")

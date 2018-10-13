@@ -4,6 +4,7 @@
 #include <map/point.hpp>
 #include <rogue_game/rogue_game.hpp>
 
+// ゲームの進行を扱う
 class GameMaster
 {
 public:

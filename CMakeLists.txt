@@ -14,7 +14,7 @@ if (${MAJOR})
     OUTPUT_VARIABLE LATEST_RELEASE
     OUTPUT_STRIP_TRAILING_WHITESPACE)  
   execute_process(
-    COMMAND git log origin/master..${LATEST_RELEASE} --oneline --merges --first-parent origin/master
+    COMMAND git log ${LATEST_RELEASE}..origin/master --oneline --merges --first-parent origin/master
     COMMAND wc --lines
     OUTPUT_VARIABLE PATCH
     OUTPUT_STRIP_TRAILING_WHITESPACE)

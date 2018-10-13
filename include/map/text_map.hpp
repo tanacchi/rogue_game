@@ -24,7 +24,7 @@ namespace map
       const std::string get_text(const std::vector<std::string>& map_strings);
     };
 
-    const std::vector<std::string> read_map_strings(const std::string& filename); // TODO : 不要になったので削除
+    const std::vector<std::string> read_map_strings(const std::string& filename);
   }
 }
 

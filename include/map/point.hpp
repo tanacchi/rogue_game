@@ -5,6 +5,7 @@
 
 namespace map
 {
+  // マップ上での位置を表現する
   class Point
   {
   public:

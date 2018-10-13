@@ -13,6 +13,8 @@ namespace map
     {
     }
 
+    // マップの文字からそれぞれ json の内容を追加
+    // ダンジョン要素とアイテム要素は別々
     void MapGenerator::set_configs()
     {
       for (std::size_t i{0}, end{text_map_.text.length()}; i < end; ++i) {
@@ -66,6 +68,7 @@ namespace map
       }
       map_data.add_child("Map.items", item_tree);
 
+      // map_dir は include/rogue_game.hpp にて自動生成される
       boost::property_tree::write_json(map_dir+"json/"+output_filename_+".json", map_data);
     }
   }

@@ -8,7 +8,7 @@ int main(int argc, char** argv)
     const std::vector<std::string> arg_list{argv, argv + argc};
     const std::string text_map_filname{arg_list[1]};
     const std::vector<std::string> map_strings{map::generator::read_map_strings(text_map_filname)};
-    map::generator::TextMap text_map{map::generator::get_text_map_obj(map_strings)};
+    map::generator::TextMap text_map{map_strings};
     text_map.show();
     map::generator::MapGenerator map_generator{text_map, "ver_0.1.0.0_map"};
     map_generator.set_configs();

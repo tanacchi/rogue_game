@@ -5,6 +5,7 @@
 
 namespace item
 {
+  // 触れると所持金が増えるアイテム
   class Gold : public Item
   {
   public:

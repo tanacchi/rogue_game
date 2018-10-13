@@ -4,9 +4,11 @@
 #include <ncurses.h>
 #include <cstdint>
 
+// キーボード入力を扱うクラス
 class KeyboardManager
 {
 public:
+  // 使用可能なキーボード入力
   enum class KeyState : std::uint8_t
   {
     Space   = 0x01 << 0,
@@ -21,6 +23,7 @@ public:
     Arrow   = Up | Down | Right | Left
   };
 
+  // ncurses のキーコードから KeyState に変換
   static const KeyState get_key() noexcept;
 };
 

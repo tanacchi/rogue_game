@@ -5,6 +5,7 @@
 
 namespace dungeon
 {
+  // ダンジョン要素　'.'
   class Floor : public DungeonElem
   {
   public:

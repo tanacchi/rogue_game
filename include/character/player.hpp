@@ -11,11 +11,14 @@ namespace character
   {
   public:
     Player(map::Point point);
-    static const std::map<KeyboardManager::KeyState, map::Point> motion_table;
+
+    // KeyState と移動方向の対応表
+    static const std::map<KeyboardManager::KeyState, const map::Point> motion_table;
+
+    // money の getter と setter
+    // ステータスごとに２個ずつメソッドが増えることは避けたい
     std::size_t get_money() const;
     void add_money(std::size_t addition);
-    void update(map::Map& map) override;
-    void update(map::Map& map, const KeyboardManager::KeyState key_state);
   private:
     std::size_t money_;
   };

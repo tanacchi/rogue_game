@@ -24,7 +24,10 @@ namespace map
       item_layer{std::move(map.item_layer)}
   {
   }
-  
+
+  // いまのところダンジョン要素の配列を一次元にしているメリットが
+  // json からの読み込み位なので
+  // そのを解消して二次元に切り替えて見ようかと思う
   const ::dungeon::DungeonElem Map::get_dungeon_elem(const Point& point) const
   {
     const ::dungeon::DungeonElem* elem{dungeon_layer[width * point.get_y() + point.get_x()].get()};
@@ -43,7 +46,10 @@ namespace map
     int y{static_cast<int>(index / width)};
     return {x, y};
   }
-  
+
+  // ダンジョン要素からインスタンスを生成しポイントを返す
+  // オブジェクト・ファクトリ
+  // TO DO : もうすこしキレイにしたい
   std::unique_ptr<::dungeon::DungeonElem> gen_dungeon_elem(std::string type)
   {
     if (type == "floor") {
@@ -62,24 +68,32 @@ namespace map
       throw std::string{"Invalid map elem type."};
     }
   }
-  
+
+  // json から Map のインスタンスを生成する
+  // コンストラクタに変える予定
+  // 要素ごとに取得する変数とかが変わってくるから
+  // マクロやらテンプレートでキレイにできたらいいなと思っている
   Map read_map(const std::string mapfile_name)
   {
     Map map{};
     boost::property_tree::ptree json_map_data{};
     boost::property_tree::read_json(mapfile_name, json_map_data);
+    // マップの横幅を取得
     {
       int width = json_map_data.get_optional<int>("Map.width").get();
       map.width = width;
     }
+    // マップの縦幅を取得
     {
       int height = json_map_data.get_optional<int>("Map.height").get();
       map.height = height;
     }
+    // プレイヤーの初期位置を取得
     {
       std::size_t player_index = json_map_data.get_optional<std::size_t>("Map.player_pos").get();
       map.initial_position = map.index_to_point(player_index);
     }
+    // ダンジョン要素を取得
     {
       std::vector<std::unique_ptr<::dungeon::DungeonElem> > elems{};
       BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.elems") ) {
@@ -92,6 +106,7 @@ namespace map
       }
       map.dungeon_layer = std::move(elems);
     }
+    // アイテム要素を取得
     {
       BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.items") ) {
         const boost::property_tree::ptree& elem{child.second};

@@ -9,6 +9,9 @@ PlayerDisplay::PlayerDisplay(std::size_t x, std::size_t y,
 
 void PlayerDisplay::show(const character::Player& player)
 {
+  // 変数をループやらマクロやらで一気に参照できたら嬉しいが
+  // 言語が違うか
+  // 位置情報は logger に任せるつもり
   map::Point pos{player.get_position()};
   mvwprintw(win_.get(), 0, 0, "Position: ");
   mvwprintw(win_.get(), 1, 2, "x: %d", pos.get_x());

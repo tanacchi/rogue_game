@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iomanip>
 #include <vector>
 #include <fstream>
@@ -37,9 +38,12 @@ namespace map
     TextMap get_text_map_obj(std::vector<std::string> map_strings)
     {
       TextMap tm;
-      for (auto row : map_strings) {
-        tm.width = std::max(tm.width, row.length());
-      }
+      const std::vector<std::string>::const_iterator longest_row =
+        std::max_element(map_strings.begin(), map_strings.end(),
+                         [](const std::string& left, const std::string& right) {
+                           return left.length() < right.length();
+                         });
+      tm.width = longest_row->length();
       tm.height = map_strings.size();
       std::stringstream ss{};
       for (auto row : map_strings) {

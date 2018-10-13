@@ -8,7 +8,7 @@ execute_process(
   OUTPUT_VARIABLE MINOR
   OUTPUT_STRIP_TRAILING_WHITESPACE)
 
-if (${MAJOR})
+if (${MINOR})
   execute_process(
     COMMAND git describe --abbrev=0
     OUTPUT_VARIABLE LATEST_RELEASE

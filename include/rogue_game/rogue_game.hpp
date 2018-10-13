@@ -5,6 +5,6 @@
 #include <display/map_display.hpp>
 #include <display/player_display.hpp>
 
-const std::string map_dir{"@PROJECT_SOURCE_DIR@/map/"};
+const std::string map_dir{"/home/tanacchi/works/rogue_game/map/"};
 
 #endif  // INCLUDED_ROGUE_GAME_HPP

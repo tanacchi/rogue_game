@@ -16,7 +16,6 @@ namespace character
     Character(map::Point position = map::Point{0, 0});
     map::Point get_position() const;
     void set_position(const map::Point& point);
-    virtual void update(map::Map& map) = 0;
   protected:
     map::Point position_;
   };

@@ -19,7 +19,7 @@ namespace map
   const char get_symbol(const std::string type)
   {
     // ダンジョン要素の種類と表示文字の対応表
-    static std::map<std::string, const char> symbol_table = { // 変数の const 化
+    static const std::map<std::string, const char> symbol_table = {
       {"horizontal_wall", '-'},
       {"vertical_wall",   '|'},
       {"floor",           '.'},

@@ -13,9 +13,9 @@ namespace map
     public:
       // テキストファイルからマップの情報を抽出しインスタンスを生成
       TextMap(const std::vector<std::string>& map_strings);
-      std::size_t width{};      // TODO : const 化
-      std::size_t height{};
-      std::string text{};
+      const std::size_t width{};
+      const std::size_t height{};
+      const std::string text{};
 
       void show() const;
     private:

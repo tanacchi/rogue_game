@@ -14,13 +14,19 @@ GameMaster::~GameMaster()
   endwin();
 }
 
+// ゲームの要素全てを更新する
+// タスク過多な気がする
 void GameMaster::update()
 {
+  // 画面表示
   map_display_.show(map_, player_);
   player_display_.show(player_);
   refresh();
+
+  // キーボード入力
   const KeyboardManager::KeyState key_state{keyboard_.get_key()};
   {
+    // プレイヤーの位置更新
     map::Point motion{character::Player::motion_table.find(key_state) != character::Player::motion_table.end() ?
         character::Player::motion_table.at(key_state) : map::Point{0, 0}};
     map::Point next_position{player_.get_position() + motion};
@@ -29,6 +35,7 @@ void GameMaster::update()
     }
   }
   {
+    // アイテムの取得・更新
     map::Point current_position{player_.get_position()};
     std::map<map::Point, std::unique_ptr<::item::Item> >::iterator it{map_.item_layer.find(current_position)};
     if (it != map_.item_layer.end()) {

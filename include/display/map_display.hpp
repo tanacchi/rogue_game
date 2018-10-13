@@ -7,6 +7,7 @@
 
 namespace map
 {
+  // マップ（タンジョン・アイテム・キャラクター）の表示
   class MapDisplay : public DisplayPanel
   {
   public:

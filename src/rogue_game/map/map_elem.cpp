@@ -18,7 +18,8 @@ namespace map
   
   const char get_symbol(const std::string type)
   {
-    static std::map<std::string, const char> symbol_table = {
+    // ダンジョン要素の種類と表示文字の対応表
+    static std::map<std::string, const char> symbol_table = { // 変数の const 化
       {"horizontal_wall", '-'},
       {"vertical_wall",   '|'},
       {"floor",           '.'},

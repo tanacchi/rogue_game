@@ -10,11 +10,18 @@
 
 namespace character
 {
+  // キャラクターの基底クラス
+  // Player に加え Enemy が継承する予定
   class Character
   {
   public:
+    // デフォルト引数はそのうちなくす予定
     Character(map::Point position = map::Point{0, 0});
+
+    // キャラクターの位置を取得
     map::Point get_position() const;
+
+    // キャラクターの位置を設定
     void set_position(const map::Point& point);
   protected:
     map::Point position_;

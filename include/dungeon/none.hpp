@@ -5,6 +5,9 @@
 
 namespace dungeon
 {
+  // ダンジョン要素　' '
+  // 隠し通路なんかにも使えるかと思って
+  // 空白もマップの要素にしてる
   class None : public DungeonElem
   {
   public:

@@ -23,7 +23,9 @@ void GameMaster::update()
   player_display_.show(player_);
   refresh();
 
-  // キーボード入力
+  // キーボード入力は外に出して
+  // Unknown なら sleep ｗｐ挟むとかしたいけど
+  // ncurses の知識がもう少しいるので後回し
   const KeyboardManager::KeyState key_state{keyboard_.get_key()};
   {
     // プレイヤーの位置更新

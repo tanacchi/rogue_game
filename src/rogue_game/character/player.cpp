@@ -8,7 +8,7 @@ namespace character
   {
   }
 
-  const std::map<KeyboardManager::KeyState, map::Point> Player::motion_table = {
+  const std::map<KeyboardManager::KeyState, const map::Point> Player::motion_table = {
     {KeyboardManager::KeyState::Up,    map::Point{ 0,-1}},
     {KeyboardManager::KeyState::Down,  map::Point{ 0, 1}},
     {KeyboardManager::KeyState::Right, map::Point{ 1, 0}},

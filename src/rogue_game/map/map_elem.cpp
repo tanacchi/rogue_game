@@ -18,7 +18,7 @@ namespace map
   
   const char get_symbol(const std::string type)
   {
-    static std::map<std::string, char> symbol_hash = {
+    static std::map<std::string, const char> symbol_table = {
       {"horizontal_wall", '-'},
       {"vertical_wall",   '|'},
       {"floor",           '.'},
@@ -27,6 +27,7 @@ namespace map
       {"door",            '+'},
       {"gold",            '*'}
     };
-    return symbol_hash.find(type) != symbol_hash.end() ? symbol_hash.at(type) : '$';
+    const std::map<std::string, const char>::const_itr found_symbol_itr{symbol_table.find(type)};
+    return found_symbol_itr != symbol_table.end() ? found_symbol_itr->second : '$';
   }
 }

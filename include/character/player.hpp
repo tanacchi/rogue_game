@@ -11,7 +11,7 @@ namespace character
   {
   public:
     Player(map::Point point);
-    static const std::map<KeyboardManager::KeyState, map::Point> motion_table;
+    static const std::map<KeyboardManager::KeyState, const map::Point> motion_table;
     std::size_t get_money() const;
     void add_money(std::size_t addition);
     void update(map::Map& map) override;

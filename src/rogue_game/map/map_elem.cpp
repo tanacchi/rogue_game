@@ -27,7 +27,7 @@ namespace map
       {"door",            '+'},
       {"gold",            '*'}
     };
-    const std::map<std::string, const char>::const_itr found_symbol_itr{symbol_table.find(type)};
+    const std::map<std::string, const char>::const_iterator found_symbol_itr{symbol_table.find(type)};
     return found_symbol_itr != symbol_table.end() ? found_symbol_itr->second : '$';
   }
 }

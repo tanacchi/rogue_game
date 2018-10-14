@@ -3,4 +3,6 @@
 build/
 *rogue_game.hpp
 
+log/*log
+
 *.out

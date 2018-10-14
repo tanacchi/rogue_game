@@ -10,6 +10,7 @@ namespace debug
   public:
     Logger();
   private:
+    std::string get_current_time_str() const;
     std::fstream fos_;
   };
 }

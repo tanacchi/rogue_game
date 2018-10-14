@@ -3,7 +3,7 @@
 namespace debug
 {
   Logger::Logger()
-    : fos_{"log/text.log", std::ios::out}
+    : fos_{"log/test.log", std::ios::out}
   {
     fos_ << "Hello" << std::endl;
   }

@@ -3,6 +3,8 @@
 
 #include <fstream>
 
+#define LOG_LOCATION (std::string{__FILE__}+" : "+std::to_string(__LINE__))
+
 namespace debug
 {
   class Logger

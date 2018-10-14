@@ -9,6 +9,7 @@ namespace debug
     : fos_{"log/" + get_current_time_str() + ".log", std::ios::out}
   {
     fos_ << "Hello, " << get_current_time_str() << std::endl;
+    fos_ << LOG_LOCATION << std::endl;
   }
 
   std::string Logger::get_current_time_str() const

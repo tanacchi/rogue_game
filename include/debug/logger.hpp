@@ -11,6 +11,9 @@ namespace debug
   {
   public:
     Logger();
+    void log(std::string location);
+    template<typename Head, typename... Tail>
+    void log(std::string location, Head head, Tail... tail);
   private:
     std::string get_current_time_str() const;
     std::fstream fos_;

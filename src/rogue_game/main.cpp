@@ -8,7 +8,7 @@ int main()
   keypad(stdscr, TRUE);
   curs_set(0);
   refresh();
-  
+
   GameMaster master{};
   while (true) {
     master.update();

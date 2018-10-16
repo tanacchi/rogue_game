@@ -9,18 +9,12 @@ namespace debug
   Logger::Logger()
     : fos_{"log/" + get_current_time_str() + ".log", std::ios::out}
   {
-    log(LOG_LOCATION, "Hello", 1, 3.14, 'A');
-  }
-
-  void Logger::log(std::string location)
-  {
-    fos_ << '\n'
-         << "\t\t" << location << '\n' << std::endl;
   }
 
   void Logger::log_with_name(std::list<std::string> name_list)
   {
-    fos_ << std::endl;
+    fos_ << '\n'
+         << "\t\t\t\t" << name_list.front() << std::endl;
   }
 
   std::list<std::string> split_string_by_comma(std::string src_string)

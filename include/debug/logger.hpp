@@ -5,7 +5,7 @@
 #include <list>
 
 #define LOG_LOCATION (std::string{__FILE__}+" : "+std::to_string(__LINE__))
-#define LOG_WITH_NAME(...) logger.log_with_name(debug::split_string_by_comma(#__VA_ARGS__), __VA_ARGS__)
+#define LOG_VALUES(...) logger.log_with_name(debug::split_string_by_comma(#__VA_ARGS__", "+LOG_LOCATION), __VA_ARGS__)
 
 namespace debug
 {
@@ -13,14 +13,6 @@ namespace debug
   {
   public:
     Logger();
-    void log(std::string location); 
-
-    template<typename Head, typename... Tail>
-    void log(std::string location, Head head, Tail... tail)
-    {
-      fos_ << head << ' ';
-      log(location, std::forward<Tail>(tail)...);
-    }
 
     void log_with_name(std::list<std::string> name_list);
 

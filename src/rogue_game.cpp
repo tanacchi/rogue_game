@@ -14,8 +14,7 @@ int main()
     std::string str{"Hello"};
     std::size_t length{str.length()};
     char initial{str[0]};
-    logger.log(LOG_LOCATION, str, length, initial);
-    LOG_WITH_NAME(str, length, initial);
+    LOG_VALUES(str, length, initial);
   }
   
   GameMaster master{};

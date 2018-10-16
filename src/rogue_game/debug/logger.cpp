@@ -14,7 +14,7 @@ namespace debug
   void Logger::log_with_name(std::list<std::string> name_list)
   {
     fos_ << '\n'
-         << "\t\t\t\t" << name_list.front() << std::endl;
+         << "\t\t\t\t[" << name_list.front() << ']'<< std::endl;
   }
 
   std::list<std::string> split_string_by_comma(std::string src_string)

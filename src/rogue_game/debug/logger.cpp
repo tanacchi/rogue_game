@@ -1,5 +1,6 @@
 #include <chrono>
 #include <ctime>
+#include <boost/algorithm/string.hpp>
 
 #include <debug/logger.hpp>
 
@@ -17,6 +18,14 @@ namespace debug
          << "\t\t" << location << '\n' << std::endl;
   }
     
+  std::list<std::string> split_string_by_comma(std::string src_string)
+  {
+    std::list<std::string>strings{};
+    boost::split(strings, src_string, boost::is_any_of(", "),
+                 boost::algorithm::token_compress_on );
+    return strings;
+  }
+
   std::string Logger::get_current_time_str() const
   {
     std::chrono::system_clock::time_point now{std::chrono::system_clock::now()};

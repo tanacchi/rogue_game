@@ -2,6 +2,7 @@
 #define INCLUDED_LOGGER_HPP
 
 #include <fstream>
+#include <list>
 
 #define LOG_LOCATION (std::string{__FILE__}+" : "+std::to_string(__LINE__))
 
@@ -19,11 +20,11 @@ namespace debug
       fos_ << head << ' ';
       log(location, std::forward<Tail>(tail)...);
     }
-    
   private:
     std::string get_current_time_str() const;
     std::fstream fos_;
   };
+  std::list<std::string> split_string_by_comma(std::string src_string);
 }
 
 #endif  // INCLUDED_LOGGER_HPP

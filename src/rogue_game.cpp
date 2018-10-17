@@ -7,6 +7,14 @@ int main()
   keypad(stdscr, TRUE);
   curs_set(0);
   refresh();
+
+  // Log test
+  {
+    std::string str{"Hello"};
+    std::size_t length{str.length()};
+    char initial{str[0]};
+    LOG_VALUES(str, length, initial);
+  }
   
   GameMaster master{};
   while (true) {

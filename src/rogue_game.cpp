@@ -3,7 +3,6 @@
 
 int main()
 {
-  debug::Logger logger{};
   initscr();
   keypad(stdscr, TRUE);
   curs_set(0);

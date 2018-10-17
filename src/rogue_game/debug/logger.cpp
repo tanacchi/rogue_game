@@ -6,11 +6,8 @@
 
 namespace debug
 {
-  Logger::Logger()
-    : fos_{"log/" + get_current_time_str() + ".log", std::ios::out}
-  {
-  }
-
+  std::fstream Logger::fos_("log/" + get_current_time_str() + ".log", std::ios::out);
+  
   void Logger::log_with_name(std::list<std::string> name_list)
   {
     fos_ << '\n'
@@ -25,7 +22,7 @@ namespace debug
     return strings;
   }
 
-  std::string Logger::get_current_time_str() const
+  std::string get_current_time_str()
   {
     std::chrono::system_clock::time_point now{std::chrono::system_clock::now()};
     std::time_t time{std::chrono::system_clock::to_time_t(now)};

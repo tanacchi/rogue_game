@@ -5,19 +5,17 @@
 #include <list>
 
 #define LOG_LOCATION (std::string{__FILE__}+":"+std::to_string(__LINE__))
-#define LOG_VALUES(...) logger.log_with_name(debug::split_string_by_comma(#__VA_ARGS__", "+LOG_LOCATION), __VA_ARGS__)
+#define LOG_VALUES(...) debug::Logger::log_with_name(debug::split_string_by_comma(#__VA_ARGS__", "+LOG_LOCATION), __VA_ARGS__)
 
 namespace debug
 {
   class Logger
   {
   public:
-    Logger();
-
-    void log_with_name(std::list<std::string> name_list);
+    static void log_with_name(std::list<std::string> name_list);
 
     template <typename Head, typename... Tail>
-    void log_with_name(std::list<std::string> name_list, Head head, Tail... tail)
+    static void log_with_name(std::list<std::string> name_list, Head head, Tail... tail)
     {
       fos_ << "{ " << name_list.front() << " : " << head << " } ";
       name_list.pop_front();
@@ -25,9 +23,9 @@ namespace debug
     }
 
   private:
-    std::string get_current_time_str() const;
-    std::fstream fos_;
+    static std::fstream fos_;
   };
+  std::string get_current_time_str();
   std::list<std::string> split_string_by_comma(std::string src_string);
 }
 

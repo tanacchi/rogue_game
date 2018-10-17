@@ -1,6 +1,7 @@
 #ifndef INCLUDED_POINT_HPP
 #define INCLUDED_POINT_HPP
 
+#include <ostream>
 #include <utility>
 
 namespace map
@@ -20,6 +21,7 @@ namespace map
     const Point& operator+=(const Point& rhs);
     bool operator==(const Point& rhs) const;
     bool operator<(const Point& rls) const;
+    friend std::ostream& operator<<(std::ostream& os, const Point& point);
   private:
     int x_;
     int y_;

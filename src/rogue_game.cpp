@@ -10,10 +10,9 @@ int main()
 
   // Log test
   {
-    std::string str{"Hello"};
-    std::size_t length{str.length()};
-    char initial{str[0]};
-    LOG_VALUES(str, length, initial);
+    map::Point point1{2, -3};
+    map::Point point2{10, 2};
+    LOG_VALUES(point1, point2);
   }
   
   GameMaster master{};

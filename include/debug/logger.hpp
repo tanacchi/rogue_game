@@ -17,7 +17,7 @@ namespace debug
     template <typename Head, typename... Tail>
     static void log_with_name(std::list<std::string> name_list, Head head, Tail... tail)
     {
-      fos_ << "{ " << name_list.front() << " : " << head << " } ";
+      fos_ << "{ " << name_list.front() << " : " << head << " }\n";
       name_list.pop_front();
       log_with_name(name_list, std::forward<Tail>(tail)...);
     }

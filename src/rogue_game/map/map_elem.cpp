@@ -15,7 +15,14 @@ namespace map
       symbol{rhs.symbol}
   {
   }
-  
+
+  std::ostream& operator<<(std::ostream& os, const MapElem& elem)
+  {
+    os << "{ type : " << elem.type << " }, "
+       << "{ symbol : '" << elem.symbol << "' }";
+    return os;
+  }
+
   const char get_symbol(const std::string type)
   {
     // ダンジョン要素の種類と表示文字の対応表

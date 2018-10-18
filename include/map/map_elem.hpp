@@ -2,6 +2,7 @@
 #define INCLUDED_MAP_ELEM_HPP
 
 #include <string>
+#include <ostream>
 
 namespace map
 {
@@ -11,7 +12,8 @@ namespace map
     MapElem(std::string type);
     MapElem(MapElem&& rhs) noexcept;
     virtual ~MapElem() = default;
-
+    friend std::ostream& operator<<(std::ostream& os, const MapElem& map_elem);
+    
     // マップ要素の種類
     const std::string type;
 

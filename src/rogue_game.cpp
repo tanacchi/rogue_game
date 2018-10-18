@@ -1,6 +1,8 @@
 #include <rogue_game/rogue_game.hpp>
 #include <rogue_game/game_master.hpp>
 
+#include <dungeon/vertical_wall.hpp> // Log test
+
 int main()
 {
   initscr();
@@ -14,7 +16,8 @@ int main()
     map::Point point2{10, 2};
     LOG_VALUES(point1, point2);
     map::MapElem map_elem{"floor"};
-    LOG_VALUES(map_elem);
+    dungeon::VerticalWall vertical_wall{};
+    LOG_VALUES(map_elem, vertical_wall);
   }
   
   GameMaster master{};

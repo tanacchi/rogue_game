@@ -1,6 +1,7 @@
 #ifndef INCLUDED_PLAYER_HPP
 #define INCLUDED_PLAYER_HPP
 
+#include <ostream>
 #include <map>
 
 #include <character/character.hpp>
@@ -19,6 +20,7 @@ namespace character
     // ステータスごとに２個ずつメソッドが増えることは避けたい
     std::size_t get_money() const;
     void add_money(std::size_t addition);
+    friend std::ostream& operator<<(std::ostream& os, const Player& player);
   private:
     std::size_t money_;
   };

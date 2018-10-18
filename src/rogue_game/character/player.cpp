@@ -24,4 +24,11 @@ namespace character
   {
     money_ += addition;
   }
+
+  std::ostream& operator<<(std::ostream& os, const Player& player)
+  {
+    os << "\n { position : " << player.position_ << " },\n"
+       << " { money : " << player.money_ << " }";
+    return os;
+  }
 }

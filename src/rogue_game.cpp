@@ -20,7 +20,8 @@ int main()
     dungeon::VerticalWall vertical_wall{};
     LOG_VALUES(map_elem, vertical_wall);
     character::Character chara{};
-    LOG_VALUES(chara);
+    character::Player player{point2};
+    LOG_VALUES(chara, player);
   }
   
   GameMaster master{};

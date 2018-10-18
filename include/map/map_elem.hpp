@@ -10,6 +10,7 @@ namespace map
   class MapElem {
   public:
     MapElem(std::string type);
+    MapElem(const MapElem& rhs);
     MapElem(MapElem&& rhs) noexcept;
     virtual ~MapElem() = default;
     friend std::ostream& operator<<(std::ostream& os, const MapElem& map_elem);

@@ -1,6 +1,8 @@
 #ifndef INCLUDED_DUNGEON_ELEM_HPP
 #define INCLUDED_DUNGEON_ELEM_HPP
 
+#include <ostream>
+
 #include <map/map_elem.hpp>
 
 namespace dungeon
@@ -12,7 +14,8 @@ namespace dungeon
     DungeonElem(std::string type, bool can_stand);
     DungeonElem(const DungeonElem& rhs);
     virtual ~DungeonElem() = default;
-
+    friend std::ostream& operator<<(std::ostream& os, const DungeonElem& elem);
+    
     // キャラクターが移動可能かの判定に使われる
     bool can_stand() const;
   public:

@@ -16,12 +16,17 @@ int main()
     map::Point point1{2, -3};
     map::Point point2{10, 2};
     LOG_VALUES(point1, point2);
+
     map::MapElem map_elem{"floor"};
     dungeon::VerticalWall vertical_wall{};
     LOG_VALUES(map_elem, vertical_wall);
+
     character::Character chara{};
     character::Player player{point2};
     LOG_VALUES(chara, player);
+
+    KeyboardManager::KeyState key_state{KeyboardManager::KeyState::Enter};
+    LOG_VALUES(key_state);
   }
   
   GameMaster master{};

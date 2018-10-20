@@ -21,6 +21,7 @@ namespace character
     // ステータスごとに２個ずつメソッドが増えることは避けたい
     std::size_t get_money() const;
     void add_money(std::size_t addition);
+    void store_item(std::unique_ptr<item::Item>&& item);
     friend std::ostream& operator<<(std::ostream& os, const Player& player);
   private:
     Inventory inventory_;

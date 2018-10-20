@@ -5,3 +5,8 @@ Inventory::Inventory(std::size_t capacity)
     capacity_{capacity}
 {
 }
+
+void Inventory::store(std::unique_ptr<item::Item>&& item)
+{
+  items_.push_back(std::move(item));
+}

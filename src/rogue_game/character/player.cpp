@@ -26,6 +26,11 @@ namespace character
     money_ += addition;
   }
 
+  void Player::store_item(std::unique_ptr<item::Item>&& item)
+  {
+    inventory_.store(std::move(item));
+  }
+  
   std::ostream& operator<<(std::ostream& os, const Player& player)
   {
     os << "\n { position : " << player.position_ << " },\n"

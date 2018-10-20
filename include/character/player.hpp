@@ -5,6 +5,7 @@
 #include <map>
 
 #include <character/character.hpp>
+#include <item/inventory.hpp>
 
 namespace character
 {
@@ -22,6 +23,7 @@ namespace character
     void add_money(std::size_t addition);
     friend std::ostream& operator<<(std::ostream& os, const Player& player);
   private:
+    Inventory inventory_;
     std::size_t money_;
   };
 }

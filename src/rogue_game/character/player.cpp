@@ -4,6 +4,7 @@ namespace character
 {
   Player::Player(map::Point position)
     : Character(position),
+      inventory_{10},
       money_{0}
   {
   }

@@ -31,6 +31,11 @@ namespace character
   {
     inventory_.store(std::move(item));
   }
+
+  void Player::use_item(std::size_t item_index)
+  {
+    inventory_.use(this, item_index);
+  }
   
   std::ostream& operator<<(std::ostream& os, const Player& player)
   {

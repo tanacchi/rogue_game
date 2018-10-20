@@ -36,6 +36,7 @@ namespace character
     std::size_t get_money() const;
     void add_money(std::size_t addition);
     void store_item(std::unique_ptr<item::Item>&& item);
+    void use_item(std::size_t item_index);
     friend std::ostream& operator<<(std::ostream& os, const Player& player);
   private:
     Inventory inventory_;

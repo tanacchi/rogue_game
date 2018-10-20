@@ -57,7 +57,7 @@ namespace character
     os << "\n{ items :\n";
     for (std::list<std::unique_ptr<item::Item> >::const_iterator it{inventory.items_.begin()}, end{inventory.items_.end()};
          it != end; ++it, os.put('\n')) {
-      const auto* const item {dynamic_cast<item::Gold *>((*it).get())}; // REFACTOR REQUIRED
+      const auto* const item(dynamic_cast<item::Gold *>((*it).get())); // REFACTOR REQUIRED
       os << *item;
     }
     os << "},\n { capacity : " << inventory.capacity_ << " }\n";

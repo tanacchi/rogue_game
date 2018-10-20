@@ -63,4 +63,13 @@ namespace character
     debug::Logger::log_string("Item just stored", '-');
     LOG_VALUES(*this);
   }
+
+  void Player::Inventory::use(Player* const player_ptr, std::size_t item_index)
+  {
+    std::list<std::unique_ptr<item::Item> >::iterator taget_item_itr{std::next(items_.begin(), item_index)};
+    (*taget_item_itr)->use(player_ptr);
+    items_.erase(taget_item_itr);
+    debug::Logger::log_string("Item just useed", '-');
+    LOG_VALUES(*this);
+  }
 }

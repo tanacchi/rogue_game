@@ -20,6 +20,7 @@ namespace character
       Inventory(std::size_t capacity);
       friend std::ostream& operator<<(std::ostream& os, const Inventory& inventory);
       void store(std::unique_ptr<item::Item>&& item);
+      void use(Player* const player_ptr, std::size_t item_index);
     private:
       std::list<std::unique_ptr<item::Item> > items_;
       std::size_t capacity_;

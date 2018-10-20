@@ -5,6 +5,7 @@
 #include <cstddef>
 #include <memory>
 
+#include <debug/logger.hpp>
 #include <keyboard/keyboard_manager.hpp>
 #include <map/map.hpp>
 #include <map/point.hpp>

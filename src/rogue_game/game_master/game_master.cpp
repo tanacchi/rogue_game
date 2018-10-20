@@ -42,7 +42,7 @@ void GameMaster::update()
     map::Point current_position{player_.get_position()};
     std::map<map::Point, std::unique_ptr<::item::Item> >::iterator it{map_.item_layer.find(current_position)};
     if (it != map_.item_layer.end()) {
-      player_.add_money(100);
+      player_.store_item(std::move(it->second));
       map_.item_layer.erase(it);
     }
   }

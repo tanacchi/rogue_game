@@ -46,4 +46,10 @@ void GameMaster::update()
       map_.item_layer.erase(it);
     }
   }
+  {
+    // アイテムの使用（テスト）
+    if (key_state == KeyboardManager::KeyState::Space) {
+      player_.use_item(0);
+    }
+  }
 }

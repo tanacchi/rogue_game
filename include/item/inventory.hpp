@@ -5,6 +5,7 @@
 #include <memory>
 
 #include <item/item.hpp>
+#include <debug/logger.hpp>
 
 class Inventory
 {

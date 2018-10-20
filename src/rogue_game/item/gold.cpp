@@ -12,6 +12,7 @@ namespace item
   void Gold::use(character::Player* const player_ptr)
   {
     player_ptr->add_money(amount_);
+    debug::Logger::log_string("Gold just has been used (Player gets $" + std::to_string(amount_));
   }
 
   std::ostream& operator<<(std::ostream& os, const Gold& gold)

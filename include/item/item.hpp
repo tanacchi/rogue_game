@@ -5,6 +5,7 @@
 
 #include <map/map_elem.hpp>
 #include <map/point.hpp>
+#include <debug/logger.hpp>
 
 namespace character
 {

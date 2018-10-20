@@ -8,7 +8,7 @@ namespace debug
 {
   std::fstream Logger::fos_("log/" + get_current_time_str() + ".log", std::ios::out);
   
-  void Logger::log_with_name(std::list<std::string> name_list)
+  void Logger::log_with_name(std::list<std::string>&& name_list)
   {
     fos_ << '\n'
          << "\t\t\t\t[" << name_list.front() << "]\n\n"<< std::endl;

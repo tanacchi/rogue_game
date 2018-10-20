@@ -34,7 +34,9 @@ namespace character
 
   void Player::use_item(std::size_t item_index)
   {
-    inventory_.use(this, item_index);
+    if (item_index < inventory_.get_item_num()) {   // ここのチェックはコイツの仕事か？？
+      inventory_.use(this, item_index);
+    }
   }
   
   std::ostream& operator<<(std::ostream& os, const Player& player)
@@ -60,6 +62,11 @@ namespace character
     }
     os << "},\n { capacity : " << inventory.capacity_ << " }\n";
     return os;
+  }
+
+  std::size_t Player::Inventory::get_item_num() const
+  {
+    return items_.size();
   }
 
   void Player::Inventory::store(std::unique_ptr<item::Item>&& item)

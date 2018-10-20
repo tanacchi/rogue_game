@@ -19,6 +19,7 @@ namespace character
     public:
       Inventory(std::size_t capacity);
       friend std::ostream& operator<<(std::ostream& os, const Inventory& inventory);
+      std::size_t get_item_num() const;
       void store(std::unique_ptr<item::Item>&& item);
       void use(Player* const player_ptr, std::size_t item_index);
     private:

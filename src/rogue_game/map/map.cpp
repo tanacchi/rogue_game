@@ -25,6 +25,19 @@ namespace map
   {
   }
 
+  std::ostream& operator<<(std::ostream& os, const Map& map)
+  {
+    os << "{ width : " << map.width << " }, { height : " << map.height << "},\n"
+       << "{ initial_position : " << map.initial_position << " },\n "
+       << "{ dungeon_layer :\n";
+    for (int y{0}; y < map.height; ++y, os.put('\n')) {
+      for (int x{0}; x < map.width; ++x) {
+        os << map.get_dungeon_elem(map::Point{x, y}).symbol;
+      }
+    }
+    return os;
+  }
+
   // いまのところダンジョン要素の配列を一次元にしているメリットが
   // json からの読み込み位なので
   // そのを解消して二次元に切り替えて見ようかと思う

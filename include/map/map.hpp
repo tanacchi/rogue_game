@@ -1,6 +1,7 @@
 #ifndef INCLUDED_MAP_HPP
 #define INCLUDED_MAP_HPP
 
+#include <ostream>
 #include <valarray>
 #include <memory>
 #include <map>
@@ -16,6 +17,8 @@ namespace map
   {
     Map() = default;
     Map(Map&& map);
+    friend std::ostream& operator<<(std::ostream& os, const Map& map);
+    
     std::size_t width;
     std::size_t height;
 

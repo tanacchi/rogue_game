@@ -16,4 +16,10 @@ namespace character
   {
     position_ = point;
   }
+
+  std::ostream& operator<<(std::ostream& os, const Character& character)
+  {
+    os << " { position : " << character.position_ << " }";
+    return os;
+  }
 }

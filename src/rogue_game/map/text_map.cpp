@@ -17,15 +17,17 @@ namespace map
     {
     }
 
-    void TextMap::show() const
+    std::ostream& operator<<(std::ostream& os, const TextMap& text_map)
     {
-      std::cout << "width:  [" << width  << "]\n"
-                << "height: [" << height << "]\n"
-                << "text: " << std::endl;
-      for (std::size_t i{0}; i < text.length(); i += width) {
-        std::string row{text.substr(i, width)};
-        std::cout << row << std::endl;
+      os << " { width : " << text_map.width  << " },"
+         << " { height : " << text_map.height << "},\n"
+         << " { text :\n";
+      for (std::size_t i{0}; i < text_map.text.length(); i += text_map.width) {
+        std::string row{text_map.text.substr(i, text_map.width)};
+        os << row << '\n';
       }
+      os << '}';
+      return os;
     }
 
     const std::size_t TextMap::get_width(const std::vector<std::string>& map_strings)

@@ -64,4 +64,10 @@ namespace map
   {
     return (x_*x_ + y_*y_) < (rls.x_*rls.x_ + rls.y_*rls.y_);
   }
+
+  std::ostream& operator<<(std::ostream& os, const Point& point)
+  {
+    os << "{ x : " << point.x_ << " }, { y : " << point.y_ << " }";
+    return os;
+  }
 }

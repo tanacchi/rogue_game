@@ -6,8 +6,9 @@ GameMaster::GameMaster()
     player_display_{70, 30, 20, 10},
     keyboard_{},
     player_(map_.initial_position)
-  {
-  }
+{
+  debug::Logger::log_string("game master initialized");
+}
 
 GameMaster::~GameMaster()
 {

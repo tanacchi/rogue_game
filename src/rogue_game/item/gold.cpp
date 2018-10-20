@@ -7,4 +7,10 @@ namespace item
       amount_{amount}
   {
   }
+
+  std::ostream& operator<<(std::ostream& os, const Gold& gold)
+  {
+    os << "{ type : " << gold.type << " }, { amount : " << gold.amount_ << " }";
+    return os;
+  }
 }

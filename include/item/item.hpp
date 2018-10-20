@@ -1,6 +1,8 @@
 #ifndef INCLUDED_ITEM_HPP
 #define INCLUDED_ITEM_HPP
 
+#include <ostream>
+
 #include <map/map_elem.hpp>
 #include <map/point.hpp>
 
@@ -15,6 +17,7 @@ namespace item
     Item(std::string type);
     Item(Item&& rhs) noexcept;
     virtual ~Item() = default;
+    friend std::ostream& operator<<(std::ostream& os, const Item& item);
   };
 }
 

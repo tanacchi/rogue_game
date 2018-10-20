@@ -11,4 +11,10 @@ namespace item
     : MapElem(type)
   {
   }
+
+  std::ostream& operator<<(std::ostream& os, const Item& item)
+  {
+    os << "{ type : " << item.type << " } ";
+    return os;
+  }
 }

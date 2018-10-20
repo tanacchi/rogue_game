@@ -1,6 +1,8 @@
 #ifndef INCLUDED_GOLD_HPP
 #define INCLUDED_GOLD_HPP
 
+#include <ostream>
+
 #include <item/item.hpp>
 
 namespace item
@@ -10,6 +12,7 @@ namespace item
   {
   public:
     Gold(std::size_t amount = 100);
+    friend std::ostream& operator<<(std::ostream& os, const Gold& gold);
   private:
     const std::size_t amount_;
   };

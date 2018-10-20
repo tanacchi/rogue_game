@@ -22,6 +22,7 @@ namespace debug
       log_with_name(std::move(name_list), std::forward<const Tail&>(tail)...);
     }
 
+    static void log_string(const std::string& str, char separate_char = '=');    
   private:
     static std::fstream fos_;
   };

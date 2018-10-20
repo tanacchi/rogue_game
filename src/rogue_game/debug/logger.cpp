@@ -14,6 +14,12 @@ namespace debug
          << "\t\t\t\t[" << name_list.front() << "]\n\n"<< std::endl;
   }
 
+  void Logger::log_string(const std::string& str, char separate_char)
+  {
+    std::string separator(str.length(), separate_char);
+    fos_ << separator << '\n' << str << '\n' << separator << std::endl;
+  }
+  
   std::list<std::string> split_string_by_comma(std::string src_string)
   {
     std::list<std::string>strings{};

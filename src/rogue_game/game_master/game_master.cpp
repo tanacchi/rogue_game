@@ -1,4 +1,5 @@
 #include <rogue_game/game_master.hpp>
+#include <display/menu_display.hpp>
 
 GameMaster::GameMaster()
   : map_{map::read_map(map_dir + "json/ver_0.1.0.0_map.json")},
@@ -49,11 +50,15 @@ void GameMaster::update()
   {
     // アイテムの使用（テスト）
     if (key_state == KeyboardManager::KeyState::Space) {
+      static menu::MenuDisplay menu_display{80, 30, 10, 10};
       player_.use_item(0);
       auto names{player_.get_item_name_array()};
-      for (name : names) {
+      debug::Logger::log_string("=====   MENU STRING SETTING START   =====");
+      for (auto name : names) {
         LOG_VALUES(name);
-      }     
+      }
+      debug::Logger::log_string("=====   MENU STRING SETTING FINISH   =====");
+      menu_display.set_menu(std::move(names));
     }
   }
 }

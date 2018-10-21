@@ -50,6 +50,10 @@ void GameMaster::update()
     // アイテムの使用（テスト）
     if (key_state == KeyboardManager::KeyState::Space) {
       player_.use_item(0);
+      auto names{player_.get_item_name_array()};
+      for (name : names) {
+        LOG_VALUES(name);
+      }     
     }
   }
 }

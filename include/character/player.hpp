@@ -5,6 +5,7 @@
 #include <map>
 #include <memory>
 #include <list>
+#include <vector>
 
 #include <character/character.hpp>
 #include <item/item.hpp>
@@ -20,6 +21,7 @@ namespace character
       Inventory(std::size_t capacity);
       friend std::ostream& operator<<(std::ostream& os, const Inventory& inventory);
       std::size_t get_item_num() const;
+      std::vector<std::string> get_item_name_array() const;
       void store(std::unique_ptr<item::Item>&& item);
       void use(Player* const player_ptr, std::size_t item_index);
     private:
@@ -38,6 +40,7 @@ namespace character
     void add_money(std::size_t addition);
     void store_item(std::unique_ptr<item::Item>&& item);
     void use_item(std::size_t item_index);
+    std::vector<std::string> get_item_name_array() const;
     friend std::ostream& operator<<(std::ostream& os, const Player& player);
   private:
     Inventory inventory_;

@@ -52,13 +52,14 @@ void GameMaster::update()
     if (key_state == KeyboardManager::KeyState::Space) {
       static menu::MenuDisplay menu_display{80, 30, 10, 10};
       player_.use_item(0);
+      menu_display.set_menu(player_.get_item_name_array());
+ 
       auto names{player_.get_item_name_array()};
       debug::Logger::log_string("=====   MENU STRING SETTING START   =====");
       for (auto name : names) {
         LOG_VALUES(name);
       }
       debug::Logger::log_string("=====   MENU STRING SETTING FINISH   =====");
-      menu_display.set_menu(std::move(names));
     }
   }
 }

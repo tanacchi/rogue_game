@@ -27,7 +27,7 @@ namespace debug
     {
       fos_ << "{ " << name_list.front() << " : " << head << " }\n";
       name_list.pop_front();
-      log_with_name(std::move(name_list), std::forward<const Tail&>(tail)...);
+      log_with_name(std::move(name_list), std::forward<Tail&&>(tail)...);
     }
 
     static void log_string(const std::string& str, char separate_char = '=');    

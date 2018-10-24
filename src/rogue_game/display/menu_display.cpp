@@ -12,4 +12,8 @@ namespace menu
   {
     menu_strings_ = menu;
   }
+
+  void MenuDisplay::show() const
+  {
+  }
 }

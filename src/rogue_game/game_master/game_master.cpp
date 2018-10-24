@@ -60,6 +60,8 @@ void GameMaster::update()
         LOG_VALUES(name);
       }
       debug::Logger::log_string("=====   MENU STRING SETTING FINISH   =====");
+
+      menu_display.show();
     }
   }
 }

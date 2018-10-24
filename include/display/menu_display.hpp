@@ -14,6 +14,7 @@ namespace menu
     MenuDisplay(std::size_t x, std::size_t y,
                 std::size_t width = 10ul, std::size_t height = 10ul);
     void set_menu(std::vector<std::string>&& menu);
+    void show() const;
   private:
     std::vector<std::string> menu_strings_{};
     int selected_index_;

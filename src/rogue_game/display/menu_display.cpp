@@ -19,7 +19,11 @@ namespace menu
     wclear(win_.get());
     for (std::size_t i{0}, size{menu_strings_.size()}; i < size; ++i) {
       LOG_VALUES(i, menu_strings_[i].c_str());
+      if (i == selected_index_) {
+        wattron(win_.get(), A_REVERSE);
+      }
       mvwprintw(win_.get(), i, 0, "%d:%s", i, menu_strings_[i].c_str());
+      wattrset(win_.get(), A_NORMAL);
     }
     wrefresh(win_.get());
   }

@@ -5,6 +5,7 @@
 #include <string>
 
 #include <display/display_panel.hpp>
+#include <keyboard/keyboard_manager.hpp>
 
 namespace menu
 {
@@ -15,6 +16,7 @@ namespace menu
                 std::size_t width = 10ul, std::size_t height = 10ul);
     void set_menu(std::vector<std::string>&& menu);
     void show() const;
+    void toggle_menu(KeyboardManager::KeyState key_state);
   private:
     std::vector<std::string> menu_strings_{};
     int selected_index_;

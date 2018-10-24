@@ -25,6 +25,8 @@ void GameMaster::update()
   player_display_.show(player_);
   refresh();
 
+  static menu::MenuDisplay menu_display{80, 10, 30, 15};
+
   // キーボード入力は外に出して
   // Unknown なら sleep ｗｐ挟むとかしたいけど
   // ncurses の知識がもう少しいるので後回し
@@ -45,22 +47,15 @@ void GameMaster::update()
     if (it != map_.item_layer.end()) {
       player_.store_item(std::move(it->second));
       map_.item_layer.erase(it);
+      menu_display.set_menu(player_.get_item_name_array());
+      menu_display.show();
     }
   }
   {
     // アイテムの使用（テスト）
     if (key_state == KeyboardManager::KeyState::Space) {
-      static menu::MenuDisplay menu_display{80, 10, 30, 15};
       player_.use_item(0);
       menu_display.set_menu(player_.get_item_name_array());
- 
-      auto names{player_.get_item_name_array()};
-      debug::Logger::log_string("=====   MENU STRING SETTING START   =====");
-      for (auto name : names) {
-        LOG_VALUES(name);
-      }
-      debug::Logger::log_string("=====   MENU STRING SETTING FINISH   =====");
-
       menu_display.show();
     }
   }

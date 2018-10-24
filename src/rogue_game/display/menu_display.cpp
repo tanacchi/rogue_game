@@ -22,7 +22,7 @@ namespace menu
       if (i == selected_index_) {
         wattron(win_.get(), A_REVERSE);
       }
-      mvwprintw(win_.get(), i, 0, "%d:%s", i, menu_strings_[i].c_str());
+      mvwprintw(win_.get(), i, 0, " %d : %s ", i, menu_strings_[i].c_str());
       wattrset(win_.get(), A_NORMAL);
     }
     wrefresh(win_.get());

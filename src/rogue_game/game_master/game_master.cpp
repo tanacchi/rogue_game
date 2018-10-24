@@ -50,7 +50,7 @@ void GameMaster::update()
   {
     // アイテムの使用（テスト）
     if (key_state == KeyboardManager::KeyState::Space) {
-      static menu::MenuDisplay menu_display{80, 30, 10, 10};
+      static menu::MenuDisplay menu_display{80, 10, 30, 15};
       player_.use_item(0);
       menu_display.set_menu(player_.get_item_name_array());
  

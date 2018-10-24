@@ -1,4 +1,5 @@
 #include <display/menu_display.hpp>
+#include <debug/logger.hpp>
 
 namespace menu
 {
@@ -15,5 +16,11 @@ namespace menu
 
   void MenuDisplay::show() const
   {
+    wclear(win_.get());
+    for (std::size_t i{0}, size{menu_strings_.size()}; i < size; ++i) {
+      LOG_VALUES(i, menu_strings_[i].c_str());
+      mvwprintw(win_.get(), i, 0, "%d:%s", i, menu_strings_[i].c_str());
+    }
+    wrefresh(win_.get());
   }
 }

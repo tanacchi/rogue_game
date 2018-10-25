@@ -17,6 +17,7 @@ namespace menu
     void set_menu(std::vector<std::string>&& menu);
     void show() const;
     void toggle_menu(KeyboardManager::KeyState key_state);
+    int get_current_index() const;
   private:
     std::vector<std::string> menu_strings_{};
     int selected_index_;

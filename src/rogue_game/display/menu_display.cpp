@@ -43,4 +43,9 @@ namespace menu
       break;
     }
   }
+
+  int MenuDisplay::get_current_index() const
+  {
+    return selected_index_;
+  }
 }

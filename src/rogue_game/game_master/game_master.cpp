@@ -48,26 +48,28 @@ void GameMaster::update()
       player_.store_item(std::move(it->second));
       map_.item_layer.erase(it);
       menu_display.set_menu(player_.get_item_name_array());
-      menu_display.show();
     }
   }
   {
     // アイテムの使用（テスト）
     if (key_state == KeyboardManager::KeyState::Space) {
+      menu_display.set_menu(player_.get_item_name_array());
+      menu_display.show();
       for (;;) {                // REFACTOR REQUIRED : 読む気失せる程度に汚いけど動く
         const KeyboardManager::KeyState memu_toggler{keyboard_.get_key()};
         if (memu_toggler == KeyboardManager::KeyState::Back) {
+          menu_display.hide();
           break;
         } else if (memu_toggler == KeyboardManager::KeyState::Enter) {
           int item_index{menu_display.get_current_index()};
           player_.use_item(item_index);
+          menu_display.hide();
           break;
         } else {
           menu_display.toggle_menu(memu_toggler);
           menu_display.show();
         }
       }
-      menu_display.set_menu(player_.get_item_name_array());
     }
   }
 }

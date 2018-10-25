@@ -17,17 +17,24 @@ namespace menu
   void MenuDisplay::show() const
   {
     wclear(win_.get());
+    box(win_.get(), 0, 0);
     for (std::size_t i{0}, size{menu_strings_.size()}; i < size; ++i) {
       LOG_VALUES(i, menu_strings_[i].c_str());
       if (i == selected_index_) {
         wattron(win_.get(), A_REVERSE);
       }
-      mvwprintw(win_.get(), i, 0, " %d : %s ", i, menu_strings_[i].c_str());
+      mvwprintw(win_.get(), 1 + i, 1, " %d : %s ", i, menu_strings_[i].c_str());
       wattrset(win_.get(), A_NORMAL);
     }
     wrefresh(win_.get());
   }
 
+  void MenuDisplay::hide()
+  {
+    wclear(win_.get());
+    wrefresh(win_.get());
+  }
+  
   void MenuDisplay::toggle_menu(KeyboardManager::KeyState key_state)
   {
     switch (key_state) {

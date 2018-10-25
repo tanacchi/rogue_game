@@ -16,6 +16,7 @@ namespace menu
                 std::size_t width = 10ul, std::size_t height = 10ul);
     void set_menu(std::vector<std::string>&& menu);
     void show() const;
+    void hide();
     void toggle_menu(KeyboardManager::KeyState key_state);
     int get_current_index() const;
   private:

@@ -22,6 +22,14 @@ namespace debug
       log_with_name(std::move(name_list), std::forward<const Tail&>(tail)...);
     }
 
+    template <typename Head, typename... Tail>
+    static void log_with_name(std::list<std::string>&& name_list, Head&& head, Tail&&... tail)
+    {
+      fos_ << "{ " << name_list.front() << " : " << head << " }\n";
+      name_list.pop_front();
+      log_with_name(std::move(name_list), std::forward<Tail&&>(tail)...);
+    }
+
     static void log_string(const std::string& str, char separate_char = '=');    
   private:
     static std::fstream fos_;

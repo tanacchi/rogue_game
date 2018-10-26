@@ -1,4 +1,5 @@
 #include <rogue_game/game_master.hpp>
+#include <display/menu_display.hpp>
 
 GameMaster::GameMaster()
   : map_{map::read_map(map_dir + "json/ver_0.1.0.0_map.json")},
@@ -24,6 +25,8 @@ void GameMaster::update()
   player_display_.show(player_);
   refresh();
 
+  static menu::MenuDisplay menu_display{80, 10, 30, 15};
+
   // キーボード入力は外に出して
   // Unknown なら sleep ｗｐ挟むとかしたいけど
   // ncurses の知識がもう少しいるので後回し
@@ -44,12 +47,29 @@ void GameMaster::update()
     if (it != map_.item_layer.end()) {
       player_.store_item(std::move(it->second));
       map_.item_layer.erase(it);
+      menu_display.set_menu(player_.get_item_name_array());
     }
   }
   {
     // アイテムの使用（テスト）
     if (key_state == KeyboardManager::KeyState::Space) {
-      player_.use_item(0);
+      menu_display.set_menu(player_.get_item_name_array());
+      menu_display.show();
+      for (;;) {                // REFACTOR REQUIRED : 読む気失せる程度に汚いけど動く
+        const KeyboardManager::KeyState memu_toggler{keyboard_.get_key()};
+        if (memu_toggler == KeyboardManager::KeyState::Back) {
+          menu_display.hide();
+          break;
+        } else if (memu_toggler == KeyboardManager::KeyState::Enter) {
+          int item_index{menu_display.get_current_index()};
+          player_.use_item(item_index);
+          menu_display.hide();
+          break;
+        } else {
+          menu_display.toggle_menu(memu_toggler);
+          menu_display.show();
+        }
+      }
     }
   }
 }

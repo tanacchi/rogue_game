@@ -39,6 +39,11 @@ namespace character
     }
   }
   
+  std::vector<std::string> Player::get_item_name_array() const
+  {
+    return inventory_.get_item_name_array();
+  }
+
   std::ostream& operator<<(std::ostream& os, const Player& player)
   {
     os << "\n { position : " << player.position_ << " },\n"
@@ -67,6 +72,16 @@ namespace character
   std::size_t Player::Inventory::get_item_num() const
   {
     return items_.size();
+  }
+
+  std::vector<std::string> Player::Inventory::get_item_name_array() const
+  {
+    std::vector<std::string> item_names{};
+    for (std::list<std::unique_ptr<item::Item> >::const_iterator it{items_.begin()}, end{items_.end()}; it != end; ++it) {
+      debug::Logger::log_string((*it)->type + "in" + LOG_LOCATION, ' ');
+      item_names.emplace_back((*it)->type);
+    }
+    return item_names;
   }
 
   void Player::Inventory::store(std::unique_ptr<item::Item>&& item)

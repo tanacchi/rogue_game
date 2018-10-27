@@ -17,6 +17,8 @@ public:
   GameMaster();
   ~GameMaster();
   void update();
+  void take_dungeon_mode(const KeyboardManager::KeyState& key_state);
+  void take_select_mode(const KeyboardManager::KeyState& key_state);
 private:
   map::Map map_;
   map::MapDisplay map_display_;

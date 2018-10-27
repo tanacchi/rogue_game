@@ -6,7 +6,8 @@ GameMaster::GameMaster()
     map_display_{5, 4, map_.width, map_.height},
     player_display_{70, 30, 20, 10},
     keyboard_{},
-    player_(map_.initial_position)
+    player_(map_.initial_position),
+    current_mode_{Mode::Dungeon}
 {
   debug::Logger::log_string("game master initialized");
 }

@@ -8,6 +8,12 @@
 class GameMaster
 {
 public:
+  enum class Mode : std::uint8_t
+  {
+    Dungeon,
+    Select
+  };
+  
   GameMaster();
   ~GameMaster();
   void update();
@@ -17,6 +23,7 @@ private:
   PlayerDisplay player_display_;
   KeyboardManager keyboard_;
   character::Player player_;
+  Mode current_mode_;
 };
 
 #endif  // INCLUDED_ROGUE_GAME_GAME_MASTER_HPP

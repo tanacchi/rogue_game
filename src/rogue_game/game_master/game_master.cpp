@@ -6,7 +6,8 @@ GameMaster::GameMaster()
     map_display_{5, 4, map_.width, map_.height},
     player_display_{70, 30, 20, 10},
     keyboard_{},
-    player_(map_.initial_position)
+    player_(map_.initial_position),
+    current_mode_{Mode::Dungeon}
 {
   debug::Logger::log_string("game master initialized");
 }
@@ -16,21 +17,8 @@ GameMaster::~GameMaster()
   endwin();
 }
 
-// ゲームの要素全てを更新する
-// タスク過多な気がする
-void GameMaster::update()
+void GameMaster::take_dungeon_mode(const KeyboardManager::KeyState& key_state)
 {
-  // 画面表示
-  map_display_.show(map_, player_);
-  player_display_.show(player_);
-  refresh();
-
-  static menu::MenuDisplay menu_display{80, 10, 30, 15};
-
-  // キーボード入力は外に出して
-  // Unknown なら sleep ｗｐ挟むとかしたいけど
-  // ncurses の知識がもう少しいるので後回し
-  const KeyboardManager::KeyState key_state{keyboard_.get_key()};
   {
     // プレイヤーの位置更新
     map::Point motion{character::Player::motion_table.find(key_state) != character::Player::motion_table.end() ?
@@ -47,29 +35,61 @@ void GameMaster::update()
     if (it != map_.item_layer.end()) {
       player_.store_item(std::move(it->second));
       map_.item_layer.erase(it);
-      menu_display.set_menu(player_.get_item_name_array());
     }
   }
-  {
-    // アイテムの使用（テスト）
-    if (key_state == KeyboardManager::KeyState::Space) {
-      menu_display.set_menu(player_.get_item_name_array());
+}
+
+void GameMaster::take_select_mode(const KeyboardManager::KeyState& key_state)
+{
+  static menu::MenuDisplay menu_display{80, 10, 30, 15};
+
+  // アイテムの使用（テスト）
+  menu_display.set_menu(player_.get_item_name_array());
+  menu_display.show();
+  for (;;) {                // REFACTOR REQUIRED : 読む気失せる程度に汚いけど動く
+    const KeyboardManager::KeyState memu_toggler{keyboard_.get_key()};
+    if (memu_toggler == KeyboardManager::KeyState::Back) {
+      menu_display.hide();
+      break;
+    } else if (memu_toggler == KeyboardManager::KeyState::Enter) {
+      int item_index{menu_display.get_current_index()};
+      player_.use_item(item_index);
+      menu_display.hide();
+      break;
+    } else {
+      menu_display.toggle_menu(memu_toggler);
       menu_display.show();
-      for (;;) {                // REFACTOR REQUIRED : 読む気失せる程度に汚いけど動く
-        const KeyboardManager::KeyState memu_toggler{keyboard_.get_key()};
-        if (memu_toggler == KeyboardManager::KeyState::Back) {
-          menu_display.hide();
-          break;
-        } else if (memu_toggler == KeyboardManager::KeyState::Enter) {
-          int item_index{menu_display.get_current_index()};
-          player_.use_item(item_index);
-          menu_display.hide();
-          break;
-        } else {
-          menu_display.toggle_menu(memu_toggler);
-          menu_display.show();
-        }
-      }
     }
+  }
+}
+
+
+
+// ゲームの要素全てを更新する
+// タスク過多な気がする
+void GameMaster::update()
+{
+  // 画面表示
+  map_display_.show(map_, player_);
+  player_display_.show(player_);
+  refresh();
+
+  const KeyboardManager::KeyState key_state{keyboard_.get_key()};
+  switch (key_state) {
+  case KeyboardManager::KeyState::Space:
+    current_mode_ = Mode::Select;
+    break;
+  case KeyboardManager::KeyState::Back:
+  case KeyboardManager::KeyState::Enter:
+    current_mode_ = Mode::Dungeon;    
+  }
+  
+  switch (current_mode_) {
+  case Mode::Dungeon:
+    take_dungeon_mode(key_state);
+    break;
+  case Mode::Select:
+    take_select_mode(key_state);
+    break;
   }
 }

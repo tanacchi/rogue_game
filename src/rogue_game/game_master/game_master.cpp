@@ -61,6 +61,7 @@ void GameMaster::take_select_mode(const KeyboardManager::KeyState& key_state)
       menu_display.show();
     }
   }
+  current_mode_ = Mode::Dungeon;
 }
 
 

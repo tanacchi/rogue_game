@@ -32,6 +32,7 @@ namespace menu
   void MenuDisplay::hide()
   {
     wclear(win_.get());
+    selected_index_ = 0;
     wrefresh(win_.get());
   }
   

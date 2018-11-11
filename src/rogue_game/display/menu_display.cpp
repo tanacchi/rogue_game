@@ -19,7 +19,6 @@ namespace menu
     wclear(win_.get());
     box(win_.get(), 0, 0);
     for (std::size_t i{0}, size{menu_strings_.size()}; i < size; ++i) {
-      LOG_VALUES(i, menu_strings_[i].c_str());
       if (i == selected_index_) {
         wattron(win_.get(), A_REVERSE);
       }

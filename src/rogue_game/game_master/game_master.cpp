@@ -11,7 +11,6 @@ GameMaster::GameMaster()
     player_(map_.initial_position),
     current_mode_{Mode::Dungeon}
 {
-  debug::Logger::log_string("game master initialized");
 }
 
 GameMaster::~GameMaster()
@@ -65,8 +64,6 @@ void GameMaster::take_select_mode(const KeyboardManager::KeyState& key_state)
   }
   current_mode_ = Mode::Dungeon;
 }
-
-
 
 // ゲームの要素全てを更新する
 // タスク過多な気がする

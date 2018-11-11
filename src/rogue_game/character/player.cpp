@@ -54,8 +54,8 @@ namespace character
   Player::Inventory::Inventory(std::size_t capacity)
     : items_{},
       capacity_{capacity}
-{
-}
+  {
+  }
 
   std::ostream& operator<<(std::ostream& os, const Player::Inventory& inventory)
   {
@@ -78,7 +78,6 @@ namespace character
   {
     std::vector<std::string> item_names{};
     for (std::list<std::unique_ptr<item::Item> >::const_iterator it{items_.begin()}, end{items_.end()}; it != end; ++it) {
-      debug::Logger::log_string((*it)->type + "in" + LOG_LOCATION, ' ');
       item_names.emplace_back((*it)->type);
     }
     return item_names;
@@ -87,8 +86,6 @@ namespace character
   void Player::Inventory::store(std::unique_ptr<item::Item>&& item)
   {
     items_.push_back(std::move(item));
-    debug::Logger::log_string("Item just stored", '-');
-    LOG_VALUES(*this);
   }
 
   void Player::Inventory::use(Player* const player_ptr, std::size_t item_index)
@@ -96,7 +93,5 @@ namespace character
     std::list<std::unique_ptr<item::Item> >::iterator taget_item_itr{std::next(items_.begin(), item_index)};
     (*taget_item_itr)->use(player_ptr);
     items_.erase(taget_item_itr);
-    debug::Logger::log_string("Item just useed", '-');
-    LOG_VALUES(*this);
   }
 }

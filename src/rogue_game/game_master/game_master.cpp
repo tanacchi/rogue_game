@@ -1,3 +1,5 @@
+#include <exception>
+
 #include <rogue_game/game_master.hpp>
 #include <display/menu_display.hpp>
 
@@ -82,9 +84,12 @@ void GameMaster::update()
     break;
   case KeyboardManager::KeyState::Back:
   case KeyboardManager::KeyState::Enter:
-    current_mode_ = Mode::Dungeon;    
+    current_mode_ = Mode::Dungeon;
+    break;
+  default:
+    break;
   }
-  
+
   switch (current_mode_) {
   case Mode::Dungeon:
     take_dungeon_mode(key_state);

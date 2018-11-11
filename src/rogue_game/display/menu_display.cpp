@@ -48,6 +48,8 @@ namespace menu
         ++selected_index_;
       }
       break;
+    default:
+      break;
     }
   }
 

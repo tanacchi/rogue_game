@@ -26,15 +26,9 @@ else()
     OUTPUT_STRIP_TRAILING_WHITESPACE)
 endif()
 
-execute_process(
-  COMMAND git log origin/master..origin/develop --oneline --merges
-  COMMAND wc --lines
-  OUTPUT_VARIABLE TWEAK
-  OUTPUT_STRIP_TRAILING_WHITESPACE)
-
 project(
   rogue_game
-  VERSION ${MAJOR}.${MINOR}.${PATCH}.${TWEAK}
+  VERSION ${MAJOR}.${MINOR}.${PATCH}
   LANGUAGES CXX)
 
 find_package(Boost REQUIRED

@@ -5,6 +5,7 @@
 #include <valarray>
 #include <memory>
 #include <map>
+#include <vector>
 
 #include <map/map_elem.hpp>
 #include <map/point.hpp>

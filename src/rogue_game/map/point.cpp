@@ -2,29 +2,34 @@
 
 namespace map
 {
-  Point::Point(int x, int y)
+  template<typename T>
+  Point::Point(T x, T y)
     : x_{x}, y_{y}
   {
   }
 
+  template<typename T>
   Point::Point(const Point& point)
     : x_{point.x_},
       y_{point.y_}
   {
   }
 
+  template<typename T>
   Point::Point(Point&& point)
     : x_{std::move(point.x_)},
       y_{std::move(point.y_)}
   {
   }
 
-  const int Point::get_x() const
+  template<typename T>
+  const T Point::get_x() const
   {
     return x_;
   }
 
-  const int Point::get_y() const
+  template<typename T>
+  const T Point::get_y() const
   {
     return y_;
   }
@@ -35,14 +40,14 @@ namespace map
     y_ = rls.y_;
     return *this;
   }
-  
+
   Point& Point::operator=(Point&& rls)
   {
     x_ = std::move(rls.x_);
     y_ = std::move(rls.y_);
     return *this;
   }
-  
+
   const Point Point::operator+(const Point& rhs) const
   {
     return {x_ + rhs.x_, y_ + rhs.y_};

@@ -3,18 +3,18 @@
 
 namespace character
 {
-  Player::Player(map::Point position)
+  Player::Player(map::Point<int> position)
     : Character(position),
       inventory_{10},
       money_{0}
   {
   }
 
-  const std::map<KeyboardManager::KeyState, const map::Point> Player::motion_table = {
-    {KeyboardManager::KeyState::Up,    map::Point{ 0,-1}},
-    {KeyboardManager::KeyState::Down,  map::Point{ 0, 1}},
-    {KeyboardManager::KeyState::Right, map::Point{ 1, 0}},
-    {KeyboardManager::KeyState::Left,  map::Point{-1, 0}},
+  const std::map<KeyboardManager::KeyState, const map::Point<int>> Player::motion_table = {
+    {KeyboardManager::KeyState::Up,    map::Point<int>{ 0,-1}},
+    {KeyboardManager::KeyState::Down,  map::Point<int>{ 0, 1}},
+    {KeyboardManager::KeyState::Right, map::Point<int>{ 1, 0}},
+    {KeyboardManager::KeyState::Left,  map::Point<int>{-1, 0}},
   };
 
   std::size_t Player::get_money() const

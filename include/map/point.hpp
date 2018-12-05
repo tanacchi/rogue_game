@@ -7,24 +7,36 @@
 namespace map
 {
   // マップ上での位置を表現する
+  template<typename T>
   class Point
   {
   public:
-    Point(int x = 0, int y = 0);
+    Point(T x = 0, T y = 0);
+    template<typename U>
+    Point(U x, U y)
+      : x_{static_cast<T>(x)}, y_{static_cast<T>(y)}
+    {
+    }
     Point(const Point& point);
+    template<typename U>
+    Point(const Point<U>& point)
+      : x_{static_cast<T>(point.get_x())},
+        y_{static_cast<T>(point.get_y())}
+    {
+    }
     Point(Point&& point);
-    const int get_x() const;
-    const int get_y() const;
+    const T get_x() const;
+    const T get_y() const;
     Point& operator=(const Point& rls);
     Point& operator=(Point&& rls);
     const Point operator+(const Point& rhs) const;
     const Point& operator+=(const Point& rhs);
     bool operator==(const Point& rhs) const;
     bool operator<(const Point& rls) const;
-    friend std::ostream& operator<<(std::ostream& os, const Point& point);
+    friend std::ostream& operator<<(std::ostream& os, const Point<int>& point);
   private:
-    int x_;
-    int y_;
+    T x_;
+    T y_;
   };
 }
 

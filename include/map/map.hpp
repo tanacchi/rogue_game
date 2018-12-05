@@ -24,20 +24,20 @@ namespace map
     std::size_t height;
 
     // プレイヤーの初期位置
-    map::Point initial_position;
+    map::Point<int> initial_position;
 
     // ダンジョン要素・アイテム要素はそれぞれ（連想）配列としてまとめ、
     // レイヤーとして扱う
     std::vector<std::unique_ptr<::dungeon::DungeonElem> > dungeon_layer;
-    std::map<Point, std::unique_ptr<::item::Item> > item_layer;
+    std::map<Point<int>, std::unique_ptr<::item::Item> > item_layer;
 
     // 位置情報から該当するダンジョン要素のコピーを取得する
-    const ::dungeon::DungeonElem get_dungeon_elem(const Point& point) const;
-    bool in_range(const Point& point) const;
+    const ::dungeon::DungeonElem get_dungeon_elem(const Point<int>& point) const;
+    bool in_range(const Point<std::size_t>& point) const;
 
     // インデックスから位置情報に変換する
     // 初期化でしか使わないから別の場所に移動したい
-    Point index_to_point(std::size_t index);
+    Point<int> index_to_point(std::size_t index);
   };
 
   // マップデータ（json）からインスタンスを生成

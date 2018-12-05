@@ -21,7 +21,7 @@ namespace menu
     int get_current_index() const;
   private:
     std::vector<std::string> menu_strings_{};
-    int selected_index_;
+    std::size_t selected_index_;
   };
 }
 

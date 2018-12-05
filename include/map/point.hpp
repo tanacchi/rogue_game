@@ -22,7 +22,7 @@ namespace map
     const Point& operator+=(const Point& rhs);
     bool operator==(const Point& rhs) const;
     bool operator<(const Point& rls) const;
-    friend std::ostream& operator<<(std::ostream& os, const Point& point);
+    friend std::ostream& operator<<(std::ostream& os, const Point<int>& point);
   private:
     T x_;
     T y_;

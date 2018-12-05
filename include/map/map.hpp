@@ -33,7 +33,7 @@ namespace map
 
     // 位置情報から該当するダンジョン要素のコピーを取得する
     const ::dungeon::DungeonElem get_dungeon_elem(const Point<int>& point) const;
-    bool in_range(const Point<int>& point) const;
+    bool in_range(const Point<std::size_t>& point) const;
 
     // インデックスから位置情報に変換する
     // 初期化でしか使わないから別の場所に移動したい

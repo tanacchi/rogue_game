@@ -30,8 +30,8 @@ namespace map
     os << "{ width : " << map.width << " }, { height : " << map.height << "},\n"
        << "{ initial_position : " << map.initial_position << " },\n "
        << "{ dungeon_layer :\n";
-    for (int y{0}; y < map.height; ++y, os.put('\n')) {
-      for (int x{0}; x < map.width; ++x) {
+    for (std::size_t y{0}; y < map.height; ++y, os.put('\n')) {
+      for (std::size_t x{0}; x < map.width; ++x) {
         os << map.get_dungeon_elem(map::Point<int>{x, y}).symbol;
       }
     }
@@ -47,17 +47,15 @@ namespace map
     return *elem;
   }
 
-  bool Map::in_range(const Point<int>& point) const
+  bool Map::in_range(const Point<std::size_t>& point) const
   {
-    int x{point.get_x()}, y{point.get_y()};
-    return (0 <= x && x < static_cast<int>(width)) && (0 <= y && y < static_cast<int>(height));
+    std::size_t x{point.get_x()}, y{point.get_y()};
+    return (0 <= x && x < width) && (0 <= y && y < height);
   }
 
   Point<int> Map::index_to_point(std::size_t index)
   {
-    int x{static_cast<int>(index % width)};
-    int y{static_cast<int>(index / width)};
-    return {x, y};
+    return {index % width, index / width};
   }
 
   // ダンジョン要素からインスタンスを生成しポイントを返す

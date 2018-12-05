@@ -2,6 +2,7 @@
 #define INCLUDED_ITEM_HPP
 
 #include <ostream>
+#include <memory>
 
 #include <map/map_elem.hpp>
 #include <map/point.hpp>
@@ -26,6 +27,8 @@ namespace item
     virtual ~Item() = default;
     friend std::ostream& operator<<(std::ostream& os, const Item& item);
   };
+
+  using ItemPtr = std::unique_ptr<Item>;
 }
 
 #endif  // INCLUDED_ITEM_HPP

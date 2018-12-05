@@ -83,4 +83,5 @@ namespace map
   }
 
   template class Point<int>;
+  template class Point<std::size_t>;
 }

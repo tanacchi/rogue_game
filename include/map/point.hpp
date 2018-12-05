@@ -12,7 +12,18 @@ namespace map
   {
   public:
     Point(T x = 0, T y = 0);
+    template<typename U>
+    Point(U x, U y)
+      : x_{static_cast<T>(x)}, y_{static_cast<T>(y)}
+    {
+    }
     Point(const Point& point);
+    template<typename U>
+    Point(const Point<U>& point)
+      : x_{static_cast<T>(point.get_x())},
+        y_{static_cast<T>(point.get_y())}
+    {
+    }
     Point(Point&& point);
     const T get_x() const;
     const T get_y() const;

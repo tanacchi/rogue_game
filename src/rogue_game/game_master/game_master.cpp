@@ -47,7 +47,7 @@ void GameMaster::take_select_mode(const KeyboardManager::KeyState& key_state)
   menu_display_.show();
   for (;;) {                // REFACTOR REQUIRED : 読む気失せる程度に汚いけど動く
     const KeyboardManager::KeyState memu_toggler{keyboard_.get_key()};
-    if (memu_toggler == KeyboardManager::KeyState::Back) {
+    if (memu_toggler == KeyboardManager::KeyState::Back || memu_toggler == KeyboardManager::KeyState::Space) {
       menu_display_.hide();
       break;
     } else if (memu_toggler == KeyboardManager::KeyState::Enter) {

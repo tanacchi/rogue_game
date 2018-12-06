@@ -46,17 +46,17 @@ void GameMaster::take_select_mode(const KeyboardManager::KeyState& key_state)
   menu_display_.set_menu(player_.get_item_name_array());
   menu_display_.show();
   for (;;) {                // REFACTOR REQUIRED : 読む気失せる程度に汚いけど動く
-    const KeyboardManager::KeyState memu_toggler{keyboard_.get_key()};
-    if (memu_toggler == KeyboardManager::KeyState::Back || memu_toggler == KeyboardManager::KeyState::Space) {
+    const KeyboardManager::KeyState menu_toggler{keyboard_.get_key()};
+    if (menu_toggler == KeyboardManager::KeyState::Back || menu_toggler == KeyboardManager::KeyState::Space) {
       menu_display_.hide();
       break;
-    } else if (memu_toggler == KeyboardManager::KeyState::Enter) {
+    } else if (menu_toggler == KeyboardManager::KeyState::Enter) {
       int item_index{menu_display_.get_current_index()};
       player_.use_item(item_index);
       menu_display_.hide();
       break;
     } else {
-      menu_display_.toggle_menu(memu_toggler);
+      menu_display_.toggle_menu(menu_toggler);
       menu_display_.show();
     }
   }

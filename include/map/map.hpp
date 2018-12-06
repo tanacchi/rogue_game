@@ -28,8 +28,8 @@ namespace map
 
     // ダンジョン要素・アイテム要素はそれぞれ（連想）配列としてまとめ、
     // レイヤーとして扱う
-    std::vector<std::unique_ptr<::dungeon::DungeonElem> > dungeon_layer;
-    std::map<Point<int>, std::unique_ptr<::item::Item> > item_layer;
+    std::vector<::dungeon::DungeonElemPtr> dungeon_layer;
+    std::map<Point<int>, ::item::ItemPtr> item_layer;
 
     // 位置情報から該当するダンジョン要素のコピーを取得する
     const ::dungeon::DungeonElem get_dungeon_elem(const Point<int>& point) const;
@@ -46,7 +46,7 @@ namespace map
 
   // ダンジョン要素の種類からダンジョン要素のインスタンスを生成しポインタを返す
   // オブジェクト・ファクトリ的な役割
-  std::unique_ptr<::dungeon::DungeonElem> gen_dungeon_elem(std::string type);
+  ::dungeon::DungeonElemPtr gen_dungeon_elem(std::string type);
 }
 
 #endif  // INCLUDED_MAP_HPP

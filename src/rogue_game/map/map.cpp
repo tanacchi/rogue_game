@@ -61,20 +61,20 @@ namespace map
   // ダンジョン要素からインスタンスを生成しポイントを返す
   // オブジェクト・ファクトリ
   // TO DO : もうすこしキレイにしたい
-  std::unique_ptr<::dungeon::DungeonElem> gen_dungeon_elem(std::string type)
+  ::dungeon::DungeonElemPtr gen_dungeon_elem(std::string type)
   {
     if (type == "floor") {
-      return std::unique_ptr<::dungeon::Floor>(new ::dungeon::Floor{});
+      return ::dungeon::DungeonElemPtr(new ::dungeon::Floor{});
     } else if (type == "path") {
-      return std::unique_ptr<::dungeon::Path>(new ::dungeon::Path{});
+      return ::dungeon::DungeonElemPtr(new ::dungeon::Path{});
     } else if (type == "none") {
-      return std::unique_ptr<::dungeon::None>(new ::dungeon::None{});
+      return ::dungeon::DungeonElemPtr(new ::dungeon::None{});
     } else if (type == "horizontal_wall") {
-      return std::unique_ptr<::dungeon::HorizontalWall>(new ::dungeon::HorizontalWall{});
+      return ::dungeon::DungeonElemPtr(new ::dungeon::HorizontalWall{});
     } else if (type == "vertical_wall") {
-      return std::unique_ptr<::dungeon::VerticalWall>(new ::dungeon::VerticalWall{});
+      return ::dungeon::DungeonElemPtr(new ::dungeon::VerticalWall{});
     } else if (type == "door") {
-      return std::unique_ptr<::dungeon::Door>(new ::dungeon::Door{});
+      return ::dungeon::DungeonElemPtr(new ::dungeon::Door{});
     } else {
       throw std::string{"Invalid map elem type."};
     }

@@ -1,12 +1,12 @@
 #include <exception>
 
 #include <rogue_game/game_master.hpp>
-#include <display/menu_display.hpp>
 
 GameMaster::GameMaster()
   : map_{map::read_map(map_dir + "json/ver_0.1.0.0_map.json")},
     map_display_{5, 4, map_.width, map_.height},
     player_display_{70, 30, 20, 10},
+    menu_display_{80, 10, 30, 16},
     keyboard_{},
     player_(map_.initial_position),
     current_mode_{Mode::Dungeon}
@@ -42,24 +42,22 @@ void GameMaster::take_dungeon_mode(const KeyboardManager::KeyState& key_state)
 
 void GameMaster::take_select_mode(const KeyboardManager::KeyState& key_state)
 {
-  static menu::MenuDisplay menu_display{80, 10, 30, 15};
-
-  // アイテムの使用（テスト）
-  menu_display.set_menu(player_.get_item_name_array());
-  menu_display.show();
+  // アイテムの使用
+  menu_display_.set_menu(player_.get_item_name_array());
+  menu_display_.show();
   for (;;) {                // REFACTOR REQUIRED : 読む気失せる程度に汚いけど動く
     const KeyboardManager::KeyState memu_toggler{keyboard_.get_key()};
     if (memu_toggler == KeyboardManager::KeyState::Back) {
-      menu_display.hide();
+      menu_display_.hide();
       break;
     } else if (memu_toggler == KeyboardManager::KeyState::Enter) {
-      int item_index{menu_display.get_current_index()};
+      int item_index{menu_display_.get_current_index()};
       player_.use_item(item_index);
-      menu_display.hide();
+      menu_display_.hide();
       break;
     } else {
-      menu_display.toggle_menu(memu_toggler);
-      menu_display.show();
+      menu_display_.toggle_menu(memu_toggler);
+      menu_display_.show();
     }
   }
   current_mode_ = Mode::Dungeon;

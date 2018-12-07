@@ -7,4 +7,8 @@ version 0.1.0 in development.
 
 ## Dependencies
 * ncurses
-* libboost
+  > To install  
+    `$ sudo apt install libncurses5-dev`
+* libboost 1.58
+  > To install  
+    `$ sudo apt install libboost1.58-all-dev`

@@ -5,6 +5,29 @@ version ${PROJECT_VERSION} in development.
 
 [Wikipedia](https://ja.wikipedia.org/wiki/%E3%83%AD%E3%83%BC%E3%82%B0)
 
+
+## How to build
+`$ mkdir build ; cd build ;cmake .. ;make ;cd -`
+
+
+## How to play
+`$ ./rogue_game`
+
+#### Dungeon mode
+Key | Action
+--- | ---
+(Arrows) | Move your character
+Space | Open inventory
+
+#### Inventory mode
+Key | Action
+--- | ---
+(Arrows) | Move cursor
+Enter | Decide item
+Space | Exit inventory mode
+BackSpace | Exit inventory mode
+
+
 ## Dependencies
 * ncurses
   > To install  

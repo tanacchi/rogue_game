@@ -6,6 +6,11 @@ version 0.1.0 in development.
 [Wikipedia](https://ja.wikipedia.org/wiki/%E3%83%AD%E3%83%BC%E3%82%B0)
 
 
+## Releases（リリース）
+**[Latest（最新版）](https://github.com/tanacchi/rogue_game/releases/latest)**  
+[Release List（リリース一覧）](https://github.com/tanacchi/rogue_game/releases)  
+
+
 ## How to build（ビルド方法）
 `$ mkdir build ; cd build ;cmake .. ;make ;cd -`
 

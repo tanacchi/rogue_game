@@ -1,7 +1,6 @@
 #include <rogue_game/rogue_game.hpp>
 #include <rogue_game/game_master.hpp>
 
-#include <dungeon/vertical_wall.hpp> // Log test
 #include <character/character.hpp>
 
 int main()

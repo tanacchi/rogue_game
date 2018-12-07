@@ -6,10 +6,16 @@ add_executable(${PROJECT_NAME}.out
   rogue_game.cpp
   ${ROGUE_GAME_SOURCE_FILES}
 )
-target_link_libraries(${PROJECT_NAME}.out ncurses)
+target_link_libraries(${PROJECT_NAME}.out
+  ncurses
+  ${Boost_LIBRARIES}
+)
 
 add_executable(map_maker.out
   map_maker.cpp
   ${ROGUE_GAME_SOURCE_FILES}
 )
-target_link_libraries(map_maker.out ncurses)
+target_link_libraries(map_maker.out
+  ncurses
+  ${Boost_LIBRARIES}
+)

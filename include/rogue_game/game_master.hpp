@@ -3,6 +3,7 @@
 
 #include <map/point.hpp>
 #include <rogue_game/rogue_game.hpp>
+#include <display/menu_display.hpp>
 
 // ゲームの進行を扱う
 class GameMaster
@@ -23,6 +24,7 @@ private:
   map::Map map_;
   map::MapDisplay map_display_;
   PlayerDisplay player_display_;
+  menu::MenuDisplay menu_display_;
   KeyboardManager keyboard_;
   character::Player player_;
   Mode current_mode_;

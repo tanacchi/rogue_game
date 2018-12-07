@@ -61,7 +61,7 @@ namespace map
 
       std::vector<std::string> map_strings{};
       std::string input_buff{};
-      for (std::size_t row{0}; !read_file.eof(); ++row) {
+      for (std::size_t row{0}; !read_file.eof(); ++row) { // Range-based-for でも良くないか
         std::getline(read_file, input_buff);
         map_strings.emplace_back(input_buff);
       }

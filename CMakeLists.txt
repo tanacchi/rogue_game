@@ -26,16 +26,15 @@ else()
     OUTPUT_STRIP_TRAILING_WHITESPACE)
 endif()
 
-execute_process(
-  COMMAND git log origin/master..origin/develop --oneline --merges
-  COMMAND wc --lines
-  OUTPUT_VARIABLE TWEAK
-  OUTPUT_STRIP_TRAILING_WHITESPACE)
-
 project(
   rogue_game
-  VERSION ${MAJOR}.${MINOR}.${PATCH}.${TWEAK}
+  VERSION ${MAJOR}.${MINOR}.${PATCH}
   LANGUAGES CXX)
+
+find_package(Boost REQUIRED
+  system
+  filesystem
+)
 
 set(CMAKE_CXX_COMPILER g++)
 set(CMAKE_CXX_FLAGS "-Wall -std=c++1y")
@@ -44,6 +43,11 @@ set(CMAKE_CXX_FLAGS "-Wall -std=c++1y")
 set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 include_directories(
   ${PROJECT_INCLUDE_DIR}
+  ${Boost_INCLUDE_DIRS}
+)
+
+link_directories(
+  ${Boost_LIBRARY_DIRS}
 )
 
 set(${PROJECT_NAME}_CONFIGURE_DIR ${PROJECT_SOURCE_DIR}/config)

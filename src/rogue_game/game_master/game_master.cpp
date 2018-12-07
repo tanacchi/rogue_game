@@ -3,7 +3,7 @@
 #include <rogue_game/game_master.hpp>
 
 GameMaster::GameMaster()
-  : map_{map::read_map(map_dir + "json/ver_0.1.0.0_map.json")},
+  : map_{map::read_map(map_dir + "json/ver_0.2.0_map.json")},
     map_display_{5, 4, map_.width, map_.height},
     player_display_{70, 30, 20, 10},
     menu_display_{80, 10, 30, 16},

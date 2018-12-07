@@ -106,7 +106,7 @@ namespace map
     }
     // ダンジョン要素を取得
     {
-      std::vector<std::unique_ptr<::dungeon::DungeonElem> > elems{};
+      std::vector<::dungeon::DungeonElemPtr> elems{};
       BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.elems") ) {
         const boost::property_tree::ptree& elem{child.second};
         if (elem.empty()) {
@@ -128,7 +128,7 @@ namespace map
         Point<int> pos{map.index_to_point(index)};
         std::string type{elem.get_optional<std::string>("type").get()};
         std::size_t amount{elem.get_optional<std::size_t>("amount").get()};
-        map.item_layer.emplace(pos, std::unique_ptr<::item::Gold>{new ::item::Gold{amount}});
+        map.item_layer.emplace(pos, ::item::ItemPtr{new ::item::Gold{amount}});
       }
     }
     return map;

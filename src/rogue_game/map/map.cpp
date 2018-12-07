@@ -91,13 +91,11 @@ namespace map
     boost::property_tree::read_json(mapfile_name, json_map_data);
     // マップの横幅を取得
     {
-      int width = json_map_data.get_optional<int>("Map.width").get();
-      map.width = width;
+      map.width = json_map_data.get_optional<int>("Map.width").get();
     }
     // マップの縦幅を取得
     {
-      int height = json_map_data.get_optional<int>("Map.height").get();
-      map.height = height;
+      map.height = json_map_data.get_optional<int>("Map.height").get();
     }
     // プレイヤーの初期位置を取得
     {
@@ -106,16 +104,14 @@ namespace map
     }
     // ダンジョン要素を取得
     {
-      std::vector<::dungeon::DungeonElemPtr> elems{};
       BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.elems") ) {
         const boost::property_tree::ptree& elem{child.second};
         if (elem.empty()) {
           continue;
         }
         std::string type = elem.get_optional<std::string>("type").get();
-        elems.push_back(std::move(gen_dungeon_elem(type)));
+        map.dungeon_layer.emplace_back(std::move(gen_dungeon_elem(type)));
       }
-      map.dungeon_layer = std::move(elems);
     }
     // アイテム要素を取得
     {

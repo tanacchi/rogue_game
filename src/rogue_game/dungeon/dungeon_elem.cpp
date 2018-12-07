@@ -14,6 +14,14 @@ namespace dungeon
   {
   }
 
+  std::ostream& operator<<(std::ostream& os, const DungeonElem& elem)
+  {
+    os << "{ type : " << elem.type << " }, "
+       << "{ symbol : '" << elem.symbol << "' }, "
+       << "{ can_stand_ : " << elem.can_stand_ << " }";
+    return os;
+  }
+  
   bool DungeonElem::can_stand() const
   {
     return can_stand_;

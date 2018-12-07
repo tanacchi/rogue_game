@@ -1,8 +1,17 @@
 #ifndef INCLUDED_ITEM_HPP
 #define INCLUDED_ITEM_HPP
 
+#include <ostream>
+#include <memory>
+
 #include <map/map_elem.hpp>
 #include <map/point.hpp>
+#include <debug/logger.hpp>
+
+namespace character
+{
+  class Player;
+}
 
 namespace item
 {
@@ -14,8 +23,12 @@ namespace item
   public:
     Item(std::string type);
     Item(Item&& rhs) noexcept;
+    virtual void use(character::Player* const player_ptr);
     virtual ~Item() = default;
+    friend std::ostream& operator<<(std::ostream& os, const Item& item);
   };
+
+  using ItemPtr = std::unique_ptr<Item>;
 }
 
 #endif  // INCLUDED_ITEM_HPP

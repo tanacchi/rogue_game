@@ -9,8 +9,9 @@ int main(int argc, char** argv)
     const std::string text_map_filname{arg_list[1]};
     const std::vector<std::string> map_strings{map::generator::read_map_strings(text_map_filname)};
     map::generator::TextMap text_map{map_strings};
-    text_map.show();
-    map::generator::MapGenerator map_generator{text_map, "ver_0.1.0.0_map"};
+    std::cout << text_map << std::endl;
+    LOG_VALUES(text_map);
+    map::generator::MapGenerator map_generator{text_map, "ver_0.2.0_map"};
     map_generator.set_configs();
     map_generator.write_json_map();
   }

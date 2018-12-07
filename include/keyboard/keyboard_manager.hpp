@@ -3,6 +3,7 @@
 
 #include <ncurses.h>
 #include <cstdint>
+#include <ostream>
 
 // キーボード入力を扱うクラス
 class KeyboardManager
@@ -26,5 +27,7 @@ public:
   // ncurses のキーコードから KeyState に変換
   static const KeyState get_key() noexcept;
 };
+
+std::ostream& operator<<(std::ostream& os, KeyboardManager::KeyState key_state);
 
 #endif  // INCLUDED_KEYBOARD_MANAGER_HPP

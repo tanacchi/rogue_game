@@ -1,9 +1,11 @@
 #ifndef INCLUDED_CHARACTER_HPP
 #define INCLUDED_CHARACTER_HPP
 
+#include <ostream>
 #include <cstddef>
 #include <memory>
 
+#include <debug/logger.hpp>
 #include <keyboard/keyboard_manager.hpp>
 #include <map/map.hpp>
 #include <map/point.hpp>
@@ -16,15 +18,17 @@ namespace character
   {
   public:
     // デフォルト引数はそのうちなくす予定
-    Character(map::Point position = map::Point{0, 0});
-
+    Character(map::Point<int> position = map::Point<int>{0, 0});
+    
     // キャラクターの位置を取得
-    map::Point get_position() const;
+    map::Point<int> get_position() const;
 
     // キャラクターの位置を設定
-    void set_position(const map::Point& point);
+    void set_position(const map::Point<int>& point);
+
+    friend std::ostream& operator<<(std::ostream& os, const Character& character);
   protected:
-    map::Point position_;
+    map::Point<int> position_;
   };
 }
 

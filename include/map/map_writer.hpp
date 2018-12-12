@@ -15,10 +15,10 @@ namespace map
 {
   // マップデータ（json）を生成するクラス
   // ループで回すことになるからファンクタ化しようと思うけど後回し
-  class MapGenerator
+  class MapWriter
   {
   public:
-    MapGenerator(const TextMap& text_map, std::string output_filename = "tmp_sample_map");
+    MapWriter(const TextMap& text_map, std::string output_filename = "tmp_sample_map");
 
     // ダンジョン要素・アイテム要素の ptree の配列を TextMap より生成する
     void set_configs();

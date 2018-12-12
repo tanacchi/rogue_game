@@ -1,11 +1,11 @@
 #include <string>
 
-#include <map/map_generator.hpp>
+#include <map/map_writer.hpp>
 #include <rogue_game/rogue_game.hpp>
 
 namespace map
 {
-  MapGenerator::MapGenerator(const TextMap& text_map, std::string output_filename)
+  MapWriter::MapWriter(const TextMap& text_map, std::string output_filename)
     : text_map_{text_map},
     output_filename_{output_filename}
   {
@@ -13,7 +13,7 @@ namespace map
 
   // マップの文字からそれぞれ json の内容を追加
   // ダンジョン要素とアイテム要素は別々
-  void MapGenerator::set_configs()
+  void MapWriter::set_configs()
   {
     for (std::size_t i{0}, end{text_map_.text.length()}; i < end; ++i) {
       boost::property_tree::ptree dungeon_config, item_config;
@@ -48,7 +48,7 @@ namespace map
     }
   }
 
-  void MapGenerator::write_json_map() const
+  void MapWriter::write_json_map() const
   {
     boost::property_tree::ptree map_data;
     map_data.put("Map.width", text_map_.width);

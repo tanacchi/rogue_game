@@ -1,6 +1,6 @@
 #include <rogue_game/rogue_game.hpp>
 #include <map/text_map.hpp>
-#include <map/map_generator.hpp>
+#include <map/map_writer.hpp>
 
 int main(int argc, char** argv)
 {
@@ -11,9 +11,9 @@ int main(int argc, char** argv)
     map::TextMap text_map{map_strings};
     std::cout << text_map << std::endl;
     LOG_VALUES(text_map);
-    map::MapGenerator map_generator{text_map, "ver_0.2.0_map"};
-    map_generator.set_configs();
-    map_generator.write_json_map();
+    map::MapWriter map_writer{text_map, "ver_0.2.0_map"};
+    map_writer.set_configs();
+    map_writer.write_json_map();
   }
   catch (const std::logic_error& e) {
     std::cout << e.what() << std::endl;

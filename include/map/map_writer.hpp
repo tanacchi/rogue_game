@@ -13,6 +13,8 @@
 
 namespace map
 {
+  using ConfigType = boost::property_tree::ptree;
+
   // マップデータ（json）を生成するクラス
   // ループで回すことになるからファンクタ化しようと思うけど後回し
   class MapWriter
@@ -30,9 +32,9 @@ namespace map
     const std::string output_filename_;
 
     // ダンジョン要素の ptree の配列
-    std::vector<boost::property_tree::ptree> dungeon_configs_;
+    std::vector<ConfigType> dungeon_configs_;
     // アイテム要素の ptree の配列
-    std::vector<boost::property_tree::ptree> item_configs_;
+    std::vector<ConfigType> item_configs_;
   };
 }
 

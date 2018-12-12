@@ -20,21 +20,16 @@ namespace map
   class MapWriter
   {
   public:
-    MapWriter(const TextMap& text_map, std::string output_filename = "tmp_sample_map");
-
     // ダンジョン要素・アイテム要素の ptree の配列を TextMap より生成する
-    void set_configs();
+    void set_configs(const TextMap& text_map, std::vector<ConfigType>& dungeon_configs, std::vector<ConfigType>& item_configs);
 
     // ptree の配列から json ファイルを書き出す
-    void write_json_map() const;
-  private:
-    const TextMap text_map_;
-    const std::string output_filename_;
+    void write_json_map(const TextMap& text_map,
+                        const std::vector<ConfigType>& dungeon_configs, 
+                        const std::vector<ConfigType>& item_configs,
+                        const std::string& output_filename) const;
 
-    // ダンジョン要素の ptree の配列
-    std::vector<ConfigType> dungeon_configs_;
-    // アイテム要素の ptree の配列
-    std::vector<ConfigType> item_configs_;
+    void operator()(const TextMap& text_map, const std::string& output_filename = "tmp_sample_map");
   };
 }
 

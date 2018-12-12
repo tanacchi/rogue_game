@@ -11,9 +11,8 @@ int main(int argc, char** argv)
     map::TextMap text_map{map_strings};
     std::cout << text_map << std::endl;
     LOG_VALUES(text_map);
-    map::MapWriter map_writer{text_map, "ver_0.2.0_map"};
-    map_writer.set_configs();
-    map_writer.write_json_map();
+    map::MapWriter map_writer{};
+    map_writer(text_map, "ver_0.2.0_map");
   }
   catch (const std::logic_error& e) {
     std::cout << e.what() << std::endl;

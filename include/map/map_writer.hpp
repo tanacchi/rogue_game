@@ -13,14 +13,12 @@
 
 namespace map
 {
-  namespace generator
+  // マップデータ（json）を生成するクラス
+  // ループで回すことになるからファンクタ化しようと思うけど後回し
+  class MapWriter
   {
-    // マップデータ（json）を生成するクラス
-    // ループで回すことになるからファンクタ化しようと思うけど後回し
-    class MapGenerator
-    {
     public:
-      MapGenerator(const TextMap& text_map, std::string output_filename = "tmp_sample_map");
+      MapWriter(const TextMap& text_map, std::string output_filename = "tmp_sample_map");
 
       // ダンジョン要素・アイテム要素の ptree の配列を TextMap より生成する
       void set_configs();
@@ -35,8 +33,7 @@ namespace map
       std::vector<boost::property_tree::ptree> dungeon_configs_;
       // アイテム要素の ptree の配列
       std::vector<boost::property_tree::ptree> item_configs_;
-    };
-  }
+  };
 }
 
 #endif  // INCLUDED_MAP_GENERATOR_HPP

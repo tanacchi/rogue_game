@@ -8,7 +8,7 @@ namespace map
   class MapReader
   {
   public:
-    Map& operator()(std::string map_filename);
+    Map operator()(std::string map_filename);
   };
 }
 

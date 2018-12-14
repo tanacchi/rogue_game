@@ -8,9 +8,10 @@ GameMaster::GameMaster()
     player_display_{70, 30, 20, 10},
     menu_display_{80, 10, 30, 16},
     keyboard_{},
-    player_(map_.initial_position),
+    player_(),
     current_mode_{Mode::Dungeon}
 {
+  player_.set_position(map_.initial_position);
 }
 
 GameMaster::~GameMaster()

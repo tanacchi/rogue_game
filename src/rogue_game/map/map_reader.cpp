@@ -17,7 +17,7 @@
 
 namespace map
 {
-  Map MapReader::operator()(std::string map_filename)
+  Map& MapReader::operator()(std::string map_filename)
   {
     // json から Map のインスタンスを生成する
     // コンストラクタに変える予定

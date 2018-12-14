@@ -18,6 +18,7 @@ namespace map
   {
     Map() = default;
     Map(Map&& map);
+    Map& operator=(Map&& map) noexcept;
     friend std::ostream& operator<<(std::ostream& os, const Map& map);
     
     std::size_t width;

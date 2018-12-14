@@ -3,8 +3,8 @@
 
 namespace character
 {
-  Player::Player(map::Point<int> position)
-    : Character(position),
+  Player::Player()
+    : Character(map::Point<int>{0, 0}),
       inventory_{10},
       money_{0}
   {

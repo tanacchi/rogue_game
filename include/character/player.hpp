@@ -29,7 +29,7 @@ namespace character
       std::size_t capacity_;
     };
 
-    Player(map::Point<int> point);
+    Player();
     
     // KeyState と移動方向の対応表
     static const std::map<KeyboardManager::KeyState, const map::Point<int>> motion_table;

@@ -44,13 +44,13 @@ namespace character
     return inventory_.get_item_name_array();
   }
 
-  std::ostream& operator<<(std::ostream& os, const Player& player)
+  std::string Player::to_string() const
   {
-    os << "\n { position : " << player.position_ << " },\n"
-       << " { money : " << player.money_ << " }";
-    return os;
+    std::stringstream ss;
+    ss << Character::to_string() << ", { money : " << money_ << " }";
+    return ss.str();
   }
-
+  
   Player::Inventory::Inventory(std::size_t capacity)
     : items_{},
       capacity_{capacity}

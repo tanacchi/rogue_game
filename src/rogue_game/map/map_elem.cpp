@@ -1,4 +1,5 @@
 #include <map>
+#include <sstream>
 
 #include <map/map_elem.hpp>
 
@@ -22,10 +23,17 @@ namespace map
   {
   }
 
+  std::string MapElem::to_string() const
+  {
+    std::stringstream ss;
+    ss << "{ type : " << type << " }, "
+       << "{ symbol : '" << symbol << "' }";
+    return ss.str();
+  }
+
   std::ostream& operator<<(std::ostream& os, const MapElem& elem)
   {
-    os << "{ type : " << elem.type << " }, "
-       << "{ symbol : '" << elem.symbol << "' }";
+    os << elem.to_string();
     return os;
   }
 

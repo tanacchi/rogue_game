@@ -1,5 +1,3 @@
-#include <sstream>
-
 #include <dungeon/dungeon_elem.hpp>
 
 namespace dungeon
@@ -16,12 +14,12 @@ namespace dungeon
   {
   }
 
-  std::string DungeonElem::to_string() const
+  std::ostream& operator<<(std::ostream& os, const DungeonElem& elem)
   {
-    std::stringstream ss;
-    ss << MapElem::to_string()
-       << ", { can_stand_ : " << can_stand_ << " }";
-    return ss.str();
+    os << "{ type : " << elem.type << " }, "
+       << "{ symbol : '" << elem.symbol << "' }, "
+       << "{ can_stand_ : " << elem.can_stand_ << " }";
+    return os;
   }
   
   bool DungeonElem::can_stand() const

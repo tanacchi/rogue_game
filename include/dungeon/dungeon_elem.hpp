@@ -15,9 +15,8 @@ namespace dungeon
     DungeonElem(std::string type, bool can_stand);
     DungeonElem(const DungeonElem& rhs);
     virtual ~DungeonElem() = default;
-
-    virtual std::string to_string() const;
-
+    friend std::ostream& operator<<(std::ostream& os, const DungeonElem& elem);
+    
     // キャラクターが移動可能かの判定に使われる
     bool can_stand() const;
   public:

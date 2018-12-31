@@ -4,8 +4,6 @@
 #include <ostream>
 #include <cstddef>
 #include <memory>
-#include <string>
-#include <sstream>
 
 #include <debug/logger.hpp>
 #include <keyboard/keyboard_manager.hpp>
@@ -28,9 +26,7 @@ namespace character
     // キャラクターの位置を設定
     void set_position(const map::Point<int>& point);
 
-    virtual std::string to_string() const;
-
-    friend std::ostream& operator<<(std::ostream& os, const character::Character& character);
+    friend std::ostream& operator<<(std::ostream& os, const Character& character);
   protected:
     map::Point<int> position_;
   };

@@ -13,7 +13,7 @@ namespace item
   public:
     Gold(std::size_t amount = 100);
     void use(character::Player* const player_ptr);
-    std::string to_string() const;
+    friend std::ostream& operator<<(std::ostream& os, const Gold& gold);
   private:
     const std::size_t amount_;
   };

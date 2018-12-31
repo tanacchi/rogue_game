@@ -26,7 +26,7 @@ void GameMaster::take_dungeon_mode(const KeyboardManager::KeyState& key_state)
         character::Player::motion_table.at(key_state) : map::Point<int>{0, 0}};
     map::Point<int> next_position{player_.get_position() + motion};
     if (map_.in_range(next_position) && map_.get_dungeon_elem(next_position).can_stand()) {
-      player_.set_position(next_position);
+      player_.assign_motion(motion);
     }
   }
   {

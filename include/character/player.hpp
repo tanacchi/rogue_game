@@ -42,8 +42,12 @@ namespace character
     void use_item(std::size_t item_index);
     std::vector<std::string> get_item_name_array() const;
     friend std::ostream& operator<<(std::ostream& os, const Player& player);
+
+    ::map::Point<int> get_direction() const;
+    void assign_motion(const ::map::Point<int>& next_motion);
   private:
     Inventory inventory_;
+    ::map::Point<int> direction_;
     std::size_t money_;
   };
 }

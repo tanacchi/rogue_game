@@ -7,7 +7,7 @@ int main()
 {
   initscr();
   keypad(stdscr, TRUE);
-  curs_set(0);
+  curs_set(2);
   refresh();
 
   GameMaster master{};

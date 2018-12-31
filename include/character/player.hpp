@@ -29,7 +29,7 @@ namespace character
       std::size_t capacity_;
     };
 
-    Player(map::Point<int> point);
+    Player();
     
     // KeyState と移動方向の対応表
     static const std::map<KeyboardManager::KeyState, const map::Point<int>> motion_table;
@@ -41,7 +41,7 @@ namespace character
     void store_item(std::unique_ptr<item::Item>&& item);
     void use_item(std::size_t item_index);
     std::vector<std::string> get_item_name_array() const;
-    friend std::ostream& operator<<(std::ostream& os, const Player& player);
+    std::string to_string() const;
   private:
     Inventory inventory_;
     std::size_t money_;

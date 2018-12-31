@@ -1,16 +1,19 @@
 #include <exception>
 
 #include <rogue_game/game_master.hpp>
+#include <map/map_reader.hpp>
 
 GameMaster::GameMaster()
-  : map_{map::read_map(map_dir + "json/ver_0.2.0_map.json")},
-    map_display_{5, 4, map_.width, map_.height},
+  : map_display_{5, 4, 80, 30},
     player_display_{70, 30, 20, 10},
     menu_display_{80, 10, 30, 16},
     keyboard_{},
-    player_(map_.initial_position),
+    player_(),
     current_mode_{Mode::Dungeon}
 {
+  map::MapReader map_reader{};
+  map_ = std::move(map_reader(map_dir + "json/tmp_sample_map.json"));
+  player_.set_position(map_.initial_position);
 }
 
 GameMaster::~GameMaster()
@@ -32,7 +35,7 @@ void GameMaster::take_dungeon_mode(const KeyboardManager::KeyState& key_state)
   {
     // アイテムの取得・更新
     map::Point<int> current_position{player_.get_position()};
-    std::map<map::Point<int>, std::unique_ptr<::item::Item> >::iterator it{map_.item_layer.find(current_position)};
+    std::map<map::Point<int>, ::item::ItemPtr>::iterator it{map_.item_layer.find(current_position)};
     if (it != map_.item_layer.end()) {
       player_.store_item(std::move(it->second));
       map_.item_layer.erase(it);

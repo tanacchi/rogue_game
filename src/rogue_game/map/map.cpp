@@ -25,6 +25,15 @@ namespace map
   {
   }
 
+  Map& Map::operator=(Map&& map) noexcept
+  {
+    width = map.width; height = map.height;
+    initial_position = std::move(map.initial_position);
+    dungeon_layer = std::move(map.dungeon_layer);
+    item_layer = std::move(map.item_layer);
+    return *this;
+  }
+
   std::ostream& operator<<(std::ostream& os, const Map& map)
   {
     os << "{ width : " << map.width << " }, { height : " << map.height << "},\n"

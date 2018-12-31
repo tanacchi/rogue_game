@@ -1,3 +1,5 @@
+#include <sstream>
+
 #include <item/item.hpp>
 
 namespace item
@@ -16,9 +18,10 @@ namespace item
   {
   }
   
-  std::ostream& operator<<(std::ostream& os, const Item& item)
+  std::string Item::to_string() const
   {
-    os << "{ type : " << item.type << " } ";
-    return os;
+    std::stringstream ss;
+    ss << ::map::MapElem::to_string();
+    return ss.str();
   }
 }

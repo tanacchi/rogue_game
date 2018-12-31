@@ -14,9 +14,10 @@ namespace item
     player_ptr->add_money(amount_);
   }
 
-  std::ostream& operator<<(std::ostream& os, const Gold& gold)
+  std::string Gold::to_string() const
   {
-    os << "{ type : " << gold.type << " }, { amount : " << gold.amount_ << " }";
-    return os;
+    std::stringstream ss{};
+    ss << Item::to_string() << ", { amount : " << amount_ << " }";
+    return ss.str();
   }
 }

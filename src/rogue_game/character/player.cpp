@@ -3,8 +3,8 @@
 
 namespace character
 {
-  Player::Player()
-    : Character(map::Point<int>{0, 0}),
+  Player::Player(map::Point<int> position)
+    : Character(position),
       inventory_{10},
       money_{0}
   {
@@ -44,13 +44,13 @@ namespace character
     return inventory_.get_item_name_array();
   }
 
-  std::string Player::to_string() const
+  std::ostream& operator<<(std::ostream& os, const Player& player)
   {
-    std::stringstream ss;
-    ss << Character::to_string() << ", { money : " << money_ << " }";
-    return ss.str();
+    os << "\n { position : " << player.position_ << " },\n"
+       << " { money : " << player.money_ << " }";
+    return os;
   }
-  
+
   Player::Inventory::Inventory(std::size_t capacity)
     : items_{},
       capacity_{capacity}

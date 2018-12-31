@@ -12,6 +12,8 @@
 #include <dungeon/path.hpp>
 #include <dungeon/vertical_wall.hpp>
 
+#include <item/gold.hpp>
+
 //
 
 int main()
@@ -33,6 +35,10 @@ int main()
 
   LOG_VALUES(door, floor, horizontal_wall, none, path, vertical_wall);
 
+  item::Gold gold{};
+
+  LOG_VALUES(gold);
+  
   //
 
   GameMaster master{};

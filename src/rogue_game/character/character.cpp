@@ -17,9 +17,16 @@ namespace character
     position_ = point;
   }
 
+  std::string Character::to_string() const
+  {
+    std::stringstream ss;
+    ss << " { position : " << position_ << " }";
+    return ss.str();
+  }
+
   std::ostream& operator<<(std::ostream& os, const Character& character)
   {
-    os << " { position : " << character.position_ << " }";
+    os << character.to_string();
     return os;
   }
 }

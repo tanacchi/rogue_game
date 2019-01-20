@@ -9,6 +9,8 @@ PlayerDisplay::PlayerDisplay(std::size_t x, std::size_t y,
 
 void PlayerDisplay::show(const character::Player& player)
 {
+  wclear(win_.get());
+
   // 変数をループやらマクロやらで一気に参照できたら嬉しいが
   // 言語が違うか
   // 位置情報は logger に任せるつもり
@@ -17,5 +19,6 @@ void PlayerDisplay::show(const character::Player& player)
   mvwprintw(win_.get(), 1, 2, "x: %d", pos.get_x());
   mvwprintw(win_.get(), 2, 2, "y: %d", pos.get_y());
   mvwprintw(win_.get(), 3, 0, "money: %d", player.get_money());
+
   wrefresh(win_.get());
 }

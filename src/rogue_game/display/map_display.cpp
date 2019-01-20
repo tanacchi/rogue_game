@@ -25,8 +25,7 @@ namespace map {
     // プレイヤーの表示
     mvwaddch(win_.get(), player.get_position().get_y(), player.get_position().get_x(), '@' | A_BOLD);
     ::map::Point<int> sight{player.get_position() + player.get_direction()};
-    wmove(win_.get(), sight.get_y(), sight.get_x());
-    wchgat(win_.get(), 1, A_BOLD | A_UNDERLINE, 0, NULL);
+    mvwchgat(win_.get(), sight.get_y(), sight.get_x(), 1, A_BOLD | A_UNDERLINE, 0, NULL);
     wrefresh(win_.get());
   }
 }

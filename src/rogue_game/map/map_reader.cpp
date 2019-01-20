@@ -17,6 +17,28 @@
 
 namespace map
 {
+  // ダンジョン要素からインスタンスを生成しポイントを返す
+  // オブジェクト・ファクトリ
+  // TO DO : もうすこしキレイにしたい
+  ::dungeon::DungeonElemPtr gen_dungeon_elem(std::string type)
+  {
+    if (type == "floor") {
+      return ::dungeon::DungeonElemPtr(new ::dungeon::Floor{});
+    } else if (type == "path") {
+      return ::dungeon::DungeonElemPtr(new ::dungeon::Path{});
+    } else if (type == "none") {
+      return ::dungeon::DungeonElemPtr(new ::dungeon::None{});
+    } else if (type == "horizontal_wall") {
+      return ::dungeon::DungeonElemPtr(new ::dungeon::HorizontalWall{});
+    } else if (type == "vertical_wall") {
+      return ::dungeon::DungeonElemPtr(new ::dungeon::VerticalWall{});
+    } else if (type == "door") {
+      return ::dungeon::DungeonElemPtr(new ::dungeon::Door{});
+    } else {
+      throw std::string{"Invalid map elem type."};
+    }
+  }
+
   Map MapReader::operator()(std::string map_filename)
   {
     // json から Map のインスタンスを生成する

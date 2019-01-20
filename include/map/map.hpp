@@ -40,14 +40,6 @@ namespace map
     // 初期化でしか使わないから別の場所に移動したい
     Point<int> index_to_point(std::size_t index);
   };
-
-  // マップデータ（json）からインスタンスを生成
-  // コンストラクタでいいな
-  Map read_map(const std::string mapfile_name);
-
-  // ダンジョン要素の種類からダンジョン要素のインスタンスを生成しポインタを返す
-  // オブジェクト・ファクトリ的な役割
-  ::dungeon::DungeonElemPtr gen_dungeon_elem(std::string type);
 }
 
 #endif  // INCLUDED_MAP_HPP

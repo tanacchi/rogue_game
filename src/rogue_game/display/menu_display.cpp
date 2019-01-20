@@ -18,20 +18,17 @@ namespace menu
   {
     wclear(win_.get());
     for (std::size_t i{0}, size{menu_strings_.size()}; i < size; ++i) {
-      if (i == selected_index_) {
-        wattron(win_.get(), A_REVERSE);
-      }
       mvwinsstr(win_.get(), 1 + i, 1, menu_strings_[i].c_str());
-      wattrset(win_.get(), A_NORMAL);
     }
+    mvwchgat(win_.get(), 1 + selected_index_, 1, 14, A_REVERSE, 1, NULL);
     box(win_.get(), ACS_VLINE, ACS_HLINE);
     wrefresh(win_.get());
   }
 
   void MenuDisplay::hide()
   {
-    wclear(win_.get());
     selected_index_ = 0;
+    wclear(win_.get());
     wrefresh(win_.get());
   }
   

@@ -32,7 +32,7 @@ void GameMaster::take_dungeon_mode(const KeyboardManager::KeyState& key_state)
   {
     // アイテムの取得・更新
     map::Point<int> current_position{player_.get_position()};
-    std::map<map::Point<int>, std::unique_ptr<::item::Item> >::iterator it{map_.item_layer.find(current_position)};
+    std::map<map::Point<int>, ::item::ItemPtr>::iterator it{map_.item_layer.find(current_position)};
     if (it != map_.item_layer.end()) {
       player_.store_item(std::move(it->second));
       map_.item_layer.erase(it);

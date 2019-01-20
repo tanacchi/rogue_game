@@ -55,8 +55,4 @@ configure_file(
   ${${PROJECT_NAME}_CONFIGURE_DIR}/README.md.in
   ${PROJECT_SOURCE_DIR}/README.md)
 
-configure_file(
-  ${${PROJECT_NAME}_CONFIGURE_DIR}/${PROJECT_NAME}.hpp.in
-  ${PROJECT_INCLUDE_DIR}/${PROJECT_NAME}/${PROJECT_NAME}.hpp)
-
 add_subdirectory(src)

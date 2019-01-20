@@ -1,7 +1,3 @@
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
-#include <boost/foreach.hpp>
-#include <boost/optional.hpp>
 #include <vector>
 #include <unordered_map>
 #include <functional>
@@ -32,6 +28,17 @@ namespace map
       {"door",            [](){ return ::dungeon::DungeonElemPtr(new ::dungeon::Door{}); }},
     }};
     return dungeon_table.at(type)();
+  }
+
+  ::item::ItemPtr gen_item_elem(std::string type, boost::property_tree::ptree property)
+  {
+    static std::unordered_map<std::string, std::function<::item::ItemPtr(boost::property_tree::ptree)>> item_table{{
+      {"gold", [](boost::property_tree::ptree property){
+        std::size_t amount{property.get_optional<std::size_t>("amount").get()};
+        return ::item::ItemPtr(new ::item::Gold{amount});
+      }},
+    }};
+    return item_table.at(type)(property);
   }
 
   Map MapReader::operator()(std::string map_filename)
@@ -71,8 +78,7 @@ namespace map
           std::string type{elem.get_optional<std::string>("type").get()};
           std::size_t index{elem.get_optional<std::size_t>("index").get()};
           Point<int> pos{map.index_to_point(index)};
-          std::size_t amount{elem.get_optional<std::size_t>("amount").get()};
-          map.item_layer.emplace(pos, ::item::ItemPtr{new ::item::Gold{amount}});
+          map.item_layer.emplace(pos, std::move(gen_item_elem(type, elem)));
         }
       }
     }

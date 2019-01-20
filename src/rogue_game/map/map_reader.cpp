@@ -42,10 +42,10 @@ namespace map
     boost::property_tree::read_json(map_filename, json_map_data);
     {
       // マップの横幅を取得
-      map.width{json_map_data.get_optional<int>("Map.width").get()};
+      map.width = json_map_data.get_optional<int>("Map.width").get();
       
       // マップの縦幅を取得
-      map.height{json_map_data.get_optional<int>("Map.height").get()};
+      map.height = json_map_data.get_optional<int>("Map.height").get();
 
       // プレイヤーの初期位置を取得
       std::size_t player_index{json_map_data.get_optional<std::size_t>("Map.player_pos").get()};
@@ -68,9 +68,9 @@ namespace map
       BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.items")) {
         const boost::property_tree::ptree& elem{child.second};
         if (!elem.empty()) {
+          std::string type{elem.get_optional<std::string>("type").get()};
           std::size_t index{elem.get_optional<std::size_t>("index").get()};
           Point<int> pos{map.index_to_point(index)};
-          std::string type{elem.get_optional<std::string>("type").get()};
           std::size_t amount{elem.get_optional<std::size_t>("amount").get()};
           map.item_layer.emplace(pos, ::item::ItemPtr{new ::item::Gold{amount}});
         }

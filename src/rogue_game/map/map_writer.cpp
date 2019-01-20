@@ -32,8 +32,8 @@ namespace map
           break;
         case '*':
           dungeon_config.put("type", "floor");
-          item_config.put("index", i);
           item_config.put("type", "gold");
+          item_config.put("index", i);
           item_config.put("amount", 100);
           break;
       }

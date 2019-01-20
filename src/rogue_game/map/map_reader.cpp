@@ -38,9 +38,6 @@ namespace map
   Map MapReader::operator()(std::string map_filename)
   {
     // json から Map のインスタンスを生成する
-    // コンストラクタに変える予定
-    // 要素ごとに取得する変数とかが変わってくるから
-    // マクロやらテンプレートでキレイにできたらいいなと思っている:x
     Map map{};
     boost::property_tree::ptree json_map_data{};
     boost::property_tree::read_json(map_filename, json_map_data);
@@ -59,27 +56,25 @@ namespace map
     }
     // ダンジョン要素を取得
     {
-      BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.elems") ) {
+      BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.elems")) {
         const boost::property_tree::ptree& elem{child.second};
-        if (elem.empty()) {
-          continue;
+        if (!elem.empty()) {
+          std::string type = elem.get_optional<std::string>("type").get();
+          map.dungeon_layer.emplace_back(std::move(gen_dungeon_elem(type)));
         }
-        std::string type = elem.get_optional<std::string>("type").get();
-        map.dungeon_layer.emplace_back(std::move(gen_dungeon_elem(type)));
       }
     }
     // アイテム要素を取得
     {
-      BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.items") ) {
+      BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.items")) {
         const boost::property_tree::ptree& elem{child.second};
-        if (elem.empty()) {
-          continue;
+        if (!elem.empty()) {
+          std::size_t index = elem.get_optional<std::size_t>("index").get();
+          Point<int> pos{map.index_to_point(index)};
+          std::string type{elem.get_optional<std::string>("type").get()};
+          std::size_t amount{elem.get_optional<std::size_t>("amount").get()};
+          map.item_layer.emplace(pos, ::item::ItemPtr{new ::item::Gold{amount}});
         }
-        std::size_t index = elem.get_optional<std::size_t>("index").get();
-        Point<int> pos{map.index_to_point(index)};
-        std::string type{elem.get_optional<std::string>("type").get()};
-        std::size_t amount{elem.get_optional<std::size_t>("amount").get()};
-        map.item_layer.emplace(pos, ::item::ItemPtr{new ::item::Gold{amount}});
       }
     }
     return map;

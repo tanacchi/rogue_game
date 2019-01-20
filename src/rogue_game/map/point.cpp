@@ -76,6 +76,12 @@ namespace map
     return (x_*x_ + y_*y_) < (rls.x_*rls.x_ + rls.y_*rls.y_);
   }
 
+  template<typename T>
+  Point<T>::operator bool() const noexcept
+  {
+    return !(x_ == 0 && y_ == 0);
+  }
+  
   std::ostream& operator<<(std::ostream& os, const Point<int>& point)
   {
     os << "{ x : " << point.x_ << " }, { y : " << point.y_ << " }";

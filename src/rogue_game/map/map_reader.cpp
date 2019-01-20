@@ -20,8 +20,7 @@
 namespace map
 {
   // ダンジョン要素からインスタンスを生成しポイントを返す
-  // オブジェクト・ファクトリ
-  // TO DO : もうすこしキレイにしたい
+  // オブジェクトファクトリ
   ::dungeon::DungeonElemPtr gen_dungeon_elem(std::string type)
   {
     static std::unordered_map<std::string, std::function<::dungeon::DungeonElemPtr(void)>> dungeon_table{{
@@ -41,19 +40,18 @@ namespace map
     Map map{};
     boost::property_tree::ptree json_map_data{};
     boost::property_tree::read_json(map_filename, json_map_data);
-    // マップの横幅を取得
     {
+      // マップの横幅を取得
       map.width = json_map_data.get_optional<int>("Map.width").get();
-    }
-    // マップの縦幅を取得
-    {
+      
+      // マップの縦幅を取得
       map.height = json_map_data.get_optional<int>("Map.height").get();
-    }
-    // プレイヤーの初期位置を取得
-    {
+
+      // プレイヤーの初期位置を取得
       std::size_t player_index = json_map_data.get_optional<std::size_t>("Map.player_pos").get();
       map.initial_position = map.index_to_point(player_index);
     }
+
     // ダンジョン要素を取得
     {
       BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.elems")) {
@@ -64,6 +62,7 @@ namespace map
         }
       }
     }
+
     // アイテム要素を取得
     {
       BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.items")) {

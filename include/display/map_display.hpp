@@ -12,7 +12,7 @@ namespace map
   {
   public:
     MapDisplay(std::size_t x, std::size_t y, std::size_t width, std::size_t height);
-    void show(Map& map, const character::Character& character);
+    void show(Map& map, const character::Player& player);
   };
 }
 

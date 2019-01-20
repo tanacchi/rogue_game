@@ -13,6 +13,8 @@ namespace map
     MapElem(const MapElem& rhs);
     MapElem(MapElem&& rhs) noexcept;
     virtual ~MapElem() = default;
+
+    virtual std::string to_string() const;
     friend std::ostream& operator<<(std::ostream& os, const MapElem& map_elem);
     
     // マップ要素の種類

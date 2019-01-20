@@ -6,6 +6,7 @@ namespace character
   Player::Player(map::Point<int> position)
     : Character(position),
       inventory_{10},
+      direction_{0, 1},
       money_{0}
   {
   }
@@ -42,6 +43,20 @@ namespace character
   std::vector<std::string> Player::get_item_name_array() const
   {
     return inventory_.get_item_name_array();
+  }
+
+  ::map::Point<int> Player::get_direction() const
+  {
+    return direction_;
+  }
+
+  void Player::assign_motion(const ::map::Point<int>& next_motion)
+  {
+    if (next_motion == direction_) {
+      set_position(next_motion + get_position());
+    } else {
+      direction_ = next_motion;
+    }
   }
 
   std::ostream& operator<<(std::ostream& os, const Player& player)

@@ -26,13 +26,13 @@ void GameMaster::take_dungeon_mode(const KeyboardManager::KeyState& key_state)
         character::Player::motion_table.at(key_state) : map::Point<int>{0, 0}};
     map::Point<int> next_position{player_.get_position() + motion};
     if (map_.in_range(next_position) && map_.get_dungeon_elem(next_position).can_stand()) {
-      player_.set_position(next_position);
+      player_.assign_motion(motion);
     }
   }
   {
     // アイテムの取得・更新
     map::Point<int> current_position{player_.get_position()};
-    std::map<map::Point<int>, std::unique_ptr<::item::Item> >::iterator it{map_.item_layer.find(current_position)};
+    std::map<map::Point<int>, ::item::ItemPtr>::iterator it{map_.item_layer.find(current_position)};
     if (it != map_.item_layer.end()) {
       player_.store_item(std::move(it->second));
       map_.item_layer.erase(it);

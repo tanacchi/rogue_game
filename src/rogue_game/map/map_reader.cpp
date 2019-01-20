@@ -3,6 +3,8 @@
 #include <boost/foreach.hpp>
 #include <boost/optional.hpp>
 #include <vector>
+#include <unordered_map>
+#include <functional>
 
 #include <map/map_reader.hpp>
 
@@ -22,21 +24,15 @@ namespace map
   // TO DO : もうすこしキレイにしたい
   ::dungeon::DungeonElemPtr gen_dungeon_elem(std::string type)
   {
-    if (type == "floor") {
-      return ::dungeon::DungeonElemPtr(new ::dungeon::Floor{});
-    } else if (type == "path") {
-      return ::dungeon::DungeonElemPtr(new ::dungeon::Path{});
-    } else if (type == "none") {
-      return ::dungeon::DungeonElemPtr(new ::dungeon::None{});
-    } else if (type == "horizontal_wall") {
-      return ::dungeon::DungeonElemPtr(new ::dungeon::HorizontalWall{});
-    } else if (type == "vertical_wall") {
-      return ::dungeon::DungeonElemPtr(new ::dungeon::VerticalWall{});
-    } else if (type == "door") {
-      return ::dungeon::DungeonElemPtr(new ::dungeon::Door{});
-    } else {
-      throw std::string{"Invalid map elem type."};
-    }
+    static std::unordered_map<std::string, std::function<::dungeon::DungeonElemPtr(void)>> dungeon_table{{
+      {"floor",           [](){ return ::dungeon::DungeonElemPtr(new ::dungeon::Floor{}); }},
+      {"path",            [](){ return ::dungeon::DungeonElemPtr(new ::dungeon::Path{}); }},
+      {"none",            [](){ return ::dungeon::DungeonElemPtr(new ::dungeon::None{}); }},
+      {"horizontal_wall", [](){ return ::dungeon::DungeonElemPtr(new ::dungeon::HorizontalWall{}); }},
+      {"vertical_wall",   [](){ return ::dungeon::DungeonElemPtr(new ::dungeon::VerticalWall{}); }},
+      {"door",            [](){ return ::dungeon::DungeonElemPtr(new ::dungeon::Door{}); }},
+    }};
+    return dungeon_table.at(type)();
   }
 
   Map MapReader::operator()(std::string map_filename)
@@ -44,7 +40,7 @@ namespace map
     // json から Map のインスタンスを生成する
     // コンストラクタに変える予定
     // 要素ごとに取得する変数とかが変わってくるから
-    // マクロやらテンプレートでキレイにできたらいいなと思っている
+    // マクロやらテンプレートでキレイにできたらいいなと思っている:x
     Map map{};
     boost::property_tree::ptree json_map_data{};
     boost::property_tree::read_json(map_filename, json_map_data);

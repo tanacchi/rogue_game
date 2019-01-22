@@ -54,7 +54,7 @@ namespace character
   {
     if (next_motion == direction_) {
       set_position(next_motion + get_position());
-    } else {
+    } else if (next_motion) {
       direction_ = next_motion;
     }
   }

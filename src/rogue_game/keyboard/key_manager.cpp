@@ -36,10 +36,25 @@ KeyManager::operator bool() const noexcept
   return key_ != KeyManager::Null;
 }
 
+bool KeyManager::operator==(const KeyManager& rhs) const noexcept
+{
+  return key_ == rhs.key_;
+}
+
+bool KeyManager::operator==(KeyManager::KeyType&& rhs) const noexcept
+{
+  return key_ == rhs;
+}
+
 void KeyManager::update() noexcept
 {
   auto itr{key_state_table.find(getch())};
   key_ = (itr == key_state_table.end()) ? KeyManager::Null : itr->second;
+}
+
+KeyManager::KeyType KeyManager::get() const noexcept
+{
+  return key_;
 }
 
 KeyManager operator|(const KeyManager& lhs, const KeyManager& rhs)

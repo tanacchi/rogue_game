@@ -3,6 +3,7 @@
 
 #include <ncurses.h>
 #include <cstdint>
+#include <unordered_map>
 
 class KeyManager
 {
@@ -19,6 +20,8 @@ class KeyManager
     static const KeyType Null;
     static const KeyType Enable;
     static const KeyType Arrow;
+
+    static const std::unordered_map<int, KeyManager::KeyType> key_state_table;
 };
 
 #endif  // INCLUDED_KEY_MANAGER_HPP

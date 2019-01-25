@@ -11,3 +11,12 @@ const KeyManager::KeyType KeyManager::Null   = 0x01 << 7;
 const KeyManager::KeyType KeyManager::Enable = 0xff >> 1;
 const KeyManager::KeyType KeyManager::Arrow  = KeyManager::Up | KeyManager::Down | KeyManager::Right | KeyManager::Left;
 
+const std::unordered_map<int, KeyManager::KeyType> KeyManager::key_state_table{{
+  {32,            KeyManager::Space},
+  {10,            KeyManager::Enter},
+  {KEY_BACKSPACE, KeyManager::Back },
+  {KEY_UP,        KeyManager::Up   },
+  {KEY_DOWN,      KeyManager::Down },
+  {KEY_RIGHT,     KeyManager::Right},
+  {KEY_LEFT,      KeyManager::Left },
+}};

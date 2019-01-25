@@ -22,6 +22,16 @@ class KeyManager
     static const KeyType Arrow;
 
     static const std::unordered_map<int, KeyManager::KeyType> key_state_table;
+
+    explicit KeyManager(KeyManager::KeyType key = KeyManager::Null) noexcept;
+    explicit operator KeyManager::KeyType() const noexcept;
+    explicit operator bool() const noexcept;
+    friend KeyManager operator|(const KeyManager& lhs, const KeyManager& rhs);
+    KeyManager operator|(KeyManager::KeyType&& rhs);
+
+    void update() noexcept;
+  private:
+    KeyManager::KeyType key_;
 };
 
 #endif  // INCLUDED_KEY_MANAGER_HPP

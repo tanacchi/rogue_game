@@ -20,3 +20,35 @@ const std::unordered_map<int, KeyManager::KeyType> KeyManager::key_state_table{{
   {KEY_RIGHT,     KeyManager::Right},
   {KEY_LEFT,      KeyManager::Left },
 }};
+
+KeyManager::KeyManager(KeyManager::KeyType key) noexcept
+  : key_{key}
+{
+}
+
+KeyManager::operator KeyManager::KeyType() const noexcept
+{
+  return key_;
+}
+
+KeyManager::operator bool() const noexcept
+{
+  return key_ != KeyManager::Null;
+}
+
+void KeyManager::update() noexcept
+{
+  auto itr{key_state_table.find(getch())};
+  key_ = (itr == key_state_table.end()) ? KeyManager::Null : itr->second;
+}
+
+KeyManager operator|(const KeyManager& lhs, const KeyManager& rhs)
+{
+  return KeyManager(lhs.key_ | rhs.key_);
+}
+
+KeyManager KeyManager::operator|(KeyManager::KeyType&& rhs)
+{
+  return KeyManager(key_ | rhs);
+}
+

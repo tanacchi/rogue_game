@@ -6,16 +6,16 @@ namespace character
   Player::Player()
     : Character(map::Point<int>{0, 0}),
       inventory_{10},
-      direction_{0, 1},
+      direction_{map::down},
       money_{0}
   {
   }
 
   const std::map<KeyboardManager::KeyState, const map::Point<int>> Player::motion_table = {
-    {KeyboardManager::KeyState::Up,    map::Point<int>{ 0,-1}},
-    {KeyboardManager::KeyState::Down,  map::Point<int>{ 0, 1}},
-    {KeyboardManager::KeyState::Right, map::Point<int>{ 1, 0}},
-    {KeyboardManager::KeyState::Left,  map::Point<int>{-1, 0}},
+    {KeyboardManager::KeyState::Up,    map::up   },
+    {KeyboardManager::KeyState::Down,  map::down },
+    {KeyboardManager::KeyState::Right, map::right},
+    {KeyboardManager::KeyState::Left,  map::left },
   };
 
   std::size_t Player::get_money() const

@@ -35,15 +35,15 @@ namespace menu
     wrefresh(win_.get());
   }
   
-  void MenuDisplay::toggle_menu(KeyboardManager::KeyState key_state)
+  void MenuDisplay::toggle_menu(KeyManager key_state)
   {
-    switch (key_state) {
-    case KeyboardManager::KeyState::Up:
+    switch (key_state.get()) {
+    case KeyManager::Up:
       if (selected_index_ > 0) {
         --selected_index_;
       }
       break;
-    case KeyboardManager::KeyState::Down:
+    case KeyManager::Down:
       if (selected_index_ < menu_strings_.size() - 1) {
         ++selected_index_;
       }

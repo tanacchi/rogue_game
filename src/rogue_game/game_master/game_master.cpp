@@ -21,7 +21,7 @@ GameMaster::~GameMaster()
   endwin();
 }
 
-void GameMaster::take_dungeon_mode(const KeyboardManager::KeyState& key_state)
+void GameMaster::take_dungeon_mode(const KeyManager& key_state)
 {
   {
     // プレイヤーの位置更新
@@ -43,17 +43,17 @@ void GameMaster::take_dungeon_mode(const KeyboardManager::KeyState& key_state)
   }
 }
 
-void GameMaster::take_select_mode(const KeyboardManager::KeyState& key_state)
+void GameMaster::take_select_mode(const KeyManager& key_state)
 {
   // アイテムの使用
   menu_display_.set_menu(player_.get_item_name_array());
   menu_display_.show();
   for (;;) {                // REFACTOR REQUIRED : 読む気失せる程度に汚いけど動く
-    const KeyboardManager::KeyState menu_toggler{keyboard_.get_key()};
-    if (menu_toggler == KeyboardManager::KeyState::Back || menu_toggler == KeyboardManager::KeyState::Space) {
+    const KeyManager::KeyType menu_toggler{keyboard_.get_key()};
+    if (menu_toggler == KeyManager::Back || menu_toggler == KeyManager::Space) {
       menu_display_.hide();
       break;
-    } else if (menu_toggler == KeyboardManager::KeyState::Enter) {
+    } else if (menu_toggler == KeyManager::Enter) {
       int item_index{menu_display_.get_current_index()};
       player_.use_item(item_index);
       menu_display_.hide();
@@ -75,13 +75,13 @@ void GameMaster::update()
   player_display_.show(player_);
   refresh();
 
-  const KeyboardManager::KeyState key_state{keyboard_.get_key()};
-  switch (key_state) {
-  case KeyboardManager::KeyState::Space:
+  const KeyManager key_state{keyboard_.get_key()};
+  switch (key_state.get()) {
+  case KeyManager::Space:
     current_mode_ = Mode::Select;
     break;
-  case KeyboardManager::KeyState::Back:
-  case KeyboardManager::KeyState::Enter:
+  case KeyManager::Back:
+  case KeyManager::Enter:
     current_mode_ = Mode::Dungeon;
     break;
   default:

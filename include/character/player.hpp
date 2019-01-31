@@ -32,7 +32,7 @@ namespace character
     Player();
     
     // KeyState と移動方向の対応表
-    static const std::map<KeyboardManager::KeyState, const map::Point<int>> motion_table;
+    static const std::map<KeyManager::KeyType, const map::Point<int>> motion_table;
 
     // money の getter と setter
     // ステータスごとに２個ずつメソッドが増えることは避けたい

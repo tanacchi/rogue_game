@@ -5,7 +5,7 @@
 #include <string>
 
 #include <display/display_panel.hpp>
-#include <keyboard/keyboard_manager.hpp>
+#include <keyboard/key_manager.hpp>
 
 namespace menu
 {

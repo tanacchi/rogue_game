@@ -1,7 +1,7 @@
 #ifndef INCLUDED_ROGUE_GAME_HPP
 #define INCLUDED_ROGUE_GAME_HPP
 
-#include <keyboard/keyboard_manager.hpp>
+#include <keyboard/key_manager.hpp>
 #include <display/map_display.hpp>
 #include <display/player_display.hpp>
 #include <debug/logger.hpp>

@@ -25,8 +25,8 @@ void GameMaster::take_dungeon_mode(const KeyManager& key_state)
 {
   {
     // プレイヤーの位置更新
-    map::Point<int> motion{character::Player::motion_table.find(key_state) != character::Player::motion_table.end() ?
-        character::Player::motion_table.at(key_state) : map::Point<int>{0, 0}};
+    map::Point<int> motion{character::Player::motion_table.find(key_state.get()) != character::Player::motion_table.end() ?
+        character::Player::motion_table.at(key_state.get()) : map::Point<int>{0, 0}};
     map::Point<int> next_position{player_.get_position() + motion};
     if (map_.in_range(next_position) && map_.get_dungeon_elem(next_position).can_stand()) {
       player_.assign_motion(motion);
@@ -48,8 +48,9 @@ void GameMaster::take_select_mode(const KeyManager& key_state)
   // アイテムの使用
   menu_display_.set_menu(player_.get_item_name_array());
   menu_display_.show();
+  keyboard_.update();
   for (;;) {                // REFACTOR REQUIRED : 読む気失せる程度に汚いけど動く
-    const KeyManager::KeyType menu_toggler{keyboard_.get_key()};
+    const KeyManager::KeyType menu_toggler{keyboard_.get()};
     if (menu_toggler == KeyManager::Back || menu_toggler == KeyManager::Space) {
       menu_display_.hide();
       break;
@@ -74,9 +75,10 @@ void GameMaster::update()
   map_display_.show(map_, player_);
   player_display_.show(player_);
   refresh();
+  keyboard_.update();
 
-  const KeyManager key_state{keyboard_.get_key()};
-  switch (key_state.get()) {
+  const KeyManager::KeyType key_state{keyboard_.get()};
+  switch (key_state) {
   case KeyManager::Space:
     current_mode_ = Mode::Select;
     break;
@@ -90,10 +92,10 @@ void GameMaster::update()
 
   switch (current_mode_) {
   case Mode::Dungeon:
-    take_dungeon_mode(key_state);
+    take_dungeon_mode(keyboard_);
     break;
   case Mode::Select:
-    take_select_mode(key_state);
+    take_select_mode(keyboard_);
     break;
   }
 }

@@ -35,9 +35,9 @@ namespace menu
     wrefresh(win_.get());
   }
   
-  void MenuDisplay::toggle_menu(KeyManager key_state)
+  void MenuDisplay::toggle_menu(KeyManager::KeyType key_state)
   {
-    switch (key_state.get()) {
+    switch (key_state) {
     case KeyManager::Up:
       if (selected_index_ > 0) {
         --selected_index_;

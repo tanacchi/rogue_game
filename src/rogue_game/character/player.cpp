@@ -11,11 +11,11 @@ namespace character
   {
   }
 
-  const std::map<KeyboardManager::KeyState, const map::Point<int>> Player::motion_table = {
-    {KeyboardManager::KeyState::Up,    map::up   },
-    {KeyboardManager::KeyState::Down,  map::down },
-    {KeyboardManager::KeyState::Right, map::right},
-    {KeyboardManager::KeyState::Left,  map::left },
+  const std::map<KeyManager::KeyType, const map::Point<int>> Player::motion_table = {
+    {KeyManager::Up,    map::up   },
+    {KeyManager::Down,  map::down },
+    {KeyManager::Right, map::right},
+    {KeyManager::Left,  map::left },
   };
 
   std::size_t Player::get_money() const

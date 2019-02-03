@@ -18,14 +18,14 @@ public:
   GameMaster();
   ~GameMaster();
   void update();
-  void take_dungeon_mode(const KeyboardManager::KeyState& key_state);
-  void take_select_mode(const KeyboardManager::KeyState& key_state);
+  void take_dungeon_mode();
+  void take_select_mode();
 private:
   map::Map map_;
   map::MapDisplay map_display_;
   PlayerDisplay player_display_;
   menu::MenuDisplay menu_display_;
-  KeyboardManager keyboard_;
+  KeyManager keyboard_;
   character::Player player_;
   Mode current_mode_;
 };

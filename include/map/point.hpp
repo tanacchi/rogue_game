@@ -33,11 +33,17 @@ namespace map
     const Point& operator+=(const Point& rhs);
     bool operator==(const Point& rhs) const;
     bool operator<(const Point& rls) const;
+    explicit operator bool() const noexcept;
     friend std::ostream& operator<<(std::ostream& os, const Point<int>& point);
   private:
     T x_;
     T y_;
   };
+
+  const Point<int> up   { 0,-1};
+  const Point<int> down { 0, 1};
+  const Point<int> right{ 1, 0};
+  const Point<int> left {-1, 0};
 }
 
 #endif  // INCLUDED_POINT_HPP

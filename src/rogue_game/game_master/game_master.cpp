@@ -48,8 +48,8 @@ void GameMaster::take_select_mode(const KeyManager& key_state)
   // アイテムの使用
   menu_display_.set_menu(player_.get_item_name_array());
   menu_display_.show();
-  keyboard_.update();
   for (;;) {                // REFACTOR REQUIRED : 読む気失せる程度に汚いけど動く
+    keyboard_.update();
     const KeyManager::KeyType menu_toggler{keyboard_.get()};
     if (menu_toggler == KeyManager::Back || menu_toggler == KeyManager::Space) {
       menu_display_.hide();

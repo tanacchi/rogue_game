@@ -52,6 +52,11 @@ void KeyManager::update() noexcept
   key_ = (itr == key_state_table.end()) ? KeyManager::Null : itr->second;
 }
 
+bool KeyManager::is_match(KeyManager::KeyType condition) const noexcept
+{
+  return (key_ & condition) != KeyManager::KeyType{};
+}
+
 KeyManager::KeyType KeyManager::get() const noexcept
 {
   return key_;

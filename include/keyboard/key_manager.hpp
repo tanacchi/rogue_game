@@ -33,6 +33,7 @@ class KeyManager
     KeyManager operator|(KeyManager::KeyType&& rhs);
 
     void update() noexcept;
+    bool is_match(KeyType condition) const noexcept;
     KeyManager::KeyType get() const noexcept;
   private:
     KeyManager::KeyType key_;

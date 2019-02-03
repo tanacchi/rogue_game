@@ -35,11 +35,11 @@ namespace menu
     wrefresh(win_.get());
   }
   
-  void MenuDisplay::toggle_menu(KeyManager::KeyType key_state)
+  void MenuDisplay::toggle_menu(const KeyManager& key)
   {
-    if (key_state == KeyManager::Up && selected_index_ > 0) {
+    if (key == KeyManager::Up && selected_index_ > 0) {
         --selected_index_;
-    } else if (key_state == KeyManager::Down && selected_index_ < menu_strings_.size()-1) {
+    } else if (key == KeyManager::Down && selected_index_ < menu_strings_.size()-1) {
         ++selected_index_;
     }
   }

@@ -18,8 +18,8 @@ public:
   GameMaster();
   ~GameMaster();
   void update();
-  void take_dungeon_mode(const KeyManager& key_type);
-  void take_select_mode(const KeyManager& key_type);
+  void take_dungeon_mode();
+  void take_select_mode();
 private:
   map::Map map_;
   map::MapDisplay map_display_;

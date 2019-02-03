@@ -39,6 +39,11 @@ namespace map
     T x_;
     T y_;
   };
+
+  const Point<int> up   { 0,-1};
+  const Point<int> down { 0, 1};
+  const Point<int> right{ 1, 0};
+  const Point<int> left {-1, 0};
 }
 
 #endif  // INCLUDED_POINT_HPP

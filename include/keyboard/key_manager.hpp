@@ -28,7 +28,7 @@ class KeyManager
     explicit operator KeyManager::KeyType() const noexcept;
     explicit operator bool() const noexcept;
     bool operator==(const KeyManager& rhs) const noexcept;
-    bool operator==(KeyManager::KeyType&& rhs) const noexcept;
+    bool operator==(KeyManager::KeyType rhs) const noexcept;
     friend KeyManager operator|(const KeyManager& lhs, const KeyManager& rhs);
     KeyManager operator|(KeyManager::KeyType&& rhs);
 

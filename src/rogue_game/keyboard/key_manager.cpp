@@ -41,7 +41,7 @@ bool KeyManager::operator==(const KeyManager& rhs) const noexcept
   return key_ == rhs.key_;
 }
 
-bool KeyManager::operator==(KeyManager::KeyType&& rhs) const noexcept
+bool KeyManager::operator==(KeyManager::KeyType rhs) const noexcept
 {
   return key_ == rhs;
 }

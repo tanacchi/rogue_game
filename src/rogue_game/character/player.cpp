@@ -11,7 +11,7 @@ namespace character
   {
   }
 
-  const std::map<KeyboardManager::KeyState, const map::Point<int>> Player::motion_table = {
+  const std::map<KeyManager::KeyType, const map::Point<int>> Player::motion_table = {
     {KeyManager::Up,    map::up   },
     {KeyManager::Down,  map::down },
     {KeyManager::Right, map::right},

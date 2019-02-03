@@ -51,10 +51,10 @@ void GameMaster::take_select_mode(const KeyManager& key_state)
   for (;;) {                // REFACTOR REQUIRED : 読む気失せる程度に汚いけど動く
     keyboard_.update();
     const KeyManager::KeyType menu_toggler{keyboard_.get()};
-    if (menu_toggler == KeyManager::Back || menu_toggler == KeyManager::Space) {
+    if (keyboard_.is_match(KeyManager::Back|KeyManager::Space)) {
       menu_display_.hide();
       break;
-    } else if (menu_toggler == KeyManager::Enter) {
+    } else if (keyboard_ == KeyManager::Enter) {
       int item_index{menu_display_.get_current_index()};
       player_.use_item(item_index);
       menu_display_.hide();
@@ -77,17 +77,10 @@ void GameMaster::update()
   refresh();
   keyboard_.update();
 
-  const KeyManager::KeyType key_state{keyboard_.get()};
-  switch (key_state) {
-  case KeyManager::Space:
+  if (keyboard_ == KeyManager::Space) {
     current_mode_ = Mode::Select;
-    break;
-  case KeyManager::Back:
-  case KeyManager::Enter:
+  } else if (keyboard_.is_match(KeyManager::Back|KeyManager::Enter)) {
     current_mode_ = Mode::Dungeon;
-    break;
-  default:
-    break;
   }
 
   switch (current_mode_) {

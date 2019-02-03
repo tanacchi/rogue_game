@@ -37,19 +37,10 @@ namespace menu
   
   void MenuDisplay::toggle_menu(KeyManager::KeyType key_state)
   {
-    switch (key_state) {
-    case KeyManager::Up:
-      if (selected_index_ > 0) {
+    if (key_state == KeyManager::Up && selected_index_ > 0) {
         --selected_index_;
-      }
-      break;
-    case KeyManager::Down:
-      if (selected_index_ < menu_strings_.size() - 1) {
+    } else if (key_state == KeyManager::Down && selected_index_ < menu_strings_.size()-1) {
         ++selected_index_;
-      }
-      break;
-    default:
-      break;
     }
   }
 

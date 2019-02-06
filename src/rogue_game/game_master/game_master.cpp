@@ -1,6 +1,6 @@
 #include <exception>
 
-#include <rogue_game/game_master.hpp>
+#include <game_master/game_master.hpp>
 #include <map/map_reader.hpp>
 
 GameMaster::GameMaster()

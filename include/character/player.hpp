@@ -1,12 +1,12 @@
 #ifndef INCLUDED_PLAYER_HPP
 #define INCLUDED_PLAYER_HPP
 
-#include <ostream>
 #include <map>
 #include <memory>
 #include <list>
 #include <vector>
 
+#include <keyboard/key_manager.hpp>
 #include <character/character.hpp>
 #include <item/item.hpp>
 

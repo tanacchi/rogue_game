@@ -1,5 +1,5 @@
 #include <character/player.hpp>
-#include <item/gold.hpp>
+#include <item/item_series.hpp>
 
 namespace character
 {

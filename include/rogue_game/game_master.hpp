@@ -1,5 +1,5 @@
-#ifndef INCLUDED_ROGUE_GAME_GAME_MASTER_HPP
-#define INCLUDED_ROGUE_GAME_GAME_MASTER_HPP
+#ifndef INCLUDED_GAME_MASTER_HPP
+#define INCLUDED_GAME_MASTER_HPP
 
 #include <map/point.hpp>
 #include <rogue_game/rogue_game.hpp>
@@ -30,4 +30,4 @@ private:
   Mode current_mode_;
 };
 
-#endif  // INCLUDED_ROGUE_GAME_GAME_MASTER_HPP
+#endif  // INCLUDED_GAME_MASTER_HPP

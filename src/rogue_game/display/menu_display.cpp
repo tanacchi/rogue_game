@@ -39,7 +39,7 @@ namespace menu
   {
     if (key == KeyManager::Up && selected_index_ > 0) {
         --selected_index_;
-    } else if (key == KeyManager::Down && selected_index_ < menu_strings_.size()-1) {
+    } else if (key == KeyManager::Down && selected_index_ < static_cast<int>(menu_strings_.size())-1) {
         ++selected_index_;
     }
   }

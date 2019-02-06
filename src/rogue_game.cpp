@@ -1,7 +1,4 @@
-#include <rogue_game/rogue_game.hpp>
-#include <rogue_game/game_master.hpp>
-
-#include <character/character.hpp>
+#include <game_master/game_master.hpp>
 
 int main()
 {

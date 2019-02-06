@@ -1,7 +1,7 @@
 #ifndef INCLUDED_TEXT_MAP_HPP
 #define INCLUDED_TEXT_MAP_HPP
 
-#include <iostream>
+#include <vector>
 
 namespace map
 {

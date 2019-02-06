@@ -1,6 +1,6 @@
-#include <rogue_game/rogue_game.hpp>
-#include <map/text_map.hpp>
+#include <debug/logger.hpp>
 #include <map/map_writer.hpp>
+#include <map/text_map.hpp>
 
 int main(int argc, char** argv)
 {

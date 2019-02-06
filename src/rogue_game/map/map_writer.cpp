@@ -1,7 +1,4 @@
-#include <string>
-
 #include <map/map_writer.hpp>
-#include <rogue_game/rogue_game.hpp>
 
 namespace map
 {

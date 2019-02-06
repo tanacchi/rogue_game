@@ -2,7 +2,6 @@
 #define INCLUDED_MUNU_DISPLAY_HPP
 
 #include <vector>
-#include <string>
 
 #include <display/display_panel.hpp>
 #include <keyboard/key_manager.hpp>

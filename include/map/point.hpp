@@ -2,7 +2,6 @@
 #define INCLUDED_POINT_HPP
 
 #include <ostream>
-#include <utility>
 
 namespace map
 {

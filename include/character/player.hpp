@@ -1,14 +1,14 @@
 #ifndef INCLUDED_PLAYER_HPP
 #define INCLUDED_PLAYER_HPP
 
-#include <ostream>
+#include <list>
 #include <map>
 #include <memory>
-#include <list>
 #include <vector>
 
 #include <character/character.hpp>
 #include <item/item.hpp>
+#include <keyboard/key_manager.hpp>
 
 namespace character
 {

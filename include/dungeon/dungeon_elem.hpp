@@ -1,8 +1,8 @@
 #ifndef INCLUDED_DUNGEON_ELEM_HPP
 #define INCLUDED_DUNGEON_ELEM_HPP
 
-#include <ostream>
 #include <memory>
+#include <ostream>
 
 #include <map/map_elem.hpp>
 

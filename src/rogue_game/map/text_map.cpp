@@ -1,9 +1,9 @@
 #include <algorithm>
-#include <iomanip>
-#include <vector>
 #include <fstream>
+#include <iomanip>
 #include <sstream>
 
+#include <debug/logger.hpp>
 #include <map/text_map.hpp>
 
 namespace map

@@ -1,8 +1,8 @@
 #ifndef INCLUDED_PLAYER_DISPLAY_HPP
 #define INCLUDED_PLAYER_DISPLAY_HPP
 
-#include <display/display_panel.hpp>
 #include <character/player.hpp>
+#include <display/display_panel.hpp>
 
 // プレイヤーのステータスを表示する
 // ただしマップ上のプレイヤーはウィンドウが違うので MapDisplay が表示してる

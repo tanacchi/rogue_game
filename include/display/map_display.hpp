@@ -1,9 +1,9 @@
 #ifndef INCLUDED_MAP_DISPLAY_HPP
 #define INCLUDED_MAP_DISPLAY_HPP
 
+#include <character/player.hpp>
 #include <display/display_panel.hpp>
 #include <map/map.hpp>
-#include <character/player.hpp>
 
 namespace map
 {

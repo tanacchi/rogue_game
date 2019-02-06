@@ -1,9 +1,11 @@
-#ifndef INCLUDED_ROGUE_GAME_GAME_MASTER_HPP
-#define INCLUDED_ROGUE_GAME_GAME_MASTER_HPP
+#ifndef INCLUDED_GAME_MASTER_HPP
+#define INCLUDED_GAME_MASTER_HPP
 
-#include <map/point.hpp>
-#include <rogue_game/rogue_game.hpp>
+#include <display/map_display.hpp>
 #include <display/menu_display.hpp>
+#include <display/player_display.hpp>
+#include <keyboard/key_manager.hpp>
+#include <map/point.hpp>
 
 // ゲームの進行を扱う
 class GameMaster
@@ -30,4 +32,4 @@ private:
   Mode current_mode_;
 };
 
-#endif  // INCLUDED_ROGUE_GAME_GAME_MASTER_HPP
+#endif  // INCLUDED_GAME_MASTER_HPP

@@ -1,7 +1,6 @@
 #ifndef INCLUDED_DISPLAY_PANEL_HPP
 #define INCLUDED_DISPLAY_PANEL_HPP
 
-#include <iostream>
 #include <ncurses.h>
 #include <memory>
 

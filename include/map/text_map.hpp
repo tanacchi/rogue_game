@@ -2,6 +2,7 @@
 #define INCLUDED_TEXT_MAP_HPP
 
 #include <iostream>
+#include <vector>
 
 namespace map
 {

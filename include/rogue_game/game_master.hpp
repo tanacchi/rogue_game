@@ -5,7 +5,6 @@
 #include <display/map_display.hpp>
 #include <display/player_display.hpp>
 #include <map/point.hpp>
-#include <rogue_game/rogue_game.hpp>
 #include <display/menu_display.hpp>
 
 // ゲームの進行を扱う

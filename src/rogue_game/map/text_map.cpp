@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 
+#include <debug/logger.hpp>
 #include <map/text_map.hpp>
 
 namespace map

@@ -1,7 +1,6 @@
 #ifndef INCLUDED_MAP_ELEM_HPP
 #define INCLUDED_MAP_ELEM_HPP
 
-#include <string>
 #include <ostream>
 
 namespace map

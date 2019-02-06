@@ -1,5 +1,5 @@
-#include <display/menu_display.hpp>
 #include <debug/logger.hpp>
+#include <display/menu_display.hpp>
 
 namespace menu
 {
@@ -35,21 +35,12 @@ namespace menu
     wrefresh(win_.get());
   }
   
-  void MenuDisplay::toggle_menu(KeyboardManager::KeyState key_state)
+  void MenuDisplay::toggle_menu(const KeyManager& key)
   {
-    switch (key_state) {
-    case KeyboardManager::KeyState::Up:
-      if (selected_index_ > 0) {
+    if (key == KeyManager::Up && selected_index_ > 0) {
         --selected_index_;
-      }
-      break;
-    case KeyboardManager::KeyState::Down:
-      if (selected_index_ < menu_strings_.size() - 1) {
+    } else if (key == KeyManager::Down && selected_index_ < static_cast<int>(menu_strings_.size())-1) {
         ++selected_index_;
-      }
-      break;
-    default:
-      break;
     }
   }
 

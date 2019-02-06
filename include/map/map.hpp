@@ -1,16 +1,19 @@
 #ifndef INCLUDED_MAP_HPP
 #define INCLUDED_MAP_HPP
 
-#include <ostream>
-#include <valarray>
-#include <memory>
 #include <map>
 #include <vector>
+#include <boost/filesystem.hpp>
+// #include <string_view>  // In C++17
 
-#include <map/map_elem.hpp>
-#include <map/point.hpp>
+#include <debug/logger.hpp>
 #include <dungeon/dungeon_elem.hpp>
 #include <item/item.hpp>
+#include <map/map_elem.hpp>
+#include <map/point.hpp>
+
+const std::string map_dir{boost::filesystem::current_path().string() + "/map/"};
+// constexpr std::string_view map_dir{boost::filesystem::current_path().string() + "/map/"};
 
 namespace map
 {
@@ -18,6 +21,7 @@ namespace map
   {
     Map() = default;
     Map(Map&& map);
+    Map& operator=(Map&& map) noexcept;
     friend std::ostream& operator<<(std::ostream& os, const Map& map);
     
     std::size_t width;
@@ -39,14 +43,6 @@ namespace map
     // 初期化でしか使わないから別の場所に移動したい
     Point<int> index_to_point(std::size_t index);
   };
-
-  // マップデータ（json）からインスタンスを生成
-  // コンストラクタでいいな
-  Map read_map(const std::string mapfile_name);
-
-  // ダンジョン要素の種類からダンジョン要素のインスタンスを生成しポインタを返す
-  // オブジェクト・ファクトリ的な役割
-  ::dungeon::DungeonElemPtr gen_dungeon_elem(std::string type);
 }
 
 #endif  // INCLUDED_MAP_HPP

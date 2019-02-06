@@ -1,7 +1,7 @@
 #include <sstream>
 
-#include <item/gold.hpp>
 #include <character/player.hpp>
+#include <item/gold.hpp>
 
 namespace item
 {

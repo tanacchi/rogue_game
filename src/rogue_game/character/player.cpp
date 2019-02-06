@@ -1,21 +1,21 @@
 #include <character/player.hpp>
-#include <item/gold.hpp>
+#include <item/item_series.hpp>
 
 namespace character
 {
-  Player::Player(map::Point<int> position)
-    : Character(position),
+  Player::Player()
+    : Character(map::Point<int>{0, 0}),
       inventory_{10},
-      direction_{0, 1},
+      direction_{map::down},
       money_{0}
   {
   }
 
-  const std::map<KeyboardManager::KeyState, const map::Point<int>> Player::motion_table = {
-    {KeyboardManager::KeyState::Up,    map::Point<int>{ 0,-1}},
-    {KeyboardManager::KeyState::Down,  map::Point<int>{ 0, 1}},
-    {KeyboardManager::KeyState::Right, map::Point<int>{ 1, 0}},
-    {KeyboardManager::KeyState::Left,  map::Point<int>{-1, 0}},
+  const std::map<KeyManager::KeyType, const map::Point<int>> Player::motion_table = {
+    {KeyManager::Up,    map::up   },
+    {KeyManager::Down,  map::down },
+    {KeyManager::Right, map::right},
+    {KeyManager::Left,  map::left },
   };
 
   std::size_t Player::get_money() const
@@ -54,7 +54,7 @@ namespace character
   {
     if (next_motion == direction_) {
       set_position(next_motion + get_position());
-    } else {
+    } else if (next_motion) {
       direction_ = next_motion;
     }
   }

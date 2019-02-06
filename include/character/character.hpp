@@ -2,12 +2,8 @@
 #define INCLUDED_CHARACTER_HPP
 
 #include <ostream>
-#include <cstddef>
-#include <memory>
 
 #include <debug/logger.hpp>
-#include <keyboard/keyboard_manager.hpp>
-#include <map/map.hpp>
 #include <map/point.hpp>
 
 namespace character
@@ -21,7 +17,7 @@ namespace character
     Character(map::Point<int> position = map::Point<int>{0, 0});
     
     // キャラクターの位置を取得
-    map::Point<int> get_position() const;
+    map::Point<int> get_position() const;  // const& にする？
 
     // キャラクターの位置を設定
     void set_position(const map::Point<int>& point);

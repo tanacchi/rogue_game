@@ -1,8 +1,8 @@
 #ifndef INCLUDED_KEY_MANAGER_HPP
 #define INCLUDED_KEY_MANAGER_HPP
 
-#include <ncurses.h>
 #include <cstdint>
+#include <ncurses.h>
 #include <unordered_map>
 
 class KeyManager

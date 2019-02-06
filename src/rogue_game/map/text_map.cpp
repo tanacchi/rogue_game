@@ -1,6 +1,6 @@
 #include <algorithm>
-#include <iomanip>
 #include <fstream>
+#include <iomanip>
 #include <sstream>
 
 #include <debug/logger.hpp>

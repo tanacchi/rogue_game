@@ -1,5 +1,5 @@
-#include <display/menu_display.hpp>
 #include <debug/logger.hpp>
+#include <display/menu_display.hpp>
 
 namespace menu
 {

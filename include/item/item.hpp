@@ -1,12 +1,12 @@
 #ifndef INCLUDED_ITEM_HPP
 #define INCLUDED_ITEM_HPP
 
-#include <ostream>
 #include <memory>
+#include <ostream>
 
+#include <debug/logger.hpp>
 #include <map/map_elem.hpp>
 #include <map/point.hpp>
-#include <debug/logger.hpp>
 
 namespace character
 {

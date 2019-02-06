@@ -1,6 +1,6 @@
-#include <map/map_reader.hpp>
 #include <dungeon/dungeon_series.hpp>
 #include <item/item_series.hpp>
+#include <map/map_reader.hpp>
 
 namespace map
 {

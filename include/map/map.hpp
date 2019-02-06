@@ -1,20 +1,15 @@
 #ifndef INCLUDED_MAP_HPP
 #define INCLUDED_MAP_HPP
 
-#include <ostream>
-#include <valarray>
-#include <memory>
 #include <map>
 #include <vector>
+#include <boost/filesystem.hpp>
+// #include <string_view>  // In C++17
 
 #include <map/map_elem.hpp>
 #include <map/point.hpp>
 #include <dungeon/dungeon_elem.hpp>
 #include <item/item.hpp>
-
-// #include <string_view>  // In C++17
-#include <boost/filesystem.hpp>
-
 #include <debug/logger.hpp>
 
 const std::string map_dir{boost::filesystem::current_path().string() + "/map/"};

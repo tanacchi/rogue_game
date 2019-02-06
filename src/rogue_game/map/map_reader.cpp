@@ -1,17 +1,6 @@
-#include <vector>
-#include <unordered_map>
-#include <functional>
-
 #include <map/map_reader.hpp>
-
-#include <dungeon/floor.hpp>
-#include <dungeon/path.hpp>
-#include <dungeon/none.hpp>
-#include <dungeon/horizontal_wall.hpp>
-#include <dungeon/vertical_wall.hpp>
-#include <dungeon/door.hpp>
-
-#include <item/gold.hpp>
+#include <dungeon/dungeon_series.hpp>
+#include <item/item_series.hpp>
 
 namespace map
 {

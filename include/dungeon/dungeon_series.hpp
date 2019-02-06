@@ -3,7 +3,7 @@
 
 #include <dungeon/door.hpp>
 #include <dungeon/floor.hpp>
-#include <dungeon/horizonal_wall.hpp>
+#include <dungeon/horizontal_wall.hpp>
 #include <dungeon/none.hpp>
 #include <dungeon/path.hpp>
 #include <dungeon/vertical_wall.hpp>

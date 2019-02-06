@@ -1,18 +1,4 @@
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
-#include <boost/foreach.hpp>
-#include <boost/optional.hpp>
-#include <vector>
-
 #include <map/map.hpp>
-#include <dungeon/floor.hpp>
-#include <dungeon/path.hpp>
-#include <dungeon/none.hpp>
-#include <dungeon/horizontal_wall.hpp>
-#include <dungeon/vertical_wall.hpp>
-#include <dungeon/door.hpp>
-
-#include <item/gold.hpp>
 
 namespace map
 {

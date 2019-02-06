@@ -1,14 +1,15 @@
 #ifndef INCLUDED_MAP_GENERATOR_HPP
 #define INCLUDED_MAP_GENERATOR_HPP
 
+#include <stdexcept>
+#include <map>
+#include <functional>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/foreach.hpp>
 #include <boost/optional.hpp>
-#include <stdexcept>
-#include <map>
-#include <functional>
 
+#include <map/map.hpp>
 #include <map/text_map.hpp>
 
 namespace map

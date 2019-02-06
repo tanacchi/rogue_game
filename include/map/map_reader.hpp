@@ -1,6 +1,8 @@
 #ifndef INCLUDED_MAP_READER_HPP
 #define INCLUDED_MAP_READER_HPP
 
+#include <unordered_map>
+#include <functional>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/foreach.hpp>

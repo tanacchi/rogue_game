@@ -26,7 +26,7 @@ namespace dungeon
     const bool can_stand_;
   };
 
-  using DungeonElemPtr = std::unique_ptr<DungeonElem>;
+  using DungeonElemPtr = std::shared_ptr<DungeonElem>;
 }
 
 #endif  // INCLUDED_DUNGEON_ELEM_HPP

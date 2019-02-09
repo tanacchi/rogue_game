@@ -48,9 +48,4 @@ namespace map
     return (0 <= x && x < width) && (0 <= y && y < height);
   }
 
-  Point<int> Map::index_to_point(std::size_t index)
-  {
-    return {index % width, index / width};
-  }
-
 }

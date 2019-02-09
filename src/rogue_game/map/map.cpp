@@ -33,13 +33,9 @@ namespace map
     return os;
   }
 
-  // いまのところダンジョン要素の配列を一次元にしているメリットが
-  // json からの読み込み位なので
-  // そのを解消して二次元に切り替えて見ようかと思う
   const ::dungeon::DungeonElem Map::get_dungeon_elem(const Point<int>& point) const
   {
-    const ::dungeon::DungeonElem* elem{dungeon_layer[width * point.get_y() + point.get_x()].get()};
-    return *elem;
+    return *dungeon_layer[width * point.get_y() + point.get_x()];
   }
 
   bool Map::in_range(const Point<std::size_t>& point) const

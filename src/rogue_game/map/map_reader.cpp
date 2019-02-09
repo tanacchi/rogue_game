@@ -44,8 +44,9 @@ namespace map
       map.height = json_map_data.get_optional<int>("Map.height").get();
 
       // プレイヤーの初期位置を取得
-      std::size_t player_index{json_map_data.get_optional<std::size_t>("Map.player_pos").get()};
-      map.initial_position = map.index_to_point(player_index);
+      auto player_x{json_map_data.get_optional<int>("Map.player_pos_x").get()};
+      auto player_y{json_map_data.get_optional<int>("Map.player_pos_y").get()};
+      map.initial_position = Point<int>{player_x, player_y};
     }
 
     // ダンジョン要素を取得

@@ -6,10 +6,6 @@ namespace map
   // ダンジョン要素とアイテム要素は別々
   void MapWriter::set_configs(const TextMap& text_map, std::vector<ConfigType>& dungeon_configs, std::vector<ConfigType>& item_configs)
   {
-    auto index_to_point{[&](std::size_t index){
-      return Point<std::size_t>{index % text_map.width, index / text_map.width};
-    }};
-
     for (std::size_t i{0}, end{text_map.text.length()}; i < end; ++i) {
       ConfigType dungeon_config, item_config;
       switch (text_map.text[i]) {
@@ -34,7 +30,7 @@ namespace map
         case '*':
           dungeon_config.put("type", "floor");
           item_config.put("type", "gold");
-          auto pos{index_to_point(i)};
+          auto pos{text_map.index_to_point(i)};
           item_config.put("pos_x", pos.get_x());
           item_config.put("pos_y", pos.get_y());
           item_config.put("amount", 100);
@@ -56,7 +52,9 @@ namespace map
     ConfigType map_data;
     map_data.put("Map.width", text_map.width);
     map_data.put("Map.height", text_map.height);
-    map_data.put("Map.player_pos", text_map.text.find('@'));
+    auto player_pos{text_map.index_to_point(text_map.text.find('@'))};
+    map_data.put("Map.player_pos_x", player_pos.get_x());
+    map_data.put("Map.player_pos_y", player_pos.get_y());
     ConfigType dungeon_tree;
     for (auto config : dungeon_configs) {
       dungeon_tree.push_back(std::make_pair("", config));

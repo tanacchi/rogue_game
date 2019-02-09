@@ -6,6 +6,10 @@ namespace map
   // ダンジョン要素とアイテム要素は別々
   void MapWriter::set_configs(const TextMap& text_map, std::vector<ConfigType>& dungeon_configs, std::vector<ConfigType>& item_configs)
   {
+    auto index_to_point{[&](std::size_t index){
+      return Point<std::size_t>{index % text_map.width, index / text_map.width};
+    }};
+
     for (std::size_t i{0}, end{text_map.text.length()}; i < end; ++i) {
       ConfigType dungeon_config, item_config;
       switch (text_map.text[i]) {
@@ -30,7 +34,9 @@ namespace map
         case '*':
           dungeon_config.put("type", "floor");
           item_config.put("type", "gold");
-          item_config.put("index", i);
+          auto pos{index_to_point(i)};
+          item_config.put("pos_x", pos.get_x());
+          item_config.put("pos_y", pos.get_y());
           item_config.put("amount", 100);
           break;
       }

@@ -65,9 +65,9 @@ namespace map
         const boost::property_tree::ptree& elem{child.second};
         if (!elem.empty()) {
           std::string type{elem.get_optional<std::string>("type").get()};
-          std::size_t index{elem.get_optional<std::size_t>("index").get()};
-          Point<int> pos{map.index_to_point(index)};
-          map.item_layer.emplace(pos, std::move(gen_item_elem(type, elem)));
+          auto pos_x{elem.get_optional<int>("pos_x").get()};
+          auto pos_y{elem.get_optional<int>("pos_y").get()};
+          map.item_layer.emplace(Point<int>{pos_x, pos_y}, std::move(gen_item_elem(type, elem)));
         }
       }
     }

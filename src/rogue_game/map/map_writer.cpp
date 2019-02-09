@@ -35,7 +35,10 @@ namespace map
           break;
       }
       dungeon_configs.emplace_back(dungeon_config);
-      item_configs.emplace_back(item_config);
+      if (!item_config.empty()) 
+      {
+        item_configs.emplace_back(item_config);
+      }
     }
   }
 

@@ -3,6 +3,8 @@
 
 #include <vector>
 
+#include <map/point.hpp>
+
 namespace map
 {
   // テキストファイルから直接読み込むマップの情報
@@ -15,6 +17,7 @@ namespace map
       const std::size_t height{};
       const std::string text{};
 
+      Point<std::size_t> index_to_point(std::size_t index) const noexcept;
       friend std::ostream& operator<<(std::ostream& os, const TextMap& text_map);
     private:
       const std::size_t get_width(const std::vector<std::string>& map_strings);

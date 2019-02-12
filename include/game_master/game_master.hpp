@@ -31,7 +31,6 @@ private:
   menu::MenuDisplay menu_display_;
   KeyManager        keyboard_;
   character::Player player_;
-  Mode              current_mode_;
 };
 
 #endif  // INCLUDED_GAME_MASTER_HPP

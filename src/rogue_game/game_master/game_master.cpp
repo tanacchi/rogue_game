@@ -8,8 +8,7 @@ GameMaster::GameMaster()
     player_display_{70, 30, 20, 10},
     menu_display_{100, 10, 30, 16},
     keyboard_{},
-    player_(),
-    current_mode_{Mode::Dungeon}
+    player_()
 {
   map::MapReader map_reader{};
   map_ = map_reader(map_dir + "json/tmp_sample_map.json");
@@ -80,15 +79,19 @@ GameMaster::Mode GameMaster::take_select_mode()
 // タスク過多な気がする
 void GameMaster::update()
 {
-  show();
-  keyboard_.update();
+  Mode mode{Mode::Dungeon};
 
-  switch (current_mode_) {
-  case Mode::Dungeon:
-    current_mode_ = take_dungeon_mode();
-    break;
-  case Mode::Select:
-    current_mode_ = take_select_mode();
-    break;
+  while (true) {
+    show();
+    keyboard_.update();
+
+    switch (mode) {
+    case Mode::Dungeon:
+      mode = take_dungeon_mode();
+      break;
+    case Mode::Select:
+      mode = take_select_mode();
+      break;
+    }
   }
 }

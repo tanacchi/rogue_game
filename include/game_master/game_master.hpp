@@ -20,16 +20,17 @@ public:
   GameMaster();
   ~GameMaster();
   void update();
+private:
   void take_dungeon_mode();
   void take_select_mode();
-private:
-  map::Map map_;
-  map::MapDisplay map_display_;
-  PlayerDisplay player_display_;
+
+  map::Map          map_;
+  map::MapDisplay   map_display_;
+  PlayerDisplay     player_display_;
   menu::MenuDisplay menu_display_;
-  KeyManager keyboard_;
+  KeyManager        keyboard_;
   character::Player player_;
-  Mode current_mode_;
+  Mode              current_mode_;
 };
 
 #endif  // INCLUDED_GAME_MASTER_HPP

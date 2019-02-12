@@ -28,7 +28,7 @@ namespace item
     virtual std::string to_string() const;
   };
 
-  using ItemPtr = std::unique_ptr<Item>;
+  using ItemPtr = std::shared_ptr<Item>;
 }
 
 #endif  // INCLUDED_ITEM_HPP

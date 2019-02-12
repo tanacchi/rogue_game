@@ -22,10 +22,10 @@ namespace character
       friend std::ostream& operator<<(std::ostream& os, const Inventory& inventory);
       std::size_t get_item_num() const;
       std::vector<std::string> get_item_name_array() const;
-      void store(std::unique_ptr<item::Item>&& item);
+      void store(::item::ItemPtr&& item);
       void use(Player* const player_ptr, std::size_t item_index);
     private:
-      std::list<std::unique_ptr<item::Item> > items_;
+      std::list<::item::ItemPtr> items_;
       std::size_t capacity_;
     };
 
@@ -38,7 +38,7 @@ namespace character
     // ステータスごとに２個ずつメソッドが増えることは避けたい
     std::size_t get_money() const;
     void add_money(std::size_t addition);
-    void store_item(std::unique_ptr<item::Item>&& item);
+    void store_item(::item::ItemPtr&& item);
     void use_item(std::size_t item_index);
     std::vector<std::string> get_item_name_array() const;
     friend std::ostream& operator<<(std::ostream& os, const Player& player);

@@ -44,8 +44,9 @@ namespace map
       map.height = json_map_data.get_optional<int>("Map.height").get();
 
       // プレイヤーの初期位置を取得
-      std::size_t player_index{json_map_data.get_optional<std::size_t>("Map.player_pos").get()};
-      map.initial_position = map.index_to_point(player_index);
+      auto player_x{json_map_data.get_optional<int>("Map.player_pos_x").get()};
+      auto player_y{json_map_data.get_optional<int>("Map.player_pos_y").get()};
+      map.initial_position = Point<int>{player_x, player_y};
     }
 
     // ダンジョン要素を取得
@@ -65,9 +66,9 @@ namespace map
         const boost::property_tree::ptree& elem{child.second};
         if (!elem.empty()) {
           std::string type{elem.get_optional<std::string>("type").get()};
-          std::size_t index{elem.get_optional<std::size_t>("index").get()};
-          Point<int> pos{map.index_to_point(index)};
-          map.item_layer.emplace(pos, std::move(gen_item_elem(type, elem)));
+          auto pos_x{elem.get_optional<int>("pos_x").get()};
+          auto pos_y{elem.get_optional<int>("pos_y").get()};
+          map.item_layer.emplace(Point<int>{pos_x, pos_y}, std::move(gen_item_elem(type, elem)));
         }
       }
     }

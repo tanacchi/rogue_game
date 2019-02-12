@@ -15,6 +15,11 @@ namespace map
   {
   }
 
+  Point<std::size_t> TextMap::index_to_point(std::size_t index) const noexcept
+  {
+    return {index % width, index / width};
+  }
+
   std::ostream& operator<<(std::ostream& os, const TextMap& text_map)
   {
     os << " { width : " << text_map.width  << " },"

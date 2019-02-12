@@ -21,6 +21,7 @@ public:
   ~GameMaster();
   void update();
 private:
+  void show();
   void take_dungeon_mode();
   void take_select_mode();
 

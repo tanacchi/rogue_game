@@ -21,6 +21,14 @@ GameMaster::~GameMaster()
   endwin();
 }
 
+void GameMaster::show()
+{
+  // 画面表示
+  map_display_.show(map_, player_);
+  player_display_.show(player_);
+  refresh();
+}
+
 void GameMaster::take_dungeon_mode()
 {
   {
@@ -70,10 +78,7 @@ void GameMaster::take_select_mode()
 // タスク過多な気がする
 void GameMaster::update()
 {
-  // 画面表示
-  map_display_.show(map_, player_);
-  player_display_.show(player_);
-  refresh();
+  show();
   keyboard_.update();
 
   if (keyboard_ == KeyManager::Space) {

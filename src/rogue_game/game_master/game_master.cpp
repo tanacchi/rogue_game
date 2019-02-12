@@ -6,7 +6,7 @@
 GameMaster::GameMaster()
   : map_display_{5, 4, 80, 30},
     player_display_{70, 30, 20, 10},
-    menu_display_{80, 10, 30, 16},
+    menu_display_{100, 10, 30, 16},
     keyboard_{},
     player_(),
     current_mode_{Mode::Dungeon}
@@ -26,11 +26,15 @@ void GameMaster::show()
   // 画面表示
   map_display_.show(map_, player_);
   player_display_.show(player_);
-  refresh();
+  // refresh();
 }
 
-void GameMaster::take_dungeon_mode()
+GameMaster::Mode GameMaster::take_dungeon_mode()
 {
+  if (keyboard_ == KeyManager::Space)
+  {
+    return Mode::Select;
+  }
   {
     // プレイヤーの位置更新
     map::Point<int> motion{character::Player::motion_table.find(keyboard_.get()) != character::Player::motion_table.end() ?
@@ -49,29 +53,27 @@ void GameMaster::take_dungeon_mode()
       map_.item_layer.erase(it);
     }
   }
+  return Mode::Dungeon;
 }
 
-void GameMaster::take_select_mode()
+GameMaster::Mode GameMaster::take_select_mode()
 {
   // アイテムの使用
   menu_display_.set_menu(player_.get_item_name_array());
-  menu_display_.show();
-  for (;;) {                // REFACTOR REQUIRED : 読む気失せる程度に汚いけど動く
-    keyboard_.update();
-    if (keyboard_.is_match(KeyManager::Back|KeyManager::Space)) {
-      menu_display_.hide();
-      break;
-    } else if (keyboard_ == KeyManager::Enter) {
-      int item_index{menu_display_.get_current_index()};
-      player_.use_item(item_index);
-      menu_display_.hide();
-      break;
-    } else {
-      menu_display_.toggle_menu(keyboard_);
-      menu_display_.show();
-    }
+  if (keyboard_.is_match(KeyManager::Back|KeyManager::Space)) {
+    menu_display_.hide();
+    return Mode::Dungeon;
+  } else if (keyboard_ == KeyManager::Enter) {
+    int item_index{menu_display_.get_current_index()};
+    player_.use_item(item_index);
+    menu_display_.hide();
+    return Mode::Dungeon;
+  } else {
+    menu_display_.toggle_menu(keyboard_);
+    menu_display_.show();
+    refresh();
+    return Mode::Select;
   }
-  current_mode_ = Mode::Dungeon;
 }
 
 // ゲームの要素全てを更新する
@@ -81,18 +83,12 @@ void GameMaster::update()
   show();
   keyboard_.update();
 
-  if (keyboard_ == KeyManager::Space) {
-    current_mode_ = Mode::Select;
-  } else if (keyboard_.is_match(KeyManager::Back|KeyManager::Enter)) {
-    current_mode_ = Mode::Dungeon;
-  }
-
   switch (current_mode_) {
   case Mode::Dungeon:
-    take_dungeon_mode();
+    current_mode_ = take_dungeon_mode();
     break;
   case Mode::Select:
-    take_select_mode();
+    current_mode_ = take_select_mode();
     break;
   }
 }

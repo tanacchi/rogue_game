@@ -22,8 +22,8 @@ public:
   void update();
 private:
   void show();
-  void take_dungeon_mode();
-  void take_select_mode();
+  Mode take_dungeon_mode();
+  Mode take_select_mode();
 
   map::Map          map_;
   map::MapDisplay   map_display_;

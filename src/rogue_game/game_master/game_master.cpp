@@ -25,7 +25,8 @@ void GameMaster::show()
   // 画面表示
   map_display_.show(map_, player_);
   player_display_.show(player_);
-  // refresh();
+  menu_display_.show();
+  refresh();
 }
 
 GameMaster::Mode GameMaster::take_dungeon_mode()
@@ -60,16 +61,16 @@ GameMaster::Mode GameMaster::take_select_mode()
   // アイテムの使用
   menu_display_.set_menu(player_.get_item_name_array());
   if (keyboard_.is_match(KeyManager::Back|KeyManager::Space)) {
-    menu_display_.hide();
+    menu_display_.set_visible(false);
     return Mode::Dungeon;
   } else if (keyboard_ == KeyManager::Enter) {
     int item_index{menu_display_.get_current_index()};
     player_.use_item(item_index);
-    menu_display_.hide();
+    menu_display_.set_visible(false);
     return Mode::Dungeon;
   } else {
     menu_display_.toggle_menu(keyboard_);
-    menu_display_.show();
+    menu_display_.set_visible(true);
     refresh();
     return Mode::Select;
   }

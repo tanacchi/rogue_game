@@ -15,7 +15,6 @@ namespace menu
                 std::size_t width = 10ul, std::size_t height = 10ul, bool is_visible = false);
     void set_menu(std::vector<std::string>&& menu);
     void show() const;
-    void hide();
     void set_visible(bool is_visible);
     void toggle_menu(const KeyManager& key_state);
     int get_current_index() const;

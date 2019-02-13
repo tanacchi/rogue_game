@@ -37,23 +37,19 @@ GameMaster::Mode GameMaster::take_dungeon_mode()
     menu_display_.show();
     return Mode::Select;
   }
-  {
-    // プレイヤーの位置更新
-    map::Point<int> motion{character::Player::motion_table.find(keyboard_.get()) != character::Player::motion_table.end() ?
-        character::Player::motion_table.at(keyboard_.get()) : map::Point<int>{0, 0}};
-    map::Point<int> next_position{player_.get_position() + motion};
-    if (map_.in_range(next_position) && map_.get_dungeon_elem(next_position).can_stand()) {
-      player_.assign_motion(motion);
-    }
+  // プレイヤーの位置更新
+  const auto motion{character::Player::motion_table.find(keyboard_.get()) != character::Player::motion_table.end() ?
+      character::Player::motion_table.at(keyboard_.get()) : map::Point<int>{0, 0}};
+  const auto next_position{player_.get_position() + motion};
+  if (map_.in_range(next_position) && map_.get_dungeon_elem(next_position).can_stand()) {
+    player_.assign_motion(motion);
   }
-  {
-    // アイテムの取得・更新
-    map::Point<int> current_position{player_.get_position()};
-    std::map<map::Point<int>, ::item::ItemPtr>::iterator it{map_.item_layer.find(current_position)};
-    if (it != map_.item_layer.end()) {
-      player_.store_item(std::move(it->second));
-      map_.item_layer.erase(it);
-    }
+  // アイテムの取得・更新
+  const auto current_position{player_.get_position()};
+  const auto picked_up_item_itr{map_.item_layer.find(current_position)};
+  if (picked_up_item_itr != map_.item_layer.end()) {
+    player_.store_item(std::move(picked_up_item_itr->second));
+    map_.item_layer.erase(picked_up_item_itr);
   }
   return Mode::Dungeon;
 }
@@ -65,7 +61,7 @@ GameMaster::Mode GameMaster::take_select_mode()
     menu_display_.set_visible(false);
     return Mode::Dungeon;
   } else if (keyboard_ == KeyManager::Enter) {
-    int item_index{menu_display_.get_current_index()};
+    const auto item_index{menu_display_.get_current_index()};
     player_.use_item(item_index);
     menu_display_.set_visible(false);
     return Mode::Dungeon;

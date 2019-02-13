@@ -3,9 +3,10 @@
 
 namespace menu
 {
-  MenuDisplay::MenuDisplay(std::size_t x, std::size_t y, std::size_t width, std::size_t height)
+  MenuDisplay::MenuDisplay(std::size_t x, std::size_t y, std::size_t width, std::size_t height, bool is_visible)
     : DisplayPanel(x, y, width, height),
-      selected_index_{}
+      selected_index_{},
+      is_visible_{is_visible}
   {
   }
 
@@ -35,6 +36,15 @@ namespace menu
     wrefresh(win_.get());
   }
   
+  void MenuDisplay::set_visible(bool is_visible)
+  {
+    is_visible_ = is_visible;
+    if (!is_visible_)
+    {
+      selected_index_ = 0;
+    }
+  }
+
   void MenuDisplay::toggle_menu(const KeyManager& key)
   {
     if (key == KeyManager::Up && selected_index_ > 0) {

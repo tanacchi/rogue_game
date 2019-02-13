@@ -19,7 +19,7 @@ public:
   
   GameMaster();
   ~GameMaster();
-  void update();
+  void run();
 private:
   void show();
   Mode take_dungeon_mode();

@@ -8,6 +8,6 @@ int main()
   refresh();
 
   GameMaster master{};
-  master.update();
+  master.run();
   return 0;
 }

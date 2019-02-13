@@ -78,7 +78,7 @@ GameMaster::Mode GameMaster::take_select_mode()
 
 // ゲームの要素全てを更新する
 // タスク過多な気がする
-void GameMaster::update()
+void GameMaster::run()
 {
   Mode mode{Mode::Dungeon};
 

@@ -38,7 +38,7 @@ GameMaster::Mode GameMaster::take_dungeon_mode()
   }
   // プレイヤーの位置更新
   const auto motion{character::Player::motion_table.find(keyboard_.get()) != character::Player::motion_table.end() ?
-      character::Player::motion_table.at(keyboard_.get()) : map::Point<int>{0, 0}};
+      character::Player::motion_table.at(keyboard_.get()) : map::zero};
   const auto next_position{player_.get_position() + motion};
   if (map_.in_range(next_position) && map_.get_dungeon_elem(next_position).can_stand()) {
     player_.assign_motion(motion);

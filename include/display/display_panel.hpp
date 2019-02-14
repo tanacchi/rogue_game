@@ -15,6 +15,7 @@ public:
 protected:
   // ncurses でウィンドウを扱うためのオブジェクト
   std::unique_ptr<WINDOW> win_;
+  static bool has_initialized_;
 };
 
 #endif  // INCLUDED_DISPLAY_PANEL_HPP

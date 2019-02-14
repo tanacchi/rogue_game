@@ -26,15 +26,14 @@ void GameMaster::show()
   map_display_.show(map_, player_);
   player_display_.show(player_);
   menu_display_.show();
-  refresh();
 }
 
 GameMaster::Mode GameMaster::take_dungeon_mode()
 {
   if (keyboard_ == KeyManager::Space)
   {
+    menu_display_.set_menu(player_.get_item_name_array());
     menu_display_.set_visible(true);
-    menu_display_.show();
     return Mode::Select;
   }
   // プレイヤーの位置更新
@@ -67,7 +66,6 @@ GameMaster::Mode GameMaster::take_select_mode()
     return Mode::Dungeon;
   } else {
     menu_display_.toggle_menu(keyboard_);
-    refresh();
     return Mode::Select;
   }
 }
@@ -88,6 +86,5 @@ void GameMaster::run()
       mode = take_select_mode();
       break;
     }
-    menu_display_.set_menu(player_.get_item_name_array());
   }
 }

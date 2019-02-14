@@ -56,11 +56,11 @@ GameMaster::Mode GameMaster::take_dungeon_mode()
 
 GameMaster::Mode GameMaster::take_select_mode()
 {
-  // アイテムの使用
   if (keyboard_.is_match(KeyManager::Back|KeyManager::Space)) {
     menu_display_.set_visible(false);
     return Mode::Dungeon;
   } else if (keyboard_ == KeyManager::Enter) {
+  // アイテムの使用
     const auto item_index{menu_display_.get_current_index()};
     player_.use_item(item_index);
     menu_display_.set_visible(false);
@@ -72,8 +72,6 @@ GameMaster::Mode GameMaster::take_select_mode()
   }
 }
 
-// ゲームの要素全てを更新する
-// タスク過多な気がする
 void GameMaster::run()
 {
   Mode mode{Mode::Dungeon};

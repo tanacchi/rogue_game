@@ -77,14 +77,6 @@ void GameMaster::run()
   while (true) {
     show();
     keyboard_.update();
-
-    switch (mode) {
-    case Mode::Dungeon:
-      mode = take_dungeon_mode();
-      break;
-    case Mode::Select:
-      mode = take_select_mode();
-      break;
-    }
+    mode = mode == Mode::Dungeon ? take_dungeon_mode() : take_select_mode();
   }
 }

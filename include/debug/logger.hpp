@@ -12,11 +12,14 @@ namespace debug
   class Logger
   {
   public:
+    static void init_log_file();
+
     static void log_with_name(std::list<std::string>&& name_list);
 
     template <typename Head, typename... Tail>
     static void log_with_name(std::list<std::string>&& name_list, const Head& head, const Tail&... tail)
     {
+      if (!Logger::fos_.is_open()) init_log_file();
       fos_ << "{ " << name_list.front() << " : " << head << " }\n";
       name_list.pop_front();
       log_with_name(std::move(name_list), std::forward<const Tail&>(tail)...);
@@ -25,6 +28,7 @@ namespace debug
     template <typename Head, typename... Tail>
     static void log_with_name(std::list<std::string>&& name_list, Head&& head, Tail&&... tail)
     {
+      if (!Logger::fos_.is_open()) init_log_file();
       fos_ << "{ " << name_list.front() << " : " << head << " }\n";
       name_list.pop_front();
       log_with_name(std::move(name_list), std::forward<Tail&&>(tail)...);

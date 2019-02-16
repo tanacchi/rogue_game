@@ -4,7 +4,7 @@
 namespace character
 {
   Player::Player()
-    : Character(map::Point<int>{0, 0}),
+    : Character(map::zero),
       inventory_{10},
       direction_{map::down},
       money_{0}

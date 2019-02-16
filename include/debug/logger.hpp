@@ -12,8 +12,6 @@ namespace debug
   class Logger
   {
   public:
-    static void init_log_file();
-
     static void log_with_name(std::list<std::string>&& name_list);
 
     template <typename Head, typename... Tail>
@@ -36,6 +34,8 @@ namespace debug
 
     static void log_string(const std::string& str, char separate_char = '=');    
   private:
+    static void init_log_file();
+
     static std::fstream fos_;
   };
   std::string get_current_time_str();

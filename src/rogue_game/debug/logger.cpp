@@ -1,21 +1,33 @@
 #include <chrono>
 #include <ctime>
 #include <boost/algorithm/string.hpp>
+#include <boost/filesystem.hpp>
 
 #include <debug/logger.hpp>
 
 namespace debug
 {
-  std::fstream Logger::fos_("log/" + get_current_time_str() + ".log", std::ios::out);
+  std::fstream Logger::fos_{};
   
+  void Logger::init_log_file()
+  {
+    if (!boost::filesystem::exists("log"))
+    {
+      boost::filesystem::create_directory("log");
+    }
+    Logger::fos_.open("log/" + get_current_time_str() + ".log", std::ios::out);
+  }
+
   void Logger::log_with_name(std::list<std::string>&& name_list)
   {
+    if (!Logger::fos_.is_open()) init_log_file();
     fos_ << '\n'
          << "\t\t\t\t[" << name_list.front() << "]\n\n"<< std::endl;
   }
 
   void Logger::log_string(const std::string& str, char separate_char)
   {
+    if (!Logger::fos_.is_open()) init_log_file();
     std::string separator(str.length(), separate_char);
     fos_ << separator << '\n' << str << '\n' << separator << std::endl;
   }

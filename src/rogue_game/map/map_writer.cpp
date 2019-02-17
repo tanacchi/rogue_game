@@ -30,12 +30,17 @@ namespace map
         case '*':
           dungeon_config.put("type", "floor");
           item_config.put("type", "gold");
-          item_config.put("index", i);
+          auto pos{text_map.index_to_point(i)};
+          item_config.put("pos_x", pos.get_x());
+          item_config.put("pos_y", pos.get_y());
           item_config.put("amount", 100);
           break;
       }
       dungeon_configs.emplace_back(dungeon_config);
-      item_configs.emplace_back(item_config);
+      if (!item_config.empty()) 
+      {
+        item_configs.emplace_back(item_config);
+      }
     }
   }
 
@@ -47,7 +52,9 @@ namespace map
     ConfigType map_data;
     map_data.put("Map.width", text_map.width);
     map_data.put("Map.height", text_map.height);
-    map_data.put("Map.player_pos", text_map.text.find('@'));
+    auto player_pos{text_map.index_to_point(text_map.text.find('@'))};
+    map_data.put("Map.player_pos_x", player_pos.get_x());
+    map_data.put("Map.player_pos_y", player_pos.get_y());
     ConfigType dungeon_tree;
     for (auto config : dungeon_configs) {
       dungeon_tree.push_back(std::make_pair("", config));

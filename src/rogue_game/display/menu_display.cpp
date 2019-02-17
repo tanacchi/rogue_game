@@ -3,9 +3,10 @@
 
 namespace menu
 {
-  MenuDisplay::MenuDisplay(std::size_t x, std::size_t y, std::size_t width, std::size_t height)
+  MenuDisplay::MenuDisplay(std::size_t x, std::size_t y, std::size_t width, std::size_t height, bool is_visible)
     : DisplayPanel(x, y, width, height),
-      selected_index_{}
+      selected_index_{},
+      is_visible_{is_visible}
   {
   }
 
@@ -18,23 +19,25 @@ namespace menu
   {
     wclear(win_.get());
 
-    for (std::size_t i{0}, size{menu_strings_.size()}; i < size; ++i) {
-      mvwinsstr(win_.get(), 1 + i, 1, menu_strings_[i].c_str());
+    if (is_visible_) {
+      for (std::size_t i{0}, size{menu_strings_.size()}; i < size; ++i) {
+        mvwinsstr(win_.get(), 1 + i, 1, menu_strings_[i].c_str());
+      }
+      mvwchgat(win_.get(), 1 + selected_index_, 1, 14, A_REVERSE, 1, NULL);
+      box(win_.get(), ACS_VLINE, ACS_HLINE);
     }
-    mvwchgat(win_.get(), 1 + selected_index_, 1, 14, A_REVERSE, 1, NULL);
-    box(win_.get(), ACS_VLINE, ACS_HLINE);
-
     wrefresh(win_.get());
   }
 
-  void MenuDisplay::hide()
+  void MenuDisplay::set_visible(bool is_visible)
   {
-    selected_index_ = 0;
-    
-    wclear(win_.get());
-    wrefresh(win_.get());
+    is_visible_ = is_visible;
+    if (!is_visible_)
+    {
+      selected_index_ = 0;
+    }
   }
-  
+
   void MenuDisplay::toggle_menu(const KeyManager& key)
   {
     if (key == KeyManager::Up && selected_index_ > 0) {

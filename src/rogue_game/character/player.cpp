@@ -4,7 +4,7 @@
 namespace character
 {
   Player::Player()
-    : Character(map::Point<int>{0, 0}),
+    : Character(map::zero),
       inventory_{10},
       direction_{map::down},
       money_{0}
@@ -28,7 +28,7 @@ namespace character
     money_ += addition;
   }
 
-  void Player::store_item(std::unique_ptr<item::Item>&& item)
+  void Player::store_item(::item::ItemPtr&& item)
   {
     inventory_.store(std::move(item));
   }
@@ -75,7 +75,7 @@ namespace character
   std::ostream& operator<<(std::ostream& os, const Player::Inventory& inventory)
   {
     os << "\n{ items :\n";
-    for (std::list<std::unique_ptr<item::Item> >::const_iterator it{inventory.items_.begin()}, end{inventory.items_.end()};
+    for (std::list<::item::ItemPtr>::const_iterator it{inventory.items_.begin()}, end{inventory.items_.end()};
          it != end; ++it, os.put('\n')) {
       const auto* const item(dynamic_cast<item::Gold *>((*it).get())); // REFACTOR REQUIRED
       os << *item;
@@ -92,20 +92,20 @@ namespace character
   std::vector<std::string> Player::Inventory::get_item_name_array() const
   {
     std::vector<std::string> item_names{};
-    for (std::list<std::unique_ptr<item::Item> >::const_iterator it{items_.begin()}, end{items_.end()}; it != end; ++it) {
+    for (std::list<::item::ItemPtr>::const_iterator it{items_.begin()}, end{items_.end()}; it != end; ++it) {
       item_names.emplace_back((*it)->type);
     }
     return item_names;
   }
 
-  void Player::Inventory::store(std::unique_ptr<item::Item>&& item)
+  void Player::Inventory::store(::item::ItemPtr&& item)
   {
     items_.push_back(std::move(item));
   }
 
   void Player::Inventory::use(Player* const player_ptr, std::size_t item_index)
   {
-    std::list<std::unique_ptr<item::Item> >::iterator taget_item_itr{std::next(items_.begin(), item_index)};
+    std::list<::item::ItemPtr>::iterator taget_item_itr{std::next(items_.begin(), item_index)};
     (*taget_item_itr)->use(player_ptr);
     items_.erase(taget_item_itr);
   }

@@ -39,6 +39,7 @@ namespace map
     T y_;
   };
 
+  const Point<int> zero { 0, 0};
   const Point<int> up   { 0,-1};
   const Point<int> down { 0, 1};
   const Point<int> right{ 1, 0};

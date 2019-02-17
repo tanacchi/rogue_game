@@ -15,7 +15,13 @@ namespace debug
     {
       boost::filesystem::create_directory("log");
     }
-    Logger::fos_.open("log/" + get_current_time_str() + ".log", std::ios::out);
+    if (boost::filesystem::exists("log/latest.log"))
+    {
+      boost::filesystem::remove("log/latest.log");
+    }
+    const std::string log_file_name{get_current_time_str() + ".log"};
+    Logger::fos_.open("log/" + log_file_name, std::ios::out);
+    boost::filesystem::create_symlink(log_file_name, "log/latest.log");
   }
 
   void Logger::log_with_name(std::list<std::string>&& name_list)

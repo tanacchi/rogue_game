@@ -2,8 +2,6 @@
 
 int main()
 {
-  debug::Logger::log_string("Hello");
-
   GameMaster master{};
   master.run();
 

@@ -1,6 +1,7 @@
 #include <chrono>
 #include <ctime>
 #include <boost/algorithm/string.hpp>
+#include <boost/filesystem.hpp>
 
 #include <debug/logger.hpp>
 
@@ -10,6 +11,10 @@ namespace debug
   
   void Logger::init_log_file()
   {
+    if (!boost::filesystem::exists("log"))
+    {
+      boost::filesystem::create_directory("log");
+    }
     Logger::fos_.open("log/" + get_current_time_str() + ".log", std::ios::out);
   }
 

@@ -6,7 +6,7 @@
 #include <display/player_display.hpp>
 #include <keyboard/key_manager.hpp>
 #include <map/point.hpp>
-#include <game_master/task.hpp>
+#include <game_master/game_status.hpp>
 
 class Menu;
 
@@ -14,18 +14,6 @@ class Menu;
 class GameMaster
 {
 public:
-  enum class Mode : std::uint8_t
-  {
-    Dungeon,
-    Select
-  };
-  
-  struct GameStatus
-  {
-    Mode mode{Mode::Dungeon};
-    Task task{Task::Show};
-  };
-
   GameMaster();
   ~GameMaster();
   void run();

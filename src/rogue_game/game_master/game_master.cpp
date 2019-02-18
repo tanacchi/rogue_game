@@ -45,7 +45,7 @@ void GameMaster::run()
   }
 }
 
-GameMaster::GameStatus GameMaster::show(GameStatus& status)
+GameStatus GameMaster::show(GameStatus& status)
 {
   // 画面表示
   map_display_.show(map_, player_);
@@ -55,14 +55,14 @@ GameMaster::GameStatus GameMaster::show(GameStatus& status)
   return status;
 }
 
-GameMaster::GameStatus GameMaster::input(GameStatus& status)
+GameStatus GameMaster::input(GameStatus& status)
 {
   keyboard_.update();
   status.task = Task::Perform;
   return status;
 }
 
-GameMaster::GameStatus GameMaster::perform(GameStatus& status)
+GameStatus GameMaster::perform(GameStatus& status)
 {
   status.mode = 
     status.mode == Mode::Dungeon ? take_dungeon_mode() : take_select_mode();
@@ -70,7 +70,7 @@ GameMaster::GameStatus GameMaster::perform(GameStatus& status)
   return status;
 }
 
-GameMaster::Mode GameMaster::take_dungeon_mode()
+Mode GameMaster::take_dungeon_mode()
 {
   if (keyboard_ == KeyManager::Space)
   {
@@ -95,7 +95,7 @@ GameMaster::Mode GameMaster::take_dungeon_mode()
   return Mode::Dungeon;
 }
 
-GameMaster::Mode GameMaster::take_select_mode()
+Mode GameMaster::take_select_mode()
 {
   if (keyboard_.is_match(KeyManager::Back|KeyManager::Space)) {
     target_menu_ptr.reset();

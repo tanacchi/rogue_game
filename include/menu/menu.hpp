@@ -11,11 +11,12 @@ class Menu
 {
   public:
     using ContentsType = std::unordered_map<std::string, std::function<GameMaster::Task(std::unique_ptr<Menu>&)>>;
-
+  
+    Menu(const ContentsType& contents);
     GameMaster::Task execute(const std::string& key, std::unique_ptr<Menu>& target_menu_ptr) const;
  
   private:
-    ContentsType contents;
+    ContentsType contents_;
 };
 
 #endif  // INCLUDED_MENU_HPP

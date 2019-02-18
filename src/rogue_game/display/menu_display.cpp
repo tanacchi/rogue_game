@@ -23,6 +23,7 @@ void MenuDisplay::show() const
       mvwinsstr(win_.get(), col, 1, itr->first.c_str());
     }
     mvwchgat(win_.get(), 1 + selected_index_, 1, 14, A_REVERSE, 1, NULL);
+    box(win_.get(), ACS_VLINE, ACS_HLINE);
   }
   wrefresh(win_.get());
 }

@@ -16,8 +16,8 @@ class Menu
     GameMaster::Task execute(const std::string& key, std::unique_ptr<Menu>& target_menu_ptr) const;
  
     static const ContentsType base_contents;
-  private:
-    ContentsType contents_;
+  
+    ContentsType contents;
 };
 
 #endif  // INCLUDED_MENU_HPP

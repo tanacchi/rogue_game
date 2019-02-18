@@ -11,6 +11,8 @@
 class GameMaster
 {
 public:
+  enum class Task : std::uint8_t;
+
   enum class Mode : std::uint8_t
   {
     Dungeon,

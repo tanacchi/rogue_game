@@ -12,7 +12,6 @@ GameMaster::GameMaster()
     player_(),
     target_menu_ptr()
 {
-  menu_display_.set_menu_ptr(target_menu_ptr);
   map::MapReader map_reader{};
   map_ = map_reader(map_dir + "json/tmp_sample_map.json");
   player_.set_position(map_.initial_position);
@@ -28,7 +27,7 @@ void GameMaster::show()
   // 画面表示
   map_display_.show(map_, player_);
   player_display_.show(player_);
-  menu_display_.show(target_menu_ptr);
+  menu_display_.show();
 }
 
 GameMaster::Mode GameMaster::take_dungeon_mode()
@@ -36,6 +35,7 @@ GameMaster::Mode GameMaster::take_dungeon_mode()
   if (keyboard_ == KeyManager::Space)
   {
     target_menu_ptr.reset(new Menu{Menu::base_contents});
+    menu_display_.set_menu_ptr(target_menu_ptr);
     return Mode::Select;
   }
   // プレイヤーの位置更新

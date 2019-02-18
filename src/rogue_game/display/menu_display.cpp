@@ -11,11 +11,10 @@ void MenuDisplay::set_menu_ptr(const std::shared_ptr<Menu>& menu_ptr)
   menu_wptr_ = menu_ptr;
 }
 
-void MenuDisplay::show(const std::shared_ptr<Menu>& menu_ptr) const
+void MenuDisplay::show() const
 {
   wclear(win_.get());
-  LOG_VALUES(!menu_ptr);
-  if (menu_ptr)
+  if (std::shared_ptr<Menu> menu_ptr = menu_wptr_.lock())
   {
     int col{1};
     for (auto itr{menu_ptr->contents.begin()}, end{menu_ptr->contents.end()}; itr != end; ++itr, ++col)

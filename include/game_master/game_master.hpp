@@ -13,7 +13,10 @@ class Menu;
 class GameMaster
 {
 public:
-  enum class Task : std::uint8_t;
+  enum class Task : std::uint8_t
+  {
+    Show
+  };
 
   enum class Mode : std::uint8_t
   {

@@ -15,6 +15,7 @@ class Menu
     Menu(const ContentsType& contents);
     GameMaster::Task execute(const std::string& key, std::unique_ptr<Menu>& target_menu_ptr) const;
  
+    static const ContentsType base_contents;
   private:
     ContentsType contents_;
 };

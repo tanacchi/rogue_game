@@ -61,6 +61,8 @@ GameMaster::Mode GameMaster::take_select_mode()
     target_menu_ptr.reset();
     return Mode::Dungeon;
   } else if (keyboard_ == KeyManager::Enter) {
+    auto selected_content_name{menu_display_.get_selected_content_name()};
+    LOG_VALUES(selected_content_name);
   // アイテムの使用
     return Mode::Dungeon;
   } else {

@@ -1,3 +1,5 @@
+#include <iterator>
+
 #include <display/menu_display.hpp>
 #include <debug/logger.hpp>
 
@@ -40,5 +42,19 @@ void MenuDisplay::toggle_cursor(const KeyManager& key)
     {
       ++selected_index_;
     }
+  }
+}
+
+const Menu::ContentsType::key_type MenuDisplay::get_selected_content_name() const
+{
+  if (std::shared_ptr<Menu> menu_ptr = menu_wptr_.lock())
+  {
+    auto selected_content_itr{std::next(menu_ptr->contents.begin(), selected_index_)};
+    return selected_content_itr->first;
+  }
+  else 
+  {
+    throw std::runtime_error{"Failed to get selected content"};
+    return "";
   }
 }

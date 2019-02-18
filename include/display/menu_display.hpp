@@ -13,7 +13,7 @@ class MenuDisplay : public DisplayPanel
     void set_menu_ptr(const std::shared_ptr<Menu>& menu_ptr);
     void show() const;
     void toggle_cursor(const KeyManager& key);
-
+    const Menu::ContentsType::key_type get_selected_content_name() const;
   private:
     std::weak_ptr<Menu> menu_wptr_;
     std::size_t selected_index_;

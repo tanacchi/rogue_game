@@ -6,6 +6,7 @@
 #include <display/player_display.hpp>
 #include <keyboard/key_manager.hpp>
 #include <map/point.hpp>
+#include <game_master/task.hpp>
 
 class Menu;
 
@@ -13,11 +14,6 @@ class Menu;
 class GameMaster
 {
 public:
-  enum class Task : std::uint8_t
-  {
-    Show
-  };
-
   enum class Mode : std::uint8_t
   {
     Dungeon,
@@ -32,12 +28,12 @@ private:
   Mode take_dungeon_mode();
   Mode take_select_mode();
 
-  map::Map          map_;
-  map::MapDisplay   map_display_;
-  PlayerDisplay     player_display_;
-  menu::MenuDisplay menu_display_;
-  KeyManager        keyboard_;
-  character::Player player_;
+  map::Map              map_;
+  map::MapDisplay       map_display_;
+  PlayerDisplay         player_display_;
+  MenuDisplay           menu_display_;
+  KeyManager            keyboard_;
+  character::Player     player_;
   std::unique_ptr<Menu> target_menu_ptr;
 };
 

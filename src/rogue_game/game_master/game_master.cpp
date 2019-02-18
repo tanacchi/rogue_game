@@ -10,7 +10,7 @@ GameMaster::GameMaster()
     menu_display_{100, 10, 30, 16},
     keyboard_{},
     player_(),
-    target_menu_ptr{}
+    target_menu_ptr()
 {
   map::MapReader map_reader{};
   map_ = map_reader(map_dir + "json/tmp_sample_map.json");
@@ -27,15 +27,14 @@ void GameMaster::show()
   // 画面表示
   map_display_.show(map_, player_);
   player_display_.show(player_);
-  menu_display_.show();
+  menu_display_.show(target_menu_ptr);
 }
 
 GameMaster::Mode GameMaster::take_dungeon_mode()
 {
   if (keyboard_ == KeyManager::Space)
   {
-    menu_display_.set_menu(player_.get_item_name_array());
-    menu_display_.set_visible(true);
+    target_menu_ptr.reset(new Menu{Menu::base_contents});
     return Mode::Select;
   }
   // プレイヤーの位置更新
@@ -58,16 +57,12 @@ GameMaster::Mode GameMaster::take_dungeon_mode()
 GameMaster::Mode GameMaster::take_select_mode()
 {
   if (keyboard_.is_match(KeyManager::Back|KeyManager::Space)) {
-    menu_display_.set_visible(false);
+    target_menu_ptr.reset();
     return Mode::Dungeon;
   } else if (keyboard_ == KeyManager::Enter) {
   // アイテムの使用
-    const auto item_index{menu_display_.get_current_index()};
-    player_.use_item(item_index);
-    menu_display_.set_visible(false);
     return Mode::Dungeon;
   } else {
-    menu_display_.toggle_menu(keyboard_);
     return Mode::Select;
   }
 }

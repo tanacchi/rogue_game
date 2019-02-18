@@ -9,9 +9,10 @@ MenuDisplay::MenuDisplay(std::size_t x, std::size_t y, std::size_t width, std::s
 {
 }
 
-void MenuDisplay::set_menu_ptr(const std::shared_ptr<Menu>& menu_ptr)
+void MenuDisplay::reset_menu(const std::shared_ptr<Menu>& menu_ptr)
 {
   menu_wptr_ = menu_ptr;
+  selected_index_ = std::size_t{};
 }
 
 void MenuDisplay::show() const

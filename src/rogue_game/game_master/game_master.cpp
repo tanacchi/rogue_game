@@ -35,7 +35,7 @@ GameMaster::Mode GameMaster::take_dungeon_mode()
   if (keyboard_ == KeyManager::Space)
   {
     target_menu_ptr.reset(new Menu{Menu::base_contents});
-    menu_display_.set_menu_ptr(target_menu_ptr);
+    menu_display_.reset_menu(target_menu_ptr);
     return Mode::Select;
   }
   // プレイヤーの位置更新

@@ -38,6 +38,7 @@ GameMaster::Mode GameMaster::take_dungeon_mode()
   {
     menu_display_.set_menu(player_.get_item_name_array());
     menu_display_.set_visible(true);
+    target_menu_ptr.reset(new Menu{Menu::base_contents});
     return Mode::Select;
   }
   // プレイヤーの位置更新
@@ -58,9 +59,10 @@ GameMaster::Mode GameMaster::take_dungeon_mode()
 }
 
 GameMaster::Mode GameMaster::take_select_mode()
-{;
+{
   if (keyboard_.is_match(KeyManager::Back|KeyManager::Space)) {
     menu_display_.set_visible(false);
+    target_menu_ptr.reset();
     return Mode::Dungeon;
   } else if (keyboard_ == KeyManager::Enter) {
   // アイテムの使用

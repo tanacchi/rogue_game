@@ -42,42 +42,39 @@ void GameMaster::run()
         status.task = Task::End;
         break;
     }
+    debug::Logger::log_string("Finish switch statement.");
   }
+  debug::Logger::log_string("Finish while statement.");
 }
 
-GameStatus GameMaster::show(GameStatus& status)
+GameStatus GameMaster::show(const GameStatus& status)
 {
   // 画面表示
   map_display_.show(map_, player_);
   player_display_.show(player_);
   menu_display_.show();
-  status.task = Task::Input;
-  return status;
+  return GameStatus{status.mode, Task::Input};
 }
 
-GameStatus GameMaster::input(GameStatus& status)
+GameStatus GameMaster::input(const GameStatus& status)
 {
   keyboard_.update();
-  status.task = Task::Perform;
-  return status;
+  return GameStatus{status.mode, Task::Perform};
 }
 
-GameStatus GameMaster::perform(GameStatus& status)
+GameStatus GameMaster::perform(const GameStatus& status)
 {
-  status = status.mode == Mode::Dungeon ? 
+  return status.mode == Mode::Dungeon ? 
     take_dungeon_mode(status) : take_select_mode(status);
-  return status;
 }
 
-GameStatus GameMaster::take_dungeon_mode(GameStatus& status)
+GameStatus GameMaster::take_dungeon_mode(const GameStatus& status)
 {
   if (keyboard_ == KeyManager::Space)
   {
     target_menu_ptr.reset(new Menu{Menu::base_contents});
     menu_display_.reset_menu(target_menu_ptr);
-    status.mode = Mode::Select;
-    status.task = Task::Show;
-    return status;
+    return GameStatus{Mode::Select, Task::Show};
   }
   // プレイヤーの位置更新
   const auto motion{character::Player::motion_table.find(keyboard_.get()) != character::Player::motion_table.end() ?
@@ -93,17 +90,14 @@ GameStatus GameMaster::take_dungeon_mode(GameStatus& status)
     player_.store_item(std::move(picked_up_item_itr->second));
     map_.item_layer.erase(picked_up_item_itr);
   }
-  status.task = Task::Show;
-  return status;
+  return GameStatus{Mode::Dungeon, Task::Show};
 }
 
-GameStatus GameMaster::take_select_mode(GameStatus& status)
+GameStatus GameMaster::take_select_mode(const GameStatus& status)
 {
   if (keyboard_.is_match(KeyManager::Back|KeyManager::Space)) {
     target_menu_ptr.reset();
-    status.mode = Mode::Dungeon;
-    status.task = Task::Show;
-    return status;
+    return GameStatus{Mode::Dungeon, Task::Show};
   } else if (keyboard_ == KeyManager::Enter) {
     auto selected_content_name{menu_display_.get_selected_content_name()};
     LOG_VALUES(selected_content_name);
@@ -111,8 +105,7 @@ GameStatus GameMaster::take_select_mode(GameStatus& status)
     return target_menu_ptr->execute(selected_content_name, target_menu_ptr);
   } else {
     menu_display_.toggle_cursor(keyboard_);
-    status.task = Task::Show;
-    return status;
+    return GameStatus{Mode::Select, Task::Show};
   }
 }
 

@@ -18,14 +18,12 @@ public:
   ~GameMaster();
   void run();
 private:
-  GameStatus update(GameStatus& status);
+  GameStatus show(const GameStatus& status);
+  GameStatus input(const GameStatus& status);
+  GameStatus perform(const GameStatus& status);
 
-  GameStatus show(GameStatus& status);
-  GameStatus input(GameStatus& status);
-  GameStatus perform(GameStatus& status);
-
-  GameStatus take_dungeon_mode(GameStatus& status);
-  GameStatus take_select_mode(GameStatus& status);
+  GameStatus take_dungeon_mode(const GameStatus& status);
+  GameStatus take_select_mode(const GameStatus& status);
 
   map::Map              map_;
   map::MapDisplay       map_display_;

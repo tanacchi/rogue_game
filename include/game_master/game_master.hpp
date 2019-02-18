@@ -24,8 +24,8 @@ private:
   GameStatus input(GameStatus& status);
   GameStatus perform(GameStatus& status);
 
-  Mode take_dungeon_mode();
-  Mode take_select_mode();
+  GameStatus take_dungeon_mode(GameStatus& status);
+  GameStatus take_select_mode(GameStatus& status);
 
   map::Map              map_;
   map::MapDisplay       map_display_;

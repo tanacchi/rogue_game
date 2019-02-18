@@ -20,6 +20,12 @@ public:
     Select
   };
   
+  struct GameStatus
+  {
+    Mode mode{Mode::Dungeon};
+    Task task{Task::Show};
+  };
+
   GameMaster();
   ~GameMaster();
   void run();

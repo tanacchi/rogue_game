@@ -64,6 +64,7 @@ GameMaster::Mode GameMaster::take_select_mode()
   // アイテムの使用
     return Mode::Dungeon;
   } else {
+    menu_display_.toggle_cursor(keyboard_);
     return Mode::Select;
   }
 }

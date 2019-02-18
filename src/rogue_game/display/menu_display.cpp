@@ -2,7 +2,8 @@
 #include <debug/logger.hpp>
 
 MenuDisplay::MenuDisplay(std::size_t x, std::size_t y, std::size_t width, std::size_t height, bool is_visible)
-  : DisplayPanel(x, y, width, height)
+  : DisplayPanel(x, y, width, height),
+    selected_index_{}
 {
 }
 
@@ -21,6 +22,22 @@ void MenuDisplay::show() const
     {
       mvwinsstr(win_.get(), col, 1, itr->first.c_str());
     }
+    mvwchgat(win_.get(), 1 + selected_index_, 1, 14, A_REVERSE, 1, NULL);
   }
   wrefresh(win_.get());
+}
+
+void MenuDisplay::toggle_cursor(const KeyManager& key)
+{
+  if (std::shared_ptr<Menu> menu_ptr = menu_wptr_.lock())
+  {
+    if (key == KeyManager::Up && selected_index_ != 0)
+    {
+      --selected_index_;
+    }
+    else if (key == KeyManager::Down && selected_index_ < menu_ptr->contents.size() - 1)
+    {
+      ++selected_index_;
+    }
+  }
 }

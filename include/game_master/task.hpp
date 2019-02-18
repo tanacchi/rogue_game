@@ -5,7 +5,7 @@
 
 enum class Task : std::uint8_t
 {
-  Show, Update, Perform, End
+  Show, Input, Perform, End
 };
 
 #endif  // INCLUDED_TASK_HPP

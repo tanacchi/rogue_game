@@ -9,10 +9,10 @@
 class Menu
 {
   public:
-    using ContentsType = std::unordered_map<std::string, std::function<Task(std::unique_ptr<Menu>&)>>;
+    using ContentsType = std::unordered_map<std::string, std::function<Task(std::shared_ptr<Menu>&)>>;
   
     Menu(const ContentsType& contents);
-    Task execute(const std::string& key, std::unique_ptr<Menu>& target_menu_ptr) const;
+    Task execute(const std::string& key, std::shared_ptr<Menu>& target_menu_ptr) const;
  
     static const ContentsType base_contents;
   

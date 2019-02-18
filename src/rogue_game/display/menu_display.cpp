@@ -6,7 +6,7 @@ MenuDisplay::MenuDisplay(std::size_t x, std::size_t y, std::size_t width, std::s
 {
 }
 
-void MenuDisplay::show(const std::unique_ptr<Menu>& menu_ptr) const
+void MenuDisplay::show(const std::shared_ptr<Menu>& menu_ptr) const
 {
   wclear(win_.get());
   LOG_VALUES(!menu_ptr);

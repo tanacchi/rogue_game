@@ -34,7 +34,7 @@ private:
   MenuDisplay           menu_display_;
   KeyManager            keyboard_;
   character::Player     player_;
-  std::unique_ptr<Menu> target_menu_ptr;
+  std::shared_ptr<Menu> target_menu_ptr;
 };
 
 #endif  // INCLUDED_GAME_MASTER_HPP

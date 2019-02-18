@@ -9,7 +9,11 @@ class MenuDisplay : public DisplayPanel
   public:
     MenuDisplay(std::size_t x, std::size_t y,
                 std::size_t width = 10ul, std::size_t height = 10ul, bool is_visible = false);
+    void set_menu_ptr(const std::shared_ptr<Menu>& menu_ptr);
     void show(const std::shared_ptr<Menu>& menu_ptr) const;
+
+  private:
+    std::weak_ptr<Menu> menu_wptr_;
 };
 
 #endif  // INCLUDED_NEW_MENU_DISPLAY

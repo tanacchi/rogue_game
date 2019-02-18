@@ -6,6 +6,11 @@ MenuDisplay::MenuDisplay(std::size_t x, std::size_t y, std::size_t width, std::s
 {
 }
 
+void MenuDisplay::set_menu_ptr(const std::shared_ptr<Menu>& menu_ptr)
+{
+  menu_wptr_ = menu_ptr;
+}
+
 void MenuDisplay::show(const std::shared_ptr<Menu>& menu_ptr) const
 {
   wclear(win_.get());

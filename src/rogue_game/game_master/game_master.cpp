@@ -12,6 +12,7 @@ GameMaster::GameMaster()
     player_(),
     target_menu_ptr()
 {
+  menu_display_.set_menu_ptr(target_menu_ptr);
   map::MapReader map_reader{};
   map_ = map_reader(map_dir + "json/tmp_sample_map.json");
   player_.set_position(map_.initial_position);

@@ -22,12 +22,52 @@ GameMaster::~GameMaster()
   endwin();
 }
 
-void GameMaster::show()
+void GameMaster::run()
+{
+  GameStatus status{};
+
+  while (status.task != Task::End) {
+    switch (status.task)
+    {
+      case Task::Show:
+        status = show(status);
+        break;
+      case Task::Input:
+        status = input(status);
+        break;
+      case Task::Perform:
+        status = perform(status);
+        break;
+      default:
+        status.task = Task::End;
+        break;
+    }
+  }
+}
+
+GameMaster::GameStatus GameMaster::show(GameStatus& status)
 {
   // 画面表示
   map_display_.show(map_, player_);
   player_display_.show(player_);
   menu_display_.show();
+  status.task = Task::Input;
+  return status;
+}
+
+GameMaster::GameStatus GameMaster::input(GameStatus& status)
+{
+  keyboard_.update();
+  status.task = Task::Perform;
+  return status;
+}
+
+GameMaster::GameStatus GameMaster::perform(GameStatus& status)
+{
+  status.mode = 
+    status.mode == Mode::Dungeon ? take_dungeon_mode() : take_select_mode();
+  status.task = Task::Show;
+  return status;
 }
 
 GameMaster::Mode GameMaster::take_dungeon_mode()
@@ -71,13 +111,3 @@ GameMaster::Mode GameMaster::take_select_mode()
   }
 }
 
-void GameMaster::run()
-{
-  Mode mode{Mode::Dungeon};
-
-  while (true) {
-    show();
-    keyboard_.update();
-    mode = mode == Mode::Dungeon ? take_dungeon_mode() : take_select_mode();
-  }
-}

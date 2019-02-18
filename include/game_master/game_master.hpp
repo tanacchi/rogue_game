@@ -30,7 +30,12 @@ public:
   ~GameMaster();
   void run();
 private:
-  void show();
+  GameStatus update(GameStatus& status);
+
+  GameStatus show(GameStatus& status);
+  GameStatus input(GameStatus& status);
+  GameStatus perform(GameStatus& status);
+
   Mode take_dungeon_mode();
   Mode take_select_mode();
 

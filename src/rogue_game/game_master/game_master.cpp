@@ -2,13 +2,15 @@
 
 #include <game_master/game_master.hpp>
 #include <map/map_reader.hpp>
+#include <menu/menu.hpp>
 
 GameMaster::GameMaster()
   : map_display_{5, 4, 80, 30},
     player_display_{70, 30, 20, 10},
     menu_display_{100, 10, 30, 16},
     keyboard_{},
-    player_()
+    player_(),
+    target_menu_ptr{}
 {
   map::MapReader map_reader{};
   map_ = map_reader(map_dir + "json/tmp_sample_map.json");

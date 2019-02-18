@@ -7,6 +7,8 @@
 #include <keyboard/key_manager.hpp>
 #include <map/point.hpp>
 
+class Menu;
+
 // ゲームの進行を扱う
 class GameMaster
 {

@@ -2,7 +2,6 @@
 #define INCLUDED_GAME_MASTER_HPP
 
 #include <display/map_display.hpp>
-#include <display/menu_display.hpp>
 #include <display/new_menu_display.hpp>
 #include <display/player_display.hpp>
 #include <keyboard/key_manager.hpp>
@@ -32,7 +31,6 @@ private:
   map::Map          map_;
   map::MapDisplay   map_display_;
   PlayerDisplay     player_display_;
-  menu::MenuDisplay menu_display_;
   NewMenuDisplay new_menu_display_;
   KeyManager        keyboard_;
   character::Player player_;

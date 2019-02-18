@@ -3,6 +3,7 @@
 
 #include <display/map_display.hpp>
 #include <display/menu_display.hpp>
+#include <display/new_menu_display.hpp>
 #include <display/player_display.hpp>
 #include <keyboard/key_manager.hpp>
 #include <map/point.hpp>
@@ -32,6 +33,7 @@ private:
   map::MapDisplay   map_display_;
   PlayerDisplay     player_display_;
   menu::MenuDisplay menu_display_;
+  NewMenuDisplay new_menu_display_;
   KeyManager        keyboard_;
   character::Player player_;
   std::unique_ptr<Menu> target_menu_ptr;

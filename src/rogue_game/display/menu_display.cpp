@@ -1,12 +1,12 @@
-#include <display/new_menu_display.hpp>
+#include <display/menu_display.hpp>
 #include <debug/logger.hpp>
 
-NewMenuDisplay::NewMenuDisplay(std::size_t x, std::size_t y, std::size_t width, std::size_t height, bool is_visible)
+MenuDisplay::MenuDisplay(std::size_t x, std::size_t y, std::size_t width, std::size_t height, bool is_visible)
   : DisplayPanel(x, y, width, height)
 {
 }
 
-void NewMenuDisplay::show(const std::unique_ptr<Menu>& menu_ptr) const
+void MenuDisplay::show(const std::unique_ptr<Menu>& menu_ptr) const
 {
   wclear(win_.get());
   LOG_VALUES(!menu_ptr);

@@ -7,8 +7,7 @@
 GameMaster::GameMaster()
   : map_display_{5, 4, 80, 30},
     player_display_{70, 30, 20, 10},
-    // menu_display_{100, 10, 30, 16},
-    new_menu_display_{100, 30, 30, 6},
+    menu_display_{100, 10, 30, 16},
     keyboard_{},
     player_(),
     target_menu_ptr()
@@ -28,7 +27,7 @@ void GameMaster::show()
   // 画面表示
   map_display_.show(map_, player_);
   player_display_.show(player_);
-  new_menu_display_.show(target_menu_ptr);
+  menu_display_.show(target_menu_ptr);
 }
 
 GameMaster::Mode GameMaster::take_dungeon_mode()

@@ -4,16 +4,15 @@
 #include <functional>
 #include <memory>
 #include <unordered_map>
-
-#include <game_master/game_master.hpp>
+#include <game_master/task.hpp>
 
 class Menu
 {
   public:
-    using ContentsType = std::unordered_map<std::string, std::function<GameMaster::Task(std::unique_ptr<Menu>&)>>;
+    using ContentsType = std::unordered_map<std::string, std::function<Task(std::unique_ptr<Menu>&)>>;
   
     Menu(const ContentsType& contents);
-    GameMaster::Task execute(const std::string& key, std::unique_ptr<Menu>& target_menu_ptr) const;
+    Task execute(const std::string& key, std::unique_ptr<Menu>& target_menu_ptr) const;
  
     static const ContentsType base_contents;
   

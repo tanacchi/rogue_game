@@ -40,6 +40,7 @@ namespace debug
     if (!Logger::fos_.is_open()) init_log_file();
     std::string separator(str.length(), separate_char);
     fos_ << separator << '\n' << str << '\n' << separator << std::endl;
+    fos_ << "\t\t\t\t[" << LOG_LOCATION << "]\n\n"<< std::endl;
   }
   
   std::list<std::string> split_string_by_comma(std::string src_string)

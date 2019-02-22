@@ -14,10 +14,8 @@ Menu::ContentsType::mapped_type::result_type Menu::execute(const std::string& ke
 
 const Menu::ContentsType Menu::base_contents{{
   {"hoge", [](std::shared_ptr<Menu>& target_menu_ptr){
-    debug::Logger::log_string("HOGE detected");
     target_menu_ptr.reset();
     return GameStatus{Mode::Dungeon, Task::Show}; }},
   {"fuga", [](std::shared_ptr<Menu>& target_menu_ptr){
-    debug::Logger::log_string("FUGA detected");
     return GameStatus{Mode::Dungeon, Task::End}; }},
 }};

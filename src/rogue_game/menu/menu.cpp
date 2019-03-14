@@ -13,9 +13,37 @@ Menu::ContentsType::mapped_type::result_type Menu::execute(const std::string& ke
 }
 
 const Menu::ContentsType Menu::base_contents{{
-  {"back", [](std::shared_ptr<Menu>& target_menu_ptr){
-    target_menu_ptr.reset();
-    return GameStatus{Mode::Dungeon, Task::Show}; }},
-  {"exit", [](std::shared_ptr<Menu>& target_menu_ptr){
-    return GameStatus{Mode::Dungeon, Task::End}; }},
+  {"item", [](std::shared_ptr<Menu>& target_menu_ptr)
+    {
+      target_menu_ptr.reset(new Menu{Menu::item_contents});
+      return GameStatus{Mode::Select, Task::Show};
+    }},
+  {"back", [](std::shared_ptr<Menu>& target_menu_ptr)
+    {
+      target_menu_ptr.reset();
+      return GameStatus{Mode::Dungeon, Task::Show}; 
+    }},
+  {"exit", [](std::shared_ptr<Menu>& target_menu_ptr)
+    {
+      return GameStatus{Mode::Dungeon, Task::End}; 
+    }},
 }};
+
+const Menu::ContentsType Menu::item_contents{{
+  {"back", [](std::shared_ptr<Menu>& target_menu_ptr)
+    {
+      target_menu_ptr.reset(new Menu{Menu::base_contents});
+      return GameStatus{Mode::Select, Task::Show};
+    }},
+  {"ahi", [](std::shared_ptr<Menu>& target_menu_ptr)
+    {
+      target_menu_ptr.reset();
+      return GameStatus{Mode::Dungeon, Task::Show}; 
+    }},
+  {"hoge", [](std::shared_ptr<Menu>& target_menu_ptr)
+    {
+      return GameStatus{Mode::Dungeon, Task::End}; 
+    }},
+}};
+
+

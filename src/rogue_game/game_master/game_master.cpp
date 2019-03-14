@@ -102,7 +102,9 @@ GameStatus GameMaster::take_select_mode(const GameStatus& status)
   } else if (keyboard_ == KeyManager::Enter) {
     auto selected_content_name{menu_display_.get_selected_content_name()};
   // アイテムの使用
-    return target_menu_ptr->execute(selected_content_name, target_menu_ptr);
+    auto next_status{target_menu_ptr->execute(selected_content_name, target_menu_ptr)};
+    menu_display_.reset_menu(target_menu_ptr);
+    return next_status;
   } else {
     menu_display_.toggle_cursor(keyboard_);
     return GameStatus{Mode::Select, Task::Show};

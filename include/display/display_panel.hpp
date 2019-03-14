@@ -4,6 +4,16 @@
 #include <memory>
 #include <ncurses.h>
 
+#include <debug/logger.hpp>
+
+struct window_ptr_deleter
+{
+  void operator()(WINDOW* ptr)
+  {
+    delwin(ptr);
+  }
+};
+
 // 画面表示系クラスの基底
 class DisplayPanel
 {
@@ -14,7 +24,7 @@ public:
   ~DisplayPanel();
 protected:
   // ncurses でウィンドウを扱うためのオブジェクト
-  std::unique_ptr<WINDOW> win_;
+  std::unique_ptr<WINDOW, window_ptr_deleter> win_;
   static bool has_initialized_;
 };
 

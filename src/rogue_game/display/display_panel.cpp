@@ -18,7 +18,6 @@ DisplayPanel::DisplayPanel(std::size_t x, std::size_t y,
 
 DisplayPanel::~DisplayPanel()
 {
-  delwin(win_.get());
 }
 
 bool DisplayPanel::has_initialized_{false};

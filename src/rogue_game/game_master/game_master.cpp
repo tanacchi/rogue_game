@@ -22,21 +22,60 @@ GameMaster::~GameMaster()
   endwin();
 }
 
-void GameMaster::show()
+void GameMaster::run()
+{
+  GameStatus status{};
+
+  while (status.task != Task::End) {
+    switch (status.task)
+    {
+      case Task::Show:
+        status = show(status);
+        break;
+      case Task::Input:
+        status = input(status);
+        break;
+      case Task::Perform:
+        status = perform(status);
+        break;
+      case Task::End:
+        return;
+      default:
+        LOG_STRING("Unknown task detected.");
+        status.task = Task::End;
+        break;
+    }
+  }
+}
+
+GameStatus GameMaster::show(const GameStatus& status)
 {
   // 画面表示
   map_display_.show(map_, player_);
   player_display_.show(player_);
   menu_display_.show();
+  return GameStatus{status.mode, Task::Input};
 }
 
-GameMaster::Mode GameMaster::take_dungeon_mode()
+GameStatus GameMaster::input(const GameStatus& status)
+{
+  keyboard_.update();
+  return GameStatus{status.mode, Task::Perform};
+}
+
+GameStatus GameMaster::perform(const GameStatus& status)
+{
+  return status.mode == Mode::Dungeon ? 
+    take_dungeon_mode(status) : take_select_mode(status);
+}
+
+GameStatus GameMaster::take_dungeon_mode(const GameStatus& status)
 {
   if (keyboard_ == KeyManager::Space)
   {
     target_menu_ptr.reset(new Menu{Menu::base_contents});
     menu_display_.reset_menu(target_menu_ptr);
-    return Mode::Select;
+    return GameStatus{Mode::Select, Task::Show};
   }
   // プレイヤーの位置更新
   const auto motion{character::Player::motion_table.find(keyboard_.get()) != character::Player::motion_table.end() ?
@@ -52,32 +91,21 @@ GameMaster::Mode GameMaster::take_dungeon_mode()
     player_.store_item(std::move(picked_up_item_itr->second));
     map_.item_layer.erase(picked_up_item_itr);
   }
-  return Mode::Dungeon;
+  return GameStatus{Mode::Dungeon, Task::Show};
 }
 
-GameMaster::Mode GameMaster::take_select_mode()
+GameStatus GameMaster::take_select_mode(const GameStatus& status)
 {
   if (keyboard_.is_match(KeyManager::Back|KeyManager::Space)) {
     target_menu_ptr.reset();
-    return Mode::Dungeon;
+    return GameStatus{Mode::Dungeon, Task::Show};
   } else if (keyboard_ == KeyManager::Enter) {
     auto selected_content_name{menu_display_.get_selected_content_name()};
-    LOG_VALUES(selected_content_name);
   // アイテムの使用
-    return Mode::Dungeon;
+    return target_menu_ptr->execute(selected_content_name, target_menu_ptr);
   } else {
     menu_display_.toggle_cursor(keyboard_);
-    return Mode::Select;
+    return GameStatus{Mode::Select, Task::Show};
   }
 }
 
-void GameMaster::run()
-{
-  Mode mode{Mode::Dungeon};
-
-  while (true) {
-    show();
-    keyboard_.update();
-    mode = mode == Mode::Dungeon ? take_dungeon_mode() : take_select_mode();
-  }
-}

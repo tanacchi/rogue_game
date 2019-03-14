@@ -15,6 +15,11 @@ namespace character
   public:
     // デフォルト引数はそのうちなくす予定
     Character(map::Point<int> position = map::zero);
+
+    ~Character()
+    {
+      LOG_STRING("Character is destructing now.");
+    }
     
     // キャラクターの位置を取得
     map::Point<int> get_position() const;  // const& にする？

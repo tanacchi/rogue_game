@@ -6,12 +6,18 @@
 #include <unordered_map>
 #include <game_master/game_status.hpp>
 
+#include <debug/logger.hpp>
+
 class Menu
 {
   public:
     using ContentsType = std::unordered_map<std::string, std::function<GameStatus(std::shared_ptr<Menu>&)>>;
   
     Menu(const ContentsType& contents);
+    ~Menu()
+    {
+      LOG_STRING("Menu is destructing now.");
+    }
     ContentsType::mapped_type::result_type execute(const std::string& key, std::shared_ptr<Menu>& target_menu_ptr) const;
  
     static const ContentsType base_contents;

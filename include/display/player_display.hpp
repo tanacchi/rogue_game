@@ -10,6 +10,11 @@ class PlayerDisplay : public DisplayPanel
 {
 public:
   PlayerDisplay(std::size_t x, std::size_t y, std::size_t width, std::size_t height);
+  ~PlayerDisplay()
+  {
+    LOG_STRING("PlayerDisplay is destructing now.");
+  }
+
   void show(const character::Player& player);
 };
 

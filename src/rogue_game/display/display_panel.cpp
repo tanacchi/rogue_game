@@ -18,6 +18,7 @@ DisplayPanel::DisplayPanel(std::size_t x, std::size_t y,
 
 DisplayPanel::~DisplayPanel()
 {
+  LOG_STRING("DisplayPanel is destructing now.");
   delwin(win_.get());
 }
 

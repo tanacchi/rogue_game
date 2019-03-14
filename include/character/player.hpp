@@ -31,6 +31,11 @@ namespace character
 
     Player();
     
+    ~Player()
+    {
+      LOG_STRING("Player is destructing now");
+    }
+
     // KeyState と移動方向の対応表
     static const std::map<KeyManager::KeyType, const map::Point<int>> motion_table;
 

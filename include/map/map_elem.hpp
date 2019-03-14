@@ -3,8 +3,6 @@
 
 #include <ostream>
 
-#include <debug/logger.hpp>
-
 namespace map
 {
   // マップ要素の基底クラス
@@ -13,12 +11,7 @@ namespace map
     MapElem(std::string type);
     MapElem(const MapElem& rhs);
     MapElem(MapElem&& rhs) noexcept;
-    virtual ~MapElem()
-    {
-      static size_t count{};
-      ++count;
-      LOG_VALUES("MapElem is destructing.", count);
-    }
+    virtual ~MapElem() = default;
 
     virtual std::string to_string() const;
     friend std::ostream& operator<<(std::ostream& os, const MapElem& map_elem);

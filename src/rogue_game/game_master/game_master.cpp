@@ -24,7 +24,7 @@ GameMaster::~GameMaster()
 
 void GameMaster::run()
 {
-  GameStatus status{};
+  GameStatus status{Mode::Dungeon, Task::End};
 
   while (status.task != Task::End) {
     switch (status.task)

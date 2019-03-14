@@ -2,18 +2,8 @@
 
 DisplayPanel::DisplayPanel(std::size_t x, std::size_t y,
                            std::size_t width, std::size_t height)
-  : win_{}
+  : win_{newwin(height, width, y, x)}
 {
-  if (!has_initialized_)
-  {
-    initscr();
-    keypad(stdscr, TRUE);
-    noecho();
-    curs_set(0);
-    refresh();
-    has_initialized_ = true; 
-  }
-  win_.reset(newwin(height, width, y, x));
 }
 
 DisplayPanel::~DisplayPanel()
@@ -21,5 +11,3 @@ DisplayPanel::~DisplayPanel()
   LOG_STRING("DisplayPanel is destructing now.");
   delwin(win_.get());
 }
-
-bool DisplayPanel::has_initialized_{false};

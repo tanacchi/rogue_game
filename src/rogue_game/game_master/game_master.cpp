@@ -38,7 +38,10 @@ void GameMaster::run()
       case Task::Perform:
         status = perform(status);
         break;
+      case Task::End:
+        return;
       default:
+        LOG_STRING("Unknown task detected.");
         status.task = Task::End;
         break;
     }

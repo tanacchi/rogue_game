@@ -42,9 +42,7 @@ void GameMaster::run()
         status.task = Task::End;
         break;
     }
-    debug::Logger::log_string("Finish switch statement.");
   }
-  debug::Logger::log_string("Finish while statement.");
 }
 
 GameStatus GameMaster::show(const GameStatus& status)
@@ -100,7 +98,6 @@ GameStatus GameMaster::take_select_mode(const GameStatus& status)
     return GameStatus{Mode::Dungeon, Task::Show};
   } else if (keyboard_ == KeyManager::Enter) {
     auto selected_content_name{menu_display_.get_selected_content_name()};
-    LOG_VALUES(selected_content_name);
   // アイテムの使用
     return target_menu_ptr->execute(selected_content_name, target_menu_ptr);
   } else {

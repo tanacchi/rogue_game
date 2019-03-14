@@ -6,6 +6,7 @@
 
 #define LOG_LOCATION (std::string{__FILE__}+":"+std::to_string(__LINE__))
 #define LOG_VALUES(...) debug::Logger::log_with_name(debug::split_string_by_comma(#__VA_ARGS__", "+LOG_LOCATION), __VA_ARGS__)
+#define LOG_STRING(arg) debug::Logger::log_string(arg); debug::Logger::log_string("\t\t\t\t["+LOG_LOCATION+"]\n\n", ' ')
 
 namespace debug
 {

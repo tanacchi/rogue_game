@@ -13,9 +13,9 @@ Menu::ContentsType::mapped_type::result_type Menu::execute(const std::string& ke
 }
 
 const Menu::ContentsType Menu::base_contents{{
-  {"hoge", [](std::shared_ptr<Menu>& target_menu_ptr){
+  {"back", [](std::shared_ptr<Menu>& target_menu_ptr){
     target_menu_ptr.reset();
     return GameStatus{Mode::Dungeon, Task::Show}; }},
-  {"fuga", [](std::shared_ptr<Menu>& target_menu_ptr){
+  {"exit", [](std::shared_ptr<Menu>& target_menu_ptr){
     return GameStatus{Mode::Dungeon, Task::End}; }},
 }};

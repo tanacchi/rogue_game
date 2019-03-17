@@ -2,11 +2,16 @@
 #include <menu/menu.hpp>
 #include <debug/logger.hpp>
 
-Menu::Menu(const ContentsType& contents, GameMaster* gm)
+Menu::Menu(const ContentsType& contents, GameMaster* gm_ptr)
   : contents{contents}
 {
-  if (gm != nullptr)
-    LOG_VALUES(gm->player_);
+  if (gm_ptr != nullptr)
+  {
+    for (const auto& item_name : gm_ptr->player_.get_item_name_array())
+    {
+      LOG_VALUES(item_name);
+    }
+  }
 }
 
 Menu::ContentsType::mapped_type::result_type Menu::execute(const std::string& key, std::shared_ptr<Menu>& target_menu_ptr) const

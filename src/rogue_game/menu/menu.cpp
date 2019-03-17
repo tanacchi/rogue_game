@@ -1,4 +1,7 @@
+#include <functional>
+
 #include <game_master/game_master.hpp>
+#include <item/item.hpp>
 #include <menu/menu.hpp>
 #include <debug/logger.hpp>
 
@@ -10,6 +13,15 @@ Menu::Menu(const ContentsType& contents, GameMaster* gm_ptr)
     for (const auto& item_name : gm_ptr->player_.get_item_name_array())
     {
       LOG_VALUES(item_name);
+    }
+    for (const auto& item_ptr : gm_ptr->player_.inventory_.items_)
+    {
+      ContentsType::key_type key{item_ptr->type};
+      std::function<void(void)> item_action{std::bind(&item::Item::use, *item_ptr, &gm_ptr->player_)};
+      ContentsType::mapped_type value{[=](std::shared_ptr<Menu>& target_menu_ptr){
+        item_action();
+        return GameStatus{Mode::Dungeon, Task::Show};
+      }};
     }
   }
 }
@@ -37,7 +49,7 @@ const Menu::ContentsType Menu::base_contents{{
     }},
 }};
 
-const Menu::ContentsType Menu::item_contents{{
+Menu::ContentsType Menu::item_contents{{
   {"back", [](std::shared_ptr<Menu>& target_menu_ptr)
     {
       target_menu_ptr.reset(new Menu{Menu::base_contents});

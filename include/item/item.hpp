@@ -22,6 +22,7 @@ namespace item
   {
   public:
     Item(std::string type);
+    Item(const Item& item) = default;
     Item(Item&& rhs) noexcept;
     virtual void use(character::Player* const player_ptr);
     virtual ~Item() = default;

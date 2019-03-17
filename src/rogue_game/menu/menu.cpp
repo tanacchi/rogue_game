@@ -1,9 +1,12 @@
+#include <game_master/game_master.hpp>
 #include <menu/menu.hpp>
 #include <debug/logger.hpp>
 
-Menu::Menu(const ContentsType& contents)
+Menu::Menu(const ContentsType& contents, GameMaster* gm)
   : contents{contents}
 {
+  if (gm != nullptr)
+    LOG_VALUES(gm->player_);
 }
 
 Menu::ContentsType::mapped_type::result_type Menu::execute(const std::string& key, std::shared_ptr<Menu>& target_menu_ptr) const

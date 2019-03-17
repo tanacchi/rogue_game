@@ -73,7 +73,7 @@ GameStatus GameMaster::take_dungeon_mode(const GameStatus& status)
 {
   if (keyboard_ == KeyManager::Space)
   {
-    target_menu_ptr.reset(new Menu{Menu::base_contents});
+    target_menu_ptr.reset(new Menu{Menu::base_contents, this});
     menu_display_.reset_menu(target_menu_ptr);
     return GameStatus{Mode::Select, Task::Show};
   }

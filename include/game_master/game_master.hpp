@@ -17,7 +17,7 @@ public:
   GameMaster();
   ~GameMaster();
   void run();
-private:
+// private:
   GameStatus show(const GameStatus& status);
   GameStatus input(const GameStatus& status);
   GameStatus perform(const GameStatus& status);

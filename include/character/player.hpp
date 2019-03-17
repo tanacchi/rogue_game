@@ -45,8 +45,10 @@ namespace character
 
     ::map::Point<int> get_direction() const;
     void assign_motion(const ::map::Point<int>& next_motion);
-  private:
+    
     Inventory inventory_;
+
+  private:
     ::map::Point<int> direction_;
     std::size_t money_;
   };

@@ -24,8 +24,8 @@ namespace character
       std::vector<std::string> get_item_name_array() const;
       void store(::item::ItemPtr&& item);
       void use(Player* const player_ptr, std::size_t item_index);
-    private:
       std::list<::item::ItemPtr> items_;
+    private:
       std::size_t capacity_;
     };
 

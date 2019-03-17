@@ -2,8 +2,16 @@
 
 int main()
 {
-  GameMaster master{};
-  master.run();
+  try
+  {
+    GameMaster master{};
+    master.run();
+  }
+  catch (std::exception& e)
+  {
+    LOG_STRING("=== EXCEPTION THROWED ===");
+    LOG_VALUES(e.what());
+  }
 
   return 0;
 }

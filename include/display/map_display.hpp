@@ -10,7 +10,7 @@ class MapDisplay : public DisplayPanel
 {
   public:
     MapDisplay(std::size_t x, std::size_t y, std::size_t width, std::size_t height);
-    void show(Map& map, const character::Player& player);
+    void show(Map& map, const Player& player);
 };
 
 #endif  // INCLUDED_MAP_DISPLAY_HPP

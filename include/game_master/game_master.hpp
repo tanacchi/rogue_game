@@ -30,7 +30,7 @@ public:
   PlayerDisplay         player_display_;
   MenuDisplay           menu_display_;
   KeyManager            keyboard_;
-  character::Player     player_;
+  Player                player_;
   std::shared_ptr<Menu> target_menu_ptr;
 };
 

@@ -6,7 +6,8 @@
 
 int main(int argc, char** argv)
 {
-  try {
+  try 
+  {
     const std::vector<std::string> arg_list{argv, argv + argc};
     const std::string text_map_filename{arg_list[1]};
     const std::vector<std::string> map_strings{read_map_strings(text_map_filename)};
@@ -16,7 +17,8 @@ int main(int argc, char** argv)
     MapWriter map_writer{};
     map_writer(text_map);
   }
-  catch (const std::logic_error& e) {
+  catch (const std::logic_error& e) 
+  {
     std::cout << e.what() << std::endl;
     std::cout << "[Usage]: argv[1]: text_map_file" << std::endl;
     return -1;

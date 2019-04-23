@@ -24,8 +24,8 @@ namespace character
       std::vector<std::string> get_item_name_array() const;
       void store(::item::ItemPtr&& item);
       void use(Player* const player_ptr, std::size_t item_index);
-    private:
       std::list<::item::ItemPtr> items_;
+    private:
       std::size_t capacity_;
     };
 
@@ -45,8 +45,10 @@ namespace character
 
     ::map::Point<int> get_direction() const;
     void assign_motion(const ::map::Point<int>& next_motion);
-  private:
+    
     Inventory inventory_;
+
+  private:
     ::map::Point<int> direction_;
     std::size_t money_;
   };

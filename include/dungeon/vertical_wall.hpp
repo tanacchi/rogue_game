@@ -3,15 +3,12 @@
 
 #include <dungeon/dungeon_elem.hpp>
 
-namespace dungeon
+// ダンジョン要素　'|'
+// マップ生成機能の予定があるので '|' と '-' は区別してる
+class VerticalWall : public DungeonElem
 {
-  // ダンジョン要素　'|'
-  // マップ生成機能の予定があるので '|' と '-' は区別してる
-  class VerticalWall : public DungeonElem
-  {
   public:
     VerticalWall();
-  };
-}
+};
 
 #endif  // INCLUDED_VERTICAL_WALL_HPP

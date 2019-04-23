@@ -14,7 +14,7 @@ namespace item
   {
   }
 
-  void Item::use(character::Player* const player_ptr)
+  void Item::use(Player* const player_ptr)
   {
   }
   

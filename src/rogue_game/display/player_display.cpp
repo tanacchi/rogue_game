@@ -7,7 +7,7 @@ PlayerDisplay::PlayerDisplay(std::size_t x, std::size_t y,
 {
 }
 
-void PlayerDisplay::show(const character::Player& player)
+void PlayerDisplay::show(const Player& player)
 {
   wclear(win_.get());
 

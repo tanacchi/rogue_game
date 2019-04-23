@@ -3,24 +3,22 @@
 
 #include <ostream>
 
-namespace map
+// マップ上での位置を表現する
+template<typename T>
+class Point
 {
-  // マップ上での位置を表現する
-  template<typename T>
-  class Point
-  {
   public:
     Point(T x = 0, T y = 0);
     template<typename U>
-    Point(U x, U y)
+      Point(U x, U y)
       : x_{static_cast<T>(x)}, y_{static_cast<T>(y)}
     {
     }
     Point(const Point& point);
     template<typename U>
-    Point(const Point<U>& point)
+      Point(const Point<U>& point)
       : x_{static_cast<T>(point.get_x())},
-        y_{static_cast<T>(point.get_y())}
+      y_{static_cast<T>(point.get_y())}
     {
     }
     Point(Point&& point);
@@ -37,13 +35,12 @@ namespace map
   private:
     T x_;
     T y_;
-  };
+};
 
-  const Point<int> zero { 0, 0};
-  const Point<int> up   { 0,-1};
-  const Point<int> down { 0, 1};
-  const Point<int> right{ 1, 0};
-  const Point<int> left {-1, 0};
-}
+const Point<int> zero { 0, 0};
+const Point<int> up   { 0,-1};
+const Point<int> down { 0, 1};
+const Point<int> right{ 1, 0};
+const Point<int> left {-1, 0};
 
 #endif  // INCLUDED_POINT_HPP

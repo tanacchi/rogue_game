@@ -19,7 +19,7 @@ void MapDisplay::show(Map& map, const Player& player)
   }
 
   // アイテム要素の表示
-  for (const std::pair<const Point<int>, ::item::ItemPtr>& item : map.item_layer) {
+  for (const std::pair<const Point<int>, ::ItemPtr>& item : map.item_layer) {
     mvwaddch(win_.get(), item.first.get_y(), item.first.get_x(), item.second->symbol);
   }
 

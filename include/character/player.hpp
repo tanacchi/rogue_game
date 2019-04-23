@@ -20,9 +20,9 @@ class Player : public Character
         friend std::ostream& operator<<(std::ostream& os, const Inventory& inventory);
         std::size_t get_item_num() const;
         std::vector<std::string> get_item_name_array() const;
-        void store(::item::ItemPtr&& item);
+        void store(::ItemPtr&& item);
         void use(Player* const player_ptr, std::size_t item_index);
-        std::list<::item::ItemPtr> items_;
+        std::list<::ItemPtr> items_;
       private:
         std::size_t capacity_;
     };
@@ -36,7 +36,7 @@ class Player : public Character
     // ステータスごとに２個ずつメソッドが増えることは避けたい
     std::size_t get_money() const;
     void add_money(std::size_t addition);
-    void store_item(::item::ItemPtr&& item);
+    void store_item(::ItemPtr&& item);
     void use_item(std::size_t item_index);
     std::vector<std::string> get_item_name_array() const;
     friend std::ostream& operator<<(std::ostream& os, const Player& player);

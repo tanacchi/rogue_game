@@ -26,7 +26,7 @@ void Player::add_money(std::size_t addition)
   money_ += addition;
 }
 
-void Player::store_item(::item::ItemPtr&& item)
+void Player::store_item(::ItemPtr&& item)
 {
   inventory_.store(std::move(item));
 }
@@ -73,9 +73,9 @@ Player::Inventory::Inventory(std::size_t capacity)
 std::ostream& operator<<(std::ostream& os, const Player::Inventory& inventory)
 {
   os << "\n{ items :\n";
-  for (std::list<::item::ItemPtr>::const_iterator it{inventory.items_.begin()}, end{inventory.items_.end()};
+  for (std::list<::ItemPtr>::const_iterator it{inventory.items_.begin()}, end{inventory.items_.end()};
       it != end; ++it, os.put('\n')) {
-    const auto* const item(dynamic_cast<item::Gold *>((*it).get())); // REFACTOR REQUIRED
+    const auto* const item(dynamic_cast<Gold *>((*it).get())); // REFACTOR REQUIRED
     os << *item;
   }
   os << "},\n { capacity : " << inventory.capacity_ << " }\n";
@@ -90,20 +90,20 @@ std::size_t Player::Inventory::get_item_num() const
 std::vector<std::string> Player::Inventory::get_item_name_array() const
 {
   std::vector<std::string> item_names{};
-  for (std::list<::item::ItemPtr>::const_iterator it{items_.begin()}, end{items_.end()}; it != end; ++it) {
+  for (std::list<::ItemPtr>::const_iterator it{items_.begin()}, end{items_.end()}; it != end; ++it) {
     item_names.emplace_back((*it)->type);
   }
   return item_names;
 }
 
-void Player::Inventory::store(::item::ItemPtr&& item)
+void Player::Inventory::store(::ItemPtr&& item)
 {
   items_.push_back(std::move(item));
 }
 
 void Player::Inventory::use(Player* const player_ptr, std::size_t item_index)
 {
-  std::list<::item::ItemPtr>::iterator taget_item_itr{std::next(items_.begin(), item_index)};
+  std::list<::ItemPtr>::iterator taget_item_itr{std::next(items_.begin(), item_index)};
   (*taget_item_itr)->use(player_ptr);
   items_.erase(taget_item_itr);
 }

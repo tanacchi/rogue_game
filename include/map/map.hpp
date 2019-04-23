@@ -31,7 +31,7 @@ struct Map
   // ダンジョン要素・アイテム要素はそれぞれ（連想）配列としてまとめ、
   // レイヤーとして扱う
   std::vector<::DungeonElemPtr> dungeon_layer;
-  std::map<Point<int>, ::item::ItemPtr> item_layer;
+  std::map<Point<int>, ::ItemPtr> item_layer;
 
   // 位置情報から該当するダンジョン要素のコピーを取得する
   const ::DungeonElem get_dungeon_elem(const Point<int>& point) const;

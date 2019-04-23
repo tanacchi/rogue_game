@@ -17,12 +17,12 @@
   return dungeon_table.at(type)();
 }
 
-::item::ItemPtr gen_item_elem(std::string type, boost::property_tree::ptree property)
+::ItemPtr gen_item_elem(std::string type, boost::property_tree::ptree property)
 {
-  static std::unordered_map<std::string, std::function<::item::ItemPtr(boost::property_tree::ptree)>> item_table{{
+  static std::unordered_map<std::string, std::function<::ItemPtr(boost::property_tree::ptree)>> item_table{{
     {"gold", [](boost::property_tree::ptree property){
                                                        std::size_t amount{property.get_optional<std::size_t>("amount").get()};
-                                                       return ::item::ItemPtr(new ::item::Gold{amount});
+                                                       return ::ItemPtr(new ::Gold{amount});
                                                      }},
   }};
   return item_table.at(type)(property);

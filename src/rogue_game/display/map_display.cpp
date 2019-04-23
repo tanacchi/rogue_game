@@ -25,7 +25,7 @@ void MapDisplay::show(Map& map, const Player& player)
 
   // プレイヤーの表示
   mvwaddch(win_.get(), player.get_position().get_y(), player.get_position().get_x(), '@' | A_BOLD);
-  ::map::Point<int> sight{player.get_position() + player.get_direction()};
+  ::Point<int> sight{player.get_position() + player.get_direction()};
   mvwchgat(win_.get(), sight.get_y(), sight.get_x(), 1, A_BOLD | A_UNDERLINE, 0, NULL);
 
   wrefresh(win_.get());

@@ -2,18 +2,18 @@
 #include <item/item_series.hpp>
 
 Player::Player()
-  : Character(map::zero),
+  : Character(zero),
   inventory_{10},
-  direction_{map::down},
+  direction_{down},
   money_{0}
 {
 }
 
-const std::map<KeyManager::KeyType, const map::Point<int>> Player::motion_table = {
-  {KeyManager::Up,    map::up   },
-  {KeyManager::Down,  map::down },
-  {KeyManager::Right, map::right},
-  {KeyManager::Left,  map::left },
+const std::map<KeyManager::KeyType, const Point<int>> Player::motion_table = {
+  {KeyManager::Up,    up   },
+  {KeyManager::Down,  down },
+  {KeyManager::Right, right},
+  {KeyManager::Left,  left },
 };
 
 std::size_t Player::get_money() const
@@ -43,12 +43,12 @@ std::vector<std::string> Player::get_item_name_array() const
   return inventory_.get_item_name_array();
 }
 
-::map::Point<int> Player::get_direction() const
+::Point<int> Player::get_direction() const
 {
   return direction_;
 }
 
-void Player::assign_motion(const ::map::Point<int>& next_motion)
+void Player::assign_motion(const ::Point<int>& next_motion)
 {
   if (next_motion == direction_) {
     set_position(next_motion + get_position());

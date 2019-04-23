@@ -12,7 +12,7 @@ GameMaster::GameMaster()
     player_(),
     target_menu_ptr()
 {
-  map::MapReader map_reader{};
+  MapReader map_reader{};
   map_ = map_reader(map_dir + "json/tmp_sample_map.json");
   player_.set_position(map_.initial_position);
 }
@@ -79,7 +79,7 @@ GameStatus GameMaster::take_dungeon_mode(const GameStatus& status)
   }
   // プレイヤーの位置更新
   const auto motion{Player::motion_table.find(keyboard_.get()) != Player::motion_table.end() ?
-      Player::motion_table.at(keyboard_.get()) : map::zero};
+      Player::motion_table.at(keyboard_.get()) : zero};
   const auto next_position{player_.get_position() + motion};
   if (map_.in_range(next_position) && map_.get_dungeon_elem(next_position).can_stand()) {
     player_.assign_motion(motion);

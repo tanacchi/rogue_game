@@ -25,8 +25,8 @@ public:
   GameStatus take_dungeon_mode(const GameStatus& status);
   GameStatus take_select_mode(const GameStatus& status);
 
-  map::Map              map_;
-  map::MapDisplay       map_display_;
+  Map                   map_;
+  MapDisplay            map_display_;
   PlayerDisplay         player_display_;
   MenuDisplay           menu_display_;
   KeyManager            keyboard_;

@@ -26,7 +26,7 @@ struct Map
   std::size_t height;
 
   // プレイヤーの初期位置
-  map::Point<int> initial_position;
+  Point<int> initial_position;
 
   // ダンジョン要素・アイテム要素はそれぞれ（連想）配列としてまとめ、
   // レイヤーとして扱う

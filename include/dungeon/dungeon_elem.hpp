@@ -7,7 +7,7 @@
 #include <map/map_elem.hpp>
 
 // ダンジョン要素の基底クラス
-class DungeonElem : public ::map::MapElem
+class DungeonElem : public ::MapElem
 {
   public:
     DungeonElem(std::string type, bool can_stand);

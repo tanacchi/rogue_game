@@ -21,7 +21,7 @@ namespace item
   std::string Item::to_string() const
   {
     std::stringstream ss;
-    ss << ::map::MapElem::to_string();
+    ss << MapElem::to_string();
     return ss.str();
   }
 }

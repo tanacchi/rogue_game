@@ -30,7 +30,7 @@ class Player : public Character
     Player();
 
     // KeyState と移動方向の対応表
-    static const std::map<KeyManager::KeyType, const map::Point<int>> motion_table;
+    static const std::map<KeyManager::KeyType, const Point<int>> motion_table;
 
     // money の getter と setter
     // ステータスごとに２個ずつメソッドが増えることは避けたい
@@ -41,13 +41,13 @@ class Player : public Character
     std::vector<std::string> get_item_name_array() const;
     friend std::ostream& operator<<(std::ostream& os, const Player& player);
 
-    ::map::Point<int> get_direction() const;
-    void assign_motion(const ::map::Point<int>& next_motion);
+    ::Point<int> get_direction() const;
+    void assign_motion(const ::Point<int>& next_motion);
 
     Inventory inventory_;
 
   private:
-    ::map::Point<int> direction_;
+    ::Point<int> direction_;
     std::size_t money_;
 };
 

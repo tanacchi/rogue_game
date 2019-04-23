@@ -12,17 +12,17 @@ class Character
 {
   public:
     // デフォルト引数はそのうちなくす予定
-    Character(map::Point<int> position = map::zero);
+    Character(Point<int> position = zero);
 
     // キャラクターの位置を取得
-    map::Point<int> get_position() const;  // const& にする？
+    Point<int> get_position() const;  // const& にする？
 
     // キャラクターの位置を設定
-    void set_position(const map::Point<int>& point);
+    void set_position(const Point<int>& point);
 
     friend std::ostream& operator<<(std::ostream& os, const Character& character);
   protected:
-    map::Point<int> position_;
+    Point<int> position_;
 };
 
 #endif  // INCLUDED_CHARACTER_HPP

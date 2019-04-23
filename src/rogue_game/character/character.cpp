@@ -1,16 +1,16 @@
 #include <character/character.hpp>
 
-Character::Character(map::Point<int> position)
+Character::Character(Point<int> position)
   : position_{position}
 {
 }
 
-map::Point<int> Character::get_position() const
+Point<int> Character::get_position() const
 {
   return position_;
 }
 
-void Character::set_position(const map::Point<int>& point)
+void Character::set_position(const Point<int>& point)
 {
   position_ = point;
 }

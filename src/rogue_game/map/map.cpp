@@ -31,7 +31,7 @@ std::ostream& operator<<(std::ostream& os, const Map& map)
   return os;
 }
 
-const ::dungeon::DungeonElem Map::get_dungeon_elem(const Point<int>& point) const
+const ::DungeonElem Map::get_dungeon_elem(const Point<int>& point) const
 {
   return *dungeon_layer[width * point.get_y() + point.get_x()];
 }

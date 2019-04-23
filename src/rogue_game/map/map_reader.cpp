@@ -4,15 +4,15 @@
 
 // ダンジョン要素からインスタンスを生成しポイントを返す
 // オブジェクトファクトリ
-::dungeon::DungeonElemPtr gen_dungeon_elem(std::string type)
+::DungeonElemPtr gen_dungeon_elem(std::string type)
 {
-  static std::unordered_map<std::string, std::function<::dungeon::DungeonElemPtr(void)>> dungeon_table{{
-    {"floor",           [](){ return ::dungeon::DungeonElemPtr(new ::dungeon::Floor{}); }},
-      {"path",            [](){ return ::dungeon::DungeonElemPtr(new ::dungeon::Path{}); }},
-      {"none",            [](){ return ::dungeon::DungeonElemPtr(new ::dungeon::None{}); }},
-      {"horizontal_wall", [](){ return ::dungeon::DungeonElemPtr(new ::dungeon::HorizontalWall{}); }},
-      {"vertical_wall",   [](){ return ::dungeon::DungeonElemPtr(new ::dungeon::VerticalWall{}); }},
-      {"door",            [](){ return ::dungeon::DungeonElemPtr(new ::dungeon::Door{}); }},
+  static std::unordered_map<std::string, std::function<::DungeonElemPtr(void)>> dungeon_table{{
+    {"floor",           [](){ return ::DungeonElemPtr(new ::Floor{}); }},
+      {"path",            [](){ return ::DungeonElemPtr(new ::Path{}); }},
+      {"none",            [](){ return ::DungeonElemPtr(new ::None{}); }},
+      {"horizontal_wall", [](){ return ::DungeonElemPtr(new ::HorizontalWall{}); }},
+      {"vertical_wall",   [](){ return ::DungeonElemPtr(new ::VerticalWall{}); }},
+      {"door",            [](){ return ::DungeonElemPtr(new ::Door{}); }},
   }};
   return dungeon_table.at(type)();
 }

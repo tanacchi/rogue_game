@@ -18,7 +18,7 @@ class MapReader
 
 // ダンジョン要素の種類からダンジョン要素のインスタンスを生成しポインタを返す
 // オブジェクト・ファクトリ的な役割
-::dungeon::DungeonElemPtr gen_dungeon_elem(std::string type);
+::DungeonElemPtr gen_dungeon_elem(std::string type);
 ::item::ItemPtr gen_item_elem(std::string type, boost::property_tree::ptree property);
 
 #endif // INCLUDED_MAP_READER_HPP

@@ -61,5 +61,3 @@ Menu::ContentsType Menu::item_contents{{
       return GameStatus{Mode::Select, Task::Show};
     }},
 }};
-
-

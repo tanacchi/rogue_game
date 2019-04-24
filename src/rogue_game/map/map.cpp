@@ -23,8 +23,10 @@ std::ostream& operator<<(std::ostream& os, const Map& map)
   os << "{ width : " << map.width << " }, { height : " << map.height << "},\n"
     << "{ initial_position : " << map.initial_position << " },\n "
     << "{ dungeon_layer :\n";
-  for (std::size_t y{0}; y < map.height; ++y, os.put('\n')) {
-    for (std::size_t x{0}; x < map.width; ++x) {
+  for (std::size_t y{0}; y < map.height; ++y, os.put('\n'))
+  {
+    for (std::size_t x{0}; x < map.width; ++x)
+    {
       os << map.get_dungeon_elem(Point<int>{x, y}).symbol;
     }
   }

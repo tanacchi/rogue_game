@@ -8,11 +8,11 @@
 {
   static std::unordered_map<std::string, std::function<::DungeonElemPtr(void)>> dungeon_table{{
     {"floor",           [](){ return ::DungeonElemPtr(new ::Floor{}); }},
-      {"path",            [](){ return ::DungeonElemPtr(new ::Path{}); }},
-      {"none",            [](){ return ::DungeonElemPtr(new ::None{}); }},
-      {"horizontal_wall", [](){ return ::DungeonElemPtr(new ::HorizontalWall{}); }},
-      {"vertical_wall",   [](){ return ::DungeonElemPtr(new ::VerticalWall{}); }},
-      {"door",            [](){ return ::DungeonElemPtr(new ::Door{}); }},
+    {"path",            [](){ return ::DungeonElemPtr(new ::Path{}); }},
+    {"none",            [](){ return ::DungeonElemPtr(new ::None{}); }},
+    {"horizontal_wall", [](){ return ::DungeonElemPtr(new ::HorizontalWall{}); }},
+    {"vertical_wall",   [](){ return ::DungeonElemPtr(new ::VerticalWall{}); }},
+    {"door",            [](){ return ::DungeonElemPtr(new ::Door{}); }},
   }};
   return dungeon_table.at(type)();
 }
@@ -20,10 +20,11 @@
 ::ItemPtr gen_item_elem(std::string type, boost::property_tree::ptree property)
 {
   static std::unordered_map<std::string, std::function<::ItemPtr(boost::property_tree::ptree)>> item_table{{
-    {"gold", [](boost::property_tree::ptree property){
-                                                       std::size_t amount{property.get_optional<std::size_t>("amount").get()};
-                                                       return ::ItemPtr(new ::Gold{amount});
-                                                     }},
+    {"gold",
+      [](boost::property_tree::ptree property){
+        std::size_t amount{property.get_optional<std::size_t>("amount").get()};
+        return ::ItemPtr(new ::Gold{amount});
+      }},
   }};
   return item_table.at(type)(property);
 }
@@ -48,26 +49,25 @@ Map MapReader::operator()(std::string map_filename)
   }
 
   // ダンジョン要素を取得
+  BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.elems"))
   {
-    BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.elems")) {
-      const boost::property_tree::ptree& elem{child.second};
-      if (!elem.empty()) {
-        std::string type{elem.get_optional<std::string>("type").get()};
-        map.dungeon_layer.emplace_back(std::move(gen_dungeon_elem(type)));
-      }
+    const boost::property_tree::ptree& elem{child.second};
+    if (!elem.empty())
+    {
+      std::string type{elem.get_optional<std::string>("type").get()};
+      map.dungeon_layer.emplace_back(std::move(gen_dungeon_elem(type)));
     }
   }
-
   // アイテム要素を取得
+  BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.items"))
   {
-    BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.items")) {
-      const boost::property_tree::ptree& elem{child.second};
-      if (!elem.empty()) {
-        std::string type{elem.get_optional<std::string>("type").get()};
-        auto pos_x{elem.get_optional<int>("pos_x").get()};
-        auto pos_y{elem.get_optional<int>("pos_y").get()};
-        map.item_layer.emplace(Point<int>{pos_x, pos_y}, std::move(gen_item_elem(type, elem)));
-      }
+    const boost::property_tree::ptree& elem{child.second};
+    if (!elem.empty())
+    {
+      std::string type{elem.get_optional<std::string>("type").get()};
+      auto pos_x{elem.get_optional<int>("pos_x").get()};
+      auto pos_y{elem.get_optional<int>("pos_y").get()};
+      map.item_layer.emplace(Point<int>{pos_x, pos_y}, std::move(gen_item_elem(type, elem)));
     }
   }
   return map;

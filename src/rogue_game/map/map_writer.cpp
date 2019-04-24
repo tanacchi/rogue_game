@@ -4,9 +4,11 @@
 // ダンジョン要素とアイテム要素は別々
 void MapWriter::set_configs(const TextMap& text_map, std::vector<ConfigType>& dungeon_configs, std::vector<ConfigType>& item_configs)
 {
-  for (std::size_t i{0}, end{text_map.text.length()}; i < end; ++i) {
+  for (std::size_t i{0}, end{text_map.text.length()}; i < end; ++i)
+  {
     ConfigType dungeon_config, item_config;
-    switch (text_map.text[i]) {
+    switch (text_map.text[i])
+    {
       case ' ':
         dungeon_config.put("type", "none");
         break;
@@ -54,13 +56,15 @@ void MapWriter::write_json_map(const TextMap& text_map,
   map_data.put("Map.player_pos_x", player_pos.get_x());
   map_data.put("Map.player_pos_y", player_pos.get_y());
   ConfigType dungeon_tree;
-  for (auto config : dungeon_configs) {
+  for (auto config : dungeon_configs)
+  {
     dungeon_tree.push_back(std::make_pair("", config));
   }
   map_data.add_child("Map.elems", dungeon_tree);
 
   ConfigType item_tree;
-  for (auto config : item_configs) {
+  for (auto config : item_configs)
+  {
     item_tree.push_back(std::make_pair("", config));
   }
   map_data.add_child("Map.items", item_tree);

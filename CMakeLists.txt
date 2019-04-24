@@ -35,6 +35,7 @@ find_package(Boost REQUIRED
   system
   filesystem
 )
+find_package(Curses REQUIRED)
 
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_COMPILER g++)
@@ -46,6 +47,7 @@ set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 include_directories(
   ${PROJECT_INCLUDE_DIR}
   ${Boost_INCLUDE_DIRS}
+  ${CURSES_INCLUDE_DIR}
 )
 
 link_directories(

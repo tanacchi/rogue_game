@@ -3,14 +3,11 @@
 
 #include <dungeon/dungeon_elem.hpp>
 
-namespace dungeon
+// ダンジョン要素　'+'
+class Door : public DungeonElem
 {
-  // ダンジョン要素　'+'
-  class Door : public DungeonElem
-  {
   public:
     Door();
-  };
-}
+};
 
 #endif  // INCLUDED_DOOR_HPP

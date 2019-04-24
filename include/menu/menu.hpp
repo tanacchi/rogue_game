@@ -12,13 +12,13 @@ class Menu
 {
   public:
     using ContentsType = std::map<std::string, std::function<GameStatus(std::shared_ptr<Menu>&)>>;
-  
+
     Menu(const ContentsType& contents, GameMaster* gm_ptr = nullptr);
     ContentsType::mapped_type::result_type execute(const std::string& key, std::shared_ptr<Menu>& target_menu_ptr) const;
- 
+
     static const ContentsType base_contents;
     static ContentsType item_contents;
-  
+
     ContentsType contents;
 };
 

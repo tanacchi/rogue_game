@@ -1,25 +1,22 @@
 #include <character/character.hpp>
 
-namespace character
+Character::Character(Point<int> position)
+  : position_{position}
 {
-  Character::Character(map::Point<int> position)
-    : position_{position}
-  {
-  }
+}
 
-  map::Point<int> Character::get_position() const
-  {
-    return position_;
-  }
+Point<int> Character::get_position() const
+{
+  return position_;
+}
 
-  void Character::set_position(const map::Point<int>& point)
-  {
-    position_ = point;
-  }
+void Character::set_position(const Point<int>& point)
+{
+  position_ = point;
+}
 
-  std::ostream& operator<<(std::ostream& os, const Character& character)
-  {
-    os << " { position : " << character.position_ << " }";
-    return os;
-  }
+std::ostream& operator<<(std::ostream& os, const Character& character)
+{
+  os << " { position : " << character.position_ << " }";
+  return os;
 }

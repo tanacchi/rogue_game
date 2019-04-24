@@ -8,9 +8,9 @@
 // ただしマップ上のプレイヤーはウィンドウが違うので MapDisplay が表示してる
 class PlayerDisplay : public DisplayPanel
 {
-public:
-  PlayerDisplay(std::size_t x, std::size_t y, std::size_t width, std::size_t height);
-  void show(const character::Player& player);
+  public:
+    PlayerDisplay(std::size_t x, std::size_t y, std::size_t width, std::size_t height);
+    void show(const Player& player);
 };
 
 #endif  // INCLUDED_PLAYER_DISPLAY_HPP

@@ -14,7 +14,7 @@ Menu::Menu(const ContentsType& contents, GameMaster* gm_ptr)
     for (const auto& item_ptr : gm_ptr->player_.inventory_.items_)
     {
       ContentsType::key_type key{item_ptr->type};
-      std::function<void(void)> item_action{std::bind(&item::Item::use, *item_ptr, &gm_ptr->player_)};
+      std::function<void(void)> item_action{std::bind(&Item::use, *item_ptr, &gm_ptr->player_)};
       ContentsType::mapped_type value{[&](std::shared_ptr<Menu>& target_menu_ptr){
         item_action();
         target_menu_ptr.reset();
@@ -61,5 +61,3 @@ Menu::ContentsType Menu::item_contents{{
       return GameStatus{Mode::Select, Task::Show};
     }},
 }};
-
-

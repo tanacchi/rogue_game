@@ -3,14 +3,11 @@
 
 #include <dungeon/dungeon_elem.hpp>
 
-namespace dungeon
+// ダンジョン要素　'-'
+class HorizontalWall : public DungeonElem
 {
-  // ダンジョン要素　'-'
-  class HorizontalWall : public DungeonElem
-  {
   public:
     HorizontalWall();
-  };
-}
+};
 
 #endif  // INCLUDED_HORIZONTAL_WALL_HPP

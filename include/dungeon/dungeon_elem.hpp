@@ -6,11 +6,9 @@
 
 #include <map/map_elem.hpp>
 
-namespace dungeon
+// ダンジョン要素の基底クラス
+class DungeonElem : public ::MapElem
 {
-  // ダンジョン要素の基底クラス
-  class DungeonElem : public ::map::MapElem
-  {
   public:
     DungeonElem(std::string type, bool can_stand);
     DungeonElem(const DungeonElem& rhs);
@@ -24,9 +22,8 @@ namespace dungeon
     // マップ要素の静的クラス変数にしてもいいんだけど
     // こっちのが若干自由度高そう
     const bool can_stand_;
-  };
+};
 
-  using DungeonElemPtr = std::shared_ptr<DungeonElem>;
-}
+using DungeonElemPtr = std::shared_ptr<DungeonElem>;
 
 #endif  // INCLUDED_DUNGEON_ELEM_HPP

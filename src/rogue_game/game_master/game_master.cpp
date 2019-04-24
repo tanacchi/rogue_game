@@ -12,7 +12,7 @@ GameMaster::GameMaster()
     player_(),
     target_menu_ptr()
 {
-  map::MapReader map_reader{};
+  MapReader map_reader{};
   map_ = map_reader(map_dir + "json/tmp_sample_map.json");
   player_.set_position(map_.initial_position);
 }
@@ -26,7 +26,8 @@ void GameMaster::run()
 {
   GameStatus status{};
 
-  while (status.task != Task::End) {
+  while (status.task != Task::End)
+  {
     switch (status.task)
     {
       case Task::Show:
@@ -78,16 +79,18 @@ GameStatus GameMaster::take_dungeon_mode(const GameStatus& status)
     return GameStatus{Mode::Select, Task::Show};
   }
   // プレイヤーの位置更新
-  const auto motion{character::Player::motion_table.find(keyboard_.get()) != character::Player::motion_table.end() ?
-      character::Player::motion_table.at(keyboard_.get()) : map::zero};
+  const auto motion{Player::motion_table.find(keyboard_.get()) != Player::motion_table.end() ?
+      Player::motion_table.at(keyboard_.get()) : zero};
   const auto next_position{player_.get_position() + motion};
-  if (map_.in_range(next_position) && map_.get_dungeon_elem(next_position).can_stand()) {
+  if (map_.in_range(next_position) && map_.get_dungeon_elem(next_position).can_stand())
+  {
     player_.assign_motion(motion);
   }
   // アイテムの取得・更新
   const auto current_position{player_.get_position()};
   const auto picked_up_item_itr{map_.item_layer.find(current_position)};
-  if (picked_up_item_itr != map_.item_layer.end()) {
+  if (picked_up_item_itr != map_.item_layer.end())
+  {
     player_.store_item(std::move(picked_up_item_itr->second));
     map_.item_layer.erase(picked_up_item_itr);
   }
@@ -96,18 +99,22 @@ GameStatus GameMaster::take_dungeon_mode(const GameStatus& status)
 
 GameStatus GameMaster::take_select_mode(const GameStatus& status)
 {
-  if (keyboard_.is_match(KeyManager::Back|KeyManager::Space)) {
+  if (keyboard_.is_match(KeyManager::Back|KeyManager::Space))
+  {
     target_menu_ptr.reset();
     return GameStatus{Mode::Dungeon, Task::Show};
-  } else if (keyboard_ == KeyManager::Enter) {
+  }
+  else if (keyboard_ == KeyManager::Enter)
+  {
     auto selected_content_name{menu_display_.get_selected_content_name()};
-  // アイテムの使用
+    // アイテムの使用
     auto next_status{target_menu_ptr->execute(selected_content_name, target_menu_ptr)};
     menu_display_.reset_menu(target_menu_ptr);
     return next_status;
-  } else {
+  }
+  else
+  {
     menu_display_.toggle_cursor(keyboard_);
     return GameStatus{Mode::Select, Task::Show};
   }
 }
-

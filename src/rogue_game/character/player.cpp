@@ -33,7 +33,8 @@ void Player::store_item(::ItemPtr&& item)
 
 void Player::use_item(std::size_t item_index)
 {
-  if (item_index < inventory_.get_item_num()) {   // ここのチェックはコイツの仕事か？？
+  if (item_index < inventory_.get_item_num())
+  {   // ここのチェックはコイツの仕事か？？
     inventory_.use(this, item_index);
   }
 }
@@ -50,9 +51,12 @@ std::vector<std::string> Player::get_item_name_array() const
 
 void Player::assign_motion(const ::Point<int>& next_motion)
 {
-  if (next_motion == direction_) {
+  if (next_motion == direction_)
+  {
     set_position(next_motion + get_position());
-  } else if (next_motion) {
+  }
+  else if (next_motion)
+  {
     direction_ = next_motion;
   }
 }
@@ -74,7 +78,8 @@ std::ostream& operator<<(std::ostream& os, const Player::Inventory& inventory)
 {
   os << "\n{ items :\n";
   for (std::list<::ItemPtr>::const_iterator it{inventory.items_.begin()}, end{inventory.items_.end()};
-      it != end; ++it, os.put('\n')) {
+      it != end; ++it, os.put('\n'))
+  {
     const auto* const item(dynamic_cast<Gold *>((*it).get())); // REFACTOR REQUIRED
     os << *item;
   }
@@ -90,7 +95,8 @@ std::size_t Player::Inventory::get_item_num() const
 std::vector<std::string> Player::Inventory::get_item_name_array() const
 {
   std::vector<std::string> item_names{};
-  for (std::list<::ItemPtr>::const_iterator it{items_.begin()}, end{items_.end()}; it != end; ++it) {
+  for (std::list<::ItemPtr>::const_iterator it{items_.begin()}, end{items_.end()}; it != end; ++it)
+  {
     item_names.emplace_back((*it)->type);
   }
   return item_names;

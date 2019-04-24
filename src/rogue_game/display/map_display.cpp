@@ -11,18 +11,19 @@ void MapDisplay::show(Map& map, const Player& player)
   wclear(win_.get());
 
   // ダンジョン要素の表示
-  for (std::size_t y{0}; y < map.height; ++y) {
-    for (std::size_t x{0}; x < map.width; ++x) {
+  for (std::size_t y{0}; y < map.height; ++y)
+  {
+    for (std::size_t x{0}; x < map.width; ++x)
+    {
       mvwaddch(win_.get(), y, x, map.dungeon_layer[y*map.width+x]->symbol);
     }
     mvwaddch(win_.get(), y, map.width, '\n');
   }
-
   // アイテム要素の表示
-  for (const std::pair<const Point<int>, ::ItemPtr>& item : map.item_layer) {
+  for (const std::pair<const Point<int>, ::ItemPtr>& item : map.item_layer)
+  {
     mvwaddch(win_.get(), item.first.get_y(), item.first.get_x(), item.second->symbol);
   }
-
   // プレイヤーの表示
   mvwaddch(win_.get(), player.get_position().get_y(), player.get_position().get_x(), '@' | A_BOLD);
   ::Point<int> sight{player.get_position() + player.get_direction()};

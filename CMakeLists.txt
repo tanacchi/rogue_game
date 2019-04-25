@@ -36,9 +36,11 @@ find_package(Boost REQUIRED
   filesystem
 )
 
+set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_COMPILER g++)
 set(CMAKE_CXX_FLAGS "-Wall -std=c++1y")
 # set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g -DDEBUG")
 
 set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 include_directories(
@@ -56,3 +58,10 @@ configure_file(
   ${PROJECT_SOURCE_DIR}/README.md)
 
 add_subdirectory(src)
+
+# message(STATUS "*** dump start cmake variables ***")
+# get_cmake_property(_variableNames VARIABLES)
+# foreach(_variableName ${_variableNames})
+        # message(STATUS "${_variableName}=${${_variableName}}")
+# endforeach()
+# message(STATUS "*** dump end ***")

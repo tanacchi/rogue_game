@@ -37,7 +37,6 @@ find_package(Boost REQUIRED
 )
 find_package(Curses REQUIRED)
 
-set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_COMPILER g++)
 set(CMAKE_CXX_FLAGS "-Wall -std=c++1y")
 # set(CMAKE_CXX_STANDARD 14)

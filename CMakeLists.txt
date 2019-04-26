@@ -38,8 +38,8 @@ find_package(Boost REQUIRED
 find_package(Curses REQUIRED)
 
 set(CMAKE_CXX_COMPILER g++)
-set(CMAKE_CXX_FLAGS "-Wall -std=c++1y")
-# set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS "-Wall")
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g -DDEBUG")
 
 set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)

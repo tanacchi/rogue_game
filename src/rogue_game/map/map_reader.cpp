@@ -34,7 +34,17 @@ Map MapReader::operator()(std::string map_filename)
   // json から Map のインスタンスを生成する
   Map map{};
   boost::property_tree::ptree json_map_data{};
-  boost::property_tree::read_json(map_filename, json_map_data);
+  try 
+  {
+    boost::property_tree::read_json(map_filename, json_map_data);
+  }
+  catch (boost::property_tree::file_parser_error& e)
+  {
+    LOG_STRING("=== Couldn't open map file");
+    LOG_VALUES(e.what());
+    std::string error_msg{"[ERROR] You should make map\n$ ./map_maker.out map/text/sample_map_1.txt"};
+    throw std::runtime_error{error_msg};
+  }
   {
     // マップの横幅を取得
     map.width = json_map_data.get_optional<int>("Map.width").get();

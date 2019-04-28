@@ -16,12 +16,10 @@ class GameMaster
   public:
     GameMaster();
     ~GameMaster();
-    void run();
-    // private:
+
     GameStatus show(const GameStatus& status);
     GameStatus input(const GameStatus& status);
     GameStatus perform(const GameStatus& status);
-
     GameStatus take_dungeon_mode(const GameStatus& status);
     GameStatus take_select_mode(const GameStatus& status);
 

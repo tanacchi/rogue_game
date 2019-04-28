@@ -21,33 +21,6 @@ GameMaster::~GameMaster()
   endwin();
 }
 
-void GameMaster::run()
-{
-  GameStatus status{};
-
-  while (status.task != Task::End)
-  {
-    switch (status.task)
-    {
-      case Task::Show:
-        status = show(status);
-        break;
-      case Task::Input:
-        status = input(status);
-        break;
-      case Task::Perform:
-        status = perform(status);
-        break;
-      case Task::End:
-        return;
-      default:
-        LOG_STRING("Unknown task detected.");
-        status.task = Task::End;
-        break;
-    }
-  }
-}
-
 GameStatus GameMaster::show(const GameStatus& status)
 {
   // 画面表示

@@ -37,6 +37,11 @@ find_package(Boost REQUIRED
 )
 find_package(Curses REQUIRED)
 
+if (NOT DEFINED CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
+  set(CMAKE_BUILD_TYPE Release)
+endif()
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+
 set(CMAKE_CXX_COMPILER g++)
 set(CMAKE_CXX_FLAGS "-Wall")
 set(CMAKE_CXX_STANDARD 14)

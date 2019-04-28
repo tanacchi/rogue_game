@@ -9,8 +9,7 @@ GameMaster::GameMaster()
     player_display_{70, 30, 20, 10},
     menu_display_{100, 10, 30, 16},
     keyboard_{},
-    player_(),
-    target_menu_ptr()
+    player_()
 {
   MapReader map_reader{};
   map_ = map_reader(map_dir + "json/tmp_sample_map.json");
@@ -76,8 +75,8 @@ GameStatus GameMaster::take_dungeon_mode(const GameStatus& status)
 {
   if (keyboard_ == KeyManager::Space)
   {
-    target_menu_ptr.reset(new Menu{Menu::base_contents, this});
-    menu_display_.reset_menu(target_menu_ptr);
+    // target_menu_ptr.reset(new Menu{Menu::base_contents, this});
+    // menu_display_.reset_menu(target_menu_ptr);
     return GameStatus{Mode::Select, Task::Show};
   }
   // プレイヤーの位置更新
@@ -103,16 +102,17 @@ GameStatus GameMaster::take_select_mode(const GameStatus& status)
 {
   if (keyboard_.is_match(KeyManager::Back|KeyManager::Space))
   {
-    target_menu_ptr.reset();
+    // target_menu_ptr.reset();
     return GameStatus{Mode::Dungeon, Task::Show};
   }
   else if (keyboard_ == KeyManager::Enter)
   {
     auto selected_content_name{menu_display_.get_selected_content_name()};
     // アイテムの使用
-    auto next_status{target_menu_ptr->execute(selected_content_name, target_menu_ptr)};
-    menu_display_.reset_menu(target_menu_ptr);
-    return next_status;
+    // auto next_status{target_menu_ptr->execute(selected_content_name, target_menu_ptr)};
+    // menu_display_.reset_menu(target_menu_ptr);
+    // return next_status;
+    return GameStatus{Mode::Dungeon, Task::Show};
   }
   else
   {

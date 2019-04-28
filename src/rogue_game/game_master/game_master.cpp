@@ -52,9 +52,11 @@ void GameMaster::run()
 GameStatus GameMaster::show(const GameStatus& status)
 {
   // 画面表示
+#ifndef DEBUG
   map_display_.show(map_, player_);
   player_display_.show(player_);
   menu_display_.show();
+#endif
   return GameStatus{status.mode, Task::Input};
 }
 

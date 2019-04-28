@@ -35,19 +35,28 @@ find_package(Boost REQUIRED
   system
   filesystem
 )
+find_package(Curses REQUIRED)
+
+if (NOT DEFINED CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
+  set(CMAKE_BUILD_TYPE Release)
+endif()
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 
 set(CMAKE_CXX_COMPILER g++)
-set(CMAKE_CXX_FLAGS "-Wall -std=c++1y")
-# set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS "-Wall")
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g -DDEBUG")
 
 set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 include_directories(
   ${PROJECT_INCLUDE_DIR}
   ${Boost_INCLUDE_DIRS}
+  ${CURSES_INCLUDE_DIR}
 )
 
 link_directories(
   ${Boost_LIBRARY_DIRS}
+  ${CURSES_LIBRARY_DIR}
 )
 
 set(${PROJECT_NAME}_CONFIGURE_DIR ${PROJECT_SOURCE_DIR}/config)
@@ -56,3 +65,10 @@ configure_file(
   ${PROJECT_SOURCE_DIR}/README.md)
 
 add_subdirectory(src)
+
+# message(STATUS "*** dump start cmake variables ***")
+# get_cmake_property(_variableNames VARIABLES)
+# foreach(_variableName ${_variableNames})
+        # message(STATUS "${_variableName}=${${_variableName}}")
+# endforeach()
+# message(STATUS "*** dump end ***")

@@ -51,6 +51,7 @@ include_directories(
 
 link_directories(
   ${Boost_LIBRARY_DIRS}
+  ${CURSES_LIBRARY_DIR}
 )
 
 set(${PROJECT_NAME}_CONFIGURE_DIR ${PROJECT_SOURCE_DIR}/config)

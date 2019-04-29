@@ -13,8 +13,9 @@ class MenuHandler
     GameStatus operator()(GameMaster& master);
    
   private:
-    MenuDisplay menu_display_;
-    size_t      selected_index_;
+    std::unique_ptr<Menu> menu_ptr;
+    MenuDisplay           menu_display_;
+    size_t                selected_index_;
 };
 
 #endif  // INCLUDED_MENU_HANDLER_HPP

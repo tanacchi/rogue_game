@@ -1,4 +1,5 @@
 #include <functional>
+#include <utility>
 
 #include <menu/menu_handler.hpp>
 #include <game_master/game_master.hpp>
@@ -35,6 +36,7 @@ GameStatus MenuHandler::operator()(GameMaster& master)
         break;
       case KeyManager::Space:
       case KeyManager::Back:
+        selected_index_ = 0;
         next_status =  GameStatus{Mode::Dungeon, Task::Show};
         menu_ptr.release();
         break;
@@ -42,6 +44,7 @@ GameStatus MenuHandler::operator()(GameMaster& master)
         auto content{menu_ptr->get_content()};
         auto itr{std::next(content.begin(), selected_index_)};
         next_status = itr->second(menu_ptr);
+        selected_index_ = 0;
         break;
     }
   }
@@ -63,6 +66,7 @@ void MenuHandler::set_item_content(Player& player)
       }
     };
     using namespace std::placeholders;
-    Menu::item_content.emplace(name, std::move(std::bind(action, _1, &player)));
+    Menu::ContentType::value_type elem{std::make_pair(name, std::bind(action, _1, &player))};
+    Menu::item_content.insert(elem);
   }
 }

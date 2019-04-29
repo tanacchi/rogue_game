@@ -5,3 +5,15 @@
 #include <menu/menu.hpp>
 #include <debug/logger.hpp>
 
+Menu::ContentType base_content {{
+  {"item", []()
+    {
+      return GameStatus{};
+    }
+  },
+  {"exit", []()
+    {
+      return GameStatus{};
+    }
+  }
+}};

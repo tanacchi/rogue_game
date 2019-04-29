@@ -10,6 +10,12 @@ class GameMaster;
 
 class Menu
 {
+  public:
+    using ContentType = std::map<std::string, std::function<GameStatus(void)> >;
+    
+  private:
+    static const ContentType base_content;
+    ContentType content;
 };
 
 #endif  // INCLUDED_MENU_HPP

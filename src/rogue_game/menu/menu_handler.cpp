@@ -1,4 +1,7 @@
+#include <functional>
+
 #include <menu/menu_handler.hpp>
+#include <game_master/game_master.hpp>
 
 MenuHandler::MenuHandler()
   : menu_ptr{}
@@ -9,6 +12,7 @@ MenuHandler::MenuHandler()
 
 GameStatus MenuHandler::operator()(GameMaster& master)
 {
+  set_item_content(master.player);
   return handle(Menu::base_content);
 }
 
@@ -46,4 +50,22 @@ GameStatus MenuHandler::handle(const Menu::ContentType& content)
   }
   menu_display_.hide();
   return next_status;
+}
+
+void MenuHandler::set_item_content(Player& player)
+{
+  Menu::item_content.clear();
+  auto names{player.get_item_name_array()};
+  for (auto name : names)
+  {
+    auto action{
+      [](Menu::MenuPtr& menu_ptr, Player* player_p){
+        menu_ptr.release();
+        player_p->add_money(100);
+        return GameStatus{};
+      }
+    };
+    using namespace std::placeholders;
+    Menu::item_content.emplace(name, std::move(std::bind(action, _1, &player)));
+  }
 }

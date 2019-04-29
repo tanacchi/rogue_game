@@ -17,3 +17,8 @@ Menu::ContentType base_content {{
     }
   }
 }};
+
+const Menu::ContentType& Menu::get_content() const
+{
+  return content_;
+}

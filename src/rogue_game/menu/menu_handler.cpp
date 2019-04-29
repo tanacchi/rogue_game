@@ -29,7 +29,8 @@ GameStatus MenuHandler::handle(const Menu::ContentType& content)
           --selected_index_;
         break;
       case KeyManager::Down:
-        ++selected_index_;
+        if (selected_index_ + 1 < menu_ptr->content_.size())
+          ++selected_index_;
         break;
       case KeyManager::Space:
       case KeyManager::Back:

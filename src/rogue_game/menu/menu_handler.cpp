@@ -12,15 +12,10 @@ MenuHandler::MenuHandler()
 
 GameStatus MenuHandler::operator()(GameMaster& master)
 {
-  set_item_content(master.player);
-  return handle(Menu::base_content);
-}
-
-GameStatus MenuHandler::handle(const Menu::ContentType& content)
-{
   KeyManager keyboard{};
   GameStatus next_status{};
-  menu_ptr.reset(new Menu{content});
+  set_item_content(master.player);
+  menu_ptr.reset(new Menu{Menu::base_content});
 
   while (menu_ptr)
   {

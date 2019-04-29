@@ -11,7 +11,6 @@ class MenuHandler
   public:
     MenuHandler();
     GameStatus operator()(GameMaster& master);
-    GameStatus handle(const Menu::ContentType& content);
     void set_item_content(Player& player);
    
   private:

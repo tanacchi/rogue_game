@@ -20,6 +20,7 @@ class Menu
     
   private:
     static const ContentType base_content;
+    static ContentType item_content;
     ContentType content_;
 };
 

@@ -18,6 +18,24 @@ const Menu::ContentType Menu::base_content {{
   }
 }};
 
+Menu::ContentType Menu::item_content {{
+  {"a", []()
+    {
+      return GameStatus{};
+    }
+  },
+  {"b", []()
+    {
+      return GameStatus{};
+    }
+  },
+  {"c", []()
+    {
+      return GameStatus{};
+    }
+  }
+}};
+
 Menu::Menu(const Menu::ContentType& content)
   : content_{content}
 {

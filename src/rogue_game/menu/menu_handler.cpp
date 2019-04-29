@@ -24,6 +24,10 @@ GameStatus MenuHandler::operator()(GameMaster& master)
       case KeyManager::Back:
         menu_display.hide();
         return GameStatus{Mode::Dungeon, Task::Show};
+      case KeyManager::Enter:
+        auto content{menu.get_content()};
+        auto itr{std::next(content.begin(), selected_index_)};
+        return itr->second();
     }
   }
   menu_display.hide();

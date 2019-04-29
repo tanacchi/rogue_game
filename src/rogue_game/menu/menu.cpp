@@ -13,7 +13,7 @@ const Menu::ContentType Menu::base_content {{
   },
   {"exit", []()
     {
-      return GameStatus{};
+      return GameStatus{Mode::Dungeon, Task::End};
     }
   }
 }};

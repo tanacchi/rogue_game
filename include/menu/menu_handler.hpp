@@ -1,0 +1,8 @@
+#ifndef INCLUDED_MENU_HANDLER_HPP
+#define INCLUDED_MENU_HANDLER_HPP
+
+class MenuHandler
+{
+};
+
+#endif  // INCLUDED_MENU_HANDLER_HPP

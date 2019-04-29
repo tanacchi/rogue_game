@@ -23,12 +23,12 @@ class GameMaster
     GameStatus take_dungeon_mode(const GameStatus& status);
     GameStatus take_select_mode(const GameStatus& status);
 
-    Map           map_;
-    MapDisplay    map_display_;
-    PlayerDisplay player_display_;
-    MenuDisplay   menu_display_;
-    KeyManager    keyboard_;
-    Player        player_;
+    Map           map;
+    MapDisplay    map_display;
+    PlayerDisplay player_display;
+    MenuDisplay   menu_display;
+    KeyManager    keyboard;
+    Player        player;
 };
 
 #endif  // INCLUDED_GAME_MASTER_HPP

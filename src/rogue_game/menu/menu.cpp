@@ -11,10 +11,10 @@ Menu::Menu(const ContentsType& contents, GameMaster* gm_ptr)
   if (gm_ptr != nullptr)
   {
     Menu::item_contents.clear();
-    for (const auto& item_ptr : gm_ptr->player_.inventory_.items_)
+    for (const auto& item_ptr : gm_ptr->player.inventory_.items_)
     {
       ContentsType::key_type key{item_ptr->type};
-      std::function<void(void)> item_action{std::bind(&Item::use, *item_ptr, &gm_ptr->player_)};
+      std::function<void(void)> item_action{std::bind(&Item::use, *item_ptr, &gm_ptr->player)};
       ContentsType::mapped_type value{[&](std::shared_ptr<Menu>& target_menu_ptr){
         item_action();
         target_menu_ptr.reset();

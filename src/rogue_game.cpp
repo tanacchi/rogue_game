@@ -2,13 +2,15 @@
 #include <cstdlib>
 
 #include <game_master/game_master.hpp>
+#include <menu/menu_handler.hpp>
 
 int main()
 {
   try
   {
-    GameMaster master{};
-    GameStatus status{};
+    GameMaster  master{};
+    GameStatus  status{};
+    MenuHandler menu_handler{};
     
     while (status.task != Task::End)
     {
@@ -24,7 +26,14 @@ int main()
           status = master.toggle_mode(status);
           break;
         case Task::Perform:
-          status = master.perform(status);
+          if (status.mode == Mode::Dungeon)
+          {
+            status = master.take_dungeon_mode(status);
+          }
+          else
+          {
+            status = menu_handler(master); 
+          }
           break;
         case Task::End:
           exit(EXIT_SUCCESS);

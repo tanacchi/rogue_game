@@ -22,3 +22,9 @@ void MenuDisplay::show(const Menu& menu, size_t highlight_index) const
   box(win_.get(), ACS_VLINE, ACS_HLINE);
   wrefresh(win_.get());
 }
+
+void MenuDisplay::hide() const
+{
+  wclear(win_.get());
+  wrefresh(win_.get());
+}

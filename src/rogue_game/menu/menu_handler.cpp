@@ -7,5 +7,10 @@ GameStatus MenuHandler::operator()(GameMaster& master)
   Menu menu;
 
   menu_display.show(menu, selected_index_);
+
+  getch();
+
+  menu_display.hide();
+
   return GameStatus{};
 }

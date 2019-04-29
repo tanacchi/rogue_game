@@ -40,10 +40,18 @@ Map MapReader::operator()(std::string map_filename)
   }
   catch (boost::property_tree::file_parser_error& e)
   {
-    LOG_STRING("=== Couldn't open map file");
+    LOG_STRING("=== Couldn't open map file ===");
     LOG_VALUES(e.what());
-    std::string error_msg{"[ERROR] You should make map\n$ ./map_maker.out map/text/sample_map_1.txt"};
-    throw std::runtime_error{error_msg};
+    auto has_failed{std::system("./map_maker.out ./map/text/sample_map_1.txt")};  // XXX: Make absolute
+    if (has_failed)
+    {
+      LOG_STRING("=== Couldn't make map file ===");
+      LOG_VALUES(e.what());
+      std::string error_msg{"[ERROR] You should make map\n$ ./map_maker.out map/text/sample_map_1.txt"};
+      throw std::runtime_error{error_msg};
+    }
+    LOG_STRING("=== Map was made automatically ===");
+    boost::property_tree::read_json(map_filename, json_map_data);
   }
   {
     // マップの横幅を取得

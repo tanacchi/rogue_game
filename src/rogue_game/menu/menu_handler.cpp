@@ -40,7 +40,7 @@ GameStatus MenuHandler::handle(const Menu::ContentType& content)
       case KeyManager::Enter:
         auto content{menu_ptr->get_content()};
         auto itr{std::next(content.begin(), selected_index_)};
-        next_status = itr->second();
+        next_status = itr->second(menu_ptr);
         menu_ptr.release();
         break;
     }

@@ -6,12 +6,12 @@
 #include <debug/logger.hpp>
 
 const Menu::ContentType Menu::base_content {{
-  {"item", []()
+  {"item", [](Menu::MenuPtr& menu_ptr)
     {
       return GameStatus{};
     }
   },
-  {"exit", []()
+  {"exit", [](Menu::MenuPtr& menu_ptr)
     {
       return GameStatus{Mode::Dungeon, Task::End};
     }
@@ -19,17 +19,17 @@ const Menu::ContentType Menu::base_content {{
 }};
 
 Menu::ContentType Menu::item_content {{
-  {"a", []()
+  {"a", [](Menu::MenuPtr& menu_ptr)
     {
       return GameStatus{};
     }
   },
-  {"b", []()
+  {"b", [](Menu::MenuPtr& menu_ptr)
     {
       return GameStatus{};
     }
   },
-  {"c", []()
+  {"c", [](Menu::MenuPtr& menu_ptr)
     {
       return GameStatus{};
     }

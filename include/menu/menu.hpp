@@ -13,6 +13,7 @@ class Menu
 {
   public:
     friend MenuHandler;
+    using MenuPtr = std::unique_ptr<Menu>;
     using ContentType = std::map<std::string, std::function<GameStatus(void)> >;
 
     Menu(const ContentType& content = base_content);

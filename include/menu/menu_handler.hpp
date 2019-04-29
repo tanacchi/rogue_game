@@ -11,6 +11,7 @@ class MenuHandler
   public:
     MenuHandler();
     GameStatus operator()(GameMaster& master);
+    GameStatus handle(const Menu::ContentType& content);
    
   private:
     std::unique_ptr<Menu> menu_ptr;

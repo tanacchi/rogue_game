@@ -19,6 +19,7 @@ class GameMaster
 
     GameStatus show(const GameStatus& status);
     GameStatus input(const GameStatus& status);
+    GameStatus toggle_mode(const GameStatus& status);
     GameStatus perform(const GameStatus& status);
     GameStatus take_dungeon_mode(const GameStatus& status);
     GameStatus take_select_mode(const GameStatus& status);

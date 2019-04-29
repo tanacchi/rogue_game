@@ -35,7 +35,15 @@ GameStatus GameMaster::show(const GameStatus& status)
 GameStatus GameMaster::input(const GameStatus& status)
 {
   keyboard.update();
-  return GameStatus{status.mode, Task::Perform};
+  return GameStatus{status.mode, Task::Switch};
+}
+
+GameStatus GameMaster::toggle_mode(const GameStatus& status)
+{
+  GameStatus next_status{status.mode, Task::Perform};
+  if (keyboard == KeyManager::Space)
+    next_status.mode = status.mode == Mode::Dungeon ? Mode::Select : Mode::Dungeon;
+  return next_status;
 }
 
 GameStatus GameMaster::perform(const GameStatus& status)
@@ -46,11 +54,6 @@ GameStatus GameMaster::perform(const GameStatus& status)
 
 GameStatus GameMaster::take_dungeon_mode(const GameStatus& status)
 {
-  if (keyboard == KeyManager::Space)
-  {
-    // target_menu_ptr.reset(new Menu{Menu::base_contents, this});
-    return GameStatus{Mode::Select, Task::Show};
-  }
   // プレイヤーの位置更新
   const auto motion{Player::motion_table.find(keyboard.get()) != Player::motion_table.end() ?
       Player::motion_table.at(keyboard.get()) : zero};
@@ -72,12 +75,7 @@ GameStatus GameMaster::take_dungeon_mode(const GameStatus& status)
 
 GameStatus GameMaster::take_select_mode(const GameStatus& status)
 {
-  if (keyboard.is_match(KeyManager::Back|KeyManager::Space))
-  {
-    // target_menu_ptr.reset();
-    return GameStatus{Mode::Dungeon, Task::Show};
-  }
-  else if (keyboard == KeyManager::Enter)
+  if (keyboard == KeyManager::Enter)
   {
     // アイテムの使用
     return GameStatus{Mode::Dungeon, Task::Show};

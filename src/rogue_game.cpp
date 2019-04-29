@@ -20,6 +20,9 @@ int main()
         case Task::Input:
           status = master.input(status);
           break;
+        case Task::Switch:
+          status = master.toggle_mode(status);
+          break;
         case Task::Perform:
           status = master.perform(status);
           break;

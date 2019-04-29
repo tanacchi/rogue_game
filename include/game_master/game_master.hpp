@@ -26,7 +26,6 @@ class GameMaster
     Map           map;
     MapDisplay    map_display;
     PlayerDisplay player_display;
-    MenuDisplay   menu_display;
     KeyManager    keyboard;
     Player        player;
 };

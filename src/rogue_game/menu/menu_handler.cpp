@@ -1,15 +1,19 @@
 #include <menu/menu_handler.hpp>
-#include <display/menu_display.hpp>
+
+MenuHandler::MenuHandler()
+  : menu_display_{100, 10, 30, 16}
+  , selected_index_{}
+{
+}
 
 GameStatus MenuHandler::operator()(GameMaster& master)
 {
   Menu        menu{};
-  MenuDisplay menu_display{100, 10, 30, 16};
   KeyManager  keyboard{};
 
   while (true)
   {
-    menu_display.show(menu, selected_index_);
+    menu_display_.show(menu, selected_index_);
     keyboard.update();
     switch (keyboard.get())
     {
@@ -22,7 +26,7 @@ GameStatus MenuHandler::operator()(GameMaster& master)
         break;
       case KeyManager::Space:
       case KeyManager::Back:
-        menu_display.hide();
+        menu_display_.hide();
         return GameStatus{Mode::Dungeon, Task::Show};
       case KeyManager::Enter:
         auto content{menu.get_content()};
@@ -30,7 +34,7 @@ GameStatus MenuHandler::operator()(GameMaster& master)
         return itr->second();
     }
   }
-  menu_display.hide();
+  menu_display_.hide();
 
   return GameStatus{};
 }

@@ -8,6 +8,6 @@ MenuDisplay::MenuDisplay(std::size_t x, std::size_t y, std::size_t width, std::s
 {
 }
 
-void MenuDisplay::show(const Menu& menu) const
+void MenuDisplay::show(const Menu& menu, size_t highlight_index) const
 {
 }

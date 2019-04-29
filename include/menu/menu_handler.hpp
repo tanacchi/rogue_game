@@ -9,6 +9,9 @@ class MenuHandler
 {
   public:
     GameStatus operator()(GameMaster& master);
+   
+  private:
+    size_t selected_index_;
 };
 
 #endif  // INCLUDED_MENU_HANDLER_HPP

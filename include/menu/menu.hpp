@@ -12,6 +12,8 @@ class Menu
 {
   public:
     using ContentType = std::map<std::string, std::function<GameStatus(void)> >;
+
+    Menu(const ContentType& content = base_content);
     const ContentType& get_content() const;
     
   private:

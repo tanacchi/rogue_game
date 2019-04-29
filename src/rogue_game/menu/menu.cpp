@@ -5,7 +5,7 @@
 #include <menu/menu.hpp>
 #include <debug/logger.hpp>
 
-Menu::ContentType base_content {{
+const Menu::ContentType Menu::base_content {{
   {"item", []()
     {
       return GameStatus{};
@@ -17,6 +17,11 @@ Menu::ContentType base_content {{
     }
   }
 }};
+
+Menu::Menu(const Menu::ContentType& content)
+  : content_{content}
+{
+}
 
 const Menu::ContentType& Menu::get_content() const
 {

@@ -27,7 +27,7 @@ GameStatus GameMaster::show(const GameStatus& status)
 #ifndef DEBUG
   map_display.show(map, player);
   player_display.show(player);
-  menu_display.show();
+  // menu_display.show(Menu{});
 #endif
   return GameStatus{status.mode, Task::Input};
 }
@@ -49,7 +49,6 @@ GameStatus GameMaster::take_dungeon_mode(const GameStatus& status)
   if (keyboard == KeyManager::Space)
   {
     // target_menu_ptr.reset(new Menu{Menu::base_contents, this});
-    // menu_display.reset_menu(target_menu_ptr);
     return GameStatus{Mode::Select, Task::Show};
   }
   // プレイヤーの位置更新
@@ -80,16 +79,11 @@ GameStatus GameMaster::take_select_mode(const GameStatus& status)
   }
   else if (keyboard == KeyManager::Enter)
   {
-    auto selected_content_name{menu_display.get_selected_content_name()};
     // アイテムの使用
-    // auto next_status{target_menu_ptr->execute(selected_content_name, target_menu_ptr)};
-    // menu_display.reset_menu(target_menu_ptr);
-    // return next_status;
     return GameStatus{Mode::Dungeon, Task::Show};
   }
   else
   {
-    menu_display.toggle_cursor(keyboard);
     return GameStatus{Mode::Select, Task::Show};
   }
 }

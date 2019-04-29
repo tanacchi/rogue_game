@@ -28,7 +28,7 @@ int main()
         case Task::Perform:
           if (status.mode == Mode::Dungeon)
           {
-            status = master.take_dungeon_mode(status);
+            status = master.handle_dungeon(status);
           }
           else
           {

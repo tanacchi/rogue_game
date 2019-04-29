@@ -46,13 +46,7 @@ GameStatus GameMaster::toggle_mode(const GameStatus& status)
   return next_status;
 }
 
-GameStatus GameMaster::perform(const GameStatus& status)
-{
-  return status.mode == Mode::Dungeon ? 
-    take_dungeon_mode(status) : take_select_mode(status);
-}
-
-GameStatus GameMaster::take_dungeon_mode(const GameStatus& status)
+GameStatus GameMaster::handle_dungeon(const GameStatus& status)
 {
   // プレイヤーの位置更新
   const auto motion{Player::motion_table.find(keyboard.get()) != Player::motion_table.end() ?
@@ -71,17 +65,4 @@ GameStatus GameMaster::take_dungeon_mode(const GameStatus& status)
     map.item_layer.erase(picked_up_item_itr);
   }
   return GameStatus{Mode::Dungeon, Task::Show};
-}
-
-GameStatus GameMaster::take_select_mode(const GameStatus& status)
-{
-  if (keyboard == KeyManager::Enter)
-  {
-    // アイテムの使用
-    return GameStatus{Mode::Dungeon, Task::Show};
-  }
-  else
-  {
-    return GameStatus{Mode::Select, Task::Show};
-  }
 }

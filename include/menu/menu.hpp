@@ -7,10 +7,12 @@
 #include <game_master/game_status.hpp>
 
 class GameMaster;
+class MenuHandler;
 
 class Menu
 {
   public:
+    friend MenuHandler;
     using ContentType = std::map<std::string, std::function<GameStatus(void)> >;
 
     Menu(const ContentType& content = base_content);

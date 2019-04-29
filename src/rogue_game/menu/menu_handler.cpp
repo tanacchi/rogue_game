@@ -41,7 +41,6 @@ GameStatus MenuHandler::handle(const Menu::ContentType& content)
         auto content{menu_ptr->get_content()};
         auto itr{std::next(content.begin(), selected_index_)};
         next_status = itr->second(menu_ptr);
-        menu_ptr.release();
         break;
     }
   }

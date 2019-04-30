@@ -20,26 +20,7 @@ const Menu::ContentType Menu::base_content {{
   }
 }};
 
-Menu::ContentType Menu::item_content {{
-  {"a", [](Menu::MenuPtr& menu_ptr)
-    {
-      menu_ptr.release();
-      return GameStatus{};
-    }
-  },
-  {"b", [](Menu::MenuPtr& menu_ptr)
-    {
-      menu_ptr.reset(new Menu{Menu::base_content});
-      return GameStatus{};
-    }
-  },
-  {"c", [](Menu::MenuPtr& menu_ptr)
-    {
-      menu_ptr.release();
-      return GameStatus{};
-    }
-  }
-}};
+Menu::ContentType Menu::item_content{};
 
 Menu::Menu(const Menu::ContentType& content)
   : content_{content}

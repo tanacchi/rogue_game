@@ -15,7 +15,7 @@ class Character
     Character(Point<int> position = zero);
 
     // キャラクターの位置を取得
-    Point<int> get_position() const;  // const& にする？
+    const Point<int>& get_position() const;
 
     // キャラクターの位置を設定
     void set_position(const Point<int>& point);

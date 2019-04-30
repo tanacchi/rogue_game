@@ -6,7 +6,7 @@ MapDisplay::MapDisplay(std::size_t x, std::size_t y,
 {
 }
 
-void MapDisplay::show(Map& map, const Player& player)
+void MapDisplay::show(const Map& map, const Player& player)
 {
   wclear(win_.get());
 
@@ -20,13 +20,13 @@ void MapDisplay::show(Map& map, const Player& player)
     mvwaddch(win_.get(), y, map.width, '\n');
   }
   // アイテム要素の表示
-  for (const std::pair<const Point<int>, ::ItemPtr>& item : map.item_layer)
+  for (auto item : map.item_layer)
   {
     mvwaddch(win_.get(), item.first.get_y(), item.first.get_x(), item.second->symbol);
   }
   // プレイヤーの表示
   mvwaddch(win_.get(), player.get_position().get_y(), player.get_position().get_x(), '@' | A_BOLD);
-  ::Point<int> sight{player.get_position() + player.get_direction()};
+  auto sight{player.get_position() + player.get_direction()};
   mvwchgat(win_.get(), sight.get_y(), sight.get_x(), 1, A_BOLD | A_UNDERLINE, 0, NULL);
 
   wrefresh(win_.get());

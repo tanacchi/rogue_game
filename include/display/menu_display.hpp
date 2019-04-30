@@ -9,7 +9,7 @@ class MenuDisplay : public DisplayPanel
 {
   public:
     MenuDisplay(std::size_t x, std::size_t y,
-                std::size_t width = 10ul, std::size_t height = 10ul, bool is_visible = false);
+                std::size_t width = 10ul, std::size_t height = 10ul);
     void show(const Menu& menu, size_t highlight_index) const;
     void hide() const;
 };

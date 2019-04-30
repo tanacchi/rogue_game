@@ -32,6 +32,7 @@ class Player : public Character
 
   private:
     ::Point<int> direction_;
+    std::multimap<std::string, const ItemPtr> inventory_{};
     std::size_t money_;
 };
 

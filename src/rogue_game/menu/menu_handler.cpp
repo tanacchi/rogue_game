@@ -62,6 +62,7 @@ void MenuHandler::set_item_content(GameMaster& master)
       [&](Menu::MenuPtr& menu_ptr){
         menu_ptr.release();
         master.player.add_money(100);
+        master.player.dispose_item(selected_index_);
         return GameStatus{};
       }
     };

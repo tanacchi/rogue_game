@@ -11,7 +11,7 @@ class MenuHandler
   public:
     MenuHandler();
     GameStatus operator()(GameMaster& master);
-    void set_item_content(Player& player);
+    void set_item_content(GameMaster& master);
    
   private:
     Menu::MenuPtr menu_ptr;

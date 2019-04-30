@@ -15,7 +15,7 @@ GameStatus MenuHandler::operator()(GameMaster& master)
 {
   KeyManager keyboard{};
   GameStatus next_status{};
-  set_item_content(master.player);
+  set_item_content(master);
   menu_ptr.reset(new Menu{Menu::base_content});
 
   while (menu_ptr)
@@ -43,8 +43,11 @@ GameStatus MenuHandler::operator()(GameMaster& master)
       case KeyManager::Enter:
         auto content{menu_ptr->get_content()};
         auto itr{std::next(content.begin(), selected_index_)};
-        next_status = itr->second(menu_ptr);
-        selected_index_ = 0;
+        if (itr != content.end()) 
+        {
+          next_status = itr->second(menu_ptr);
+          selected_index_ = 0;
+        }
         break;
     }
   }
@@ -52,21 +55,27 @@ GameStatus MenuHandler::operator()(GameMaster& master)
   return next_status;
 }
 
-void MenuHandler::set_item_content(Player& player)
+void MenuHandler::set_item_content(GameMaster& master)
 {
   Menu::item_content.clear();
-  auto names{player.get_item_name_array()};
+  auto names{master.player.get_item_name_array()};
   for (auto name : names)
   {
     auto action{
-      [](Menu::MenuPtr& menu_ptr, Player* player_p){
+      [&](Menu::MenuPtr& menu_ptr){
         menu_ptr.release();
-        player_p->add_money(100);
+        master.player.add_money(100);
+        master.player.dispose_item(selected_index_);
         return GameStatus{};
       }
     };
     using namespace std::placeholders;
-    Menu::ContentType::value_type elem{std::make_pair(name, std::bind(action, _1, &player))};
-    Menu::item_content.insert(elem);
+    Menu::item_content.emplace(name, std::bind(action, _1));
   }
+  Menu::item_content.emplace(
+      "back", [](Menu::MenuPtr& menu_ptr)
+      {
+        menu_ptr.reset(new Menu{Menu::base_content});
+        return GameStatus{};
+      });
 }

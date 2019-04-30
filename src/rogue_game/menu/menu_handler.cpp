@@ -70,7 +70,14 @@ void MenuHandler::set_item_content(GameMaster& master)
       }
     };
     using namespace std::placeholders;
-    Menu::ContentType::value_type elem{std::make_pair(name, std::bind(action, _1))};
+    auto elem{std::make_pair(name, std::bind(action, _1))};
     Menu::item_content.insert(elem);
   }
+  auto back_to_base{
+    std::make_pair("back", 
+        [](Menu::MenuPtr& menu_ptr){
+          menu_ptr.reset(new Menu{Menu::base_content});
+          return GameStatus{};
+        })};
+  Menu::item_content.insert(back_to_base);
 }

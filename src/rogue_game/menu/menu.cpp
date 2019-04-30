@@ -6,9 +6,9 @@
 #include <debug/logger.hpp>
 
 const Menu::ContentType Menu::base_content {{
-  {"item", [](Menu::MenuPtr& menu_ptr)
+  {"back", [](Menu::MenuPtr& menu_ptr)
     {
-      menu_ptr.reset(new Menu{Menu::item_content});
+      menu_ptr.release();
       return GameStatus{};
     }
   },
@@ -16,6 +16,12 @@ const Menu::ContentType Menu::base_content {{
     {
       menu_ptr.release();
       return GameStatus{Mode::Dungeon, Task::End};
+    }
+  },
+  {"item", [](Menu::MenuPtr& menu_ptr)
+    {
+      menu_ptr.reset(new Menu{Menu::item_content});
+      return GameStatus{};
     }
   }
 }};

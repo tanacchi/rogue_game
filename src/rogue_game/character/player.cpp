@@ -2,9 +2,10 @@
 #include <item/item_series.hpp>
 
 Player::Player()
-  : Character(zero),
-  direction_{down},
-  money_{0}
+  : Character(zero)
+  , direction_{down}
+  , inventory_{}
+  , money_{}
 {
 }
 
@@ -25,16 +26,25 @@ void Player::add_money(std::size_t addition)
   money_ += addition;
 }
 
-void Player::store_item(::ItemPtr&& item)
+void Player::store_item(const ItemPtr& item_ptr)
 {
+  inventory_.emplace(item_ptr->type, item_ptr);
 }
 
-void Player::use_item(std::size_t item_index)
+void Player::dispose_item(std::size_t item_index)
 {
+  auto used_item_itr{std::next(inventory_.begin(), item_index)};
+  inventory_.erase(used_item_itr);
 }
 
 std::vector<std::string> Player::get_item_name_array() const
 {
+  std::vector<std::string> names{};
+  for (auto itr{inventory_.begin()}, end{inventory_.end()}; itr != end; ++itr)
+  {
+    names.emplace_back(itr->first);
+  }
+  return names;
 }
 
 ::Point<int> Player::get_direction() const

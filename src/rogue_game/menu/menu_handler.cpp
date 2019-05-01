@@ -72,10 +72,4 @@ void MenuHandler::set_item_content(GameMaster& master)
     using namespace std::placeholders;
     Menu::item_content.emplace(name, std::bind(action, _1));
   }
-  Menu::item_content.emplace(
-      "back", [](Menu::MenuPtr& menu_ptr)
-      {
-        menu_ptr.reset(new Menu{Menu::base_content});
-        return GameStatus{};
-      });
 }

@@ -1,4 +1,5 @@
 #include <map/map_writer.hpp>
+#include <utility/path.hpp>
 
 void MapWriter::set_configs(const TextMap& text_map, std::vector<ConfigType>& dungeon_configs, std::vector<ConfigType>& item_configs)
 {

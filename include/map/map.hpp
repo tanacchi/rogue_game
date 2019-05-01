@@ -12,9 +12,6 @@
 #include <map/map_elem.hpp>
 #include <utility/point.hpp>
 
-const std::string map_dir{boost::filesystem::current_path().string() + "/map/"};
-// constexpr std::string_view map_dir{boost::filesystem::current_path().string() + "/map/"};
-
 struct Map
 {
   Map() = default;

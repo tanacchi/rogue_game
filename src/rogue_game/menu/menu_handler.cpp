@@ -43,7 +43,7 @@ GameStatus MenuHandler::operator()(GameMaster& master)
       case KeyManager::Enter:
         auto content{menu_ptr->get_content()};
         auto itr{std::next(content.begin(), selected_index_)};
-        if (itr != content.end()) 
+        if (itr != content.end())
         {
           next_status = itr->second(menu_ptr);
           selected_index_ = 0;

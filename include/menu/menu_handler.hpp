@@ -12,7 +12,7 @@ class MenuHandler
     MenuHandler();
     GameStatus operator()(GameMaster& master);
     void set_item_content(GameMaster& master);
-   
+
   private:
     Menu::MenuPtr menu_ptr;
     MenuDisplay   menu_display_;

@@ -70,4 +70,4 @@ const std::vector<std::string> read_map_strings(const std::string& filename)
     map_strings.emplace_back(input_buff);
   }
   return map_strings;
-} 
+}

@@ -35,14 +35,14 @@ void MapWriter::set_configs(const TextMap& text_map, std::vector<ConfigType>& du
         break;
     }
     dungeon_configs.emplace_back(dungeon_config);
-    if (!item_config.empty()) 
+    if (!item_config.empty())
     {
       item_configs.emplace_back(item_config);
     }
   }
 }
 
-void MapWriter::write_json_map(const TextMap& text_map, 
+void MapWriter::write_json_map(const TextMap& text_map,
     const std::vector<ConfigType>& dungeon_configs,
     const std::vector<ConfigType>& item_configs,
     const std::string& output_filename) const

@@ -53,7 +53,7 @@ GameStatus GameMaster::handle_dungeon(const GameStatus& status)
   {
     player.assign_motion(motion);
   }
-  // Get items 
+  // Get items
   const auto current_position{player.get_position()};
   const auto picked_up_item_itr{map.item_layer.find(current_position)};
   if (picked_up_item_itr != map.item_layer.end())

@@ -12,7 +12,7 @@ DisplayPanel::DisplayPanel(std::size_t x, std::size_t y,
     noecho();
     curs_set(0);
     refresh();
-    has_initialized_ = true; 
+    has_initialized_ = true;
   }
   win_.reset(newwin(height, width, y, x));
 #endif

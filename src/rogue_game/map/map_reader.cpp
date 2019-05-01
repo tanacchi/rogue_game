@@ -31,7 +31,7 @@ Map MapReader::operator()(std::string map_filename)
 {
   Map map{};
   boost::property_tree::ptree json_map_data{};
-  try 
+  try
   {
     boost::property_tree::read_json(map_filename, json_map_data);
   }

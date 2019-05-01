@@ -13,7 +13,7 @@ struct TextMap {
     const std::string text{};
     Point<std::size_t> index_to_point(std::size_t index) const noexcept;
     friend std::ostream& operator<<(std::ostream& os, const TextMap& text_map);
- 
+
   private:
     const std::size_t get_width(const std::vector<std::string>& map_strings);
     const std::size_t get_height(const std::vector<std::string>& map_strings);

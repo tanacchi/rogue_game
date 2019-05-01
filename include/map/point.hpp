@@ -17,8 +17,8 @@ class Point
     Point(const Point& point);
     template<typename U>
       Point(const Point<U>& point)
-      : x_{static_cast<T>(point.get_x())},
-      y_{static_cast<T>(point.get_y())}
+      : x_{static_cast<T>(point.get_x())}
+      , y_{static_cast<T>(point.get_y())}
     {
     }
     Point(Point&& point);

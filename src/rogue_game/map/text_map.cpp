@@ -7,9 +7,9 @@
 #include <map/text_map.hpp>
 
 TextMap::TextMap(const std::vector<std::string>& map_strings)
-  : width{get_width(map_strings)},
-  height{get_height(map_strings)},
-  text{get_text(map_strings)}
+  : width{get_width(map_strings)}
+  , height{get_height(map_strings)}
+  , text{get_text(map_strings)}
 {
 }
 
@@ -70,4 +70,4 @@ const std::vector<std::string> read_map_strings(const std::string& filename)
     map_strings.emplace_back(input_buff);
   }
   return map_strings;
-}    
+} 

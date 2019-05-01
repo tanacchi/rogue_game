@@ -5,10 +5,10 @@
 #include <menu/menu.hpp>
 
 GameMaster::GameMaster()
-  : map_display{5, 4, 80, 30},
-    player_display{70, 30, 20, 10},
-    keyboard{},
-    player()
+  : map_display{5, 4, 80, 30}
+  , player_display{70, 30, 20, 10}
+  , keyboard{}
+  , player()
 {
   MapReader map_reader{};
   map = map_reader(map_dir + "json/tmp_sample_map.json");

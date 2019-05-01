@@ -4,20 +4,20 @@
 #include <map/map_elem.hpp>
 
 MapElem::MapElem(const std::string type)
-  : type{type},
-  symbol{get_symbol(type)}
+  : type{type}
+  , symbol{get_symbol(type)}
 {
 }
 
 MapElem::MapElem(const MapElem& rhs)
-  : type{rhs.type},
-  symbol{rhs.symbol}
+  : type{rhs.type}
+  , symbol{rhs.symbol}
 {
 }
 
 MapElem::MapElem(MapElem&& rhs) noexcept
-: type{rhs.type},
-  symbol{rhs.symbol}
+  : type{rhs.type}
+  , symbol{rhs.symbol}
 {
 }
 

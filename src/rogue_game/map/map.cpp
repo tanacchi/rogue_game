@@ -1,11 +1,11 @@
 #include <map/map.hpp>
 
 Map::Map(Map&& map)
-  : width{map.width},
-  height{map.height},
-  initial_position{std::move(map.initial_position)},
-  dungeon_layer{std::move(map.dungeon_layer)},
-  item_layer{std::move(map.item_layer)}
+  : width{map.width}
+  , height{map.height}
+  , initial_position{std::move(map.initial_position)}
+  , dungeon_layer{std::move(map.dungeon_layer)}
+  , item_layer{std::move(map.item_layer)}
 {
 }
 
@@ -33,7 +33,7 @@ std::ostream& operator<<(std::ostream& os, const Map& map)
   return os;
 }
 
-const ::DungeonElem Map::get_dungeon_elem(const Point<int>& point) const
+const DungeonElem Map::get_dungeon_elem(const Point<int>& point) const
 {
   return *dungeon_layer[width * point.get_y() + point.get_x()];
 }

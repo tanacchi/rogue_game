@@ -18,7 +18,7 @@ class Menu
 
     Menu(const ContentType& content = base_content);
     const ContentType& get_content() const;
-    
+
   private:
     static const ContentType base_content;
     static ContentType item_content;

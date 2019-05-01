@@ -47,12 +47,12 @@ std::vector<std::string> Player::get_item_name_array() const
   return names;
 }
 
-::Point<int> Player::get_direction() const
+Point<int> Player::get_direction() const
 {
   return direction_;
 }
 
-void Player::assign_motion(const ::Point<int>& next_motion)
+void Player::assign_motion(const Point<int>& next_motion)
 {
   if (next_motion == direction_)
   {

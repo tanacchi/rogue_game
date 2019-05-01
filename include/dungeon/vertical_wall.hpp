@@ -3,8 +3,7 @@
 
 #include <dungeon/dungeon_elem.hpp>
 
-// ダンジョン要素　'|'
-// マップ生成機能の予定があるので '|' と '-' は区別してる
+// '|'
 class VerticalWall : public DungeonElem
 {
   public:

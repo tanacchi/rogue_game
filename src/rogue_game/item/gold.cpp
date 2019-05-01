@@ -4,8 +4,8 @@
 #include <item/gold.hpp>
 
 Gold::Gold(std::size_t amount)
-  : Item("gold"),
-  amount_{amount}
+  : Item("gold")
+  , amount_{amount}
 {
 }
 

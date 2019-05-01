@@ -7,9 +7,9 @@
 #include <map/text_map.hpp>
 
 TextMap::TextMap(const std::vector<std::string>& map_strings)
-  : width{get_width(map_strings)},
-  height{get_height(map_strings)},
-  text{get_text(map_strings)}
+  : width{get_width(map_strings)}
+  , height{get_height(map_strings)}
+  , text{get_text(map_strings)}
 {
 }
 
@@ -64,10 +64,10 @@ const std::vector<std::string> read_map_strings(const std::string& filename)
 
   std::vector<std::string> map_strings{};
   std::string input_buff{};
-  for (std::size_t row{0}; !read_file.eof(); ++row)
-  { // Range-based-for でも良くないか
+  while (!read_file.eof())
+  {
     std::getline(read_file, input_buff);
     map_strings.emplace_back(input_buff);
   }
   return map_strings;
-}    
+}

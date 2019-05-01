@@ -3,7 +3,6 @@
 
 #include <ostream>
 
-// マップ上での位置を表現する
 template<typename T>
 class Point
 {
@@ -17,8 +16,8 @@ class Point
     Point(const Point& point);
     template<typename U>
       Point(const Point<U>& point)
-      : x_{static_cast<T>(point.get_x())},
-      y_{static_cast<T>(point.get_y())}
+      : x_{static_cast<T>(point.get_x())}
+      , y_{static_cast<T>(point.get_y())}
     {
     }
     Point(Point&& point);
@@ -32,6 +31,7 @@ class Point
     bool operator<(const Point& rls) const;
     explicit operator bool() const noexcept;
     friend std::ostream& operator<<(std::ostream& os, const Point<int>& point);
+
   private:
     T x_;
     T y_;

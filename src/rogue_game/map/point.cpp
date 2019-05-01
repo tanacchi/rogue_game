@@ -1,22 +1,22 @@
 #include <map/point.hpp>
 
-  template<typename T>
+template<typename T>
 Point<T>::Point(T x, T y)
   : x_{x}, y_{y}
 {
 }
 
-  template<typename T>
+template<typename T>
 Point<T>::Point(const Point<T>& point)
-  : x_{point.x_},
-  y_{point.y_}
+  : x_{point.x_}
+  , y_{point.y_}
 {
 }
 
-  template<typename T>
+template<typename T>
 Point<T>::Point(Point<T>&& point)
-  : x_{std::move(point.x_)},
-  y_{std::move(point.y_)}
+  : x_{std::move(point.x_)}
+  , y_{std::move(point.y_)}
 {
 }
 
@@ -32,7 +32,7 @@ const T Point<T>::get_y() const
   return y_;
 }
 
-  template<typename T>
+template<typename T>
 Point<T>& Point<T>::operator=(const Point<T>& rls)
 {
   x_ = rls.x_;
@@ -40,7 +40,7 @@ Point<T>& Point<T>::operator=(const Point<T>& rls)
   return *this;
 }
 
-  template<typename T>
+template<typename T>
 Point<T>& Point<T>::operator=(Point<T>&& rls)
 {
   x_ = std::move(rls.x_);
@@ -54,7 +54,7 @@ const Point<T> Point<T>::operator+(const Point<T>& rhs) const
   return {x_ + rhs.x_, y_ + rhs.y_};
 }
 
-  template<typename T>
+template<typename T>
 const Point<T>& Point<T>::operator+=(const Point<T>& rhs)
 {
   *this = *this + rhs;
@@ -67,7 +67,6 @@ bool Point<T>::operator==(const Point<T>& rhs) const
   return x_ == rhs.x_ && y_ == rhs.y_;
 }
 
-// 現状、比較演算は原点からの距離で判定
 template<typename T>
 bool Point<T>::operator<(const Point<T>& rls) const
 {

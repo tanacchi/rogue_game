@@ -3,7 +3,7 @@
 
 #include <dungeon/dungeon_elem.hpp>
 
-// ダンジョン要素　'-'
+// '-'
 class HorizontalWall : public DungeonElem
 {
   public:

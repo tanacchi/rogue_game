@@ -10,13 +10,11 @@
 
 class Menu;
 
-// ゲームの進行を扱う
 class GameMaster
 {
   public:
     GameMaster();
     ~GameMaster();
-
     GameStatus show(const GameStatus& status);
     GameStatus input(const GameStatus& status);
     GameStatus toggle_mode(const GameStatus& status);

@@ -14,29 +14,31 @@ class Logger
     static void log_with_name(std::list<std::string>&& name_list);
 
     template <typename Head, typename... Tail>
-      static void log_with_name(std::list<std::string>&& name_list, const Head& head, const Tail&... tail)
-      {
-        if (!Logger::fos_.is_open()) init_log_file();
-        fos_ << "{ " << name_list.front() << " : " << head << " }\n";
-        name_list.pop_front();
-        log_with_name(std::move(name_list), std::forward<const Tail&>(tail)...);
-      }
+    static void log_with_name(std::list<std::string>&& name_list, const Head& head, const Tail&... tail)
+    {
+      if (!Logger::fos_.is_open()) init_log_file();
+      fos_ << "{ " << name_list.front() << " : " << head << " }\n";
+      name_list.pop_front();
+      log_with_name(std::move(name_list), std::forward<const Tail&>(tail)...);
+    }
 
     template <typename Head, typename... Tail>
-      static void log_with_name(std::list<std::string>&& name_list, Head&& head, Tail&&... tail)
-      {
-        if (!Logger::fos_.is_open()) init_log_file();
-        fos_ << "{ " << name_list.front() << " : " << head << " }\n";
-        name_list.pop_front();
-        log_with_name(std::move(name_list), std::forward<Tail&&>(tail)...);
-      }
+    static void log_with_name(std::list<std::string>&& name_list, Head&& head, Tail&&... tail)
+    {
+      if (!Logger::fos_.is_open()) init_log_file();
+      fos_ << "{ " << name_list.front() << " : " << head << " }\n";
+      name_list.pop_front();
+      log_with_name(std::move(name_list), std::forward<Tail&&>(tail)...);
+    }
 
-    static void log_string(const std::string& str, char separate_char = '=');    
+    static void log_string(const std::string& str, char separate_char = '=');
+
   private:
     static void init_log_file();
 
     static std::fstream fos_;
 };
+
 std::string get_current_time_str();
 std::list<std::string> split_string_by_comma(std::string src_string);
 

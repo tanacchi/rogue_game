@@ -5,7 +5,7 @@ Character::Character(Point<int> position)
 {
 }
 
-Point<int> Character::get_position() const
+const Point<int>& Character::get_position() const
 {
   return position_;
 }

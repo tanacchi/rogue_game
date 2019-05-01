@@ -11,7 +11,7 @@ int main()
     GameMaster  master{};
     GameStatus  status{};
     MenuHandler menu_handler{};
-    
+
     while (status.task != Task::End)
     {
       switch (status.task)
@@ -32,7 +32,7 @@ int main()
           }
           else
           {
-            status = menu_handler(master); 
+            status = menu_handler(master);
           }
           break;
         case Task::End:

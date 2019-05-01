@@ -5,10 +5,10 @@
 #include <menu/menu.hpp>
 
 GameMaster::GameMaster()
-  : map_display{5, 4, 80, 30},
-    player_display{70, 30, 20, 10},
-    keyboard{},
-    player()
+  : map_display{5, 4, 80, 30}
+  , player_display{70, 30, 20, 10}
+  , keyboard{}
+  , player()
 {
   MapReader map_reader{};
   map = map_reader(map_dir + "json/tmp_sample_map.json");
@@ -22,7 +22,6 @@ GameMaster::~GameMaster()
 
 GameStatus GameMaster::show(const GameStatus& status)
 {
-  // 画面表示
 #ifndef DEBUG
   map_display.show(map, player);
   player_display.show(player);
@@ -46,7 +45,7 @@ GameStatus GameMaster::toggle_mode(const GameStatus& status)
 
 GameStatus GameMaster::handle_dungeon(const GameStatus& status)
 {
-  // プレイヤーの位置更新
+  // Update player's motion
   const auto motion{Player::motion_table.find(keyboard.get()) != Player::motion_table.end() ?
       Player::motion_table.at(keyboard.get()) : zero};
   const auto next_position{player.get_position() + motion};
@@ -54,7 +53,7 @@ GameStatus GameMaster::handle_dungeon(const GameStatus& status)
   {
     player.assign_motion(motion);
   }
-  // アイテムの取得・更新
+  // Get items
   const auto current_position{player.get_position()};
   const auto picked_up_item_itr{map.item_layer.find(current_position)};
   if (picked_up_item_itr != map.item_layer.end())

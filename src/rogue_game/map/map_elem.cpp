@@ -4,20 +4,20 @@
 #include <map/map_elem.hpp>
 
 MapElem::MapElem(const std::string type)
-  : type{type},
-  symbol{get_symbol(type)}
+  : type{type}
+  , symbol{get_symbol(type)}
 {
 }
 
 MapElem::MapElem(const MapElem& rhs)
-  : type{rhs.type},
-  symbol{rhs.symbol}
+  : type{rhs.type}
+  , symbol{rhs.symbol}
 {
 }
 
 MapElem::MapElem(MapElem&& rhs) noexcept
-: type{rhs.type},
-  symbol{rhs.symbol}
+  : type{rhs.type}
+  , symbol{rhs.symbol}
 {
 }
 
@@ -37,7 +37,6 @@ std::ostream& operator<<(std::ostream& os, const MapElem& elem)
 
 const char get_symbol(const std::string type)
 {
-  // ダンジョン要素の種類と表示文字の対応表
   static const std::map<std::string, const char> symbol_table = {
     {"horizontal_wall", '-'},
     {"vertical_wall",   '|'},

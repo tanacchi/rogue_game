@@ -4,26 +4,26 @@
 
 // ダンジョン要素からインスタンスを生成しポイントを返す
 // オブジェクトファクトリ
-::DungeonElemPtr gen_dungeon_elem(std::string type)
+DungeonElemPtr gen_dungeon_elem(std::string type)
 {
   static std::unordered_map<std::string, std::function<::DungeonElemPtr(void)>> dungeon_table{{
-    {"floor",           [](){ return ::DungeonElemPtr(new ::Floor{}); }},
-    {"path",            [](){ return ::DungeonElemPtr(new ::Path{}); }},
-    {"none",            [](){ return ::DungeonElemPtr(new ::None{}); }},
-    {"horizontal_wall", [](){ return ::DungeonElemPtr(new ::HorizontalWall{}); }},
-    {"vertical_wall",   [](){ return ::DungeonElemPtr(new ::VerticalWall{}); }},
-    {"door",            [](){ return ::DungeonElemPtr(new ::Door{}); }},
+    {"floor",           [](){ return DungeonElemPtr(new Floor{}); }},
+    {"path",            [](){ return DungeonElemPtr(new Path{}); }},
+    {"none",            [](){ return DungeonElemPtr(new None{}); }},
+    {"horizontal_wall", [](){ return DungeonElemPtr(new HorizontalWall{}); }},
+    {"vertical_wall",   [](){ return DungeonElemPtr(new VerticalWall{}); }},
+    {"door",            [](){ return DungeonElemPtr(new Door{}); }},
   }};
   return dungeon_table.at(type)();
 }
 
-::ItemPtr gen_item_elem(std::string type, boost::property_tree::ptree property)
+ItemPtr gen_item_elem(std::string type, boost::property_tree::ptree property)
 {
   static std::unordered_map<std::string, std::function<::ItemPtr(boost::property_tree::ptree)>> item_table{{
     {"gold",
       [](boost::property_tree::ptree property){
         std::size_t amount{property.get_optional<std::size_t>("amount").get()};
-        return ::ItemPtr(new ::Gold{amount});
+        return ItemPtr(new Gold{amount});
       }},
   }};
   return item_table.at(type)(property);

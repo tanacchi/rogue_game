@@ -27,11 +27,11 @@ class Player : public Character
     std::vector<std::string> get_item_name_array() const;
     friend std::ostream& operator<<(std::ostream& os, const Player& player);
 
-    ::Point<int> get_direction() const;
-    void assign_motion(const ::Point<int>& next_motion);
+    Point<int> get_direction() const;
+    void assign_motion(const Point<int>& next_motion);
 
   private:
-    ::Point<int> direction_;
+    Point<int> direction_;
     std::multimap<std::string, const ItemPtr> inventory_{};
     std::size_t money_;
 };

@@ -6,7 +6,7 @@
 
 #include <debug/logger.hpp>
 #include <map/map_elem.hpp>
-#include <map/point.hpp>
+#include <utility/point.hpp>
 
 class Player;
 

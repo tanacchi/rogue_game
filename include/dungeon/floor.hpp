@@ -3,14 +3,11 @@
 
 #include <dungeon/dungeon_elem.hpp>
 
-namespace dungeon
+// '.'
+class Floor : public DungeonElem
 {
-  // ダンジョン要素　'.'
-  class Floor : public DungeonElem
-  {
   public:
     Floor();
-  };
-}
+};
 
 #endif  // INCLUDED_FLOOR_HPP

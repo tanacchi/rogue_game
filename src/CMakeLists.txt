@@ -7,7 +7,7 @@ add_executable(${PROJECT_NAME}.out
   ${ROGUE_GAME_SOURCE_FILES}
 )
 target_link_libraries(${PROJECT_NAME}.out
-  ncurses
+  ${CURSES_LIBRARIES}
   ${Boost_LIBRARIES}
 )
 
@@ -16,6 +16,6 @@ add_executable(map_maker.out
   ${ROGUE_GAME_SOURCE_FILES}
 )
 target_link_libraries(map_maker.out
-  ncurses
+  ${CURSES_LIBRARIES}
   ${Boost_LIBRARIES}
 )

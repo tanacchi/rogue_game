@@ -1,9 +1,6 @@
 #include <dungeon/floor.hpp>
 
-namespace dungeon
+Floor::Floor()
+  : DungeonElem("floor", true)
 {
-  Floor::Floor()
-    : DungeonElem("floor", true)
-  {
-  }
 }

@@ -71,4 +71,3 @@ KeyManager KeyManager::operator|(KeyManager::KeyType&& rhs)
 {
   return KeyManager(key_ | rhs);
 }
-

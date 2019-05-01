@@ -4,6 +4,7 @@ DisplayPanel::DisplayPanel(std::size_t x, std::size_t y,
                            std::size_t width, std::size_t height)
   : win_{}
 {
+#ifndef DEBUG
   if (!has_initialized_)
   {
     initscr();
@@ -11,14 +12,14 @@ DisplayPanel::DisplayPanel(std::size_t x, std::size_t y,
     noecho();
     curs_set(0);
     refresh();
-    has_initialized_ = true; 
+    has_initialized_ = true;
   }
   win_.reset(newwin(height, width, y, x));
+#endif
 }
 
 DisplayPanel::~DisplayPanel()
 {
-  delwin(win_.get());
 }
 
 bool DisplayPanel::has_initialized_{false};

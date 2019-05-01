@@ -4,7 +4,7 @@
 #include <memory>
 #include <ncurses.h>
 
-#include <debug/logger.hpp>
+#include <utility/logger.hpp>
 
 struct window_ptr_deleter
 {

@@ -3,7 +3,7 @@
 #include <game_master/game_master.hpp>
 #include <item/item.hpp>
 #include <menu/menu.hpp>
-#include <debug/logger.hpp>
+#include <utility/logger.hpp>
 
 const Menu::ContentType Menu::base_content {{
   {"back", [](Menu::MenuPtr& menu_ptr)

@@ -3,7 +3,7 @@
 
 #include <ostream>
 
-#include <debug/logger.hpp>
+#include <utility/logger.hpp>
 #include <utility/point.hpp>
 
 class Character

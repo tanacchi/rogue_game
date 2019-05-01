@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include <debug/logger.hpp>
+#include <utility/logger.hpp>
 #include <map/map_writer.hpp>
 #include <map/text_map.hpp>
 

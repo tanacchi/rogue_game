@@ -64,7 +64,7 @@ const std::vector<std::string> read_map_strings(const std::string& filename)
 
   std::vector<std::string> map_strings{};
   std::string input_buff{};
-  while (!read_file.eof();)
+  while (!read_file.eof())
   {
     std::getline(read_file, input_buff);
     map_strings.emplace_back(input_buff);

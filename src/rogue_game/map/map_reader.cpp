@@ -67,7 +67,7 @@ Map MapReader::operator()(std::string map_filename)
   }
 
   // ダンジョン要素を取得
-  BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.elems"))
+  for (const auto& child : json_map_data.get_child("Map.elems"))
   {
     const boost::property_tree::ptree& elem{child.second};
     if (!elem.empty())
@@ -77,7 +77,7 @@ Map MapReader::operator()(std::string map_filename)
     }
   }
   // アイテム要素を取得
-  BOOST_FOREACH (const boost::property_tree::ptree::value_type& child, json_map_data.get_child("Map.items"))
+  for (const auto& child : json_map_data.get_child("Map.items"))
   {
     const boost::property_tree::ptree& elem{child.second};
     if (!elem.empty())

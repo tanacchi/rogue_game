@@ -3,7 +3,6 @@
 
 #include <functional>
 #include <unordered_map>
-#include <boost/foreach.hpp>
 #include <boost/optional.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>

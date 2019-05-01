@@ -24,14 +24,12 @@ class KeyManager
     static const std::unordered_map<int, KeyManager::KeyType> key_state_table;
 
     explicit KeyManager(KeyManager::KeyType key = KeyManager::Null) noexcept;
-
     explicit operator KeyManager::KeyType() const noexcept;
     explicit operator bool() const noexcept;
     bool operator==(const KeyManager& rhs) const noexcept;
     bool operator==(KeyManager::KeyType rhs) const noexcept;
     friend KeyManager operator|(const KeyManager& lhs, const KeyManager& rhs);
     KeyManager operator|(KeyManager::KeyType&& rhs);
-
     void update() noexcept;
     bool is_match(KeyType condition) const noexcept;
     KeyManager::KeyType get() const noexcept;

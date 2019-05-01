@@ -5,18 +5,15 @@
 
 #include <map/point.hpp>
 
-// テキストファイルから直接読み込むマップの情報
-// MapGenerator のフレンド関数でもいいかもしれない
 struct TextMap {
   public:
-    // テキストファイルからマップの情報を抽出しインスタンスを生成
     TextMap(const std::vector<std::string>& map_strings);
     const std::size_t width{};
     const std::size_t height{};
     const std::string text{};
-
     Point<std::size_t> index_to_point(std::size_t index) const noexcept;
     friend std::ostream& operator<<(std::ostream& os, const TextMap& text_map);
+ 
   private:
     const std::size_t get_width(const std::vector<std::string>& map_strings);
     const std::size_t get_height(const std::vector<std::string>& map_strings);

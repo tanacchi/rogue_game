@@ -31,7 +31,8 @@ class Logger
       log_with_name(std::move(name_list), std::forward<Tail&&>(tail)...);
     }
 
-    static void log_string(const std::string& str, char separate_char = '=');    
+    static void log_string(const std::string& str, char separate_char = '=');
+
   private:
     static void init_log_file();
 

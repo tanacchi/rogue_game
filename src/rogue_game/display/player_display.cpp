@@ -11,9 +11,6 @@ void PlayerDisplay::show(const Player& player)
 {
   wclear(win_.get());
 
-  // 変数をループやらマクロやらで一気に参照できたら嬉しいが
-  // 言語が違うか
-  // 位置情報は logger に任せるつもり
   auto pos{player.get_position()};
   auto dir{player.get_direction()};
   mvwprintw(win_.get(), 0, 0, "Position: ");

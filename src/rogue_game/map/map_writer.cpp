@@ -1,7 +1,5 @@
 #include <map/map_writer.hpp>
 
-// マップの文字からそれぞれ json の内容を追加
-// ダンジョン要素とアイテム要素は別々
 void MapWriter::set_configs(const TextMap& text_map, std::vector<ConfigType>& dungeon_configs, std::vector<ConfigType>& item_configs)
 {
   for (std::size_t i{0}, end{text_map.text.length()}; i < end; ++i)
@@ -69,7 +67,6 @@ void MapWriter::write_json_map(const TextMap& text_map,
   }
   map_data.add_child("Map.items", item_tree);
 
-  // map_dir は include/rogue_game.hpp にて自動生成される
   boost::property_tree::write_json(map_dir+"json/"+output_filename+".json", map_data);
 }
 

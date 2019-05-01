@@ -64,8 +64,8 @@ const std::vector<std::string> read_map_strings(const std::string& filename)
 
   std::vector<std::string> map_strings{};
   std::string input_buff{};
-  for (std::size_t row{0}; !read_file.eof(); ++row)
-  { // Range-based-for でも良くないか
+  while (!read_file.eof();)
+  {
     std::getline(read_file, input_buff);
     map_strings.emplace_back(input_buff);
   }

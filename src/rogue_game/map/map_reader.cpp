@@ -2,8 +2,6 @@
 #include <item/item_series.hpp>
 #include <map/map_reader.hpp>
 
-// ダンジョン要素からインスタンスを生成しポイントを返す
-// オブジェクトファクトリ
 DungeonElemPtr gen_dungeon_elem(std::string type)
 {
   static std::unordered_map<std::string, std::function<::DungeonElemPtr(void)>> dungeon_table{{
@@ -31,7 +29,6 @@ ItemPtr gen_item_elem(std::string type, boost::property_tree::ptree property)
 
 Map MapReader::operator()(std::string map_filename)
 {
-  // json から Map のインスタンスを生成する
   Map map{};
   boost::property_tree::ptree json_map_data{};
   try 
@@ -54,19 +51,12 @@ Map MapReader::operator()(std::string map_filename)
     boost::property_tree::read_json(map_filename, json_map_data);
   }
   {
-    // マップの横幅を取得
     map.width = json_map_data.get_optional<int>("Map.width").get();
-
-    // マップの縦幅を取得
     map.height = json_map_data.get_optional<int>("Map.height").get();
-
-    // プレイヤーの初期位置を取得
     auto player_x{json_map_data.get_optional<int>("Map.player_pos_x").get()};
     auto player_y{json_map_data.get_optional<int>("Map.player_pos_y").get()};
     map.initial_position = Point<int>{player_x, player_y};
   }
-
-  // ダンジョン要素を取得
   for (const auto& child : json_map_data.get_child("Map.elems"))
   {
     const boost::property_tree::ptree& elem{child.second};
@@ -76,7 +66,6 @@ Map MapReader::operator()(std::string map_filename)
       map.dungeon_layer.emplace_back(std::move(gen_dungeon_elem(type)));
     }
   }
-  // アイテム要素を取得
   for (const auto& child : json_map_data.get_child("Map.items"))
   {
     const boost::property_tree::ptree& elem{child.second};

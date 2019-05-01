@@ -3,7 +3,7 @@
 
 #include <dungeon/dungeon_elem.hpp>
 
-// ダンジョン要素　'.'
+// '.'
 class Floor : public DungeonElem
 {
   public:

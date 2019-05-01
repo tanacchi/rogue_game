@@ -4,8 +4,6 @@
 #include <character/player.hpp>
 #include <display/display_panel.hpp>
 
-// プレイヤーのステータスを表示する
-// ただしマップ上のプレイヤーはウィンドウが違うので MapDisplay が表示してる
 class PlayerDisplay : public DisplayPanel
 {
   public:

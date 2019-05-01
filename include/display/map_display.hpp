@@ -5,7 +5,6 @@
 #include <display/display_panel.hpp>
 #include <map/map.hpp>
 
-// マップ（タンジョン・アイテム・キャラクター）の表示
 class MapDisplay : public DisplayPanel
 {
   public:

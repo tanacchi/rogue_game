@@ -67,7 +67,6 @@ bool Point<T>::operator==(const Point<T>& rhs) const
   return x_ == rhs.x_ && y_ == rhs.y_;
 }
 
-// 現状、比較演算は原点からの距離で判定
 template<typename T>
 bool Point<T>::operator<(const Point<T>& rls) const
 {

@@ -10,9 +10,6 @@
 
 class Player;
 
-// アイテムの基底クラス
-// マップデータに記述されるので MapElem を継承
-// 取得（インベントリに追加） → 使用のプロセスを設ける予定
 class Item : public MapElem
 {
   public:

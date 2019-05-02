@@ -20,6 +20,7 @@ void PlayerDisplay::show(const Player& player)
   mvwprintw(win_.get(), 4, 2, "dx: %d", dir.get_x());
   mvwprintw(win_.get(), 5, 2, "dy: %d", dir.get_y());
   mvwprintw(win_.get(), 6, 0, "money: %d", player.get_money());
+  mvwprintw(win_.get(), 7, 0, "HP: %d (max: %d)", player.get_hit_point(), player.get_max_hit_point());
 
   wrefresh(win_.get());
 }

@@ -5,6 +5,7 @@
 
 #include <item/item.hpp>
 
+// '*'
 class Gold : public Item
 {
   public:

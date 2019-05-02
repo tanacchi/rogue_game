@@ -61,15 +61,31 @@ void MenuHandler::set_item_content(GameMaster& master)
   auto names{master.player.get_item_name_array()};
   for (auto name : names)
   {
-    auto action{
-      [&](Menu::MenuPtr& menu_ptr){
-        menu_ptr.release();
-        master.player.add_money(100);
-        master.player.dispose_item(selected_index_);
-        return GameStatus{};
-      }
-    };
-    using namespace std::placeholders;
-    Menu::item_content.emplace(name, std::bind(action, _1));
+    if (name == "gold")
+    {
+      auto action{
+        [&](Menu::MenuPtr& menu_ptr){
+          menu_ptr.release();
+          master.player.add_money(100);
+          master.player.dispose_item(selected_index_);
+          return GameStatus{};
+        }
+      };
+      using namespace std::placeholders;
+      Menu::item_content.emplace(name, std::bind(action, _1));
+    }
+    else if (name == "food")
+    {
+      auto action{
+        [&](Menu::MenuPtr& menu_ptr){
+          menu_ptr.release();
+          master.player.toggle_hit_point(10);
+          master.player.dispose_item(selected_index_);
+          return GameStatus{};
+        }
+      };
+      using namespace std::placeholders;
+      Menu::item_content.emplace(name, std::bind(action, _1));
+    }
   }
 }

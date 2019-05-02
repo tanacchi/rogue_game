@@ -70,8 +70,11 @@ configure_file(
 add_subdirectory(src)
 
 # For terminal setting on WSL
-if (CMAKE_HOST_SYSTEM MATCHES "^.*Microsoft$")
-  message(STATUS "It's on Windows system")
+if (CMAKE_HOST_SYSTEM MATCHES "^.*Microsoft$" AND NOT EXISTS "$ENV{HOME}/.terminfo")
+  message(WARNING
+    "Please set terminfo for Windows system\n"
+    "$ infocmp | sed 's/\\(\\s\\+\\)rep=[^,]*,\\s*/\\1/' | tic - -o ~/.terminfo/"
+  )
 endif()
 
 # message(STATUS "*** dump start cmake variables ***")

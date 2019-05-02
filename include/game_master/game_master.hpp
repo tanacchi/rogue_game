@@ -5,7 +5,7 @@
 #include <display/menu_display.hpp>
 #include <display/player_display.hpp>
 #include <keyboard/key_manager.hpp>
-#include <map/point.hpp>
+#include <utility/point.hpp>
 #include <game_master/game_status.hpp>
 
 class Menu;

@@ -1,5 +1,5 @@
 #include <display/player_display.hpp>
-#include <map/point.hpp>
+#include <utility/point.hpp>
 
 PlayerDisplay::PlayerDisplay(std::size_t x, std::size_t y,
                              std::size_t width, std::size_t height)

@@ -33,8 +33,7 @@ project(
 
 find_package(Boost REQUIRED
   system
-  filesystem
-)
+  filesystem)
 find_package(Curses REQUIRED)
 
 if (NOT DEFINED CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
@@ -51,24 +50,32 @@ set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 include_directories(
   ${PROJECT_INCLUDE_DIR}
   ${Boost_INCLUDE_DIRS}
-  ${CURSES_INCLUDE_DIR}
-)
+  ${CURSES_INCLUDE_DIR})
 
 link_directories(
   ${Boost_LIBRARY_DIRS}
-  ${CURSES_LIBRARY_DIR}
-)
+  ${CURSES_LIBRARY_DIR})
 
-set(${PROJECT_NAME}_CONFIGURE_DIR ${PROJECT_SOURCE_DIR}/config)
+set(PROJECT_CONFIGURE_DIR ${PROJECT_SOURCE_DIR}/config)
 configure_file(
-  ${${PROJECT_NAME}_CONFIGURE_DIR}/README.md.in
+  ${PROJECT_CONFIGURE_DIR}/README.md.in
   ${PROJECT_SOURCE_DIR}/README.md)
+configure_file(
+  ${PROJECT_CONFIGURE_DIR}/path.hpp.in
+  ${PROJECT_INCLUDE_DIR}/utility/path.hpp)
 
 add_subdirectory(src)
+
+# For terminal setting on WSL
+if (CMAKE_HOST_SYSTEM MATCHES "^.*Microsoft$" AND NOT EXISTS "$ENV{HOME}/.terminfo")
+  message(WARNING
+    "Please set terminfo for Windows system\n"
+    "$ infocmp | sed 's/\\(\\s\\+\\)rep=[^,]*,\\s*/\\1/' | tic - -o ~/.terminfo/")
+endif()
 
 # message(STATUS "*** dump start cmake variables ***")
 # get_cmake_property(_variableNames VARIABLES)
 # foreach(_variableName ${_variableNames})
-        # message(STATUS "${_variableName}=${${_variableName}}")
+    # message(STATUS "${_variableName}=${${_variableName}}")
 # endforeach()
 # message(STATUS "*** dump end ***")

@@ -1,4 +1,4 @@
-#include <map/point.hpp>
+#include <utility/point.hpp>
 
 template<typename T>
 Point<T>::Point(T x, T y)

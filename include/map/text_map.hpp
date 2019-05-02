@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include <map/point.hpp>
+#include <utility/point.hpp>
 
 struct TextMap {
   public:

@@ -1,0 +1,9 @@
+#ifndef INCLUDED_PATH_HPP
+#define INCLUDED_PATH_HPP
+
+const std::string root_dir{"${PROJECT_SOURCE_DIR}"};
+const std::string map_dir{root_dir + "/map/"};
+// constexpr std::string_view map_dir{boost::filesystem::current_path().string() + "/map/"};
+
+
+#endif  // INCLUDED_PATH_HPP

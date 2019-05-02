@@ -1,7 +1,5 @@
 *tmp*
-
 build/
-
 log/
-
 *.out
+include/utility/path.hpp

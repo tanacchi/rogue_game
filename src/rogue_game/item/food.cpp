@@ -1,15 +1,14 @@
 #include <sstream>
 
-#include <character/player.hpp>
-#include <item/gold.hpp>
+#include <item/food.hpp>
 
-Gold::Gold(std::size_t amount)
-  : Item("gold")
+Food::Food(std::size_t amount)
+  : Item("food")
   , amount_{amount}
 {
 }
 
-std::string Gold::to_string() const
+std::string Food::to_string() const
 {
   std::stringstream ss{};
   ss << Item::to_string() << ", { amount : " << amount_ << " }";

@@ -3,6 +3,7 @@
 #include <game_master/game_master.hpp>
 #include <map/map_reader.hpp>
 #include <menu/menu.hpp>
+#include <utility/path.hpp>
 
 GameMaster::GameMaster()
   : map_display{5, 4, 80, 30}

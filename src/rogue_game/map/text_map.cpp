@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <sstream>
 
-#include <debug/logger.hpp>
+#include <utility/logger.hpp>
 #include <map/text_map.hpp>
 
 TextMap::TextMap(const std::vector<std::string>& map_strings)

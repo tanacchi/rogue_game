@@ -3,7 +3,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem.hpp>
 
-#include <debug/logger.hpp>
+#include <utility/logger.hpp>
 
 std::fstream Logger::fos_{};
 

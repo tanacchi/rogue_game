@@ -16,6 +16,8 @@ class Character
 
   protected:
     Point<int> position_;
+    std::size_t hit_point_;
+    std::size_t max_hit_point_;
 };
 
 #endif  // INCLUDED_CHARACTER_HPP

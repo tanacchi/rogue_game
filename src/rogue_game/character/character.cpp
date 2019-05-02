@@ -2,6 +2,8 @@
 
 Character::Character(Point<int> position)
   : position_{position}
+  , hit_point_{50}
+  , max_hit_point_{100}
 {
 }
 

@@ -69,6 +69,11 @@ configure_file(
 
 add_subdirectory(src)
 
+# For terminal setting on WSL
+if (CMAKE_HOST_SYSTEM MATCHES "^.*Microsoft$")
+  message(STATUS "It's on Windows system")
+endif()
+
 # message(STATUS "*** dump start cmake variables ***")
 # get_cmake_property(_variableNames VARIABLES)
 # foreach(_variableName ${_variableNames})

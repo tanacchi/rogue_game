@@ -27,13 +27,25 @@ void MapWriter::set_configs(const TextMap& text_map, std::vector<ConfigType>& du
         dungeon_config.put("type", "door");
         break;
       case '*':
-        dungeon_config.put("type", "floor");
-        item_config.put("type", "gold");
-        auto pos{text_map.index_to_point(i)};
-        item_config.put("pos_x", pos.get_x());
-        item_config.put("pos_y", pos.get_y());
-        item_config.put("amount", 100);
-        break;
+        {
+          dungeon_config.put("type", "floor");
+          item_config.put("type", "gold");
+          auto pos{text_map.index_to_point(i)};
+          item_config.put("pos_x", pos.get_x());
+          item_config.put("pos_y", pos.get_y());
+          item_config.put("amount", 100);
+          break;
+        }
+      case ':':
+        {
+          dungeon_config.put("type", "floor");
+          item_config.put("type", "food");
+          auto pos{text_map.index_to_point(i)};
+          item_config.put("pos_x", pos.get_x());
+          item_config.put("pos_y", pos.get_y());
+          item_config.put("amount", 10);
+          break;
+        }
     }
     dungeon_configs.emplace_back(dungeon_config);
     if (!item_config.empty())

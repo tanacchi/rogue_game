@@ -12,10 +12,6 @@ Item::Item(Item&& rhs) noexcept
 {
 }
 
-void Item::use(Player* const player_ptr)
-{
-}
-
 std::string Item::to_string() const
 {
   std::stringstream ss;

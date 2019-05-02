@@ -9,11 +9,6 @@ Gold::Gold(std::size_t amount)
 {
 }
 
-void Gold::use(Player* const player_ptr)
-{
-  player_ptr->add_money(amount_);
-}
-
 std::string Gold::to_string() const
 {
   std::stringstream ss{};

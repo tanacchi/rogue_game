@@ -33,18 +33,18 @@ const T Point<T>::get_y() const
 }
 
 template<typename T>
-Point<T>& Point<T>::operator=(const Point<T>& rls)
+Point<T>& Point<T>::operator=(const Point<T>& rhs)
 {
-  x_ = rls.x_;
-  y_ = rls.y_;
+  x_ = rhs.x_;
+  y_ = rhs.y_;
   return *this;
 }
 
 template<typename T>
-Point<T>& Point<T>::operator=(Point<T>&& rls)
+Point<T>& Point<T>::operator=(Point<T>&& rhs)
 {
-  x_ = std::move(rls.x_);
-  y_ = std::move(rls.y_);
+  x_ = std::move(rhs.x_);
+  y_ = std::move(rhs.y_);
   return *this;
 }
 
@@ -68,9 +68,13 @@ bool Point<T>::operator==(const Point<T>& rhs) const
 }
 
 template<typename T>
-bool Point<T>::operator<(const Point<T>& rls) const
+bool Point<T>::operator<(const Point<T>& rhs) const
 {
-  return (x_*x_ + y_*y_) < (rls.x_*rls.x_ + rls.y_*rls.y_);
+  auto lhs_distance = x_*x_ + y_*y_, rhs_distance =rhs.x_*rhs.x_ + rhs.y_*rhs.y_; 
+  if (lhs_distance == rhs_distance)
+    return x_ < rhs.x_;
+  else
+    return lhs_distance < rhs_distance;
 }
 
 template<typename T>

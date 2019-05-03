@@ -23,12 +23,12 @@ class Point
     Point(Point&& point);
     const T get_x() const;
     const T get_y() const;
-    Point& operator=(const Point& rls);
-    Point& operator=(Point&& rls);
+    Point& operator=(const Point& rhs);
+    Point& operator=(Point&& rhs);
     const Point operator+(const Point& rhs) const;
     const Point& operator+=(const Point& rhs);
     bool operator==(const Point& rhs) const;
-    bool operator<(const Point& rls) const;
+    bool operator<(const Point& rhs) const;
     explicit operator bool() const noexcept;
     friend std::ostream& operator<<(std::ostream& os, const Point<int>& point);
 

@@ -23,9 +23,12 @@ class Player : public Character
     Point<int> get_direction() const;
     void assign_motion(const Point<int>& next_motion);
     friend std::ostream& operator<<(std::ostream& os, const Player& player);
+    std::size_t get_max_hit_point() const noexcept;
+    void toggle_hit_point(std::size_t amount);
 
   private:
     Point<int> direction_;
+    std::size_t max_hit_point_;
     std::multimap<std::string, const ItemPtr> inventory_{};
     std::size_t money_;
 };

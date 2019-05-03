@@ -79,7 +79,7 @@ void MenuHandler::set_item_content(GameMaster& master)
       auto action{
         [&](Menu::MenuPtr& menu_ptr){
           menu_ptr.release();
-          master.player.toggle_hit_point(10);
+          master.player.heal(10);
           master.player.dispose_item(selected_index_);
           return GameStatus{};
         }

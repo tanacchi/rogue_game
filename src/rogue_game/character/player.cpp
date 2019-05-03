@@ -77,11 +77,9 @@ std::size_t Player::get_max_hit_point() const noexcept
   return max_hit_point_;
 }
 
-void Player::toggle_hit_point(std::size_t amount)
+void Player::heal(std::size_t amount) noexcept
 {
   hit_point_ += amount;
   if (hit_point_ > max_hit_point_)
     hit_point_ = max_hit_point_;
-  else if (hit_point_ < 0)
-    hit_point_ = 0;
 }

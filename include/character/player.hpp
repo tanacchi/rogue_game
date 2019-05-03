@@ -10,9 +10,13 @@
 #include <item/item.hpp>
 #include <keyboard/key_manager.hpp>
 
+class PlayerDisplay;
+
 class Player : public Character
 {
   public:
+    friend PlayerDisplay;  // XXX: Might not be beautiful
+
     Player();
     static const std::map<KeyManager::KeyType, const Point<int>> motion_table;
     std::size_t get_money() const;
@@ -24,7 +28,7 @@ class Player : public Character
     void assign_motion(const Point<int>& next_motion);
     friend std::ostream& operator<<(std::ostream& os, const Player& player);
     std::size_t get_max_hit_point() const noexcept;
-    void toggle_hit_point(std::size_t amount);
+    void heal(std::size_t amount) noexcept;
 
   private:
     Point<int> direction_;

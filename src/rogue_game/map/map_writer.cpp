@@ -46,6 +46,11 @@ void MapWriter::set_configs(const TextMap& text_map, std::vector<ConfigType>& du
           item_config.put("amount", 10);
           break;
         }
+      default:
+        {
+          std::string error_msg{"Unknown map symbol '"+std::string{text_map.text[i]}+"' detected."};
+          throw std::domain_error{error_msg.c_str()};
+        }
     }
     dungeon_configs.emplace_back(dungeon_config);
     if (!item_config.empty())

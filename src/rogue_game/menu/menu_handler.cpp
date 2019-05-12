@@ -21,9 +21,7 @@ GameStatus MenuHandler::operator()(GameMaster& master)
 
   while (menu_ptr)
   {
-#ifndef DEBUG
     menu_display_.show(*menu_ptr, selected_index_);
-#endif
     keyboard.update();
     switch (keyboard.get())
     {

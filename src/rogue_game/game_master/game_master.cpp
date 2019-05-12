@@ -24,10 +24,8 @@ GameMaster::~GameMaster()
 
 GameStatus GameMaster::show(const GameStatus& status)
 {
-#ifndef DEBUG
   map_display.show(map, player);
   player_display.show(player);
-#endif
   return GameStatus{status.mode, Task::Input};
 }
 

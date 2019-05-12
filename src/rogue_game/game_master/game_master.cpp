@@ -1,6 +1,7 @@
 #include <exception>
 
 #include <game_master/game_master.hpp>
+#include <character/inventory.hpp>
 #include <map/map_reader.hpp>
 #include <menu/menu.hpp>
 #include <utility/path.hpp>
@@ -59,7 +60,7 @@ GameStatus GameMaster::handle_dungeon(const GameStatus& status)
   const auto picked_up_item_itr{map.item_layer.find(current_position)};
   if (picked_up_item_itr != map.item_layer.end())
   {
-    player.store_item(std::move(picked_up_item_itr->second));
+    player.inventory_ptr->store(std::move(picked_up_item_itr->second));
     map.item_layer.erase(picked_up_item_itr);
   }
   return GameStatus{Mode::Dungeon, Task::Show};

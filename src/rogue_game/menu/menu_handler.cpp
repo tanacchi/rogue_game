@@ -2,6 +2,7 @@
 #include <utility>
 
 #include <menu/menu_handler.hpp>
+#include <character/inventory.hpp>
 #include <game_master/game_master.hpp>
 
 MenuHandler::MenuHandler()
@@ -20,9 +21,7 @@ GameStatus MenuHandler::operator()(GameMaster& master)
 
   while (menu_ptr)
   {
-#ifndef DEBUG
     menu_display_.show(*menu_ptr, selected_index_);
-#endif
     keyboard.update();
     switch (keyboard.get())
     {
@@ -58,7 +57,7 @@ GameStatus MenuHandler::operator()(GameMaster& master)
 void MenuHandler::set_item_content(GameMaster& master)
 {
   Menu::item_content.clear();
-  auto names{master.player.get_item_name_array()};
+  auto names{master.player.inventory_ptr->get_item_names()};
   for (auto name : names)
   {
     if (name == "gold")
@@ -67,7 +66,7 @@ void MenuHandler::set_item_content(GameMaster& master)
         [&](Menu::MenuPtr& menu_ptr){
           menu_ptr.release();
           master.player.add_money(100);
-          master.player.dispose_item(selected_index_);
+          master.player.inventory_ptr->dispose(selected_index_);
           return GameStatus{};
         }
       };
@@ -79,8 +78,8 @@ void MenuHandler::set_item_content(GameMaster& master)
       auto action{
         [&](Menu::MenuPtr& menu_ptr){
           menu_ptr.release();
-          master.player.toggle_hit_point(10);
-          master.player.dispose_item(selected_index_);
+          master.player.heal(10);
+          master.player.inventory_ptr->dispose(selected_index_);
           return GameStatus{};
         }
       };

@@ -12,7 +12,7 @@ MenuHandler::MenuHandler()
 {
 }
 
-GameStatus MenuHandler::operator()(GameMaster& master)
+GameStatus MenuHandler::operator()(const std::shared_ptr<GameMaster>& master)
 {
   KeyManager keyboard{};
   GameStatus next_status{};
@@ -54,10 +54,10 @@ GameStatus MenuHandler::operator()(GameMaster& master)
   return next_status;
 }
 
-void MenuHandler::set_item_content(GameMaster& master)
+void MenuHandler::set_item_content(const std::shared_ptr<GameMaster>& master)
 {
   Menu::item_content.clear();
-  auto names{master.player.inventory_ptr->get_item_names()};
+  auto names{master->player.inventory_ptr->get_item_names()};
   for (auto name : names)
   {
     if (name == "gold")
@@ -65,8 +65,8 @@ void MenuHandler::set_item_content(GameMaster& master)
       auto action{
         [&](Menu::MenuPtr& menu_ptr){
           menu_ptr.release();
-          master.player.add_money(100);
-          master.player.inventory_ptr->dispose(selected_index_);
+          master->player.add_money(100);
+          master->player.inventory_ptr->dispose(selected_index_);
           return GameStatus{};
         }
       };
@@ -78,8 +78,8 @@ void MenuHandler::set_item_content(GameMaster& master)
       auto action{
         [&](Menu::MenuPtr& menu_ptr){
           menu_ptr.release();
-          master.player.heal(10);
-          master.player.inventory_ptr->dispose(selected_index_);
+          master->player.heal(10);
+          master->player.inventory_ptr->dispose(selected_index_);
           return GameStatus{};
         }
       };

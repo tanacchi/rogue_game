@@ -8,7 +8,7 @@ int main()
 {
   try
   {
-    GameMaster  master{};
+    std::shared_ptr<GameMaster> master{std::make_shared<GameMaster>()};
     GameStatus  status{};
     MenuHandler menu_handler{};
 
@@ -17,18 +17,18 @@ int main()
       switch (status.task)
       {
         case Task::Show:
-          status = master.show(status);
+          status = master->show(status);
           break;
         case Task::Input:
-          status = master.input(status);
+          status = master->input(status);
           break;
         case Task::Switch:
-          status = master.toggle_mode(status);
+          status = master->toggle_mode(status);
           break;
         case Task::Perform:
           if (status.mode == Mode::Dungeon)
           {
-            status = master.handle_dungeon(status);
+            status = master->handle_dungeon(status);
           }
           else
           {

@@ -5,6 +5,9 @@
 #include <map/map_reader.hpp>
 #include <menu/menu.hpp>
 #include <utility/path.hpp>
+#include <action/any_action.hpp>
+#include <action/gold_action.hpp>
+#include <action/action_handler.hpp>
 
 GameMaster::GameMaster()
   : map_display{5, 4, 80, 30}
@@ -60,6 +63,7 @@ GameStatus GameMaster::handle_dungeon(const GameStatus& status)
   {
     player.inventory_ptr->store(std::move(picked_up_item_itr->second));
     map.item_layer.erase(picked_up_item_itr);
+    ActionHandler::push_action(GoldAction<ConsumeTag>());
   }
   return GameStatus{Mode::Dungeon, Task::Show};
 }

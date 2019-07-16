@@ -1,6 +1,5 @@
 #include <action/any_action.hpp>
 #include <game_master/game_master.hpp>
-#include <game_master/game_master.hpp>
 
 template <typename T>
 ActionHolder<T>::ActionHolder(T&& action)

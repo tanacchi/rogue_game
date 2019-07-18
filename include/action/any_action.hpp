@@ -37,7 +37,7 @@ class AnyAction
       action_.reset(new ActionHolder<T>{action});
     }
 
-    GameStatus do_action(const std::shared_ptr<GameMaster>& master)
+    GameStatus do_action(const std::shared_ptr<GameMaster>& master) const
     {
       return action_->do_action(master);
     }

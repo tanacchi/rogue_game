@@ -3,6 +3,7 @@
 
 #include <game_master/game_master.hpp>
 #include <menu/menu_handler.hpp>
+#include <action/action_handler.hpp>
 
 int main()
 {
@@ -34,6 +35,13 @@ int main()
           {
             status = menu_handler(master);
           }
+          break;
+        case Task::Act:
+          while (!ActionHandler::empty())
+          {
+            ActionHandler::invoke(master.get());
+          }
+          status.task = Task::Show;
           break;
         case Task::End:
           exit(EXIT_SUCCESS);

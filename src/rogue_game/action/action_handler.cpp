@@ -21,5 +21,5 @@ GameStatus ActionHandler::invoke(GameMaster* master)
 
 bool ActionHandler::empty()
 {
-  return true;
+  return actions_.empty();
 }

@@ -12,9 +12,11 @@ void ActionHandler::push_action(AnyAction&& action)
   LOG_VALUES(actions_.size());
 }
 
-GameStatus ActionHandler::invoke()
+GameStatus ActionHandler::invoke(const std::shared_ptr<GameMaster>& master)
 {
-  return GameStatus{};
+  const auto& current_action{actions_.front()};
+  actions_.pop();
+  return current_action.do_action(master);
 }
 
 bool ActionHandler::empty()

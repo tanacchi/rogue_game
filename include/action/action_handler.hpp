@@ -2,15 +2,17 @@
 #define INCLUDED_ACTION_HANDLER_HPP
 
 #include <queue>
+#include <memory>
 
 class GameStatus;
+class GameMaster;
 class AnyAction;
 
 class ActionHandler
 {
   public:
     static void push_action(AnyAction&& action);
-    static GameStatus invoke();
+    static GameStatus invoke(const std::shared_ptr<GameMaster>& master);
     static bool empty();
 
   private:

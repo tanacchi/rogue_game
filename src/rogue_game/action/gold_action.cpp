@@ -10,13 +10,13 @@
 // }
 
 // template <typename U>
-// GameStatus GoldAction<U>::do_it(const std::shared_ptr<GameMaster>& master, ConsumeTag)
+// GameStatus GoldAction<U>::do_it(GameMaster* master, ConsumeTag)
 // {
   // return GameStatus{};
 // }
 
 // template <typename U>
-// GameStatus GoldAction<U>::do_it(const std::shared_ptr<GameMaster>& master, PutTag)
+// GameStatus GoldAction<U>::do_it(GameMaster* master, PutTag)
 // {
   // return GameStatus{};
 // }

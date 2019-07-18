@@ -18,12 +18,12 @@ class GoldAction : public Action<Gold, U>
     }
 
   private:
-    GameStatus do_it(const std::shared_ptr<GameMaster>& master, ConsumeTag)
+    GameStatus do_it(GameMaster* master, ConsumeTag)
     {
       return GameStatus{};
     }
 
-    GameStatus do_it(const std::shared_ptr<GameMaster>& master, PutTag)
+    GameStatus do_it(GameMaster* master, PutTag)
     {
       return GameStatus{};
     }

@@ -9,7 +9,7 @@ class GameMaster;
 
 struct ActionHolderBase
 {
-  virtual GameStatus do_action(const std::shared_ptr<GameMaster>& master) = 0;
+  virtual GameStatus do_action(GameMaster* master) = 0;
 };
 
 template <typename T>
@@ -20,7 +20,7 @@ struct ActionHolder : public ActionHolderBase
   {
   }
 
-  virtual GameStatus do_action(const std::shared_ptr<GameMaster>& master)
+  virtual GameStatus do_action(GameMaster* master)
   {
     return action.do_action(master);
   }
@@ -37,7 +37,7 @@ class AnyAction
       action_.reset(new ActionHolder<T>{action});
     }
 
-    GameStatus do_action(const std::shared_ptr<GameMaster>& master) const
+    GameStatus do_action(GameMaster* master) const
     {
       return action_->do_action(master);
     }

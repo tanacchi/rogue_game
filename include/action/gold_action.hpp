@@ -5,8 +5,7 @@
 #include <game_master/game_status.hpp>
 #include <game_master/game_master.hpp>
 #include <utility/logger.hpp>
-
-class Gold;
+#include <item/gold.hpp>
 
 template <typename U>
 class GoldAction : public Action<Gold, U>
@@ -14,8 +13,9 @@ class GoldAction : public Action<Gold, U>
   public:
     using Usage = U;
 
-    GoldAction()
+    GoldAction(const Gold& gold)
       : Action<Gold, U>{}
+      , gold_{gold}
     {
     }
 
@@ -23,7 +23,7 @@ class GoldAction : public Action<Gold, U>
     GameStatus do_it(GameMaster* master, ConsumeTag)
     {
       LOG_STRING("GoldAction<ConsumeTag>::do_it called");
-      master->player.add_money(100);
+      master->player.add_money(gold_.get_amount());
       return GameStatus{};
     }
 
@@ -31,6 +31,8 @@ class GoldAction : public Action<Gold, U>
     {
       return GameStatus{};
     }
+
+    Gold gold_;
 };
 
 #endif  // INCLUDED_GOLD_ACTION_HPP

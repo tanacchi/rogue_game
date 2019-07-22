@@ -69,8 +69,8 @@ void MenuHandler::set_item_content(const std::shared_ptr<GameMaster>& master)
       auto action{
         [&](Menu::MenuPtr& menu_ptr){
           menu_ptr.release();
+          ActionHandler::push_action(GoldAction<ConsumeTag>(Gold()));
           master->player.inventory_ptr->dispose(selected_index_);
-          ActionHandler::push_action(GoldAction<ConsumeTag>());
           return GameStatus{Mode::Dungeon, Task::Act};
         }
       };

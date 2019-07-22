@@ -67,9 +67,11 @@ void MenuHandler::set_item_content(const std::shared_ptr<GameMaster>& master)
     if (name == "gold")
     {
       auto action{
-        [&](Menu::MenuPtr& menu_ptr){
+        [&](Menu::MenuPtr& menu_ptr){  // XXX: So duty.
           menu_ptr.release();
-          ActionHandler::push_action(GoldAction<ConsumeTag>(Gold()));
+          auto target_item_itr{master->player.inventory_ptr->get_item_by_index(selected_index_)};
+          const Gold& gold_ptr(dynamic_cast<Gold&>(*target_item_itr));
+          ActionHandler::push_action(GoldAction<ConsumeTag>(gold_ptr));
           master->player.inventory_ptr->dispose(selected_index_);
           return GameStatus{Mode::Dungeon, Task::Act};
         }

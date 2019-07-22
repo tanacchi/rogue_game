@@ -5,6 +5,10 @@
 #include <character/inventory.hpp>
 #include <game_master/game_master.hpp>
 
+#include <action/action_handler.hpp>
+#include <action/gold_action.hpp>
+#include <action/any_action.hpp>
+
 MenuHandler::MenuHandler()
   : menu_ptr{}
   , menu_display_{100, 10, 30, 16}
@@ -65,8 +69,8 @@ void MenuHandler::set_item_content(const std::shared_ptr<GameMaster>& master)
       auto action{
         [&](Menu::MenuPtr& menu_ptr){
           menu_ptr.release();
-          master->player.add_money(100);
           master->player.inventory_ptr->dispose(selected_index_);
+          ActionHandler::push_action(GoldAction<ConsumeTag>());
           return GameStatus{Mode::Dungeon, Task::Act};
         }
       };

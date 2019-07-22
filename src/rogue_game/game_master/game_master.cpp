@@ -63,7 +63,6 @@ GameStatus GameMaster::handle_dungeon(const GameStatus& status)
   {
     player.inventory_ptr->store(std::move(picked_up_item_itr->second));
     map.item_layer.erase(picked_up_item_itr);
-    ActionHandler::push_action(GoldAction<ConsumeTag>());
   }
   return GameStatus{Mode::Dungeon, Task::Show};
 }

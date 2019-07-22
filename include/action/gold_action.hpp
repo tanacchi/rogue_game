@@ -3,6 +3,8 @@
 
 #include <action/action.hpp>
 #include <game_master/game_status.hpp>
+#include <game_master/game_master.hpp>
+#include <utility/logger.hpp>
 
 class Gold;
 
@@ -20,6 +22,8 @@ class GoldAction : public Action<Gold, U>
   private:
     GameStatus do_it(GameMaster* master, ConsumeTag)
     {
+      LOG_STRING("GoldAction<ConsumeTag>::do_it called");
+      master->player.add_money(100);
       return GameStatus{};
     }
 

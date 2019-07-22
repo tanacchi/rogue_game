@@ -14,7 +14,7 @@ void ActionHandler::push_action(AnyAction&& action)
 
 GameStatus ActionHandler::invoke(GameMaster* master)
 {
-  const auto& current_action{actions_.front()};
+  const auto current_action{actions_.front()};
   actions_.pop();
   return current_action.do_action(master);
 }

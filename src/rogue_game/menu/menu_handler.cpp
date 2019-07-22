@@ -67,7 +67,7 @@ void MenuHandler::set_item_content(const std::shared_ptr<GameMaster>& master)
           menu_ptr.release();
           master->player.add_money(100);
           master->player.inventory_ptr->dispose(selected_index_);
-          return GameStatus{};
+          return GameStatus{Mode::Dungeon, Task::Act};
         }
       };
       using namespace std::placeholders;
@@ -80,7 +80,7 @@ void MenuHandler::set_item_content(const std::shared_ptr<GameMaster>& master)
           menu_ptr.release();
           master->player.heal(10);
           master->player.inventory_ptr->dispose(selected_index_);
-          return GameStatus{};
+          return GameStatus{Mode::Dungeon, Task::Act};
         }
       };
       using namespace std::placeholders;

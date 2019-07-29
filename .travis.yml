@@ -19,7 +19,7 @@ before_script:
         
 script:
   - cmake .
-  - make
+  - make -j
 
 notifications:
   on_success: never

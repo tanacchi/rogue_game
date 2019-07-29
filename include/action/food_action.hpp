@@ -23,7 +23,7 @@ class FoodAction : public Action<Food, U>
     GameStatus do_it(GameMaster* master, ConsumeTag)
     {
       LOG_STRING("FoodAction<ConsumeTag>::do_it called");
-      master->player.add_money(food_.get_amount());
+      master->player.heal(food_.get_amount());
       return GameStatus{};
     }
 

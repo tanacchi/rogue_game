@@ -7,6 +7,7 @@
 
 #include <action/action_handler.hpp>
 #include <action/gold_action.hpp>
+#include <action/food_action.hpp>
 #include <action/any_action.hpp>
 
 MenuHandler::MenuHandler()
@@ -68,10 +69,10 @@ void MenuHandler::set_item_content(const std::shared_ptr<GameMaster>& master)
     {
       auto action{
         [&](Menu::MenuPtr& menu_ptr){  // XXX: So duty.
-          menu_ptr.release();
           auto target_item_itr{master->player.inventory_ptr->get_item_by_index(selected_index_)};
-          const Gold& gold_ptr(dynamic_cast<Gold&>(*target_item_itr));
-          ActionHandler::push_action(GoldAction<ConsumeTag>(gold_ptr));
+          const Gold& gold(dynamic_cast<Gold&>(*target_item_itr));
+          ActionHandler::push_action(GoldAction<ConsumeTag>(gold));
+          menu_ptr.release();
           master->player.inventory_ptr->dispose(selected_index_);
           return GameStatus{Mode::Dungeon, Task::Act};
         }
@@ -82,9 +83,11 @@ void MenuHandler::set_item_content(const std::shared_ptr<GameMaster>& master)
     else if (name == "food")
     {
       auto action{
-        [&](Menu::MenuPtr& menu_ptr){
+        [&](Menu::MenuPtr& menu_ptr){  // XXX: So duty.
+          auto target_item_itr{master->player.inventory_ptr->get_item_by_index(selected_index_)};
+          const Food& food(dynamic_cast<Food&>(*target_item_itr));
+          ActionHandler::push_action(FoodAction<ConsumeTag>(food));
           menu_ptr.release();
-          master->player.heal(10);
           master->player.inventory_ptr->dispose(selected_index_);
           return GameStatus{Mode::Dungeon, Task::Act};
         }

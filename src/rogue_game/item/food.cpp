@@ -8,6 +8,11 @@ Food::Food(std::size_t amount)
 {
 }
 
+std::size_t Food::get_amount() const noexcept
+{
+  return amount_;
+}
+
 std::string Food::to_string() const
 {
   std::stringstream ss{};

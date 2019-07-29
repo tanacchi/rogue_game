@@ -8,6 +8,7 @@ class Food : public Item
 {
   public:
     Food(std::size_t amount = 100);
+    std::size_t get_amount() const noexcept;
     std::string to_string() const;
 
   private:

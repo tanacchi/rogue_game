@@ -26,11 +26,6 @@ class GoldAction : public Action<Gold, U>
       return GameStatus{};
     }
 
-    GameStatus do_it(GameMaster* master, PutTag)
-    {
-      return GameStatus{};
-    }
-
     Gold gold_;
 };
 

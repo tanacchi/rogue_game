@@ -26,11 +26,6 @@ class FoodAction : public Action<Food, U>
       return GameStatus{};
     }
 
-    GameStatus do_it(GameMaster* master, PutTag)
-    {
-      return GameStatus{};
-    }
-
     Food food_;
 };
 

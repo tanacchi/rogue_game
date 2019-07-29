@@ -5,6 +5,7 @@
 
 #include <action/usages.hpp>
 #include <game_master/game_status.hpp>
+#include <utility/logger.hpp>
 
 class GameMaster;
 class GameStatus;
@@ -21,8 +22,17 @@ class Action
     }
 
   private:
-    virtual GameStatus do_it(GameMaster* master, ConsumeTag) = 0;
-    virtual GameStatus do_it(GameMaster* master, PutTag) = 0;
+    virtual GameStatus do_it(GameMaster* master, ConsumeTag)
+    {
+      LOG_STRING("Invalid Action::do_it called. (ConsumeTag)");
+      return {Mode::Dungeon, Task::End};
+    }
+
+    virtual GameStatus do_it(GameMaster* master, PutTag)
+    {
+      LOG_STRING("Invalid Action::do_it called. (PutTag)");
+      return {Mode::Dungeon, Task::End};
+    }
 };
 
 #endif  // INCLUDED_ACTION_HPP

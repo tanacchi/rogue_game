@@ -22,7 +22,6 @@ class GoldAction : public Action<Gold, U>
   private:
     GameStatus do_it(GameMaster* master, ConsumeTag)
     {
-      LOG_STRING("GoldAction<ConsumeTag>::do_it called");
       master->player.add_money(gold_.get_amount());
       return GameStatus{};
     }

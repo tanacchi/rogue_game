@@ -10,8 +10,8 @@ class MenuHandler
 {
   public:
     MenuHandler();
-    GameStatus operator()(GameMaster& master);
-    void set_item_content(GameMaster& master);
+    GameStatus operator()(const std::shared_ptr<GameMaster>& master);
+    void set_item_content(const std::shared_ptr<GameMaster>& master);
 
   private:
     Menu::MenuPtr menu_ptr;

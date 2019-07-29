@@ -15,3 +15,8 @@ std::string Gold::to_string() const
   ss << Item::to_string() << ", { amount : " << amount_ << " }";
   return ss.str();
 }
+
+std::size_t Gold::get_amount() const noexcept
+{
+  return amount_;
+}

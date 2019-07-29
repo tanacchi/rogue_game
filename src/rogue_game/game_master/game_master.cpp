@@ -5,6 +5,9 @@
 #include <map/map_reader.hpp>
 #include <menu/menu.hpp>
 #include <utility/path.hpp>
+#include <action/any_action.hpp>
+#include <action/gold_action.hpp>
+#include <action/action_handler.hpp>
 
 GameMaster::GameMaster()
   : map_display{5, 4, 80, 30}

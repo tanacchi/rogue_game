@@ -62,38 +62,38 @@ GameStatus MenuHandler::operator()(const std::shared_ptr<GameMaster>& master)
 void MenuHandler::set_item_content(const std::shared_ptr<GameMaster>& master)
 {
   Menu::item_content.clear();
+
   auto names{master->player.inventory_ptr->get_item_names()};
+  auto base_action{
+    [&](Menu::MenuPtr& menu_ptr, std::function<void(void)> specific_action){
+      specific_action();
+      master->player.inventory_ptr->dispose(selected_index_);
+      menu_ptr.release();
+      return GameStatus{Mode::Dungeon, Task::Act};
+    }
+  };
+  std::function<void(void)> specific_action{};
+
   for (auto name : names)
   {
     if (name == "gold")
     {
-      auto action{
-        [&](Menu::MenuPtr& menu_ptr){  // XXX: So duty.
+      specific_action = 
+        [&](){
           auto target_item_itr{master->player.inventory_ptr->get_item_by_index(selected_index_)};
           const Gold& gold(dynamic_cast<Gold&>(*target_item_itr));
           ActionHandler::push_action(GoldAction<ConsumeTag>(gold));
-          menu_ptr.release();
-          master->player.inventory_ptr->dispose(selected_index_);
-          return GameStatus{Mode::Dungeon, Task::Act};
-        }
-      };
-      using namespace std::placeholders;
-      Menu::item_content.emplace(name, std::bind(action, _1));
+        };
     }
     else if (name == "food")
     {
-      auto action{
-        [&](Menu::MenuPtr& menu_ptr){  // XXX: So duty.
+      specific_action = 
+        [&](){
           auto target_item_itr{master->player.inventory_ptr->get_item_by_index(selected_index_)};
           const Food& food(dynamic_cast<Food&>(*target_item_itr));
           ActionHandler::push_action(FoodAction<ConsumeTag>(food));
-          menu_ptr.release();
-          master->player.inventory_ptr->dispose(selected_index_);
-          return GameStatus{Mode::Dungeon, Task::Act};
-        }
-      };
-      using namespace std::placeholders;
-      Menu::item_content.emplace(name, std::bind(action, _1));
+        };
     }
+    Menu::item_content.emplace(name, std::bind(base_action, std::placeholders::_1, specific_action));
   }
 }

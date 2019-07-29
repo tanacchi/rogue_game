@@ -2,12 +2,9 @@
 #define INCLUDED_ACTION_HPP
 
 #include <memory>
-#include <game_master/game_status.hpp>
 
-template <typename T>
-class UsageTag {};
-class ConsumeTag : UsageTag<ConsumeTag> {};
-class PutTag : UsageTag<PutTag> {};
+#include <action/usages.hpp>
+#include <game_master/game_status.hpp>
 
 class GameMaster;
 class GameStatus;

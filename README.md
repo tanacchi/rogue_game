@@ -39,4 +39,4 @@ BackSpace | Exit inventory mode（アイテム選択モードを出る）
     `$ sudo apt install libncurses5-dev`
 * libboost 1.65
   > To install  
-    `$ sudo apt install libboost1.58-all-dev`
+    `$ sudo apt install libboost-all-dev`

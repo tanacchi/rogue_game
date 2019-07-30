@@ -12,6 +12,7 @@
 GameMaster::GameMaster()
   : map_display{5, 4, 80, 30}
   , player_display{70, 30, 20, 10}
+  , message_display{10, 30, 50, 10}
   , keyboard{}
   , player()
 {
@@ -29,6 +30,7 @@ GameStatus GameMaster::show(const GameStatus& status)
 {
   map_display.show(map, player);
   player_display.show(player);
+  message_display.show();
   return GameStatus{status.mode, Task::Input};
 }
 

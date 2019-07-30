@@ -22,9 +22,9 @@ void MapDisplay::show(const Map& map, const Player& player)
   // Display items
   for (auto item : map.item_layer)
   {
-    mvwaddch(win_.get(), item.first.get_y(), item.first.get_x(), item.second->symbol);
+    mvwaddch(win_.get(), item.first.get_y(), item.first.get_x(), item.second->symbol | A_BOLD);
   }
-  // Display player position
+  // Display player position and direction
   mvwaddch(win_.get(), player.get_position().get_y(), player.get_position().get_x(), '@' | A_BOLD);
   auto sight{player.get_position() + player.get_direction()};
   mvwchgat(win_.get(), sight.get_y(), sight.get_x(), 1, A_BOLD | A_UNDERLINE, 0, NULL);

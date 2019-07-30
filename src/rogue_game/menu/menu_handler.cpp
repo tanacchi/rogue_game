@@ -2,7 +2,13 @@
 #include <utility>
 
 #include <menu/menu_handler.hpp>
+#include <character/inventory.hpp>
 #include <game_master/game_master.hpp>
+
+#include <action/action_handler.hpp>
+#include <action/gold_action.hpp>
+#include <action/food_action.hpp>
+#include <action/any_action.hpp>
 
 MenuHandler::MenuHandler()
   : menu_ptr{}
@@ -11,7 +17,7 @@ MenuHandler::MenuHandler()
 {
 }
 
-GameStatus MenuHandler::operator()(GameMaster& master)
+GameStatus MenuHandler::operator()(const std::shared_ptr<GameMaster>& master)
 {
   KeyManager keyboard{};
   GameStatus next_status{};
@@ -20,9 +26,7 @@ GameStatus MenuHandler::operator()(GameMaster& master)
 
   while (menu_ptr)
   {
-#ifndef DEBUG
     menu_display_.show(*menu_ptr, selected_index_);
-#endif
     keyboard.update();
     switch (keyboard.get())
     {
@@ -55,21 +59,41 @@ GameStatus MenuHandler::operator()(GameMaster& master)
   return next_status;
 }
 
-void MenuHandler::set_item_content(GameMaster& master)
+void MenuHandler::set_item_content(const std::shared_ptr<GameMaster>& master)
 {
   Menu::item_content.clear();
-  auto names{master.player.get_item_name_array()};
+
+  auto names{master->player.inventory_ptr->get_item_names()};
+  auto base_action{
+    [&](Menu::MenuPtr& menu_ptr, std::function<void(void)> specific_action){
+      specific_action();
+      master->player.inventory_ptr->dispose(selected_index_);
+      menu_ptr.release();
+      return GameStatus{Mode::Dungeon, Task::Act};
+    }
+  };
+  std::function<void(void)> specific_action{};
+
   for (auto name : names)
   {
-    auto action{
-      [&](Menu::MenuPtr& menu_ptr){
-        menu_ptr.release();
-        master.player.add_money(100);
-        master.player.dispose_item(selected_index_);
-        return GameStatus{};
-      }
-    };
-    using namespace std::placeholders;
-    Menu::item_content.emplace(name, std::bind(action, _1));
+    if (name == "gold")
+    {
+      specific_action = 
+        [&](){
+          auto target_item_itr{master->player.inventory_ptr->get_item_by_index(selected_index_)};
+          const Gold& gold(dynamic_cast<Gold&>(*target_item_itr));
+          ActionHandler::push_action(GoldAction<ConsumeTag>(gold));
+        };
+    }
+    else if (name == "food")
+    {
+      specific_action = 
+        [&](){
+          auto target_item_itr{master->player.inventory_ptr->get_item_by_index(selected_index_)};
+          const Food& food(dynamic_cast<Food&>(*target_item_itr));
+          ActionHandler::push_action(FoodAction<ConsumeTag>(food));
+        };
+    }
+    Menu::item_content.emplace(name, std::bind(base_action, std::placeholders::_1, specific_action));
   }
 }

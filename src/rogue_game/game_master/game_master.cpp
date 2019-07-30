@@ -1,9 +1,13 @@
 #include <exception>
 
 #include <game_master/game_master.hpp>
+#include <character/inventory.hpp>
 #include <map/map_reader.hpp>
 #include <menu/menu.hpp>
 #include <utility/path.hpp>
+#include <action/any_action.hpp>
+#include <action/gold_action.hpp>
+#include <action/action_handler.hpp>
 
 GameMaster::GameMaster()
   : map_display{5, 4, 80, 30}
@@ -23,10 +27,8 @@ GameMaster::~GameMaster()
 
 GameStatus GameMaster::show(const GameStatus& status)
 {
-#ifndef DEBUG
   map_display.show(map, player);
   player_display.show(player);
-#endif
   return GameStatus{status.mode, Task::Input};
 }
 
@@ -59,7 +61,7 @@ GameStatus GameMaster::handle_dungeon(const GameStatus& status)
   const auto picked_up_item_itr{map.item_layer.find(current_position)};
   if (picked_up_item_itr != map.item_layer.end())
   {
-    player.store_item(std::move(picked_up_item_itr->second));
+    player.inventory_ptr->store(std::move(picked_up_item_itr->second));
     map.item_layer.erase(picked_up_item_itr);
   }
   return GameStatus{Mode::Dungeon, Task::Show};

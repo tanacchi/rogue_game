@@ -13,9 +13,11 @@ class Character
     const Point<int>& get_position() const;
     void set_position(const Point<int>& point);
     friend std::ostream& operator<<(std::ostream& os, const Character& character);
+    std::size_t get_hit_point() const noexcept;
 
   protected:
     Point<int> position_;
+    std::size_t hit_point_;
 };
 
 #endif  // INCLUDED_CHARACTER_HPP

@@ -44,7 +44,8 @@ const char get_symbol(const std::string type)
     {"path",            '#'},
     {"none",            ' '},
     {"door",            '+'},
-    {"gold",            '*'}
+    {"gold",            '*'},
+    {"food",            ':'}
   };
   const std::map<std::string, const char>::const_iterator found_symbol_itr{symbol_table.find(type)};
   return found_symbol_itr != symbol_table.end() ? found_symbol_itr->second : '$';

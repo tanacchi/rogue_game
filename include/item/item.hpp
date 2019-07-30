@@ -16,7 +16,6 @@ class Item : public MapElem
     Item(std::string type);
     Item(const Item& item) = default;
     Item(Item&& rhs) noexcept;
-    virtual void use(Player* const player_ptr);
     virtual ~Item() = default;
     virtual std::string to_string() const;
 };

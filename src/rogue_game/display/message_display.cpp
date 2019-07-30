@@ -6,9 +6,17 @@ MessageDisplay::MessageDisplay(std::size_t x, std::size_t y,
 {
 }
 
-void MessageDisplay::show()
+void MessageDisplay::show(const std::vector<std::string>& messages)
 {
   wclear(win_.get());
+  for (const auto& message : messages)
+  {
+    wclear(win_.get());
+    mvwinsstr(win_.get(), 1, 1, message.c_str());
+    box(win_.get(), ACS_VLINE, ACS_HLINE);
+    wrefresh(win_.get());
+    getch();
+  }
   box(win_.get(), ACS_VLINE, ACS_HLINE);
   wrefresh(win_.get());
 }

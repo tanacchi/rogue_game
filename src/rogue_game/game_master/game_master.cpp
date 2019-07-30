@@ -15,6 +15,7 @@ GameMaster::GameMaster()
   , message_display{10, 30, 50, 10}
   , keyboard{}
   , player()
+  , messages{}
 {
   MapReader map_reader{};
   map = map_reader(map_dir + "json/tmp_sample_map.json");
@@ -30,7 +31,7 @@ GameStatus GameMaster::show(const GameStatus& status)
 {
   map_display.show(map, player);
   player_display.show(player);
-  message_display.show();
+  message_display.show(messages);
   return GameStatus{status.mode, Task::Input};
 }
 

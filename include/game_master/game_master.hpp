@@ -28,6 +28,7 @@ class GameMaster
     MessageDisplay message_display;
     KeyManager     keyboard;
     Player         player;
+    std::vector<std::string> messages;
 };
 
 #endif  // INCLUDED_GAME_MASTER_HPP

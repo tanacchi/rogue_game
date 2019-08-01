@@ -1,3 +1,6 @@
+#include <thread>
+#include <chrono>
+
 #include <display/message_display.hpp>
 
 MessageDisplay::MessageDisplay(std::size_t x, std::size_t y,
@@ -15,7 +18,8 @@ void MessageDisplay::show(const std::vector<std::string>& messages)
     mvwinsstr(win_.get(), 1, 1, message.c_str());
     box(win_.get(), ACS_VLINE, ACS_HLINE);
     wrefresh(win_.get());
-    getch();
+    wgetch(win_.get());
+    std::this_thread::sleep_for(std::chrono::seconds(1));
   }
   box(win_.get(), ACS_VLINE, ACS_HLINE);
   wrefresh(win_.get());

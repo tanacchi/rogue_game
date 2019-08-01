@@ -5,7 +5,7 @@
 #include <game_master/game_status.hpp>
 #include <game_master/game_master.hpp>
 
-using Messsage = std::string;
+using Message = std::string;
 
 template <typename U>
 class MessageAction : public Action<Message, U>
@@ -20,7 +20,7 @@ class MessageAction : public Action<Message, U>
     }
 
   private:
-    GameStatus do_it(GameMaster* master, ConsumeTag)
+    GameStatus do_it(GameMaster* master, NormalTag)
     {
       master->messages.emplace_back(message_);
       return GameStatus{};

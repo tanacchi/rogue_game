@@ -8,6 +8,7 @@
 #include <action/any_action.hpp>
 #include <action/gold_action.hpp>
 #include <action/action_handler.hpp>
+#include <action/message_action.hpp>
 
 GameMaster::GameMaster()
   : map_display{5, 4, 80, 30}
@@ -32,6 +33,7 @@ GameStatus GameMaster::show(const GameStatus& status)
   map_display.show(map, player);
   player_display.show(player);
   message_display.show(messages);
+  messages.clear();
   return GameStatus{status.mode, Task::Input};
 }
 
@@ -64,8 +66,9 @@ GameStatus GameMaster::handle_dungeon(const GameStatus& status)
   const auto picked_up_item_itr{map.item_layer.find(current_position)};
   if (picked_up_item_itr != map.item_layer.end())
   {
+    ActionHandler::push_action(MessageAction<NormalTag>("You got an item !"));
     player.inventory_ptr->store(std::move(picked_up_item_itr->second));
     map.item_layer.erase(picked_up_item_itr);
   }
-  return GameStatus{Mode::Dungeon, Task::Show};
+  return GameStatus{Mode::Dungeon, Task::Act};
 }

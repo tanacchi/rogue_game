@@ -1,12 +1,16 @@
 #include <iostream>
 #include <cstdlib>
+#include <csignal>
 
 #include <game_master/game_master.hpp>
 #include <menu/menu_handler.hpp>
 #include <action/action_handler.hpp>
+#include <action/any_action.hpp>
+#include <action/message_action.hpp>
 
 int main()
 {
+  std::signal(SIGINT, [](int signum) { ActionHandler::push_action(MessageAction<NormalTag>("Exit from menu.")); });
   try
   {
     std::shared_ptr<GameMaster> master{std::make_shared<GameMaster>()};

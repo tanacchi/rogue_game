@@ -22,6 +22,12 @@ class Action
     }
 
   private:
+    virtual GameStatus do_it(GameMaster* master, NormalTag)
+    {
+      LOG_STRING("Invalid Action::do_it called. (NormalTag)");
+      return {Mode::Dungeon, Task::End};
+    }
+
     virtual GameStatus do_it(GameMaster* master, ConsumeTag)
     {
       LOG_STRING("Invalid Action::do_it called. (ConsumeTag)");

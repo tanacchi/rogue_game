@@ -43,7 +43,7 @@ int main()
         case Task::Act:
           while (!ActionHandler::empty())
           {
-            ActionHandler::invoke(master.get());
+            ActionHandler::invoke(master);
           }
           status.task = Task::Show;
           break;

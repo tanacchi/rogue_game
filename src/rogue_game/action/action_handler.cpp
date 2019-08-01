@@ -10,7 +10,7 @@ void ActionHandler::push_action(AnyAction&& action)
   actions_.push(action);
 }
 
-GameStatus ActionHandler::invoke(GameMaster* master)
+GameStatus ActionHandler::invoke(const std::shared_ptr<GameMaster>& master)
 {
   const auto current_action{actions_.front()};
   actions_.pop();

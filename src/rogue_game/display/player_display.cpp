@@ -9,7 +9,7 @@ PlayerDisplay::PlayerDisplay(std::size_t x, std::size_t y,
 
 void PlayerDisplay::show(const Player& player)
 {
-  wclear(win_.get());
+  werase(win_.get());
 
   auto pos{player.position_};
   auto dir{player.direction_};

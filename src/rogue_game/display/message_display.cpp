@@ -18,9 +18,10 @@ void MessageDisplay::show(const std::vector<std::string>& messages)
     mvwinsstr(win_.get(), 1, 1, message.c_str());
     box(win_.get(), ACS_VLINE, ACS_HLINE);
     wrefresh(win_.get());
-    wgetch(win_.get());
-    std::this_thread::sleep_for(std::chrono::seconds(1));
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    flushinp();
   }
+  werase(win_.get());
   box(win_.get(), ACS_VLINE, ACS_HLINE);
   wrefresh(win_.get());
 }

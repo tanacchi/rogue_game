@@ -6,6 +6,9 @@
 #include <game_master/game_master.hpp>
 #include <utility/logger.hpp>
 #include <item/food.hpp>
+#include <action/any_action.hpp>
+#include <action/action_handler.hpp>
+#include <action/message_action.hpp>
 
 template <typename U>
 class FoodAction : public Action<Food, U>
@@ -20,9 +23,10 @@ class FoodAction : public Action<Food, U>
     }
 
   private:
-    GameStatus do_it(GameMaster* master, ConsumeTag)
+    GameStatus do_it(const std::shared_ptr<GameMaster>& master, ConsumeTag)
     {
       master->player.heal(food_.get_amount());
+      ActionHandler::push(MessageAction<NormalTag>("You healed yourself."));
       return GameStatus{};
     }
 

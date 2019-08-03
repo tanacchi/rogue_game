@@ -10,7 +10,7 @@ MenuDisplay::MenuDisplay(std::size_t x, std::size_t y, std::size_t width, std::s
 
 void MenuDisplay::show(const Menu& menu, size_t highlight_index) const
 {
-  wclear(win_.get());
+  werase(win_.get());
   auto content{menu.get_content()};
   for (auto itr{content.begin()}, end{content.end()}; itr != end; ++itr)
   {
@@ -25,6 +25,6 @@ void MenuDisplay::show(const Menu& menu, size_t highlight_index) const
 
 void MenuDisplay::hide() const
 {
-  wclear(win_.get());
+  werase(win_.get());
   wrefresh(win_.get());
 }

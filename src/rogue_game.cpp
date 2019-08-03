@@ -1,12 +1,16 @@
 #include <iostream>
 #include <cstdlib>
+#include <csignal>
 
 #include <game_master/game_master.hpp>
 #include <menu/menu_handler.hpp>
 #include <action/action_handler.hpp>
+#include <action/any_action.hpp>
+#include <action/message_action.hpp>
 
 int main()
 {
+  std::signal(SIGINT, [](int signum) { ActionHandler::push(MessageAction<NormalTag>("Exit from menu.")); });
   try
   {
     std::shared_ptr<GameMaster> master{std::make_shared<GameMaster>()};
@@ -39,12 +43,10 @@ int main()
         case Task::Act:
           while (!ActionHandler::empty())
           {
-            ActionHandler::invoke(master.get());
+            ActionHandler::invoke(master);
           }
           status.task = Task::Show;
           break;
-        case Task::End:
-          exit(EXIT_SUCCESS);
         default:
           throw std::domain_error{"Invalid task detected."};
       }
@@ -57,6 +59,7 @@ int main()
     LOG_VALUES(e.what());
     std::cout << e.what() << std::endl;
   }
+  exit(EXIT_SUCCESS);
 
   return 0;
 }

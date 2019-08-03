@@ -3,6 +3,7 @@
 
 template <typename T>
 class UsageTag {};
+class NormalTag : UsageTag<NormalTag>{};
 class ConsumeTag : UsageTag<ConsumeTag> {};
 class PutTag : UsageTag<PutTag> {};
 

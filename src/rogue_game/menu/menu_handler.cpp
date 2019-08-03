@@ -82,7 +82,7 @@ void MenuHandler::set_item_content(const std::shared_ptr<GameMaster>& master)
         [&](){
           auto target_item_itr{master->player.inventory_ptr->get_item_by_index(selected_index_)};
           const Gold& gold(dynamic_cast<Gold&>(*target_item_itr));
-          ActionHandler::push_action(GoldAction<ConsumeTag>(gold));
+          ActionHandler::push(GoldAction<ConsumeTag>(gold));
         };
     }
     else if (name == "food")
@@ -91,7 +91,7 @@ void MenuHandler::set_item_content(const std::shared_ptr<GameMaster>& master)
         [&](){
           auto target_item_itr{master->player.inventory_ptr->get_item_by_index(selected_index_)};
           const Food& food(dynamic_cast<Food&>(*target_item_itr));
-          ActionHandler::push_action(FoodAction<ConsumeTag>(food));
+          ActionHandler::push(FoodAction<ConsumeTag>(food));
         };
     }
     Menu::item_content.emplace(name, std::bind(base_action, std::placeholders::_1, specific_action));

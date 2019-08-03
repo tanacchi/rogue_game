@@ -16,19 +16,25 @@ class Action
   public:
     using Target = T;
     using Usage  = U;
-    virtual GameStatus do_action(GameMaster* master)
+    virtual GameStatus do_action(const std::shared_ptr<GameMaster>& master)
     {
       return do_it(master, Usage{});
     }
 
   private:
-    virtual GameStatus do_it(GameMaster* master, ConsumeTag)
+    virtual GameStatus do_it(const std::shared_ptr<GameMaster>& master, NormalTag)
+    {
+      LOG_STRING("Invalid Action::do_it called. (NormalTag)");
+      return {Mode::Dungeon, Task::End};
+    }
+
+    virtual GameStatus do_it(const std::shared_ptr<GameMaster>& master, ConsumeTag)
     {
       LOG_STRING("Invalid Action::do_it called. (ConsumeTag)");
       return {Mode::Dungeon, Task::End};
     }
 
-    virtual GameStatus do_it(GameMaster* master, PutTag)
+    virtual GameStatus do_it(const std::shared_ptr<GameMaster>& master, PutTag)
     {
       LOG_STRING("Invalid Action::do_it called. (PutTag)");
       return {Mode::Dungeon, Task::End};

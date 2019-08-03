@@ -3,6 +3,7 @@
 
 const std::string root_dir{"${PROJECT_SOURCE_DIR}"};
 const std::string map_dir{root_dir + "/map/"};
+const std::string log_dir{root_dir + "/log/"};
 // constexpr std::string_view map_dir{boost::filesystem::current_path().string() + "/map/"};
 
 

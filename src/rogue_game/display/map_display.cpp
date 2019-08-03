@@ -8,7 +8,7 @@ MapDisplay::MapDisplay(std::size_t x, std::size_t y,
 
 void MapDisplay::show(const Map& map, const Player& player)
 {
-  wclear(win_.get());
+  werase(win_.get());
 
   // Display dungeon map
   for (std::size_t y{0}; y < map.height; ++y)

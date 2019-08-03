@@ -43,12 +43,10 @@ int main()
         case Task::Act:
           while (!ActionHandler::empty())
           {
-            ActionHandler::invoke(master.get());
+            ActionHandler::invoke(master);
           }
           status.task = Task::Show;
           break;
-        case Task::End:
-          exit(EXIT_SUCCESS);
         default:
           throw std::domain_error{"Invalid task detected."};
       }
@@ -61,6 +59,7 @@ int main()
     LOG_VALUES(e.what());
     std::cout << e.what() << std::endl;
   }
+  exit(EXIT_SUCCESS);
 
   return 0;
 }

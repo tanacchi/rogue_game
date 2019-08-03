@@ -12,7 +12,7 @@ class ActionHandler
 {
   public:
     static void push_action(AnyAction&& action);
-    static GameStatus invoke(GameMaster* master);
+    static GameStatus invoke(const std::shared_ptr<GameMaster>& master);
     static bool empty();
 
   private:

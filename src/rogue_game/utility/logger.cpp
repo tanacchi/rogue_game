@@ -4,25 +4,25 @@
 #include <boost/filesystem.hpp>
 
 #include <utility/logger.hpp>
+#include <utility/path.hpp>
 
 std::fstream Logger::fos_{};
 
 void Logger::init_log_file()
 {
   namespace fs = boost::filesystem;
-  const std::string log_dir_path{"log/"};
   const std::string log_file_name{get_current_time_str() + ".log"};
-  const std::string symlink_path{log_dir_path + "latest.log"};
+  const std::string symlink_path{log_dir + "latest.log"};
 
-  if (!fs::exists(log_dir_path))
+  if (!fs::exists(log_dir))
   {
-    fs::create_directory(log_dir_path);
+    fs::create_directory(log_dir);
   }
   if (fs::exists(symlink_path))
   {
     fs::remove(symlink_path);
   }
-  Logger::fos_.open(log_dir_path + log_file_name, std::ios::out);
+  Logger::fos_.open(log_dir + log_file_name, std::ios::out);
   fs::create_symlink(log_file_name, symlink_path);
 }
 

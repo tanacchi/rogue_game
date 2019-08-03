@@ -20,7 +20,7 @@ class MessageAction : public Action<Message, U>
     }
 
   private:
-    GameStatus do_it(GameMaster* master, NormalTag)
+    GameStatus do_it(const std::shared_ptr<GameMaster>& master, NormalTag)
     {
       master->messages.emplace_back(message_);
       return GameStatus{};

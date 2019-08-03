@@ -26,7 +26,7 @@ class GoldAction : public Action<Gold, U>
     GameStatus do_it(const std::shared_ptr<GameMaster>& master, ConsumeTag)
     {
       master->player.add_money(gold_.get_amount());
-      ActionHandler::push_action(MessageAction<NormalTag>("You gained some gold."));
+      ActionHandler::push(MessageAction<NormalTag>("You gained some gold."));
       return GameStatus{};
     }
 

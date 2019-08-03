@@ -10,7 +10,7 @@
 
 int main()
 {
-  std::signal(SIGINT, [](int signum) { ActionHandler::push_action(MessageAction<NormalTag>("Exit from menu.")); });
+  std::signal(SIGINT, [](int signum) { ActionHandler::push(MessageAction<NormalTag>("Exit from menu.")); });
   try
   {
     std::shared_ptr<GameMaster> master{std::make_shared<GameMaster>()};

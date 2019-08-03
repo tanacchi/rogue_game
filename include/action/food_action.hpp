@@ -26,7 +26,7 @@ class FoodAction : public Action<Food, U>
     GameStatus do_it(const std::shared_ptr<GameMaster>& master, ConsumeTag)
     {
       master->player.heal(food_.get_amount());
-      ActionHandler::push_action(MessageAction<NormalTag>("You healed yourself."));
+      ActionHandler::push(MessageAction<NormalTag>("You healed yourself."));
       return GameStatus{};
     }
 

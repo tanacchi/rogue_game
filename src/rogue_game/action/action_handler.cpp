@@ -5,7 +5,7 @@
 
 std::queue<AnyAction> ActionHandler::actions_;
 
-void ActionHandler::push_action(AnyAction&& action)
+void ActionHandler::push(AnyAction&& action)
 {
   actions_.push(action);
 }

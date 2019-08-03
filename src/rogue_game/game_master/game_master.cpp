@@ -66,7 +66,7 @@ GameStatus GameMaster::handle_dungeon(const GameStatus& status)
   const auto picked_up_item_itr{map.item_layer.find(current_position)};
   if (picked_up_item_itr != map.item_layer.end())
   {
-    ActionHandler::push_action(MessageAction<NormalTag>("You got an item !"));
+    ActionHandler::push(MessageAction<NormalTag>("You got an item !"));
     player.inventory_ptr->store(std::move(picked_up_item_itr->second));
     map.item_layer.erase(picked_up_item_itr);
   }

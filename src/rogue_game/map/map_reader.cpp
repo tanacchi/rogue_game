@@ -62,17 +62,27 @@ Map MapReader::operator()(std::string map_filename)
   {
     map.width = json_map_data.get_optional<int>("Map.width").get();
     map.height = json_map_data.get_optional<int>("Map.height").get();
+    map.dungeon_layer.resize(map.height);
     auto player_x{json_map_data.get_optional<int>("Map.player_pos_x").get()};
     auto player_y{json_map_data.get_optional<int>("Map.player_pos_y").get()};
     map.initial_position = Point<int>{player_x, player_y};
   }
+  std::size_t row{}, col{};
+  LOG_VALUES(map.width, map.height);
   for (const auto& child : json_map_data.get_child("Map.elems"))
   {
     const boost::property_tree::ptree& elem{child.second};
     if (!elem.empty())
     {
+      LOG_VALUES(row, col);
       std::string type{elem.get_optional<std::string>("type").get()};
-      map.dungeon_layer.emplace_back(std::move(gen_dungeon_elem(type)));
+      if (row == map.width)
+      {
+        row = 0;
+        ++col;
+      }
+      map.dungeon_layer[col].emplace_back(std::move(gen_dungeon_elem(type)));
+      ++row;
     }
   }
   for (const auto& child : json_map_data.get_child("Map.items"))

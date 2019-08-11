@@ -15,7 +15,7 @@ void MapDisplay::show(const Map& map, const Player& player)
   {
     for (std::size_t x{0}; x < map.width; ++x)
     {
-      mvwaddch(win_.get(), y, x, map.dungeon_layer[y*map.width+x]->symbol);
+      mvwaddch(win_.get(), y, x, map.dungeon_layer[y][x]->symbol);
     }
     mvwaddch(win_.get(), y, map.width, '\n');
   }

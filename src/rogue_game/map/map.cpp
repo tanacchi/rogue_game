@@ -35,7 +35,7 @@ std::ostream& operator<<(std::ostream& os, const Map& map)
 
 const DungeonElem Map::get_dungeon_elem(const Point<int>& point) const
 {
-  return *dungeon_layer[width * point.get_y() + point.get_x()];
+  return *dungeon_layer[point.get_y()][point.get_x()];
 }
 
 bool Map::in_range(const Point<std::size_t>& point) const

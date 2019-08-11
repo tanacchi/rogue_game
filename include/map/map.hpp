@@ -24,7 +24,7 @@ struct Map
   std::size_t width;
   std::size_t height;
   Point<int> initial_position;
-  std::vector<::DungeonElemPtr> dungeon_layer;
+  std::vector<std::vector<::DungeonElemPtr>> dungeon_layer;
   std::map<Point<int>, ItemPtr> item_layer;
 };
 

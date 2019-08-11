@@ -48,7 +48,7 @@ Map MapReader::operator()(std::string map_filename)
   {
     LOG_STRING("=== Couldn't open map file ===");
     LOG_VALUES(e.what());
-    auto has_failed{std::system("./map_maker.out ./map/text/sample_map_1.txt")};  // XXX: Make absolute
+    auto has_failed{std::system("./map_maker.out ./map/text/sample_map_1.txt")};
     if (has_failed)
     {
       LOG_STRING("=== Couldn't make map file ===");

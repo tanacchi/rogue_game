@@ -19,6 +19,7 @@ struct Map
   Map& operator=(Map&& map) noexcept;
   const DungeonElem get_dungeon_elem(const Point<int>& point) const;
   bool in_range(const Point<std::size_t>& point) const;
+  void make_apparent(const Point<std::size_t>& point);
   friend std::ostream& operator<<(std::ostream& os, const Map& map);
 
   std::size_t width;

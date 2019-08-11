@@ -45,3 +45,18 @@ bool Map::in_range(const Point<std::size_t>& point) const
   std::size_t x{point.get_x()}, y{point.get_y()};
   return (0 <= x && x < width) && (0 <= y && y < height);
 }
+
+void Map::make_apparent(const Point<std::size_t>& point)
+{
+  std::size_t range{2ul};
+  for (auto y{point.get_y() - range}, y_limit{point.get_y() + range}; y <= y_limit; ++y)
+  {
+    for (auto x{point.get_x() - range}, x_limit{point.get_x() + range}; x <= x_limit; ++x)
+    {
+      if (in_range(Point<std::size_t>{x, y}))
+      {
+        hidden_layer[y][x] = 1;
+      }
+    }
+  }
+}

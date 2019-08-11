@@ -21,6 +21,7 @@ GameMaster::GameMaster()
   MapReader map_reader{};
   map = map_reader(map_dir + "json/tmp_sample_map.json");
   player.set_position(map.initial_position);
+  map.make_apparent(player.get_position());
 }
 
 GameMaster::~GameMaster()

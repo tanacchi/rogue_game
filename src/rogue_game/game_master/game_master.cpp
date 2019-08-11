@@ -60,6 +60,7 @@ GameStatus GameMaster::handle_dungeon(const GameStatus& status)
   if (map.in_range(next_position) && map.get_dungeon_elem(next_position).can_stand())
   {
     player.assign_motion(motion);
+    map.make_apparent(player.get_position());
   }
   // Get items
   const auto current_position{player.get_position()};

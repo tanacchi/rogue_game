@@ -30,13 +30,10 @@ void MapDisplay::show(const Map& map, const Player& player)
   {
     for (std::size_t x{0}; x < map.width; ++x)
     {
+      LOG_VALUES(x, y, map.hidden_layer[y][x]);
       if (map.hidden_layer[y][x] != 1)
       {
         mvwaddch(win_.get(), y, x, ' ');
-      }
-      else
-      {
-        LOG_VALUES(x, y);
       }
     }
     mvwaddch(win_.get(), y, map.width, '\n');

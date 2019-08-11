@@ -63,7 +63,7 @@ Map MapReader::operator()(std::string map_filename)
     map.width = json_map_data.get_optional<int>("Map.width").get();
     map.height = json_map_data.get_optional<int>("Map.height").get();
     map.dungeon_layer.resize(map.height);
-    map.hidden_layer = std::vector<std::vector<int>>(map.height, std::vector<int>(map.width, 0));
+    map.hidden_layer = std::vector<std::vector<bool>>(map.height, std::vector<bool>(map.width, true));
     auto player_x{json_map_data.get_optional<int>("Map.player_pos_x").get()};
     auto player_y{json_map_data.get_optional<int>("Map.player_pos_y").get()};
     map.initial_position = Point<int>{player_x, player_y};

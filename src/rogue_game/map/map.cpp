@@ -55,7 +55,7 @@ void Map::make_apparent(const Point<std::size_t>& point)
     {
       if (in_range(Point<std::size_t>{x, y}))
       {
-        hidden_layer[y][x] = 1;
+        hidden_layer[y][x] = false;
       }
     }
   }

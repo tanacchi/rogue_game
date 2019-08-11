@@ -6,6 +6,7 @@ Map::Map(Map&& map)
   , initial_position{std::move(map.initial_position)}
   , dungeon_layer{std::move(map.dungeon_layer)}
   , item_layer{std::move(map.item_layer)}
+  , hidden_layer{std::move(map.hidden_layer)}
 {
 }
 
@@ -15,6 +16,7 @@ Map& Map::operator=(Map&& map) noexcept
   initial_position = std::move(map.initial_position);
   dungeon_layer = std::move(map.dungeon_layer);
   item_layer = std::move(map.item_layer);
+  hidden_layer = std::move(map.hidden_layer);
   return *this;
 }
 

@@ -15,7 +15,7 @@ class PlayerDisplay;
 class Player : public Character
 {
   public:
-    friend PlayerDisplay;  // XXX: Might not be beautiful
+    friend PlayerDisplay;
 
     Player();
     static const std::map<KeyManager::KeyType, const Point<int>> motion_table;

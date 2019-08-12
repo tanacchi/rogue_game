@@ -15,7 +15,7 @@ void MapDisplay::show(const Map& map, const Player& player)
   {
     for (std::size_t x{0}; x < map.width; ++x)
     {
-      mvwaddch(win_.get(), y, x, map.dungeon_layer[y*map.width+x]->symbol);
+      mvwaddch(win_.get(), y, x, map.dungeon_layer[y][x]->symbol);
     }
     mvwaddch(win_.get(), y, map.width, '\n');
   }
@@ -23,6 +23,19 @@ void MapDisplay::show(const Map& map, const Player& player)
   for (auto item : map.item_layer)
   {
     mvwaddch(win_.get(), item.first.get_y(), item.first.get_x(), item.second->symbol | A_BOLD);
+  }
+
+  // Hide unknown area
+  for (std::size_t y{0}; y < map.height; ++y)
+  {
+    for (std::size_t x{0}; x < map.width; ++x)
+    {
+      if (map.hidden_layer[y][x])
+      {
+        mvwaddch(win_.get(), y, x, ' ');
+      }
+    }
+    mvwaddch(win_.get(), y, map.width, '\n');
   }
   // Display player position and direction
   mvwaddch(win_.get(), player.get_position().get_y(), player.get_position().get_x(), '@' | A_BOLD);

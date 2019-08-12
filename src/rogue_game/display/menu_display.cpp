@@ -5,6 +5,7 @@
 
 MenuDisplay::MenuDisplay(std::size_t x, std::size_t y, std::size_t width, std::size_t height)
   : DisplayPanel(x, y, width, height)
+  , cursor_width_{width-2}
 {
 }
 
@@ -16,9 +17,7 @@ void MenuDisplay::show(const Menu& menu, size_t highlight_index) const
   {
     mvwinsstr(win_.get(), std::distance(content.begin(), itr) + 1, 1, itr->first.c_str());
   }
-  // TODO: Do not use magic-number
-  // 14 is cursor width
-  mvwchgat(win_.get(), highlight_index + 1, 1, 14, A_REVERSE, 1, NULL);
+  mvwchgat(win_.get(), highlight_index + 1, 1, cursor_width_, A_REVERSE, 1, NULL);
   box(win_.get(), ACS_VLINE, ACS_HLINE);
   wrefresh(win_.get());
 }

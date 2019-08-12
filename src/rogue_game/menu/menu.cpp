@@ -15,7 +15,7 @@ const Menu::ContentType Menu::base_content {{
   {"exit", [](Menu::MenuPtr& menu_ptr)
     {
       menu_ptr.release();
-      return GameStatus{Mode::Dungeon, Task::End};
+      return GameStatus{Task::End};
     }
   },
   {"item", [](Menu::MenuPtr& menu_ptr)

@@ -35,18 +35,18 @@ GameStatus GameMaster::show(const GameStatus& status)
   player_display.show(player);
   message_display.show(messages);
   messages.clear();
-  return GameStatus{status.mode, Task::Input};
+  return GameStatus{Task::Input, status.mode};
 }
 
 GameStatus GameMaster::input(const GameStatus& status)
 {
   keyboard.update();
-  return GameStatus{status.mode, Task::Switch};
+  return GameStatus{Task::Switch, status.mode};
 }
 
 GameStatus GameMaster::toggle_mode(const GameStatus& status)
 {
-  GameStatus next_status{status.mode, Task::Perform};
+  GameStatus next_status{Task::Perform, status.mode};
   if (keyboard == KeyManager::Space)
     next_status.mode = status.mode == Mode::Dungeon ? Mode::Select : Mode::Dungeon;
   return next_status;
@@ -72,5 +72,5 @@ GameStatus GameMaster::handle_dungeon(const GameStatus& status)
     player.inventory_ptr->store(std::move(picked_up_item_itr->second));
     map.item_layer.erase(picked_up_item_itr);
   }
-  return GameStatus{Mode::Dungeon, Task::Act};
+  return GameStatus{Task::Act};
 }

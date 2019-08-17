@@ -63,7 +63,7 @@ void MenuHandler::set_item_content(const std::shared_ptr<GameMaster>& master)
 {
   Menu::item_content.clear();
 
-  auto names{master->player.inventory_ptr->get_item_names()};
+  const auto& items{master->player.inventory_ptr->get_items()};
   auto base_action{
     [&](Menu::MenuPtr& menu_ptr, std::function<void(void)> specific_action){
       specific_action();
@@ -74,26 +74,24 @@ void MenuHandler::set_item_content(const std::shared_ptr<GameMaster>& master)
   };
   std::function<void(void)> specific_action{};
 
-  for (auto name : names)
+  for (const auto& item : items)
   {
-    if (name == "gold")
+    if (item->type == "gold")
     {
       specific_action = 
-        [&](){
-          auto target_item_itr{master->player.inventory_ptr->get_item_by_index(selected_index_)};
-          const Gold& gold(dynamic_cast<Gold&>(*target_item_itr));
+        [=](){
+          const Gold& gold(dynamic_cast<Gold&>(*item));
           ActionHandler::push(GoldAction<ConsumeTag>(gold));
         };
     }
-    else if (name == "food")
+    else if (item->type == "food")
     {
       specific_action = 
-        [&](){
-          auto target_item_itr{master->player.inventory_ptr->get_item_by_index(selected_index_)};
-          const Food& food(dynamic_cast<Food&>(*target_item_itr));
+        [=](){
+          const Food& food(dynamic_cast<Food&>(*item));
           ActionHandler::push(FoodAction<ConsumeTag>(food));
         };
     }
-    Menu::item_content.emplace(name, std::bind(base_action, std::placeholders::_1, specific_action));
+    Menu::item_content.emplace(item->type, std::bind(base_action, std::placeholders::_1, specific_action));
   }
 }

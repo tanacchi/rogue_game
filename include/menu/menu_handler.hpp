@@ -2,9 +2,9 @@
 #define INCLUDED_MENU_HANDLER_HPP
 
 #include <display/menu_display.hpp>
-#include <game_master/game_status.hpp>
 #include <menu/menu.hpp>
-#include <character/player.hpp>
+
+class GameStatus;
 
 class MenuHandler
 {

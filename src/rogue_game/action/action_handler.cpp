@@ -1,7 +1,6 @@
 #include <action/action_handler.hpp>
 #include <action/any_action.hpp>
 #include <game_master/game_status.hpp>
-#include <utility/logger.hpp>
 
 std::queue<AnyAction> ActionHandler::actions_;
 

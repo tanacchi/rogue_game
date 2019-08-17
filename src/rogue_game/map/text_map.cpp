@@ -3,8 +3,8 @@
 #include <iomanip>
 #include <sstream>
 
-#include <utility/logger.hpp>
 #include <map/text_map.hpp>
+#include <utility/point.hpp>
 
 TextMap::TextMap(const std::vector<std::string>& map_strings)
   : width{get_width(map_strings)}

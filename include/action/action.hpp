@@ -8,7 +8,6 @@
 #include <utility/logger.hpp>
 
 class GameMaster;
-class GameStatus;
 
 template <typename T, typename U>
 class Action

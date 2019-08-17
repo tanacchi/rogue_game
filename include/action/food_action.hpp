@@ -4,7 +4,6 @@
 #include <action/action.hpp>
 #include <game_master/game_status.hpp>
 #include <game_master/game_master.hpp>
-#include <utility/logger.hpp>
 #include <item/food.hpp>
 #include <action/any_action.hpp>
 #include <action/action_handler.hpp>

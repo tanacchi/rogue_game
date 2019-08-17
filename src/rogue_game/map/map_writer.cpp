@@ -1,5 +1,13 @@
+#include <functional>
+#include <stdexcept>
+#include <boost/optional.hpp>
+#include <boost/foreach.hpp>
+#include <boost/property_tree/json_parser.hpp>
+
 #include <map/map_writer.hpp>
+#include <map/text_map.hpp>
 #include <utility/path.hpp>
+#include <utility/point.hpp>
 
 void MapWriter::set_configs(const TextMap& text_map, std::vector<ConfigType>& dungeon_configs, std::vector<ConfigType>& item_configs)
 {

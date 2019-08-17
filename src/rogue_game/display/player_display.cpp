@@ -1,5 +1,6 @@
 #include <display/player_display.hpp>
 #include <utility/point.hpp>
+#include <character/player.hpp>
 
 PlayerDisplay::PlayerDisplay(std::size_t x, std::size_t y,
                              std::size_t width, std::size_t height)
@@ -11,8 +12,8 @@ void PlayerDisplay::show(const Player& player)
 {
   werase(win_.get());
 
-  auto pos{player.position_};
-  auto dir{player.direction_};
+  const auto& pos{player.position_};
+  const auto& dir{player.direction_};
   mvwprintw(win_.get(), 0, 0, "Position: ");
   mvwprintw(win_.get(), 1, 2, "x: %d", pos.get_x());
   mvwprintw(win_.get(), 2, 2, "y: %d", pos.get_y());

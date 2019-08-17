@@ -1,7 +1,8 @@
 #include <iterator>
 
 #include <display/menu_display.hpp>
-#include <utility/logger.hpp>
+#include <keyboard/key_manager.hpp>
+#include <menu/menu.hpp>
 
 MenuDisplay::MenuDisplay(std::size_t x, std::size_t y, std::size_t width, std::size_t height)
   : DisplayPanel(x, y, width, height)
@@ -9,7 +10,7 @@ MenuDisplay::MenuDisplay(std::size_t x, std::size_t y, std::size_t width, std::s
 {
 }
 
-void MenuDisplay::show(const Menu& menu, size_t highlight_index) const
+void MenuDisplay::show(const Menu& menu, std::size_t highlight_index) const
 {
   werase(win_.get());
   auto content{menu.get_content()};
@@ -17,7 +18,7 @@ void MenuDisplay::show(const Menu& menu, size_t highlight_index) const
   {
     mvwinsstr(win_.get(), std::distance(content.begin(), itr) + 1, 1, itr->first.c_str());
   }
-  mvwchgat(win_.get(), highlight_index + 1, 1, cursor_width_, A_REVERSE, 1, NULL);
+  mvwchgat(win_.get(), highlight_index + 1, 1, cursor_width_, A_REVERSE, 1, nullptr);
   box(win_.get(), ACS_VLINE, ACS_HLINE);
   wrefresh(win_.get());
 }

@@ -16,6 +16,14 @@ void Inventory::dispose(std::size_t target_index)
   content_.erase(target_itr);
 }
 
+const std::vector<ItemPtr> Inventory::get_items() const
+{
+  std::vector<ItemPtr> items;
+  for (auto itr{std::begin(content_)}, end{std::end(content_)}; itr != end; ++itr)
+    items.emplace_back(itr->second);
+  return items;
+}
+
 std::vector<std::string> Inventory::get_item_names() const noexcept
 {
   std::vector<std::string> names{};

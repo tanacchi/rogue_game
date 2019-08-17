@@ -6,7 +6,6 @@
 #include <boost/filesystem.hpp>
 // #include <string_view>  // In C++17
 
-#include <utility/logger.hpp>
 #include <dungeon/dungeon_elem.hpp>
 #include <item/item.hpp>
 #include <map/map_elem.hpp>

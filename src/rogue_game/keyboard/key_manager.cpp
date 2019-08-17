@@ -48,7 +48,7 @@ bool KeyManager::operator==(KeyManager::KeyType rhs) const noexcept
 
 void KeyManager::update() noexcept
 {
-  auto itr{key_state_table.find(getch())};
+  const auto& itr{key_state_table.find(getch())};
   key_ = (itr == key_state_table.end()) ? KeyManager::Null : itr->second;
 }
 

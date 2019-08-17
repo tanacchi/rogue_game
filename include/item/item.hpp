@@ -4,9 +4,7 @@
 #include <memory>
 #include <ostream>
 
-#include <utility/logger.hpp>
 #include <map/map_elem.hpp>
-#include <utility/point.hpp>
 
 class Player;
 

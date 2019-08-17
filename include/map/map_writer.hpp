@@ -1,18 +1,12 @@
 #ifndef INCLUDED_MAP_GENERATOR_HPP
 #define INCLUDED_MAP_GENERATOR_HPP
 
-#include <functional>
-#include <map>
-#include <stdexcept>
-#include <boost/foreach.hpp>
-#include <boost/optional.hpp>
-#include <boost/property_tree/json_parser.hpp>
+#include <vector>
 #include <boost/property_tree/ptree.hpp>
 
-#include <map/map.hpp>
-#include <map/text_map.hpp>
-
 using ConfigType = boost::property_tree::ptree;
+
+class TextMap;
 
 class MapWriter
 {

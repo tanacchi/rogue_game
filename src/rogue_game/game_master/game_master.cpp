@@ -1,5 +1,8 @@
 #include <exception>
 
+#include <utility/point.hpp>
+#include <game_master/game_status.hpp>
+#include <keyboard/key_manager.hpp>
 #include <game_master/game_master.hpp>
 #include <character/inventory.hpp>
 #include <map/map_reader.hpp>

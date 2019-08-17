@@ -1,4 +1,6 @@
 #include <display/map_display.hpp>
+#include <character/player.hpp>
+#include <map/map.hpp>
 
 MapDisplay::MapDisplay(std::size_t x, std::size_t y,
     std::size_t width, std::size_t height)
@@ -20,7 +22,7 @@ void MapDisplay::show(const Map& map, const Player& player)
     mvwaddch(win_.get(), y, map.width, '\n');
   }
   // Display items
-  for (auto item : map.item_layer)
+  for (const auto& item : map.item_layer)
   {
     mvwaddch(win_.get(), item.first.get_y(), item.first.get_x(), item.second->symbol | A_BOLD);
   }

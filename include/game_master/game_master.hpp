@@ -1,15 +1,15 @@
 #ifndef INCLUDED_GAME_MASTER_HPP
 #define INCLUDED_GAME_MASTER_HPP
 
+#include <map/map.hpp>
+#include <character/player.hpp>
 #include <display/map_display.hpp>
 #include <display/menu_display.hpp>
 #include <display/player_display.hpp>
 #include <display/message_display.hpp>
-#include <keyboard/key_manager.hpp>
-#include <utility/point.hpp>
-#include <game_master/game_status.hpp>
 
 class Menu;
+class GameStatus;
 
 class GameMaster
 {

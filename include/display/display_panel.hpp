@@ -4,8 +4,6 @@
 #include <memory>
 #include <ncurses.h>
 
-#include <utility/logger.hpp>
-
 struct window_ptr_deleter
 {
   void operator()(WINDOW* ptr)

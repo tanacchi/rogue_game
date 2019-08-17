@@ -1,8 +1,9 @@
 #ifndef INCLUDED_PLAYER_DISPLAY_HPP
 #define INCLUDED_PLAYER_DISPLAY_HPP
 
-#include <character/player.hpp>
 #include <display/display_panel.hpp>
+
+class Player;
 
 class PlayerDisplay : public DisplayPanel
 {

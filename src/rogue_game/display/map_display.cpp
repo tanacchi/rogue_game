@@ -42,7 +42,7 @@ void MapDisplay::show(const Map& map, const Player& player)
   // Display player position and direction
   mvwaddch(win_.get(), player.get_position().get_y(), player.get_position().get_x(), '@' | A_BOLD);
   auto sight{player.get_position() + player.get_direction()};
-  mvwchgat(win_.get(), sight.get_y(), sight.get_x(), 1, A_BOLD | A_UNDERLINE, 0, NULL);
+  mvwchgat(win_.get(), sight.get_y(), sight.get_x(), 1, A_BOLD | A_UNDERLINE, 0, nullptr);
 
   wrefresh(win_.get());
 }

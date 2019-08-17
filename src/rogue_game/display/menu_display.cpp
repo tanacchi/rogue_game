@@ -18,7 +18,7 @@ void MenuDisplay::show(const Menu& menu, std::size_t highlight_index) const
   {
     mvwinsstr(win_.get(), std::distance(content.begin(), itr) + 1, 1, itr->first.c_str());
   }
-  mvwchgat(win_.get(), highlight_index + 1, 1, cursor_width_, A_REVERSE, 1, NULL);
+  mvwchgat(win_.get(), highlight_index + 1, 1, cursor_width_, A_REVERSE, 1, nullptr);
   box(win_.get(), ACS_VLINE, ACS_HLINE);
   wrefresh(win_.get());
 }

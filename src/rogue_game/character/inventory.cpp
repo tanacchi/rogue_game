@@ -23,17 +23,3 @@ const std::vector<ItemPtr> Inventory::get_items() const
     items.emplace_back(itr->second);
   return items;
 }
-
-std::vector<std::string> Inventory::get_item_names() const noexcept
-{
-  std::vector<std::string> names{};
-  for (auto itr{std::begin(content_)}, end{std::end(content_)}; itr != end; ++itr)
-    names.emplace_back(itr->first);
-  return names;
-}
-
-const ItemPtr Inventory::get_item_by_index(const std::size_t index) const
-{
-  const auto& target_itr{std::next(std::begin(content_), index)};
-  return target_itr->second;
-}

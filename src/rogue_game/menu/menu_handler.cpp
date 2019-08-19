@@ -74,7 +74,7 @@ void MenuHandler::set_item_content(const std::shared_ptr<GameMaster>& master)
   };
   std::function<void(void)> specific_action{};
 
-  for (const auto& item : items)
+  for (const auto item : items)
   {
     if (item->type == "gold")
     {

@@ -31,14 +31,7 @@ int main()
           status = master->toggle_mode(status);
           break;
         case Task::Perform:
-          if (status.mode == Mode::Dungeon)
-          {
-            status = master->handle_dungeon(status);
-          }
-          else
-          {
-            status = menu_handler(master);
-          }
+          status = status.mode == Mode::Dungeon ? master->handle_dungeon(status) : menu_handler(master);
           break;
         case Task::Act:
           while (!ActionHandler::empty())

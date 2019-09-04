@@ -11,6 +11,8 @@ const KeyManager::KeyType KeyManager::Null;
 const KeyManager::KeyType KeyManager::Enable;
 const KeyManager::KeyType KeyManager::Arrow;
 
+KeyManager::KeyType KeyManager::key_{KeyManager::Null};
+
 const std::unordered_map<int, KeyManager::KeyType> KeyManager::key_state_table{{
   {32,            KeyManager::Space},
   {10,            KeyManager::Enter},
@@ -21,53 +23,23 @@ const std::unordered_map<int, KeyManager::KeyType> KeyManager::key_state_table{{
   {KEY_LEFT,      KeyManager::Left },
 }};
 
-KeyManager::KeyManager(KeyManager::KeyType key) noexcept
-  : key_{key}
-{
-}
-
-KeyManager::operator KeyManager::KeyType() const noexcept
-{
-  return key_;
-}
-
-KeyManager::operator bool() const noexcept
+bool KeyManager::is_null()
 {
   return key_ != KeyManager::Null;
 }
 
-bool KeyManager::operator==(const KeyManager& rhs) const noexcept
-{
-  return key_ == rhs.key_;
-}
-
-bool KeyManager::operator==(KeyManager::KeyType rhs) const noexcept
-{
-  return key_ == rhs;
-}
-
-void KeyManager::update() noexcept
+void KeyManager::update()
 {
   const auto& itr{key_state_table.find(getch())};
   key_ = (itr == key_state_table.end()) ? KeyManager::Null : itr->second;
 }
 
-bool KeyManager::is_match(KeyManager::KeyType condition) const noexcept
+bool KeyManager::is_match(KeyManager::KeyType condition)
 {
   return (key_ & condition) != KeyManager::KeyType{};
 }
 
-KeyManager::KeyType KeyManager::get() const noexcept
+KeyManager::KeyType KeyManager::get()
 {
   return key_;
-}
-
-KeyManager operator|(const KeyManager& lhs, const KeyManager& rhs)
-{
-  return KeyManager(lhs.key_ | rhs.key_);
-}
-
-KeyManager KeyManager::operator|(KeyManager::KeyType&& rhs)
-{
-  return KeyManager(key_ | rhs);
 }

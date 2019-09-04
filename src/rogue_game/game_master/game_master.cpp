@@ -50,7 +50,7 @@ GameStatus GameMaster::input(const GameStatus& status)
 GameStatus GameMaster::toggle_mode(const GameStatus& status)
 {
   GameStatus next_status{Task::Perform, status.mode};
-  if (keyboard == KeyManager::Space)
+  if (keyboard.is_match(KeyManager::Space))
     next_status.mode = status.mode == Mode::Dungeon ? Mode::Select : Mode::Dungeon;
   return next_status;
 }

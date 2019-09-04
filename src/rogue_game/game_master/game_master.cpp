@@ -17,7 +17,6 @@ GameMaster::GameMaster()
   : map_display{5, 4, 80, 30}
   , player_display{70, 30, 20, 10}
   , message_display{10, 30, 50, 10}
-  , keyboard{}
   , player()
   , messages{}
 {
@@ -43,14 +42,14 @@ GameStatus GameMaster::show(const GameStatus& status)
 
 GameStatus GameMaster::input(const GameStatus& status)
 {
-  keyboard.update();
+  KeyManager::update();
   return GameStatus{Task::Switch, status.mode};
 }
 
 GameStatus GameMaster::toggle_mode(const GameStatus& status)
 {
   GameStatus next_status{Task::Perform, status.mode};
-  if (keyboard.is_match(KeyManager::Space))
+  if (KeyManager::is_match(KeyManager::Space))
     next_status.mode = status.mode == Mode::Dungeon ? Mode::Select : Mode::Dungeon;
   return next_status;
 }
@@ -58,8 +57,8 @@ GameStatus GameMaster::toggle_mode(const GameStatus& status)
 GameStatus GameMaster::handle_dungeon(const GameStatus& status)
 {
   // Update player's motion
-  const auto motion{Player::motion_table.find(keyboard.get()) != Player::motion_table.end() ?
-      Player::motion_table.at(keyboard.get()) : zero};
+  const auto motion{Player::motion_table.find(KeyManager::get()) != Player::motion_table.end() ?
+      Player::motion_table.at(KeyManager::get()) : zero};
   const auto next_position{player.get_position() + motion};
   if (map.in_range(next_position) && map.get_dungeon_elem(next_position).can_stand())
   {

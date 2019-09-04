@@ -2,7 +2,6 @@
 #define INCLUDED_NEW_MENU_DISPLAY
 
 #include <display/display_panel.hpp>
-#include <keyboard/key_manager.hpp>
 
 class Menu;
 

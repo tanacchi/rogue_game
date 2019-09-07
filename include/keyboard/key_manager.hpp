@@ -27,8 +27,10 @@ class KeyManager
     static void update();
     static bool is_match(KeyType condition);
     static KeyManager::KeyType get();
+
   private:
-    static KeyManager::KeyType key_;
+    static KeyManager::KeyType current_key_;
+    static KeyManager::KeyType previous_key_;
 };
 
 #endif  // INCLUDED_KEY_MANAGER_HPP

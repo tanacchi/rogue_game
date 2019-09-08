@@ -20,7 +20,7 @@ void MapDisplay::show(const Map& map, const Player& player)
       auto visible_symbol{map.dungeon_layer[y][x]->symbol};
       const auto& stepped_item_itr{map.item_layer.find(Point<int>{x, y})};
       if (stepped_item_itr != map.item_layer.end())
-        visible_symbol = stepped_item_itr->second->symbol;
+        visible_symbol = stepped_item_itr->second->symbol | A_BOLD;
       if (map.hidden_layer[y][x])
         visible_symbol = ' ';
       mvwaddch(win_.get(), y, x, visible_symbol);
@@ -28,7 +28,7 @@ void MapDisplay::show(const Map& map, const Player& player)
   }
 
   mvwaddch(win_.get(), player.get_position().get_y(), player.get_position().get_x(), '@' | A_BOLD);
-  auto sight{player.get_position() + player.get_direction()};
+  const auto& sight{player.get_position() + player.get_direction()};
   mvwchgat(win_.get(), sight.get_y(), sight.get_x(), 1, A_BOLD | A_UNDERLINE, 0, nullptr);
 
   wrefresh(win_.get());

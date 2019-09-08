@@ -35,9 +35,9 @@ std::ostream& operator<<(std::ostream& os, const MapElem& elem)
   return os;
 }
 
-const char get_symbol(const std::string type)
+const chtype get_symbol(const std::string type)
 {
-  static const std::map<std::string, const char> symbol_table = {
+  static const std::map<std::string, const chtype> symbol_table = {
     {"horizontal_wall", '-'},
     {"vertical_wall",   '|'},
     {"floor",           '.'},
@@ -47,6 +47,6 @@ const char get_symbol(const std::string type)
     {"gold",            '*'},
     {"food",            ':'}
   };
-  const std::map<std::string, const char>::const_iterator found_symbol_itr{symbol_table.find(type)};
+  const std::map<std::string, const chtype>::const_iterator found_symbol_itr{symbol_table.find(type)};
   return found_symbol_itr != symbol_table.end() ? found_symbol_itr->second : '$';
 }

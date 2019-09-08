@@ -12,18 +12,22 @@ void MapDisplay::show(const Map& map, const Player& player)
 {
   werase(win_.get());
 
-  // Display dungeon map
+  const auto get_visible_symbol{
+    [&](std::size_t x, std::size_t y){
+      const auto& stepped_item_itr{map.item_layer.find(Point<int>{x, y})};
+      if (map.hidden_layer[y][x])
+        return ' ' | A_NORMAL;
+      else if (stepped_item_itr != map.item_layer.end())
+        return stepped_item_itr->second->symbol | A_BOLD;
+      else
+        return map.dungeon_layer[y][x]->symbol;
+   }};
+
   for (std::size_t y{0}; y < map.height; ++y)
   {
     for (std::size_t x{0}; x < map.width; ++x)
     {
-      auto visible_symbol{map.dungeon_layer[y][x]->symbol};
-      const auto& stepped_item_itr{map.item_layer.find(Point<int>{x, y})};
-      if (stepped_item_itr != map.item_layer.end())
-        visible_symbol = stepped_item_itr->second->symbol | A_BOLD;
-      if (map.hidden_layer[y][x])
-        visible_symbol = ' ';
-      mvwaddch(win_.get(), y, x, visible_symbol);
+      mvwaddch(win_.get(), y, x, get_visible_symbol(x, y));
     }
   }
 

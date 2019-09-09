@@ -7,19 +7,19 @@ const Menu::ContentType Menu::base_content {{
   {"back", [](Menu::MenuPtr& menu_ptr)
     {
       menu_ptr.release();
-      return GameStatus{};
+      return GameStatus{Task::Act, Mode::Dungeon};
     }
   },
   {"exit", [](Menu::MenuPtr& menu_ptr)
     {
       menu_ptr.release();
-      return GameStatus{Task::End};
+      return GameStatus{Task::End, Mode::Select};
     }
   },
   {"item", [](Menu::MenuPtr& menu_ptr)
     {
       menu_ptr.reset(new Menu{Menu::item_content});
-      return GameStatus{};
+      return GameStatus{Task::Act, Mode::Select};
     }
   }
 }};

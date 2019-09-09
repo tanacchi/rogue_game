@@ -74,5 +74,5 @@ GameStatus GameMaster::handle_dungeon(const GameStatus& status)
     player.inventory_ptr->store(std::move(picked_up_item_itr->second));
     map.item_layer.erase(picked_up_item_itr);
   }
-  return GameStatus{Task::Act};
+  return GameStatus{Task::Act, Mode::Dungeon};
 }

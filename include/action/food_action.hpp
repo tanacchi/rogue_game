@@ -26,7 +26,7 @@ class FoodAction : public Action<Food, U>
     {
       master->player.heal(food_.get_amount());
       ActionHandler::push(MessageAction<NormalTag>("You healed yourself."));
-      return GameStatus{};
+      return GameStatus{Task::Show, Mode::Dungeon};
     }
 
     Food food_;

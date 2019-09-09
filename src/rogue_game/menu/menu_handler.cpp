@@ -20,7 +20,7 @@ MenuHandler::MenuHandler()
 
 GameStatus MenuHandler::operator()(const std::shared_ptr<GameMaster>& master)
 {
-  GameStatus next_status{};
+  GameStatus next_status{Task::Act, Mode::Select};
   set_item_content(master);
   menu_ptr.reset(new Menu{Menu::base_content});
 
@@ -41,7 +41,7 @@ GameStatus MenuHandler::operator()(const std::shared_ptr<GameMaster>& master)
       case KeyManager::Space:
       case KeyManager::Back:
         selected_index_ = 0;
-        next_status =  GameStatus{};
+        next_status =  GameStatus{Task::Act, Mode::Dungeon};
         menu_ptr.release();
         break;
       case KeyManager::Enter:
@@ -69,7 +69,7 @@ void MenuHandler::set_item_content(const std::shared_ptr<GameMaster>& master)
       specific_action();
       master->player.inventory_ptr->dispose(selected_index_);
       menu_ptr.release();
-      return GameStatus{Task::Act};
+      return GameStatus{Task::Act, Mode::Dungeon};
     }
   };
   std::function<void(void)> specific_action{};

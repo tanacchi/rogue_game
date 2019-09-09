@@ -14,7 +14,7 @@ int main()
   try
   {
     std::shared_ptr<GameMaster> master{std::make_shared<GameMaster>()};
-    GameStatus  status{};
+    GameStatus  status{Task::Show, Mode::Dungeon};
     MenuHandler menu_handler{};
 
     while (status.task != Task::End)

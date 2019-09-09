@@ -7,7 +7,7 @@
 struct GameStatus
 {
 
-  explicit GameStatus(Task task = Task::Show, Mode mode = Mode::Dungeon) noexcept;
+  explicit GameStatus(Task task, Mode mode) noexcept;
 
   Task task;
   Mode mode;

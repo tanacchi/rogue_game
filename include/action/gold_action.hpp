@@ -26,7 +26,7 @@ class GoldAction : public Action<Gold, U>
     {
       master->player.add_money(gold_.get_amount());
       ActionHandler::push(MessageAction<NormalTag>("You gained some gold."));
-      return GameStatus{};
+      return GameStatus{Task::Show, Mode::Dungeon};
     }
 
     Gold gold_;

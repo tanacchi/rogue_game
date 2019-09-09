@@ -26,7 +26,6 @@ class GameMaster
     MapDisplay     map_display;
     PlayerDisplay  player_display;
     MessageDisplay message_display;
-    KeyManager     keyboard;
     Player         player;
     std::vector<std::string> messages;
 };

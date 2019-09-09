@@ -2,6 +2,7 @@
 #include <utility>
 
 #include <menu/menu_handler.hpp>
+#include <keyboard/key_manager.hpp>
 #include <character/inventory.hpp>
 #include <game_master/game_master.hpp>
 
@@ -19,7 +20,6 @@ MenuHandler::MenuHandler()
 
 GameStatus MenuHandler::operator()(const std::shared_ptr<GameMaster>& master)
 {
-  KeyManager keyboard{};
   GameStatus next_status{};
   set_item_content(master);
   menu_ptr.reset(new Menu{Menu::base_content});
@@ -27,8 +27,8 @@ GameStatus MenuHandler::operator()(const std::shared_ptr<GameMaster>& master)
   while (menu_ptr)
   {
     menu_display_.show(*menu_ptr, selected_index_);
-    keyboard.update();
-    switch (keyboard.get())
+    KeyManager::update();
+    switch (KeyManager::get())
     {
       case KeyManager::Up:
         if (selected_index_ > 0)

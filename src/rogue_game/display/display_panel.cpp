@@ -8,6 +8,7 @@ DisplayPanel::DisplayPanel(std::size_t x, std::size_t y,
   {
     initscr();
     keypad(stdscr, TRUE);
+    timeout(50);
     noecho();
     curs_set(0);
     refresh();

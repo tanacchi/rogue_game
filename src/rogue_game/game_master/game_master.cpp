@@ -52,7 +52,7 @@ GameStatus GameMaster::handle_dungeon(const GameStatus& status)
   if (KeyManager::get() == KeyManager::Space)
   {
     KeyManager::set_key(KeyManager::Null);
-    return GameStatus{Task::Act, Mode::Select};
+    return GameStatus{Task::Perform, Mode::Select};
   }
 
   // Update player's motion

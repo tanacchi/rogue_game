@@ -22,37 +22,43 @@ GameStatus MenuHandler::operator()(const std::shared_ptr<GameMaster>& master)
 {
   GameStatus next_status{Task::Act, Mode::Select};
   set_item_content(master);
-  menu_ptr.reset(new Menu{Menu::base_content});
-
-  menu_display_.show(*menu_ptr, selected_index_);
-  KeyManager::update();
+  
+  if (!menu_ptr)
+  {
+    menu_ptr.reset(new Menu{Menu::base_content});
+    menu_display_.show(*menu_ptr, selected_index_);
+  }
   switch (KeyManager::get())
   {
     case KeyManager::Up:
       if (selected_index_ > 0)
         --selected_index_;
       break;
+
     case KeyManager::Down:
       if (selected_index_ + 1 < menu_ptr->content_.size())
         ++selected_index_;
       break;
+
     case KeyManager::Space:
     case KeyManager::Back:
       selected_index_ = 0;
-      next_status =  GameStatus{Task::Act, Mode::Dungeon};
       menu_display_.hide();
       menu_ptr.release();
-      break;
+      return GameStatus{Task::Act, Mode::Dungeon};
+
     case KeyManager::Enter:
       auto content{menu_ptr->get_content()};
       auto itr{std::next(content.begin(), selected_index_)};
       if (itr != content.end())
       {
-        next_status = itr->second(menu_ptr);
         selected_index_ = 0;
+        menu_display_.hide();
+        return itr->second(menu_ptr);
       }
       break;
   }
+  menu_display_.show(*menu_ptr, selected_index_);
   return next_status;
 }
 

@@ -49,13 +49,20 @@ GameStatus GameMaster::input(const GameStatus& status)
 GameStatus GameMaster::toggle_mode(const GameStatus& status)
 {
   GameStatus next_status{Task::Perform, status.mode};
-  if (KeyManager::is_match(KeyManager::Space))
-    next_status.mode = status.mode == Mode::Dungeon ? Mode::Select : Mode::Dungeon;
+  // if (KeyManager::is_match(KeyManager::Space))
+    // next_status.mode = status.mode == Mode::Dungeon ? Mode::Select : Mode::Dungeon;
   return next_status;
 }
 
 GameStatus GameMaster::handle_dungeon(const GameStatus& status)
 {
+  // Switch to Select mode
+  if (KeyManager::get() == KeyManager::Space)
+  {
+    KeyManager::set_key(KeyManager::Null);
+    return GameStatus{Task::Act, Mode::Select};
+  }
+
   // Update player's motion
   const auto motion{Player::motion_table.find(KeyManager::get()) != Player::motion_table.end() ?
       Player::motion_table.at(KeyManager::get()) : zero};

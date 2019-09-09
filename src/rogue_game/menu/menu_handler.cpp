@@ -24,38 +24,35 @@ GameStatus MenuHandler::operator()(const std::shared_ptr<GameMaster>& master)
   set_item_content(master);
   menu_ptr.reset(new Menu{Menu::base_content});
 
-  while (menu_ptr)
+  menu_display_.show(*menu_ptr, selected_index_);
+  KeyManager::update();
+  switch (KeyManager::get())
   {
-    menu_display_.show(*menu_ptr, selected_index_);
-    KeyManager::update();
-    switch (KeyManager::get())
-    {
-      case KeyManager::Up:
-        if (selected_index_ > 0)
-          --selected_index_;
-        break;
-      case KeyManager::Down:
-        if (selected_index_ + 1 < menu_ptr->content_.size())
-          ++selected_index_;
-        break;
-      case KeyManager::Space:
-      case KeyManager::Back:
+    case KeyManager::Up:
+      if (selected_index_ > 0)
+        --selected_index_;
+      break;
+    case KeyManager::Down:
+      if (selected_index_ + 1 < menu_ptr->content_.size())
+        ++selected_index_;
+      break;
+    case KeyManager::Space:
+    case KeyManager::Back:
+      selected_index_ = 0;
+      next_status =  GameStatus{Task::Act, Mode::Dungeon};
+      menu_display_.hide();
+      menu_ptr.release();
+      break;
+    case KeyManager::Enter:
+      auto content{menu_ptr->get_content()};
+      auto itr{std::next(content.begin(), selected_index_)};
+      if (itr != content.end())
+      {
+        next_status = itr->second(menu_ptr);
         selected_index_ = 0;
-        next_status =  GameStatus{Task::Act, Mode::Dungeon};
-        menu_ptr.release();
-        break;
-      case KeyManager::Enter:
-        auto content{menu_ptr->get_content()};
-        auto itr{std::next(content.begin(), selected_index_)};
-        if (itr != content.end())
-        {
-          next_status = itr->second(menu_ptr);
-          selected_index_ = 0;
-        }
-        break;
-    }
+      }
+      break;
   }
-  menu_display_.hide();
   return next_status;
 }
 

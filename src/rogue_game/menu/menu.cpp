@@ -19,7 +19,7 @@ const Menu::ContentType Menu::base_content {{
   {"item", [](Menu::MenuPtr& menu_ptr)
     {
       menu_ptr.reset(new Menu{Menu::item_content});
-      return GameStatus{Task::Act, Mode::Select};
+      return GameStatus{Task::Input, Mode::Select};
     }
   }
 }};

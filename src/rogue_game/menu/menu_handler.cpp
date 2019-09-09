@@ -48,13 +48,17 @@ GameStatus MenuHandler::operator()(const std::shared_ptr<GameMaster>& master)
       return GameStatus{Task::Act, Mode::Dungeon};
 
     case KeyManager::Enter:
-      auto content{menu_ptr->get_content()};
-      auto itr{std::next(content.begin(), selected_index_)};
+      const auto& content{menu_ptr->get_content()};
+      const auto& itr{std::next(content.begin(), selected_index_)};
       if (itr != content.end())
       {
         selected_index_ = 0;
-        menu_display_.hide();
-        return itr->second(menu_ptr);
+        const auto next_status{itr->second(menu_ptr)};
+        if (!menu_ptr)
+          menu_display_.hide();
+        else
+          menu_display_.show(*menu_ptr, selected_index_);
+        return next_status;
       }
       break;
   }
@@ -67,7 +71,7 @@ void MenuHandler::set_item_content(const std::shared_ptr<GameMaster>& master)
   Menu::item_content.clear();
 
   const auto& items{master->player.inventory_ptr->get_items()};
-  auto base_action{
+  const auto& base_action{
     [&](Menu::MenuPtr& menu_ptr, std::function<void(void)> specific_action){
       specific_action();
       master->player.inventory_ptr->dispose(selected_index_);

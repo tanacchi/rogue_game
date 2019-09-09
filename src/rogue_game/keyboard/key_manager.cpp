@@ -28,6 +28,11 @@ bool KeyManager::is_null()
   return key_ != KeyManager::Null;
 }
 
+void KeyManager::set_key(const KeyManager::KeyType key)
+{
+  key_ = key;
+}
+
 void KeyManager::update()
 {
   const auto& itr{key_state_table.find(getch())};

@@ -43,15 +43,7 @@ GameStatus GameMaster::show(const GameStatus& status)
 GameStatus GameMaster::input(const GameStatus& status)
 {
   KeyManager::update();
-  return GameStatus{Task::Switch, status.mode};
-}
-
-GameStatus GameMaster::toggle_mode(const GameStatus& status)
-{
-  GameStatus next_status{Task::Perform, status.mode};
-  // if (KeyManager::is_match(KeyManager::Space))
-    // next_status.mode = status.mode == Mode::Dungeon ? Mode::Select : Mode::Dungeon;
-  return next_status;
+  return GameStatus{Task::Perform, status.mode};
 }
 
 GameStatus GameMaster::handle_dungeon(const GameStatus& status)

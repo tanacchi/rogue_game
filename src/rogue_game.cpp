@@ -27,9 +27,6 @@ int main()
         case Task::Input:
           status = master->input(status);
           break;
-        case Task::Switch:
-          status = master->toggle_mode(status);
-          break;
         case Task::Perform:
           status = status.mode == Mode::Dungeon ? master->handle_dungeon(status) : menu_handler(master);
           break;

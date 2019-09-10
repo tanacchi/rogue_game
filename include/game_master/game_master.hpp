@@ -15,7 +15,7 @@ class GameMaster
 {
   public:
     GameMaster();
-    ~GameMaster();
+    ~GameMaster() = default;
     GameStatus show(const GameStatus& status);
     GameStatus input(const GameStatus& status);
     GameStatus perform(const GameStatus& status);

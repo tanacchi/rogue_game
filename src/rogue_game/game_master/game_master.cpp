@@ -26,10 +26,6 @@ GameMaster::GameMaster()
   map.make_apparent(player.get_position());
 }
 
-GameMaster::~GameMaster()
-{
-}
-
 GameStatus GameMaster::show(const GameStatus& status)
 {
   map_display.show(map, player);

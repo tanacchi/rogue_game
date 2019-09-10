@@ -28,7 +28,6 @@ GameMaster::GameMaster()
 
 GameMaster::~GameMaster()
 {
-  endwin();
 }
 
 GameStatus GameMaster::show(const GameStatus& status)

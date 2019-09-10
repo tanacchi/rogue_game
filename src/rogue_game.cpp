@@ -8,15 +8,20 @@
 #include <action/any_action.hpp>
 #include <action/message_action.hpp>
 
+namespace {
+  class SigintHandler {};
+}
+
 int main()
 {
-  std::signal(SIGINT, [](int signum) { ActionHandler::push(MessageAction<NormalTag>("Exit from menu.")); });
+  GameStatus status{Task::Show, Mode::Dungeon};
+  std::shared_ptr<GameMaster> master{std::make_shared<GameMaster>()};
+  MenuHandler menu_handler{};
+
+try_begin:
   try
   {
-    std::shared_ptr<GameMaster> master{std::make_shared<GameMaster>()};
-    GameStatus  status{Task::Show, Mode::Dungeon};
-    MenuHandler menu_handler{};
-
+    std::signal(SIGINT, [](int signal){ throw SigintHandler{};});
     while (status.task != Task::End)
     {
       switch (status.task)
@@ -42,6 +47,12 @@ int main()
       }
     }
   }
+  catch (SigintHandler&)
+  {
+    ActionHandler::push(MessageAction<NormalTag>("Exit from menu."));
+    status.task = Task::Act;
+    goto try_begin;
+  }
   catch (std::exception& e)
   {
     endwin();
@@ -49,6 +60,8 @@ int main()
     LOG_VALUES(e.what());
     std::cout << e.what() << std::endl;
   }
+
+  endwin();
   exit(EXIT_SUCCESS);
 
   return 0;

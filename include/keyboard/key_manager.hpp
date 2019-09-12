@@ -5,7 +5,9 @@
 #include <ncurses.h>
 #include <unordered_map>
 
-class KeyManager
+#include <boost/serialization/singleton.hpp>
+
+class KeyManager : public boost::serialization::singleton<KeyManager>
 {
   public:
     using KeyType = std::uint8_t;
@@ -28,6 +30,7 @@ class KeyManager
     static void update();
     static bool is_match(KeyType condition);
     static KeyManager::KeyType get();
+
   private:
     static KeyManager::KeyType key_;
 };

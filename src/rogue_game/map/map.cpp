@@ -52,9 +52,9 @@ void Map::make_apparent(const Point<std::size_t>& point)
   std::size_t range{2ul};
   LOG_STRING("make_apparent called");
   LOG_VALUES(point.get_x(), point.get_y());
-  for (auto y{std::max(point.get_y()-range, 0ul)}, y_limit{std::min(point.get_y()+range, height)}; y <= y_limit; ++y)
+  for (auto y{std::max(point.get_y(), range) - range}, y_limit{std::min(point.get_y()+range, height)}; y <= y_limit; ++y)
   {
-    for (auto x{std::max(point.get_x()-range, 0ul)}, x_limit{std::min(point.get_x()+range, width)}; x <= x_limit; ++x)
+    for (auto x{std::max(point.get_x(), range) - range}, x_limit{std::min(point.get_x()+range, width)}; x <= x_limit; ++x)
     {
       LOG_VALUES(x, y);
       if (in_range(Point<std::size_t>{x, y}))

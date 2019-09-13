@@ -4,11 +4,13 @@
 #include <queue>
 #include <memory>
 
+#include <boost/serialization/singleton.hpp>
+
 class GameStatus;
 class GameMaster;
 class AnyAction;
 
-class ActionHandler
+class ActionHandler : public boost::serialization::singleton<ActionHandler>
 {
   public:
     static void push(AnyAction&& action);

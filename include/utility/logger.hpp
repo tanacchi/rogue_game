@@ -4,11 +4,13 @@
 #include <fstream>
 #include <list>
 
+#include <boost/serialization/singleton.hpp>
+
 #define LOG_LOCATION (std::string{__FILE__}+":"+std::to_string(__LINE__))
 #define LOG_VALUES(...) Logger::log_with_name(split_string_by_comma(#__VA_ARGS__", "+LOG_LOCATION), __VA_ARGS__)
 #define LOG_STRING(arg) Logger::log_string(arg); Logger::log_string("\t\t\t\t["+LOG_LOCATION+"]\n\n", ' ')
 
-class Logger
+class Logger : public boost::serialization::singleton<Logger>
 {
   public:
     static void log_with_name(std::list<std::string>&& name_list);

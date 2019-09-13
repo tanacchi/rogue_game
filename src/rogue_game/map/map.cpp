@@ -1,5 +1,4 @@
 #include <map/map.hpp>
-#include <utility/logger.hpp>
 
 Map::Map(Map&& map)
   : width{map.width}
@@ -49,18 +48,12 @@ bool Map::in_range(const Point<std::size_t>& point) const
 
 void Map::make_apparent(const Point<std::size_t>& point)
 {
-  std::size_t range{2ul};
-  LOG_STRING("make_apparent called");
-  LOG_VALUES(point.get_x(), point.get_y());
-  for (auto y{std::max(point.get_y(), range) - range}, y_limit{std::min(point.get_y()+range, height)}; y <= y_limit; ++y)
+  const std::size_t range{2ul};
+  for (auto y{std::max(point.get_y(), range) - range}, y_limit{std::min(point.get_y()+range, height - 1ul)}; y <= y_limit; ++y)
   {
-    for (auto x{std::max(point.get_x(), range) - range}, x_limit{std::min(point.get_x()+range, width)}; x <= x_limit; ++x)
+    for (auto x{std::max(point.get_x(), range) - range}, x_limit{std::min(point.get_x()+range, width - 1ul)}; x <= x_limit; ++x)
     {
-      LOG_VALUES(x, y);
-      if (in_range(Point<std::size_t>{x, y}))
-      {
-        hidden_layer[y][x] = false;
-      }
+      hidden_layer[y][x] = false;
     }
   }
 }

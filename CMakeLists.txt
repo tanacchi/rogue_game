@@ -33,7 +33,8 @@ project(
 
 find_package(Boost REQUIRED
   system
-  filesystem)
+  filesystem
+  serialization)
 find_package(Curses REQUIRED)
 
 if (NOT DEFINED CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")

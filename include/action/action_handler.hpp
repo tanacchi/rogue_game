@@ -13,6 +13,7 @@ class AnyAction;
 class ActionHandler : public boost::serialization::singleton<ActionHandler>
 {
   public:
+    ActionHandler() = delete;
     static void push(AnyAction&& action);
     static GameStatus invoke(const std::shared_ptr<GameMaster>& master);
     static bool empty();

@@ -13,6 +13,7 @@
 class Logger : public boost::serialization::singleton<Logger>
 {
   public:
+    Logger() = delete;
     static void log_with_name(std::list<std::string>&& name_list);
 
     template <typename Head, typename... Tail>

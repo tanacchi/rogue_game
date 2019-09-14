@@ -25,6 +25,7 @@ class KeyManager : public boost::serialization::singleton<KeyManager>
 
     static const std::unordered_map<int, KeyManager::KeyType> key_state_table;
 
+    KeyManager() = delete;
     static bool is_null();
     static void set_key(const KeyType key);
     static void update();

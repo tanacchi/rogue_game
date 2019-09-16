@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <csignal>
+#include <exception>
 
 #include <game_master/game_master.hpp>
 #include <menu/menu_handler.hpp>
@@ -9,7 +10,7 @@
 #include <action/message_action.hpp>
 
 namespace {
-  class SigintHandler {};
+  class SigintHandler : std::exception {};
 }
 
 int main()

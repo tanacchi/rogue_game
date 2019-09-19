@@ -2,6 +2,9 @@
 #include <game_master/game_master.hpp>
 #include <item/item.hpp>
 #include <menu/menu.hpp>
+#include <action/action_handler.hpp>
+#include <action/any_action.hpp>
+#include <action/message_action.hpp>
 
 const Menu::ContentType Menu::base_content {{
   {"back", [](Menu::MenuPtr& menu_ptr)
@@ -18,6 +21,11 @@ const Menu::ContentType Menu::base_content {{
   },
   {"item", [](Menu::MenuPtr& menu_ptr)
     {
+      if (Menu::item_content.empty())
+      {
+        ActionHandler::push(MessageAction<NormalTag>("You don't have any items."));
+        return GameStatus{Task::Perform, Mode::Select};
+      }
       menu_ptr.reset(new Menu{Menu::item_content});
       return GameStatus{Task::Input, Mode::Select};
     }

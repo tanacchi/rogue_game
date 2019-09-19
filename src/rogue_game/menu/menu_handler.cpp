@@ -50,17 +50,13 @@ GameStatus MenuHandler::operator()(const std::shared_ptr<GameMaster>& master)
     case KeyManager::Enter:
       const auto& content{menu_ptr->get_content()};
       const auto& itr{std::next(content.begin(), selected_index_)};
-      if (itr != content.end())
-      {
-        selected_index_ = 0;
-        const auto next_status{itr->second(menu_ptr)};
-        if (!menu_ptr)
-          menu_display_.hide();
-        else
-          menu_display_.show(*menu_ptr, selected_index_);
-        return next_status;
-      }
-      break;
+      selected_index_ = 0;
+      const auto next_status{itr->second(menu_ptr)};
+      if (!menu_ptr)
+        menu_display_.hide();
+      else
+        menu_display_.show(*menu_ptr, selected_index_);
+      return next_status;
   }
   menu_display_.show(*menu_ptr, selected_index_);
   return next_status;

@@ -2,6 +2,7 @@
 #define INCLUDED_DISPLAY_PANEL_HPP
 
 #include <memory>
+#include <mutex>  // once_flag
 #include <ncurses.h>
 
 struct window_ptr_deleter
@@ -20,7 +21,10 @@ class DisplayPanel
 
   protected:
     std::unique_ptr<WINDOW, window_ptr_deleter> win_;
-    static bool has_initialized_;
+    static std::once_flag has_initialized_;
+
+  private:
+    void init_screen(void);
 };
 
 #endif  // INCLUDED_DISPLAY_PANEL_HPP

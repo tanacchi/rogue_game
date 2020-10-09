@@ -1,10 +1,8 @@
 #ifndef INCLUDED_PLAYER_HPP
 #define INCLUDED_PLAYER_HPP
 
-#include <list>
 #include <map>
 #include <memory>
-#include <vector>
 
 #include <character/character.hpp>
 #include <keyboard/key_manager.hpp>
@@ -15,7 +13,7 @@ class PlayerDisplay;
 class Player : public Character
 {
   public:
-    friend PlayerDisplay;  // XXX: Might not be beautiful
+    friend PlayerDisplay;
 
     Player();
     static const std::map<KeyManager::KeyType, const Point<int>> motion_table;

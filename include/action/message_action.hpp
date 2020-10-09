@@ -23,7 +23,7 @@ class MessageAction : public Action<Message, U>
     GameStatus do_it(const std::shared_ptr<GameMaster>& master, NormalTag)
     {
       master->messages.emplace_back(message_);
-      return GameStatus{};
+      return GameStatus{Task::Show, Mode::Dungeon};
     }
 
     Message message_;

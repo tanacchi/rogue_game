@@ -5,8 +5,7 @@
 
 enum class Mode : std::uint8_t
 {
-  Dungeon,
-  Select
+  Dungeon, Select
 };
 
 #endif  // INCLUDED_MODE_HPP

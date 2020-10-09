@@ -4,8 +4,8 @@
 #include <functional>
 #include <memory>
 #include <map>
-#include <game_master/game_status.hpp>
 
+class GameStatus;
 class GameMaster;
 class MenuHandler;
 

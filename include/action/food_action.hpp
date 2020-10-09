@@ -4,7 +4,6 @@
 #include <action/action.hpp>
 #include <game_master/game_status.hpp>
 #include <game_master/game_master.hpp>
-#include <utility/logger.hpp>
 #include <item/food.hpp>
 #include <action/any_action.hpp>
 #include <action/action_handler.hpp>
@@ -27,7 +26,7 @@ class FoodAction : public Action<Food, U>
     {
       master->player.heal(food_.get_amount());
       ActionHandler::push(MessageAction<NormalTag>("You healed yourself."));
-      return GameStatus{};
+      return GameStatus{Task::Show, Mode::Dungeon};
     }
 
     Food food_;

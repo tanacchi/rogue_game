@@ -8,7 +8,6 @@
 #include <utility/logger.hpp>
 
 class GameMaster;
-class GameStatus;
 
 template <typename T, typename U>
 class Action
@@ -25,19 +24,19 @@ class Action
     virtual GameStatus do_it(const std::shared_ptr<GameMaster>& master, NormalTag)
     {
       LOG_STRING("Invalid Action::do_it called. (NormalTag)");
-      return {Mode::Dungeon, Task::End};
+      return GameStatus{Task::End, Mode::Dungeon};
     }
 
     virtual GameStatus do_it(const std::shared_ptr<GameMaster>& master, ConsumeTag)
     {
       LOG_STRING("Invalid Action::do_it called. (ConsumeTag)");
-      return {Mode::Dungeon, Task::End};
+      return GameStatus{Task::End, Mode::Dungeon};
     }
 
     virtual GameStatus do_it(const std::shared_ptr<GameMaster>& master, PutTag)
     {
       LOG_STRING("Invalid Action::do_it called. (PutTag)");
-      return {Mode::Dungeon, Task::End};
+      return GameStatus{Task::End, Mode::Dungeon};
     }
 };
 

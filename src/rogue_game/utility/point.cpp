@@ -68,6 +68,12 @@ bool Point<T>::operator==(const Point<T>& rhs) const
 }
 
 template<typename T>
+bool Point<T>::operator!=(const Point<T>& rhs) const
+{
+  return !(*this == rhs);
+}
+
+template<typename T>
 bool Point<T>::operator<(const Point<T>& rhs) const
 {
   auto lhs_distance = x_*x_ + y_*y_, rhs_distance =rhs.x_*rhs.x_ + rhs.y_*rhs.y_; 

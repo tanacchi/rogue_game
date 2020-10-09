@@ -28,6 +28,7 @@ class Point
     const Point operator+(const Point& rhs) const;
     const Point& operator+=(const Point& rhs);
     bool operator==(const Point& rhs) const;
+    bool operator!=(const Point& rhs) const;
     bool operator<(const Point& rhs) const;
     explicit operator bool() const noexcept;
     friend std::ostream& operator<<(std::ostream& os, const Point<int>& point);

@@ -6,8 +6,11 @@
 
 struct GameStatus
 {
-  Mode mode{Mode::Dungeon};
-  Task task{Task::Show};
+
+  explicit GameStatus(Task task, Mode mode) noexcept;
+
+  Task task;
+  Mode mode;
 };
 
 #endif  // INCLUDED_GAME_STATUS_HPP

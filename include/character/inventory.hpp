@@ -15,8 +15,7 @@ class Inventory
     Inventory();
     void store(const ItemPtr& item_ptr);
     void dispose(std::size_t target_index);
-    std::vector<std::string> get_item_names() const noexcept;
-    const ItemPtr get_item_by_index(const std::size_t index) const;
+    const std::vector<ItemPtr> get_items() const;
 
   private:
     ContentType content_;

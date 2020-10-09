@@ -4,7 +4,6 @@
 #include <action/action.hpp>
 #include <game_master/game_status.hpp>
 #include <game_master/game_master.hpp>
-#include <utility/logger.hpp>
 #include <item/gold.hpp>
 #include <action/any_action.hpp>
 #include <action/action_handler.hpp>
@@ -27,7 +26,7 @@ class GoldAction : public Action<Gold, U>
     {
       master->player.add_money(gold_.get_amount());
       ActionHandler::push(MessageAction<NormalTag>("You gained some gold."));
-      return GameStatus{};
+      return GameStatus{Task::Show, Mode::Dungeon};
     }
 
     Gold gold_;

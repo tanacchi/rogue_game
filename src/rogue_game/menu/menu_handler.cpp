@@ -2,6 +2,7 @@
 #include <utility>
 
 #include <menu/menu_handler.hpp>
+#include <keyboard/key_manager.hpp>
 #include <character/inventory.hpp>
 #include <game_master/game_master.hpp>
 
@@ -19,43 +20,45 @@ MenuHandler::MenuHandler()
 
 GameStatus MenuHandler::operator()(const std::shared_ptr<GameMaster>& master)
 {
-  KeyManager keyboard{};
-  GameStatus next_status{};
+  GameStatus next_status{Task::Act, Mode::Select};
   set_item_content(master);
-  menu_ptr.reset(new Menu{Menu::base_content});
-
-  while (menu_ptr)
+  
+  if (!menu_ptr)
   {
+    menu_ptr.reset(new Menu{Menu::base_content});
     menu_display_.show(*menu_ptr, selected_index_);
-    keyboard.update();
-    switch (keyboard.get())
-    {
-      case KeyManager::Up:
-        if (selected_index_ > 0)
-          --selected_index_;
-        break;
-      case KeyManager::Down:
-        if (selected_index_ + 1 < menu_ptr->content_.size())
-          ++selected_index_;
-        break;
-      case KeyManager::Space:
-      case KeyManager::Back:
-        selected_index_ = 0;
-        next_status =  GameStatus{Mode::Dungeon, Task::Show};
-        menu_ptr.release();
-        break;
-      case KeyManager::Enter:
-        auto content{menu_ptr->get_content()};
-        auto itr{std::next(content.begin(), selected_index_)};
-        if (itr != content.end())
-        {
-          next_status = itr->second(menu_ptr);
-          selected_index_ = 0;
-        }
-        break;
-    }
   }
-  menu_display_.hide();
+  switch (KeyManager::get())
+  {
+    case KeyManager::Up:
+      if (selected_index_ > 0)
+        --selected_index_;
+      break;
+
+    case KeyManager::Down:
+      if (selected_index_ + 1 < menu_ptr->content_.size())
+        ++selected_index_;
+      break;
+
+    case KeyManager::Space:
+    case KeyManager::Back:
+      selected_index_ = 0;
+      menu_display_.hide();
+      menu_ptr.release();
+      return GameStatus{Task::Act, Mode::Dungeon};
+
+    case KeyManager::Enter:
+      const auto& content{menu_ptr->get_content()};
+      const auto& itr{std::next(content.begin(), selected_index_)};
+      selected_index_ = 0;
+      const auto next_status{itr->second(menu_ptr)};
+      if (!menu_ptr)
+        menu_display_.hide();
+      else
+        menu_display_.show(*menu_ptr, selected_index_);
+      return next_status;
+  }
+  menu_display_.show(*menu_ptr, selected_index_);
   return next_status;
 }
 
@@ -63,37 +66,35 @@ void MenuHandler::set_item_content(const std::shared_ptr<GameMaster>& master)
 {
   Menu::item_content.clear();
 
-  auto names{master->player.inventory_ptr->get_item_names()};
-  auto base_action{
+  const auto& items{master->player.inventory_ptr->get_items()};
+  const auto& base_action{
     [&](Menu::MenuPtr& menu_ptr, std::function<void(void)> specific_action){
       specific_action();
       master->player.inventory_ptr->dispose(selected_index_);
       menu_ptr.release();
-      return GameStatus{Mode::Dungeon, Task::Act};
+      return GameStatus{Task::Act, Mode::Dungeon};
     }
   };
   std::function<void(void)> specific_action{};
 
-  for (auto name : names)
+  for (const auto item : items)
   {
-    if (name == "gold")
+    if (item->type == "gold")
     {
       specific_action = 
-        [&](){
-          auto target_item_itr{master->player.inventory_ptr->get_item_by_index(selected_index_)};
-          const Gold& gold(dynamic_cast<Gold&>(*target_item_itr));
+        [=](){
+          const Gold& gold(dynamic_cast<Gold&>(*item));
           ActionHandler::push(GoldAction<ConsumeTag>(gold));
         };
     }
-    else if (name == "food")
+    else if (item->type == "food")
     {
       specific_action = 
-        [&](){
-          auto target_item_itr{master->player.inventory_ptr->get_item_by_index(selected_index_)};
-          const Food& food(dynamic_cast<Food&>(*target_item_itr));
+        [=](){
+          const Food& food(dynamic_cast<Food&>(*item));
           ActionHandler::push(FoodAction<ConsumeTag>(food));
         };
     }
-    Menu::item_content.emplace(name, std::bind(base_action, std::placeholders::_1, specific_action));
+    Menu::item_content.emplace(item->type, std::bind(base_action, std::placeholders::_1, specific_action));
   }
 }

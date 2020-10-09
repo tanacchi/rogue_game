@@ -2,6 +2,7 @@
 #define INCLUDED_MAP_ELEM_HPP
 
 #include <ostream>
+#include <ncurses.h>
 
 class MapElem {
   public:
@@ -13,9 +14,9 @@ class MapElem {
     friend std::ostream& operator<<(std::ostream& os, const MapElem& map_elem);
 
     const std::string type;
-    const char symbol;
+    const chtype symbol;
 };
 
-const char get_symbol(const std::string);
+const chtype get_symbol(const std::string);
 
 #endif  // INCLUDED_MAP_ELEM_HPP

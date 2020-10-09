@@ -5,7 +5,9 @@
 #include <ncurses.h>
 #include <unordered_map>
 
-class KeyManager
+#include <boost/serialization/singleton.hpp>
+
+class KeyManager : public boost::serialization::singleton<KeyManager>
 {
   public:
     using KeyType = std::uint8_t;
@@ -23,18 +25,15 @@ class KeyManager
 
     static const std::unordered_map<int, KeyManager::KeyType> key_state_table;
 
-    explicit KeyManager(KeyManager::KeyType key = KeyManager::Null) noexcept;
-    explicit operator KeyManager::KeyType() const noexcept;
-    explicit operator bool() const noexcept;
-    bool operator==(const KeyManager& rhs) const noexcept;
-    bool operator==(KeyManager::KeyType rhs) const noexcept;
-    friend KeyManager operator|(const KeyManager& lhs, const KeyManager& rhs);
-    KeyManager operator|(KeyManager::KeyType&& rhs);
-    void update() noexcept;
-    bool is_match(KeyType condition) const noexcept;
-    KeyManager::KeyType get() const noexcept;
+    KeyManager() = delete;
+    static bool is_null();
+    static void set_key(const KeyType key);
+    static void update();
+    static bool is_match(KeyType condition);
+    static KeyManager::KeyType get();
+
   private:
-    KeyManager::KeyType key_;
+    static KeyManager::KeyType key_;
 };
 
 #endif  // INCLUDED_KEY_MANAGER_HPP

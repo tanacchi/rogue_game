@@ -30,7 +30,7 @@ GameMaster::GameMaster()
 
 GameStatus GameMaster::show(const GameStatus& status)
 {
-  map_display.show(map, player);
+  map_display.show(map, player, enemies);
   player_display.show(player);
   message_display.show(messages);
   messages.clear();

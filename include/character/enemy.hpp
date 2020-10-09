@@ -2,6 +2,7 @@
 
 #include <character/character.hpp>
 #include <map/map.hpp>
+#include <list>
 
 class Enemy : public Character
 {
@@ -12,3 +13,5 @@ class Enemy : public Character
     bool is_alive() const noexcept;
     void move(const Map& map, Point<int> player_pos);
 };
+
+using Enemies = std::list<Enemy>;

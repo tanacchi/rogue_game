@@ -1,5 +1,6 @@
 #include <display/map_display.hpp>
 #include <character/player.hpp>
+#include <character/enemy.hpp>
 #include <map/map.hpp>
 
 MapDisplay::MapDisplay(std::size_t x, std::size_t y,
@@ -8,7 +9,7 @@ MapDisplay::MapDisplay(std::size_t x, std::size_t y,
 {
 }
 
-void MapDisplay::show(const Map& map, const Player& player)
+void MapDisplay::show(const Map& map, const Player& player, const Enemies& enemies)
 {
   werase(win_.get());
 
@@ -31,6 +32,10 @@ void MapDisplay::show(const Map& map, const Player& player)
     }
   }
 
+  for (const auto& enemy : enemies)
+  {
+    mvwaddch(win_.get(), enemy.get_position().get_y(), enemy.get_position().get_x(), 'E' | A_BOLD);
+  }
   mvwaddch(win_.get(), player.get_position().get_y(), player.get_position().get_x(), '@' | A_BOLD);
   const auto& sight{player.get_position() + player.get_direction()};
   mvwchgat(win_.get(), sight.get_y(), sight.get_x(), 1, A_BOLD | A_UNDERLINE, 0, nullptr);

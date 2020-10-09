@@ -18,11 +18,13 @@ GameMaster::GameMaster()
   , player_display{70, 30, 20, 10}
   , message_display{10, 30, 50, 10}
   , player()
+  , enemies()
   , messages{}
 {
   MapReader map_reader{};
   map = map_reader(map_dir + "json/tmp_sample_map.json");
   player.set_position(map.initial_position);
+  enemies.emplace_back(Enemy({5, 15}));
   map.make_apparent(player.get_position());
 }
 
@@ -58,6 +60,11 @@ GameStatus GameMaster::handle_dungeon(const GameStatus& status)
   {
     player.assign_motion(motion);
     map.make_apparent(player.get_position());
+  }
+  // Update enemies position
+  for (auto& enemy : enemies)
+  {
+    enemy.move(map, player.get_position());
   }
   // Get items
   const auto current_position{player.get_position()};

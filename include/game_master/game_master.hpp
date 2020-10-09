@@ -3,6 +3,7 @@
 
 #include <map/map.hpp>
 #include <character/player.hpp>
+#include <character/enemy.hpp>
 #include <display/map_display.hpp>
 #include <display/menu_display.hpp>
 #include <display/player_display.hpp>
@@ -26,6 +27,7 @@ class GameMaster
     PlayerDisplay  player_display;
     MessageDisplay message_display;
     Player         player;
+    Enemies        enemies;
     std::vector<std::string> messages;
 };
 

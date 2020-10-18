@@ -1,4 +1,5 @@
 #include <exception>
+#include <random>
 
 #include <utility/point.hpp>
 #include <game_master/game_status.hpp>
@@ -13,22 +14,25 @@
 #include <action/action_handler.hpp>
 #include <action/message_action.hpp>
 
-GameMaster::GameMaster()
+GameMaster::GameMaster(std::default_random_engine& rand_engine)
   : map_display{5, 4, 80, 30}
   , player_display{70, 30, 20, 10}
   , message_display{10, 30, 50, 10}
   , player()
+  , enemies()
   , messages{}
+  , rand_engine{rand_engine}
 {
   MapReader map_reader{};
   map = map_reader(map_dir + "json/tmp_sample_map.json");
   player.set_position(map.initial_position);
+  enemies.emplace_back(Enemy({5, 10}));
   map.make_apparent(player.get_position());
 }
 
 GameStatus GameMaster::show(const GameStatus& status)
 {
-  map_display.show(map, player);
+  map_display.show(map, player, enemies);
   player_display.show(player);
   message_display.show(messages);
   messages.clear();
@@ -58,6 +62,11 @@ GameStatus GameMaster::handle_dungeon(const GameStatus& status)
   {
     player.assign_motion(motion);
     map.make_apparent(player.get_position());
+  }
+  // Update enemies position
+  for (auto& enemy : enemies)
+  {
+    enemy.move(map, player.get_position(), rand_engine);
   }
   // Get items
   const auto current_position{player.get_position()};

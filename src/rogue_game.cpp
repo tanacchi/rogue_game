@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <csignal>
 #include <exception>
+#include <random>
 
 #include <game_master/game_master.hpp>
 #include <menu/menu_handler.hpp>
@@ -15,8 +16,10 @@ namespace {
 
 int main()
 {
+  std::random_device seed_gen;
+  std::default_random_engine engine(seed_gen());
   GameStatus status{Task::Show, Mode::Dungeon};
-  std::shared_ptr<GameMaster> master{std::make_shared<GameMaster>()};
+  std::shared_ptr<GameMaster> master{std::make_shared<GameMaster>(engine)};
   MenuHandler menu_handler{};
 
 try_begin:

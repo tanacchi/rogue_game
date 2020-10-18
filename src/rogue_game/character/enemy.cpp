@@ -1,5 +1,6 @@
 #include <array>
 #include <character/enemy.hpp>
+#include <action/enemy_action.hpp>
 
 Enemy::Enemy(Point<int> position)
   : Character(position)

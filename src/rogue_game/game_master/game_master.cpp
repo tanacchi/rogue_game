@@ -1,4 +1,5 @@
 #include <exception>
+#include <random>
 
 #include <utility/point.hpp>
 #include <game_master/game_status.hpp>
@@ -13,13 +14,14 @@
 #include <action/action_handler.hpp>
 #include <action/message_action.hpp>
 
-GameMaster::GameMaster()
+GameMaster::GameMaster(const std::default_random_engine& rand_engine)
   : map_display{5, 4, 80, 30}
   , player_display{70, 30, 20, 10}
   , message_display{10, 30, 50, 10}
   , player()
   , enemies()
   , messages{}
+  , rand_engine{rand_engine}
 {
   MapReader map_reader{};
   map = map_reader(map_dir + "json/tmp_sample_map.json");

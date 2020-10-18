@@ -1,6 +1,7 @@
 #ifndef INCLUDED_GAME_MASTER_HPP
 #define INCLUDED_GAME_MASTER_HPP
 
+#include <random>
 #include <map/map.hpp>
 #include <character/player.hpp>
 #include <character/enemy.hpp>
@@ -15,7 +16,7 @@ class GameStatus;
 class GameMaster
 {
   public:
-    GameMaster();
+    GameMaster(const std::default_random_engine& rand_engine);
     ~GameMaster() = default;
     GameStatus show(const GameStatus& status);
     GameStatus input(const GameStatus& status);
@@ -29,6 +30,7 @@ class GameMaster
     Player         player;
     Enemies        enemies;
     std::vector<std::string> messages;
+    const std::default_random_engine& rand_engine;
 };
 
 #endif  // INCLUDED_GAME_MASTER_HPP

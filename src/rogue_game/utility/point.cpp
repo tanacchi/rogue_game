@@ -1,3 +1,4 @@
+#include <cmath>
 #include <utility/point.hpp>
 
 template<typename T>
@@ -55,6 +56,12 @@ const Point<T> Point<T>::operator+(const Point<T>& rhs) const
 }
 
 template<typename T>
+const Point<T> Point<T>::operator-(const Point<T>& rhs) const
+{
+  return {x_ - rhs.x_, y_ - rhs.y_};
+}
+
+template<typename T>
 const Point<T>& Point<T>::operator+=(const Point<T>& rhs)
 {
   *this = *this + rhs;
@@ -76,7 +83,7 @@ bool Point<T>::operator!=(const Point<T>& rhs) const
 template<typename T>
 bool Point<T>::operator<(const Point<T>& rhs) const
 {
-  auto lhs_distance = x_*x_ + y_*y_, rhs_distance =rhs.x_*rhs.x_ + rhs.y_*rhs.y_; 
+  auto lhs_distance = x_*x_ + y_*y_, rhs_distance =rhs.x_*rhs.x_ + rhs.y_*rhs.y_;
   if (lhs_distance == rhs_distance)
     return x_ < rhs.x_;
   else
@@ -87,6 +94,20 @@ template<typename T>
 Point<T>::operator bool() const noexcept
 {
   return !(x_ == 0 && y_ == 0);
+}
+
+float norm(const Point<int>& point)
+{
+  const auto x{static_cast<float>(point.x_)};
+  const auto y{static_cast<float>(point.y_)};
+  return sqrt(x*x + y*y);
+}
+
+float norm(const Point<int>&& point)
+{
+  const auto x{static_cast<float>(point.x_)};
+  const auto y{static_cast<float>(point.y_)};
+  return sqrt(x*x + y*y);
 }
 
 std::ostream& operator<<(std::ostream& os, const Point<int>& point)

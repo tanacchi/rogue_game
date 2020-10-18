@@ -1,5 +1,6 @@
 #include <array>
 #include <character/enemy.hpp>
+#include <action/action_handler.hpp>
 #include <action/enemy_action.hpp>
 #include <utility/point.hpp>
 
@@ -11,6 +12,7 @@ Enemy::Enemy(Point<int> position)
 
 void Enemy::attack()
 {
+  ActionHandler::push(EnemyAction<NormalTag>(10ul));
 }
 
 bool Enemy::is_alive() const noexcept
@@ -22,6 +24,11 @@ void Enemy::move(const Map& map, const Point<int> player_pos, std::default_rando
 {
   const std::array<const Point<int>, 4> directions{up, right, down, left};
   const auto dist_to_player{norm(position_ - player_pos)};
+  if (dist_to_player <= 1.0f)
+  {
+    attack();
+    return;
+  }
   Point<int> next_pos;
   do
   {

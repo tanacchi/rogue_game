@@ -19,6 +19,12 @@ const Menu::ContentType Menu::base_content {{
       return GameStatus{Task::End, Mode::Select};
     }
   },
+  {"attack", [](Menu::MenuPtr& menu_ptr)
+    {
+      menu_ptr.release();
+      return GameStatus{Task::Act, Mode::Dungeon};
+    }
+  },
   {"item", [](Menu::MenuPtr& menu_ptr)
     {
       if (Menu::item_content.empty())

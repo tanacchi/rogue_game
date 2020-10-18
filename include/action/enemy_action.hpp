@@ -23,6 +23,7 @@ class EnemyAction : public Action<Enemy, U>
   private:
     GameStatus do_it(const std::shared_ptr<GameMaster>& master, NormalTag)
     {
+      master->player.hit(damage_);
       ActionHandler::push(MessageAction<NormalTag>("The enemy ataccked you !"));
       return GameStatus{Task::Show, Mode::Dungeon};
     }

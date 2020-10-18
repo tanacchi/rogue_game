@@ -14,7 +14,7 @@
 #include <action/action_handler.hpp>
 #include <action/message_action.hpp>
 
-GameMaster::GameMaster(const std::default_random_engine& rand_engine)
+GameMaster::GameMaster(std::default_random_engine& rand_engine)
   : map_display{5, 4, 80, 30}
   , player_display{70, 30, 20, 10}
   , message_display{10, 30, 50, 10}
@@ -26,7 +26,7 @@ GameMaster::GameMaster(const std::default_random_engine& rand_engine)
   MapReader map_reader{};
   map = map_reader(map_dir + "json/tmp_sample_map.json");
   player.set_position(map.initial_position);
-  enemies.emplace_back(Enemy({5, 15}));
+  enemies.emplace_back(Enemy({5, 10}));
   map.make_apparent(player.get_position());
 }
 
@@ -66,7 +66,7 @@ GameStatus GameMaster::handle_dungeon(const GameStatus& status)
   // Update enemies position
   for (auto& enemy : enemies)
   {
-    enemy.move(map, player.get_position());
+    enemy.move(map, player.get_position(), rand_engine);
   }
   // Get items
   const auto current_position{player.get_position()};

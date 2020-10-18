@@ -16,7 +16,7 @@ class GameStatus;
 class GameMaster
 {
   public:
-    GameMaster(const std::default_random_engine& rand_engine);
+    GameMaster(std::default_random_engine& rand_engine);
     ~GameMaster() = default;
     GameStatus show(const GameStatus& status);
     GameStatus input(const GameStatus& status);
@@ -30,7 +30,7 @@ class GameMaster
     Player         player;
     Enemies        enemies;
     std::vector<std::string> messages;
-    const std::default_random_engine& rand_engine;
+    std::default_random_engine& rand_engine;
 };
 
 #endif  // INCLUDED_GAME_MASTER_HPP

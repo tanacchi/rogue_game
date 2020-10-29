@@ -4,6 +4,7 @@
 #include <menu/menu.hpp>
 #include <action/action_handler.hpp>
 #include <action/any_action.hpp>
+#include <action/attack_action.hpp>
 #include <action/message_action.hpp>
 
 const Menu::ContentType Menu::base_content {{
@@ -22,6 +23,7 @@ const Menu::ContentType Menu::base_content {{
   {"attack", [](Menu::MenuPtr& menu_ptr)
     {
       menu_ptr.release();
+      ActionHandler::push(AttackAction<NormalTag>());
       return GameStatus{Task::Act, Mode::Dungeon};
     }
   },

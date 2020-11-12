@@ -26,3 +26,15 @@ std::size_t Character::get_hit_point() const noexcept
 {
   return hit_point_;
 }
+
+void Character::hit(std::size_t damage) noexcept
+{
+  if (hit_point_ < damage)
+    {
+      hit_point_ = 0ul;
+    }
+  else
+    {
+      hit_point_ -= damage;
+    }
+}

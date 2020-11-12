@@ -24,7 +24,6 @@ class Player : public Character
     friend std::ostream& operator<<(std::ostream& os, const Player& player);
     std::size_t get_max_hit_point() const noexcept;
     void heal(std::size_t amount) noexcept;
-    void hit(std::size_t damage) noexcept;
 
     std::shared_ptr<Inventory> inventory_ptr;
 

@@ -1,7 +1,7 @@
 # rogue_game
 [![Build Status](https://travis-ci.org/tanacchi/rogue_game.png)](https://travis-ci.org/tanacchi/rogue_game)
 
-version **0.6.0** in development.
+version **0.6.1** in development.
 
 ![logo](https://raw.githubusercontent.com/tanacchi/rogue_game/master/docs/logo.png)
 

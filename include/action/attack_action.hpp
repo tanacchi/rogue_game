@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include <action/action.hpp>
 #include <game_master/game_status.hpp>
 #include <game_master/game_master.hpp>
@@ -7,12 +9,18 @@
 #include <character/enemy.hpp>
 
 
+// Use double dispatch
 class Attack
 {
   public:
     Attack(std::size_t damage)
       : damage_{damage}
     {
+    }
+
+    void operator()(std::list<Enemy>::iterator& enemy_itr) const
+    {
+      enemy_itr->hit(damage_);
     }
 
   private:
@@ -35,8 +43,8 @@ class AttackAction : public Action<Attack, U>
     GameStatus do_it(const std::shared_ptr<GameMaster>& master, NormalTag)
     {
       const auto target_pos{master->player.get_position() + master->player.get_direction()};
-      const auto& enemies{master->enemies};
-      const auto enemy_itr{std::find_if(enemies.begin(),
+      auto& enemies{master->enemies};
+      auto enemy_itr{std::find_if(enemies.begin(),
                                         enemies.end(),
                                         [&](const auto& e){
                                           return e.get_position() == target_pos;
@@ -47,7 +55,12 @@ class AttackAction : public Action<Attack, U>
       }
       else
       {
+        attack_(enemy_itr);
         ActionHandler::push(MessageAction<NormalTag>("Attack!!"));
+        if (enemy_itr->get_hit_point() == 0ul)
+        {
+          enemies.erase(enemy_itr);
+        }
       }
       return GameStatus{Task::Show, Mode::Dungeon};
     }

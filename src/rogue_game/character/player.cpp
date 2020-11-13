@@ -63,15 +63,3 @@ void Player::heal(std::size_t amount) noexcept
   if (hit_point_ > max_hit_point_)
     hit_point_ = max_hit_point_;
 }
-
-void Player::hit(std::size_t damage) noexcept
-{
-  if (hit_point_ < damage)
-  {
-    hit_point_ = 0ul;
-  }
-  else
-  {
-    hit_point_ -= damage;
-  }
-}

@@ -13,6 +13,7 @@ class Character
     void set_position(const Point<int>& point);
     friend std::ostream& operator<<(std::ostream& os, const Character& character);
     std::size_t get_hit_point() const noexcept;
+    void hit(std::size_t damage) noexcept;
 
   protected:
     Point<int> position_;
